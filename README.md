@@ -3,18 +3,20 @@
 
 ### Team Members
 
-Andrew Milich <br/>
+**Andrew Milich** <br/>
 <img src="https://github.com/StanfordCS194/Team-7/blob/master/team_photos/Andrew_Photo.png"/>
 
-Anna Mitchell <br/>
+**Anna Mitchell** <br/>
 <img src="https://github.com/StanfordCS194/Team-7/blob/master/team_photos/Anna_Photo.jpg"/>
 
-Dhruv Kedia <br/>
+**Dhruv Kedia** <br/>
 <img src="https://github.com/StanfordCS194/Team-7/blob/master/team_photos/Dhruv_Photo.jpg"/>
 
-Kevin Chang <br/>
+**Kevin Chang** <br/>
 <img src="https://github.com/StanfordCS194/Team-7/blob/master/team_photos/Kevin_Photo.jpeg"/>
 
+### Project Description 
+We brainstormed a variety of ideas related to data privacy, peer-to-peer services, and information management. In the next week, we plan to continue refining these ideas, which are listed on an ideas document in our Google Drive folder.
 
 ### Team Skills
 
@@ -24,3 +26,10 @@ Andrew | Hardware, AI, Autonomous Vehicles | Gets up early, will work in lengthy
 Anna | AI, Backend Development, Communication, Project Management. | Organized, curious, blunt, productive.  | Design, user interviews. | Design, user interviews, hardware.
 Dhruv | Design, User Testing, Product Management, Machine Learning | Optimistic, Accommodating, Loves feedback + iteration loop | Software, Systems/Backend | Software - Languages besides python
 Kevin | UX Design, Web Dev, Backend Dev, VR & AR, Prototyping. | Likes fun colors. Cynical, but not too cynical. Hyperbolic for dramatic effect sometimes. Organized. | Unit tests. Communication. Task management. Scalable code. | Weak knees. 
+
+### Team Communication
+- How we keep in touch: iMessage
+- Emails: amilich@stanford.edu, amitche@stanford.edu, dkedia@stanford.edu, kevchang@stanford.edu
+- Github: [Team Repo](https://github.com/orgs/StanfordCS194/teams/team-7), Source Code Repo
+- Google Drive
+- [SGM Worksheet](https://docs.google.com/forms/d/1n633tuF8Z4Co8PyzTQ9mA4NvOxeZ1oRgGYOn9XS5rIw/edit)
