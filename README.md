@@ -1,6 +1,5 @@
 # Dreams From My Filesystem
-
-Logo here
+<img src="https://github.com/StanfordCS194/Team-7/blob/master/team_photos/dfmfs.jpeg" width="600"/>
 
 ### Team Members
 
