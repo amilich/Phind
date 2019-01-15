@@ -3,17 +3,13 @@
 
 ### Team Members
 
-**Andrew Milich** <br/>
-<img src="https://github.com/StanfordCS194/Team-7/blob/master/team_photos/Andrew_Photo.png"/>
+Andrew Milich              |  Anna Mitchell
+:-------------------------:|:-------------------------:
+![](https://github.com/StanfordCS194/Team-7/blob/master/team_photos/Andrew_Photo.png)  |  ![](https://github.com/StanfordCS194/Team-7/blob/master/team_photos/Anna_Photo.jpg)
 
-**Anna Mitchell** <br/>
-<img src="https://github.com/StanfordCS194/Team-7/blob/master/team_photos/Anna_Photo.jpg"/>
-
-**Dhruv Kedia** <br/>
-<img src="https://github.com/StanfordCS194/Team-7/blob/master/team_photos/Dhruv_Photo.jpg"/>
-
-**Kevin Chang** <br/>
-<img src="https://github.com/StanfordCS194/Team-7/blob/master/team_photos/Kevin_Photo.jpeg"/>
+Dhruv Kedia                |  Kevin Chang
+:-------------------------:|:-------------------------:
+![](https://github.com/StanfordCS194/Team-7/blob/master/team_photos/Dhruv_Photo.jpg)  |  ![](https://github.com/StanfordCS194/Team-7/blob/master/team_photos/Kevin_Photo.jpeg)
 
 ### Project Description 
 We brainstormed a variety of ideas related to data privacy, peer-to-peer services, and information management. In the next week, we plan to continue refining these ideas, which are listed on an ideas document in our Google Drive folder.
