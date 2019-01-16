@@ -21,7 +21,7 @@ Member | Skills | Personal Traits | Desired Growth | Weaknesses
 Andrew | Hardware, AI, Autonomous Vehicles | Gets up early, will work in lengthy stretches, likes rapid prototyping | Systems, design, and unit tests | User interfaces, databases, web programming
 Anna | AI, Backend Development, Communication, Project Management. | Organized, curious, blunt, productive.  | Design, user interviews. | Design, user interviews, hardware.
 Dhruv | Design, User Testing, Product Management, Machine Learning | Optimistic, Accommodating, Loves feedback + iteration loop | Software, Systems/Backend | Software - Languages besides python
-Kevin | UX Design, Web Dev, Backend Dev, VR & AR, Prototyping. | Likes fun colors. Cynical, but not too cynical. Hyperbolic for dramatic effect sometimes. Organized. | Unit tests. Communication. Task management. Scalable code. | Weak knees. 
+Kevin | UX Design, Web Dev, Backend Dev, VR & AR, Prototyping. | Likes fun colors. Cynical, but not too cynical. Organized. | Unit tests. Communication. Task management. Scalable code. | Modern C++. Distributed Systems. Weak knees. 
 
 ### Team Communication
 - How we keep in touch: iMessage
