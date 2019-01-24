@@ -28,4 +28,4 @@ Kevin | UX Design, Web Dev, Backend Dev, VR & AR, Prototyping. | Likes fun color
 - Emails: amilich@stanford.edu, amitche@stanford.edu, dkedia@stanford.edu, kevchang@stanford.edu
 - Github: [Team Repo](https://github.com/orgs/StanfordCS194/teams/team-7), Source Code Repo
 - Google Drive
-- [SGM Worksheet](https://docs.google.com/forms/d/1n633tuF8Z4Co8PyzTQ9mA4NvOxeZ1oRgGYOn9XS5rIw/edit)
+- [SGM Worksheet](https://docs.google.com/forms/d/1TpNHzHb60ZhCu5Vq_ZFA_Ge5-mq2JDT9stoN3qDqRxI/edit)
