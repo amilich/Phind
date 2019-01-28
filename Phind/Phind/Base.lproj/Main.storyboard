@@ -50,18 +50,35 @@
         <!--Third-->
         <scene sceneID="2dJ-9o-n8G">
             <objects>
-                <viewController id="aEk-OU-hjs" sceneMemberID="viewController">
+                <viewController id="aEk-OU-hjs" customClass="ThirdViewController" customModule="Phind" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eh9-qn-TsG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" text="Third View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="vuv-Aa-WVp">
+                                <rect key="frame" x="106" y="64" width="163" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Hug-6C-tJK">
+                                <rect key="frame" x="27" y="129" width="320" height="472"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="3ZL-Jf-Ee8"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Third" image="first" id="ykC-F6-KKJ"/>
+                    <connections>
+                        <outlet property="mapView" destination="Hug-6C-tJK" id="9LF-RZ-fH0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fgm-rK-iW6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1465" y="0.0"/>
+            <point key="canvasLocation" x="1464.8" y="-0.44977511244377816"/>
         </scene>
         <!--Second-->
         <scene sceneID="wg7-f3-ORb">
@@ -104,9 +121,6 @@
         <scene sceneID="yl2-sM-qoP">
             <objects>
                 <tabBarController id="49e-Tb-3d3" sceneMemberID="viewController">
-                    <keyCommands>
-                        <keyCommand/>
-                    </keyCommands>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
