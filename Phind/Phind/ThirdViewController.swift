@@ -27,9 +27,13 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate {
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation() // TODO is this the right place
         }
+        // https://stackoverflow.com/questions/47256304/creating-a-google-map-in-ios-that-doesnt-fit-the-whole-screen
+        mapView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width , height: self.view.frame.size.height)
     }
     
+    // Partial snippet credit
     // http://swiftdeveloperblog.com/code-examples/determine-users-current-location-example-in-swift/
+    // https://www.raywenderlich.com/548-mapkit-tutorial-getting-started
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation:CLLocation = locations[0] as CLLocation
         
@@ -39,7 +43,7 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate {
         
         print("Location lat = \(userLocation.coordinate.latitude)")
         print("Location lon = \(userLocation.coordinate.longitude)")
-        // https://www.raywenderlich.com/548-mapkit-tutorial-getting-started
+        
         let coordinateRegion = MKCoordinateRegion.init(center: userLocation.coordinate, latitudinalMeters: 100000, longitudinalMeters: 100000)
         mapView.setRegion(coordinateRegion, animated: true)
     }
