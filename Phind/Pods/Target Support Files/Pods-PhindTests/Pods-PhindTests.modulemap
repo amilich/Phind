@@ -1,0 +1,6 @@
+framework module Pods_PhindTests {
+  umbrella header "Pods-PhindTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
