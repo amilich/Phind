@@ -1,6 +1,14 @@
 # Acknowledgements
 This application makes use of the following third party libraries:
 
+## GoogleMaps
+
+Copyright 2018 Google
+
+## GooglePlaces
+
+Copyright 2018 Google
+
 ## Realm
 
 TABLE OF CONTENTS
