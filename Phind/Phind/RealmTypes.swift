@@ -14,3 +14,5 @@ class RealmLocation: Object {
     @objc dynamic var uuid = NSUUID().uuidString
     @objc dynamic var location : CLLocation = CLLocation.init()
 }
+
+
