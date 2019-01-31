@@ -11,11 +11,6 @@ import MapKit
 import RealmSwift
 import CoreLocation
 
-class Location: Object {
-    @objc dynamic var uuid = NSUUID().uuidString
-    @objc dynamic var location : CLLocation = CLLocation.init()
-}
-
 class ThirdViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
@@ -43,6 +38,11 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate {
     // https://www.raywenderlich.com/548-mapkit-tutorial-getting-started
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation:CLLocation = locations[0] as CLLocation
+        let cur_loc = RealmLocation()
+        cur_loc.location = userLocation // TODO can you do this in constructor
+        try! realm.write {
+            realm.add(cur_loc)
+        }
         
         // Call stopUpdatingLocation() to stop listening for location updates,
         // other wise this function will be called every time when user location
