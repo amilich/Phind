@@ -67,13 +67,21 @@
                                 <rect key="frame" x="0.0" y="129" width="375" height="472"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="vea-HO-RYZ">
+                                <rect key="frame" x="0.0" y="129" width="375" height="472"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="vfl-HH-1OI">
+                                <rect key="frame" x="0.0" y="129" width="375" height="472"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="3ZL-Jf-Ee8"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Third" image="first" id="ykC-F6-KKJ"/>
                     <connections>
-                        <outlet property="mapView" destination="Hug-6C-tJK" id="9LF-RZ-fH0"/>
+                        <outlet property="mapView" destination="vfl-HH-1OI" id="pGL-Gv-EUd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fgm-rK-iW6" userLabel="First Responder" sceneMemberID="firstResponder"/>
