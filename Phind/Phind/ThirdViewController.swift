@@ -8,15 +8,21 @@
 
 import UIKit
 import MapKit
-import CoreLocation
 import RealmSwift
+import CoreLocation
+
+class Location: Object {
+    @objc dynamic var uuid = NSUUID().uuidString
+    @objc dynamic var location : CLLocation = CLLocation.init()
+}
 
 class ThirdViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     
     let locationManager = CLLocationManager()
-    
+    let realm = try! Realm()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.locationManager.requestAlwaysAuthorization()
