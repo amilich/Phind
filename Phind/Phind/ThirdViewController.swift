@@ -30,7 +30,13 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate {
             locationManager.startUpdatingLocation() // TODO is this the right place
         }
         // https://stackoverflow.com/questions/47256304/creating-a-google-map-in-ios-that-doesnt-fit-the-whole-screen
-        mapView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width , height: self.view.frame.size.height)
+        mapView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
+        
+        let cur_loc = RealmLocation()
+        try! realm.write {
+            realm.add(cur_loc)
+            print("Wrote to realm")
+        }
     }
     
     // Partial snippet credit
@@ -39,14 +45,15 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation:CLLocation = locations[0] as CLLocation
         let cur_loc = RealmLocation()
-        cur_loc.location = userLocation // TODO can you do this in constructor
+        cur_loc.latitude = NSNumber(value: userLocation.coordinate.latitude) // Constructor?
+        cur_loc.longitude = NSNumber(value: userLocation.coordinate.longitude)
+        
         try! realm.write {
             realm.add(cur_loc)
+            print("Wrote to realm")
         }
         
-        // Call stopUpdatingLocation() to stop listening for location updates,
-        // other wise this function will be called every time when user location
-        // manager.stopUpdatingLocation()
+        // manager.stopUpdatingLocation() to stop getting location updates
         
         print("Location lat = \(userLocation.coordinate.latitude)")
         print("Location lon = \(userLocation.coordinate.longitude)")
