@@ -33,10 +33,6 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate {
         mapView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
         
         let cur_loc = RealmLocation()
-        try! realm.write {
-            realm.add(cur_loc)
-            print("Wrote to realm")
-        }
     }
     
     // Partial snippet credit

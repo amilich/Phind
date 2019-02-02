@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    let realm = try! Realm()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -35,6 +36,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        // Resolve all the unresolved locations
+        let unresolved_locations = realm.objects(RealmLocation.self).filter("resolved_by_human = false")
+        print("Starting to resolve locations");
+        for loc in unresolved_locations {
+            print("Unresolved loc: \(loc.latitude),\(loc.longitude)")
+            let new_place_id = 1
+            let old_places = realm.objects(RealmPlace.self).filter("place_id = \(new_place_id)")
+            if old_places.endIndex == 0 { // TODO length??
+                print("\tNo place found")
+            } else {
+                print("\tFound place ID = \(new_place_id)")
+            }
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
