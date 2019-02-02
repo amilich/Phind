@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         // Resolve all the unresolved locations
-        let unresolved_locations = realm.objects(RealmLocation.self).filter("resolved_by_human = false")
+        let unresolved_locations = realm.objects(RealmLocation.self).filter("place_id = -1")
         print("Starting to resolve locations");
         for loc in unresolved_locations {
             print("Unresolved loc: \(loc.latitude),\(loc.longitude)")
