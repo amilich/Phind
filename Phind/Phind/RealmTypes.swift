@@ -17,6 +17,16 @@ import CoreLocation
 
 class RealmLocation: Object {
     @objc dynamic var uuid = NSUUID().uuidString
-    @objc dynamic var latitude : NSNumber = 0.0
-    @objc dynamic var longitude : NSNumber = 0.0
+    @objc dynamic var latitude : NSNumber = -1.0
+    @objc dynamic var longitude : NSNumber = -1.0
+    @objc dynamic var place_id : NSNumber = -1.0
+    @objc dynamic var timestamp : Date = Date()
+    @objc dynamic var resolved_by_human : Bool = false
+}
+
+class RealmPlace: Object {
+    @objc dynamic var uuid = NSUUID().uuidString
+    @objc dynamic var place_id : NSNumber = -1.0
+    @objc dynamic var name : NSString = ""
+    @objc dynamic var address : NSString = ""
 }
