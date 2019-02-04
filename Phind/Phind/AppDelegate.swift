@@ -13,15 +13,28 @@ import RealmSwift
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
     
     var window: UIWindow?
-    let realm = try! Realm()
+    let realm = try! Realm()    
+    let locationManager = CLLocationManager()
+    let placesClient = GMSPlacesClient()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         GMSServices.provideAPIKey("AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU")
         GMSPlacesClient.provideAPIKey("AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU")
+
+        self.locationManager.requestAlwaysAuthorization()
+
+        // Do any additional setup after loading the view.
+        // https://stackoverflow.com/questions/25296691/get-users-current-location-coordinates
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation() // TODO is this the right place
+        }
+        
         return true
     }
     
@@ -82,6 +95,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    
+    // Partial snippet credit
+    // http://swiftdeveloperblog.com/code-examples/determine-users-current-location-example-in-swift/
+    // https://www.raywenderlich.com/548-mapkit-tutorial-getting-started
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation:CLLocation = locations[0] as CLLocation
+        let cur_loc = RealmLocation()
+        cur_loc.latitude = NSNumber(value: userLocation.coordinate.latitude) // Constructor?
+        cur_loc.longitude = NSNumber(value: userLocation.coordinate.longitude)
+        
+        print("Get places")
+        
+        try! realm.write {
+            realm.add(cur_loc)
+            print("Wrote to realm")
+        }
+        
+        // manager.stopUpdatingLocation() to stop getting location updates
+        
+        print("Location lat = \(userLocation.coordinate.latitude)")
+        print("Location lon = \(userLocation.coordinate.longitude)")
+        
+//        let coordinateRegion = MKCoordinateRegion.init(center: userLocation.coordinate, latitudinalMeters: 100000, longitudinalMeters: 100000)
+//        mapView.setRegion(coordinateRegion, animated: true)
+    }
     
 }
 
