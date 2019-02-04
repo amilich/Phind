@@ -5,7 +5,7 @@
 //  Created by Andrew B. Milich on 1/26/19.
 //  Copyright © 2019 Team-7. All rights reserved.
 //
-
+import GooglePlaces
 import UIKit
 import GooglePlaces
 
@@ -19,10 +19,12 @@ class SecondViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         placesClient = GMSPlacesClient.shared()
         
         let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
             UInt(GMSPlaceField.placeID.rawValue))!
+        
         placesClient.findPlaceLikelihoodsFromCurrentLocation(withPlaceFields: fields, callback: {
             (placeLikelihoodList: Array<GMSPlaceLikelihood>?, error: Error?) in
             if let error = error {
@@ -38,6 +40,6 @@ class SecondViewController: UIViewController {
                 }
             }
         })
-        
+
     }
 }
