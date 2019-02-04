@@ -58,8 +58,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let unresolved_locations = realm.objects(RealmLocation.self).filter("place_id = -1.0")
         print("Starting to resolve locations");
         for loc in unresolved_locations {
-            print("Unresolved loc: \(loc.latitude),\(loc.longitude)")
-            getPlaceIdForLocation(loc)
+//            print("Unresolved loc: \(loc.latitude),\(loc.longitude)")
+//            getPlaceIdForLocation(loc)
             // Get place ID for the location using latitude/longitude
             //            print("Unresolved loc: \(loc.latitude),\(loc.longitude)")
             //            let new_place_id = 1

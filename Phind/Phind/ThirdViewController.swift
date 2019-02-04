@@ -9,6 +9,8 @@
 import UIKit
 import MapKit
 import RealmSwift
+import GoogleMaps
+import GooglePlaces
 import CoreLocation
 
 class ThirdViewController: UIViewController, CLLocationManagerDelegate {
@@ -16,6 +18,7 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var mapView: MKMapView!
     
     let locationManager = CLLocationManager()
+    let placesClient = GMSPlacesClient()
     let realm = try! Realm()
 
     override func viewDidLoad() {
@@ -31,8 +34,6 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate {
         }
         // https://stackoverflow.com/questions/47256304/creating-a-google-map-in-ios-that-doesnt-fit-the-whole-screen
         mapView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
-        
-        let cur_loc = RealmLocation()
     }
     
     // Partial snippet credit
@@ -47,6 +48,23 @@ class ThirdViewController: UIViewController, CLLocationManagerDelegate {
         try! realm.write {
             realm.add(cur_loc)
             print("Wrote to realm")
+            
+            let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
+                UInt(GMSPlaceField.placeID.rawValue))!
+            placesClient.findPlaceLikelihoodsFromCurrentLocation(withPlaceFields: fields, callback: {
+                (placeLikelihoodList: Array<GMSPlaceLikelihood>?, error: Error?) in
+                if let error = error {
+                    print("An error occurred: \(error.localizedDescription)")
+                    return
+                }
+                if let placeLikelihoodList = placeLikelihoodList {
+                    for likelihood in placeLikelihoodList {
+                        let place = likelihood.place
+                        print("Current Place name \(String(describing: place.name)) at likelihood \(likelihood.likelihood)")
+                        print("Current PlaceID \(String(describing: place.placeID))")
+                    }
+                }
+            })
         }
         
         // manager.stopUpdatingLocation() to stop getting location updates
