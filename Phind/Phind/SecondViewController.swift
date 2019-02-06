@@ -22,6 +22,8 @@ class SecondViewController: UIViewController {
         
         placesClient = GMSPlacesClient.shared()
         
+        print("Second view loaded")
+        
         let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
             UInt(GMSPlaceField.placeID.rawValue))!
         

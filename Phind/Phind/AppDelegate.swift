@@ -26,21 +26,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
         self.locationManager.requestAlwaysAuthorization()
         
-        // Do any additional setup after loading the view.
-        // https://stackoverflow.com/questions/25296691/get-users-current-location-coordinates
+        // Do any additional setup after loading the view.
+        // https://stackoverflow.com/questions/25296691/get-users-current-location-coordinates
         if CLLocationManager.locationServicesEnabled() {
           locationManager.delegate = self
           locationManager.desiredAccuracy = kCLLocationAccuracyBest
           locationManager.startUpdatingLocation() // TODO is this the right place
         }
         
-        print("HEYYY")
-        
+        // Anna
         GMSServices.provideAPIKey("AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU")
         GMSPlacesClient.provideAPIKey("AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU")
-
+        // Andrew
+//        GMSServices.provideAPIKey("AIzaSyCKmapjQc3SU99_Ik-mTNbQh3FgPJGUWN0")
+//        GMSPlacesClient.provideAPIKey("AIzaSyCKmapjQc3SU99_Ik-mTNbQh3FgPJGUWN0")
+        
         self.locationManager.requestAlwaysAuthorization()
-
+        
         // Do any additional setup after loading the view.
         // https://stackoverflow.com/questions/25296691/get-users-current-location-coordinates
         if CLLocationManager.locationServicesEnabled() {
@@ -97,5 +99,23 @@ extension AppDelegate {
             
         }
         
+        let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
+            UInt(GMSPlaceField.placeID.rawValue))!
+        
+        placesClient.findPlaceLikelihoodsFromCurrentLocation(withPlaceFields: fields, callback: {
+            (placeLikelihoodList: Array<GMSPlaceLikelihood>?, error: Error?) in
+            if let error = error {
+                print("An error occurred: \(error.localizedDescription)")
+                print(error);
+                return
+            }
+            if let placeLikelihoodList = placeLikelihoodList {
+                for likelihood in placeLikelihoodList {
+                    let place = likelihood.place
+                    print("Current Place name \(String(describing: place.name)) at likelihood \(likelihood.likelihood)")
+                    print("Current PlaceID \(String(describing: place.placeID))")
+                }
+            }
+        })
     }
 }
