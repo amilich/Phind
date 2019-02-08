@@ -51,6 +51,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             locationManager.startUpdatingLocation() // TODO is this the right place
         }
         
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+
         return true
     }
     
@@ -87,26 +89,24 @@ extension AppDelegate {
         let userLocation:CLLocation = locations[0] as CLLocation
         
         let cur_loc = RealmLocation()
-        cur_loc.latitude = NSNumber(value: userLocation.coordinate.latitude) // Constructor?
-        cur_loc.longitude = NSNumber(value: userLocation.coordinate.longitude)
+        cur_loc.latitude = userLocation.coordinate.latitude // Constructor?
+        cur_loc.longitude = userLocation.coordinate.longitude
         
         print("Location lat = \(userLocation.coordinate.latitude)")
         print("Location lon = \(userLocation.coordinate.longitude)")
         
-        try! realm.write {
-            realm.add(cur_loc)
-            print("Wrote to realm")
-            
-        }
-        
         let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
             UInt(GMSPlaceField.placeID.rawValue))!
         
-        placesClient.findPlaceLikelihoodsFromCurrentLocation(withPlaceFields: fields, callback: {
+        GMSPlacesClient.shared().findPlaceLikelihoodsFromCurrentLocation(withPlaceFields: fields, callback: {
             (placeLikelihoodList: Array<GMSPlaceLikelihood>?, error: Error?) in
             if let error = error {
                 print("An error occurred: \(error.localizedDescription)")
                 print(error);
+                try! self.realm.write {
+                    self.realm.add(cur_loc)
+                    print("Wrote to realm without place IDs")
+                }
                 return
             }
             if let placeLikelihoodList = placeLikelihoodList {
@@ -114,6 +114,29 @@ extension AppDelegate {
                     let place = likelihood.place
                     print("Current Place name \(String(describing: place.name)) at likelihood \(likelihood.likelihood)")
                     print("Current PlaceID \(String(describing: place.placeID))")
+                    
+                    let likely_place = RealmLikelyPlace()
+                    likely_place.likelihood = likelihood.likelihood
+                    likely_place.place_id = place.placeID ?? "" // TODO need default value
+                    likely_place.name = place.name ?? ""
+                    likely_place.address = place.formattedAddress ?? ""
+                    cur_loc.likelyPlaces.append(likely_place);
+                    
+//                    if (place.placeID != nil) {
+//                        let placeID = place.placeID
+//                        let predicate = NSPredicate(format: "place_id = %@", placeID ?? "")
+//                        let old_places = self.realm.objects(RealmPlace.self).filter(predicate)
+//                        if old_places.endIndex == 0 { // TODO length??
+//                            print("\tNo place found")
+//                        } else {
+//                            print("\tFound place")
+//                        }
+//                        break
+//                    }
+                }
+                try! self.realm.write {
+                    self.realm.add(cur_loc)
+                    print("Wrote to realm with place IDs")
                 }
             }
         })

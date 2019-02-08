@@ -34,8 +34,8 @@ class ThirdViewController: UIViewController {
             
             let coordinateRegion = MKCoordinateRegion.init(
                 center: CLLocationCoordinate2D(
-                    latitude: CLLocationDegrees(truncating: userLocation.latitude),
-                    longitude: CLLocationDegrees(truncating: userLocation.longitude)),
+                    latitude: CLLocationDegrees(userLocation.latitude),
+                    longitude: CLLocationDegrees(userLocation.longitude)),
                 latitudinalMeters: 100000,
                 longitudinalMeters: 100000)
             mapView.setRegion(coordinateRegion, animated: true)
