@@ -97,6 +97,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A04B95E220F7DB600D94EB9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				492F5C5C21FD814E009B6411 /* Main.storyboard */,
+				492F5C6121FD814F009B6411 /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0A04B95F220F7DE000D94EB9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4934F6BE220296D90025C749 /* RealmTypes.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0A04B960220F7DE500D94EB9 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				492F5C5821FD814E009B6411 /* TimelineController.swift */,
+				492F5C5A21FD814E009B6411 /* SecondViewController.swift */,
+				492F5C5621FD814E009B6411 /* AppDelegate.swift */,
+				492F5C8821FE8FAA009B6411 /* ThirdViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		14330F41CA0973F749EFC1BF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -133,15 +161,11 @@
 		492F5C5521FD814D009B6411 /* Phind */ = {
 			isa = PBXGroup;
 			children = (
-				492F5C5621FD814E009B6411 /* AppDelegate.swift */,
-				492F5C5821FD814E009B6411 /* TimelineController.swift */,
-				492F5C5A21FD814E009B6411 /* SecondViewController.swift */,
-				492F5C5C21FD814E009B6411 /* Main.storyboard */,
+				0A04B960220F7DE500D94EB9 /* Controllers */,
+				0A04B95F220F7DE000D94EB9 /* Models */,
+				0A04B95E220F7DB600D94EB9 /* Views */,
 				492F5C5F21FD814F009B6411 /* Assets.xcassets */,
-				492F5C6121FD814F009B6411 /* LaunchScreen.storyboard */,
 				492F5C6421FD814F009B6411 /* Info.plist */,
-				492F5C8821FE8FAA009B6411 /* ThirdViewController.swift */,
-				4934F6BE220296D90025C749 /* RealmTypes.swift */,
 			);
 			path = Phind;
 			sourceTree = "<group>";
