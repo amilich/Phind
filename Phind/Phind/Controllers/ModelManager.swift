@@ -50,6 +50,27 @@ public class ModelManager : NSObject {
     
   }
   
+  // Return most recent location entry.
+  public func getMostRecentRawCoord() -> RawCoordinates? {
+    
+    let rawCoordinates = getRawCoords()
+    return rawCoordinates.count > 0 ? rawCoordinates[0]  : nil
+    
+  }
+  
+  // Return all location entries from a certain day, limited to max, and ascending default to false.
+  public func getRawCoords(from: Date = Date(), ascending: Bool = false) -> [RawCoordinates] {
+    
+    let dayStart = Calendar.current.startOfDay(for: from)
+    let dayEnd = Calendar.current.date(byAdding: .day, value: 1, to: dayStart)
+    let rawCoordinates = realm.objects(RawCoordinates.self)
+      .filter("timestamp >= %@ AND timestamp < %@", dayStart, dayEnd)
+      .sorted(byKeyPath: "timestamp", ascending: ascending)
+    
+    return Array(rawCoordinates)
+    
+  }
+  
   /// <section>
   /// All the write methods.
   /// </section>
@@ -85,26 +106,26 @@ public class ModelManager : NSObject {
   }
   
   // Append a RawCoordinates to a LocationEntry.
-  public func appendRawCoordinates(_ locationEntry: LocationEntry, _ rawCoordinates: RawCoordinates) {
+  public func appendRawCoord(_ locationEntry: LocationEntry, _ rawCoord: RawCoordinates) {
     
     try! realm.write {
-      locationEntry.raw_coordinates.append(rawCoordinates)
+      locationEntry.raw_coordinates.append(rawCoord)
     }
     
   }
   
   // Construct a RawCoordinates entry and add it.
-  public func addRawCoordinates(_ location: CLLocation) -> RawCoordinates {
+  public func addRawCoord(_ location: CLLocation) -> RawCoordinates {
     
-    let rawCoordinates = RawCoordinates()
-    rawCoordinates.latitude = location.coordinate.latitude
-    rawCoordinates.longitude = location.coordinate.longitude
-    rawCoordinates.timestamp = NSDate()
+    let rawCoord = RawCoordinates()
+    rawCoord.latitude = location.coordinate.latitude
+    rawCoord.longitude = location.coordinate.longitude
+    rawCoord.timestamp = NSDate()
     try! realm.write {
-      realm.add(rawCoordinates)
+      realm.add(rawCoord)
       print("Add new RawCoordinates: (\(location.coordinate))")
     }
-    return rawCoordinates
+    return rawCoord
     
   }
   

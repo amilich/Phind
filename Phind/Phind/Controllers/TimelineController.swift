@@ -29,8 +29,8 @@ class TimelinePin: NSObject, MKAnnotation {
 class TimelineController: UIViewController, MKMapViewDelegate {
   
   // Constants.
-  let MAP_SPAN_LAT = 10000.0
-  let MAP_SPAN_LONG = 10000.0
+  let MAP_SPAN_LAT = 1000.0
+  let MAP_SPAN_LONG = 1000.0
   let ROUTE_WIDTH: CGFloat = 4.0
   let ROUTE_COLOR: UIColor = UIColor(
     red: 232.0 / 255.0,
@@ -68,8 +68,6 @@ class TimelineController: UIViewController, MKMapViewDelegate {
     super.viewDidLoad()
     
     // Get all LocationEntries from today.
-    let formatter = DateFormatter()
-    formatter.dateFormat = "HH:mm:ss"
     let locationEntries = ModelManager.shared.getLocationEntries()
     
     // Iterate through each LocationEntry to draw pins and routes, as well
@@ -84,17 +82,24 @@ class TimelineController: UIViewController, MKMapViewDelegate {
       }
       
     }
+    
+    // Center map around lastCoord.
+    let viewRegion = MKCoordinateRegion(center: lastCoord!, latitudinalMeters: MAP_SPAN_LAT, longitudinalMeters: MAP_SPAN_LONG)
+    mapView.setRegion(viewRegion, animated: true)
+    
   }
   
   func drawPin(_ lastCoord: inout CLLocationCoordinate2D?, _ locationEntry: LocationEntry) {
     
     // Add a pin for each stationary location on the map.
+    formatter.dateFormat = "HH:mm:ss"
     var subtitle = formatter.string(from: locationEntry.start as Date)
     if locationEntry.end != nil {
       subtitle += " to " + formatter.string(from: locationEntry.end! as Date)
     } else {
       subtitle += " to now"
     }
+    print(locationEntry.start)
     
     // If lastCoord exists before pin is drawn, draw a line from the
     // lastCoord to this point.
