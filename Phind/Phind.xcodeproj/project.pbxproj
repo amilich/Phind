@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A04B962220FAD1100D94EB9 /* PhindLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A04B961220FAD1100D94EB9 /* PhindLocationManager.swift */; };
 		0AA9103F220F6BF9001B1270 /* Pods in Resources */ = {isa = PBXBuildFile; fileRef = 0AA9103E220F6BF9001B1270 /* Pods */; };
 		492F5C5721FD814E009B6411 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5C5621FD814E009B6411 /* AppDelegate.swift */; };
 		492F5C5921FD814E009B6411 /* TimelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5C5821FD814E009B6411 /* TimelineController.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A04B961220FAD1100D94EB9 /* PhindLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhindLocationManager.swift; sourceTree = "<group>"; };
 		0AA9103E220F6BF9001B1270 /* Pods */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pods; sourceTree = "<group>"; };
 		0F367DD7A00A628AE7BAFE25 /* Pods_PhindTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhindTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		23004EA1A217FA918547CD4A /* Pods-PhindTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhindTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhindTests/Pods-PhindTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				492F5C5A21FD814E009B6411 /* SecondViewController.swift */,
 				492F5C5621FD814E009B6411 /* AppDelegate.swift */,
 				492F5C8821FE8FAA009B6411 /* ThirdViewController.swift */,
+				0A04B961220FAD1100D94EB9 /* PhindLocationManager.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A04B962220FAD1100D94EB9 /* PhindLocationManager.swift in Sources */,
 				4934F6BF220296D90025C749 /* RealmTypes.swift in Sources */,
 				492F5C5B21FD814E009B6411 /* SecondViewController.swift in Sources */,
 				492F5C5721FD814E009B6411 /* AppDelegate.swift in Sources */,

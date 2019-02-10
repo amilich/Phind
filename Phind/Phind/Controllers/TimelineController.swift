@@ -14,8 +14,8 @@ import RealmSwift
 
 class TimelineController: UIViewController {
   // Constants.
-  let MAP_SPAN_LAT = 10000
-  let MAP_SPAN_LONG = 10000
+  let MAP_SPAN_LAT = 10000.0
+  let MAP_SPAN_LONG = 10000.0
   
   // Setup all the links to the UI.
   @IBOutlet weak var currentDateLabel: UILabel!
@@ -37,6 +37,7 @@ class TimelineController: UIViewController {
     let formatter = DateFormatter()
     formatter.dateFormat = "MMM dd, yyyy"
     currentDateLabel.text = formatter.string(from: date)
+    currentDateLabel.center.x = self.view.center.x
     
   }
   

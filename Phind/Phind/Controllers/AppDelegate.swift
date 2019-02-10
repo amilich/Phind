@@ -13,10 +13,11 @@ import RealmSwift
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
   
+  var phindLocationManager = PhindLocationManager()
   var locationManager = CLLocationManager()
   let placesClient = GMSPlacesClient()
   let realm = try! Realm()
@@ -27,31 +28,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     self.locationManager.requestAlwaysAuthorization()
     
     // Do any additional setup after loading the view.
-    // https://stackoverflow.com/questions/25296691/get-users-current-location-coordinates
     if CLLocationManager.locationServicesEnabled() {
       locationManager.delegate = self
       locationManager.desiredAccuracy = kCLLocationAccuracyBest
-      locationManager.startUpdatingLocation() // TODO is this the right place
+      locationManager.distanceFilter = 15
+      locationManager.startUpdatingLocation()
     }
-    
-    // Anna
-    GMSServices.provideAPIKey("AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU")
-    GMSPlacesClient.provideAPIKey("AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU")
-    // Andrew
-    //        GMSServices.provideAPIKey("AIzaSyCKmapjQc3SU99_Ik-mTNbQh3FgPJGUWN0")
-    //        GMSPlacesClient.provideAPIKey("AIzaSyCKmapjQc3SU99_Ik-mTNbQh3FgPJGUWN0")
-    
-    self.locationManager.requestAlwaysAuthorization()
-    
-    // Do any additional setup after loading the view.
-    // https://stackoverflow.com/questions/25296691/get-users-current-location-coordinates
-    if CLLocationManager.locationServicesEnabled() {
-      locationManager.delegate = self
-      locationManager.desiredAccuracy = kCLLocationAccuracyBest
-      locationManager.startUpdatingLocation() // TODO is this the right place
-    }
-    
-    print(Realm.Configuration.defaultConfiguration.fileURL!)
     
     return true
   }
@@ -82,63 +64,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
   
 }
 
-extension AppDelegate {
+extension AppDelegate : CLLocationManagerDelegate{
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    print("Hello")
-    // create CLLocation from the coordinates of CLVisit
-    let userLocation:CLLocation = locations[0] as CLLocation
     
-    let cur_loc = RealmLocation()
-    cur_loc.latitude = userLocation.coordinate.latitude // Constructor?
-    cur_loc.longitude = userLocation.coordinate.longitude
+    phindLocationManager.updateLocation(manager, didUpdateLocations: locations)
     
-    print("Location lat = \(userLocation.coordinate.latitude)")
-    print("Location lon = \(userLocation.coordinate.longitude)")
-    
-    let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
-      UInt(GMSPlaceField.placeID.rawValue))!
-    
-    GMSPlacesClient.shared().findPlaceLikelihoodsFromCurrentLocation(withPlaceFields: fields, callback: {
-      (placeLikelihoodList: Array<GMSPlaceLikelihood>?, error: Error?) in
-      if let error = error {
-        print("An error occurred: \(error.localizedDescription)")
-        print(error);
-        try! self.realm.write {
-          self.realm.add(cur_loc)
-          print("Wrote to realm without place IDs")
-        }
-        return
-      }
-      if let placeLikelihoodList = placeLikelihoodList {
-        for likelihood in placeLikelihoodList {
-          let place = likelihood.place
-          print("Current Place name \(String(describing: place.name)) at likelihood \(likelihood.likelihood)")
-          print("Current PlaceID \(String(describing: place.placeID))")
-          
-          let likely_place = RealmLikelyPlace()
-          likely_place.likelihood = likelihood.likelihood
-          likely_place.place_id = place.placeID ?? "" // TODO need default value
-          likely_place.name = place.name ?? ""
-          likely_place.address = place.formattedAddress ?? ""
-          cur_loc.likelyPlaces.append(likely_place);
-          
-          //                    if (place.placeID != nil) {
-          //                        let placeID = place.placeID
-          //                        let predicate = NSPredicate(format: "place_id = %@", placeID ?? "")
-          //                        let old_places = self.realm.objects(RealmPlace.self).filter(predicate)
-          //                        if old_places.endIndex == 0 { // TODO length??
-          //                            print("\tNo place found")
-          //                        } else {
-          //                            print("\tFound place")
-          //                        }
-          //                        break
-          //                    }
-        }
-        try! self.realm.write {
-          self.realm.add(cur_loc)
-          print("Wrote to realm with place IDs")
-        }
-      }
-    })
   }
 }
