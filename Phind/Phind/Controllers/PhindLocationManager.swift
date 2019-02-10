@@ -119,9 +119,17 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
         if lastLocationEntry?.movement_type == currMovementType.rawValue {
           if currMovementType != MovementType.STATIONARY {
             // Case 1: Move from non-stationary to non-stationary.
-            // This means the user experienced a jump greater than NOTABLE_DISTANCE_THRESHOLD, going
-            // from STATIONARY to STATIONARY. This likely means it was some sort of GPS bug, so we will
-            // just keep the last location entry.
+            // This means the user was moving and is still moving, and as such, we will simply append
+            // the raw coord to the last location entry.
+            print("Case 1: NON-STATIONARY TO NON-STATIONARY")
+            currLocationEntry = lastLocationEntry!
+          } else {
+            // Case 2: Move from stationary to stationary.
+            // This means the user has hopped from one stationary location to another, with a distance
+            // > NOTABLE_DISTANCE_THRESHOLD in between the two. This is unlikely to happen, since
+            // there would likely be some mode of movement in between. It is likely this is a GPS bug,
+            // so we should just ignore this point if the speed is 0.
+            print("Case 2: STATIONARY TO STATIONARY")
             
             #if !targetEnvironment(simulator)
             // Prevent buggy GPS signals in "jumping" the location.
@@ -130,14 +138,6 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
             }
             #endif
             
-            print("Case 1.")
-            currLocationEntry = lastLocationEntry!
-          } else {
-            // Case 2: Move from stationary to stationary.
-            // This means the user has hopped from one stationary location to another, with a distance
-            // > NOTABLE_DISTANCE_THRESHOLD in between the two. This is unlikely to happen, since
-            // there would likely be some mode of movement in between. In any case, we will create
-            print("Case 2.")
             ModelManager.shared.closeLocationEntry(lastLocationEntry!)
             currLocationEntry = ModelManager.shared.addLocationEntry(rawCoord, currMovementType)
           }
@@ -146,14 +146,14 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
             // Case 3: Move from non-stationary to stationary.
             // This means the user has likely moved from a non-stationary / commuting phase to a
             // stationary phase, i.e. the user has stopped moving and is now in a new location.
-            print("Case 3.")
+            print("Case 3: NON-STATIONARY TO STATIONARY")
             ModelManager.shared.closeLocationEntry(lastLocationEntry!)
             currLocationEntry = ModelManager.shared.addLocationEntry(rawCoord, currMovementType)
           } else {
             // Case 4: Move from stationary to non-stationary.
             // This means the user has likely moved from a stationary phase to a non-stationary
             // (commuting) phase, i.e. the user has started moving.
-            print("Case 4.")
+            print("Case 4: STATIONARY to NON-STATIONARY")
             ModelManager.shared.closeLocationEntry(lastLocationEntry!)
             currLocationEntry = ModelManager.shared.addLocationEntry(rawCoord, currMovementType)
           }

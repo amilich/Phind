@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../gpx_simulator_files/nyc.gpx">
+   </FileRef>
+   <FileRef
       location = "group:../../../Downloads/stanford_to_google.gpx">
    </FileRef>
    <FileRef
