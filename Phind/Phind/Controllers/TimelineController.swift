@@ -42,7 +42,6 @@ class TimelineController: UIViewController, MKMapViewDelegate {
   // Setup all the links to the UI.
   @IBOutlet weak var currentDateLabel: UILabel!
   @IBOutlet weak var mapView: MKMapView!
-  @IBOutlet weak var timelineView: UITableView!
   
   // TODO: Should this be moved into a function?
   let realm = try! Realm()
@@ -62,9 +61,6 @@ class TimelineController: UIViewController, MKMapViewDelegate {
     formatter.dateFormat = "MMM dd, yyyy"
     currentDateLabel.text = formatter.string(from: date)
     currentDateLabel.center.x = self.view.center.x
-    
-    // Stable tableView inset to zero.
-    timelineView.separatorInset = UIEdgeInsets.zero
     
   }
   
