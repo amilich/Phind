@@ -116,6 +116,9 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
       // coordinates is greater than NOTABLE_DISTANCE_THRESHOLD, then need to evaluate a few cases
       // to determine what is happening.
       if (distanceFromLastLocation >= PhindLocationManager.NOTABLE_DISTANCE_THRESHOLD) {
+//      #if targetEnvironment(simulator)
+//        currMovementType = MovementType.CYCLING
+//      #endif
         if lastLocationEntry?.movement_type == currMovementType.rawValue {
           if currMovementType != MovementType.STATIONARY {
             // Case 1: Move from non-stationary to non-stationary.
@@ -140,6 +143,7 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
             
             ModelManager.shared.closeLocationEntry(lastLocationEntry!)
             currLocationEntry = ModelManager.shared.addLocationEntry(rawCoord, currMovementType)
+            ModelManager.shared.assignPlaceIdToCurrentLocation(currLocationEntry!)
           }
         } else {
           if lastLocationEntry?.movement_type != MovementType.STATIONARY.rawValue {
@@ -149,6 +153,7 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
             print("Case 3: NON-STATIONARY TO STATIONARY")
             ModelManager.shared.closeLocationEntry(lastLocationEntry!)
             currLocationEntry = ModelManager.shared.addLocationEntry(rawCoord, currMovementType)
+            ModelManager.shared.assignPlaceIdToCurrentLocation(currLocationEntry!)
           } else {
             // Case 4: Move from stationary to non-stationary.
             // This means the user has likely moved from a stationary phase to a non-stationary
@@ -156,6 +161,7 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
             print("Case 4: STATIONARY to NON-STATIONARY")
             ModelManager.shared.closeLocationEntry(lastLocationEntry!)
             currLocationEntry = ModelManager.shared.addLocationEntry(rawCoord, currMovementType)
+            ModelManager.shared.assignPlaceIdToCurrentLocation(currLocationEntry!)
           }
         }
       } else {
@@ -164,10 +170,11 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
     } else {
       // If location entry is not found, then create a new one.
       print("Last location entry not found.")
-      currLocationEntry = ModelManager.shared.addLocationEntry(rawCoord, currMovementType)
+      ModelManager.shared.addLocationEntry(rawCoord, currMovementType)
     }
-    
+   
     ModelManager.shared.appendRawCoord(currLocationEntry!, rawCoord)
+    
     
   }
   

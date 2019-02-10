@@ -35,6 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       locationManager.startUpdatingLocation()
     }
     
+    GMSServices.provideAPIKey("AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU")
+    GMSPlacesClient.provideAPIKey("AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU")
+    
     // Activate CoreMotion Activity Manager to check and update current movement type.
     if CMMotionActivityManager.isActivityAvailable() {
       motionActivityManager.startActivityUpdates(to: OperationQueue.main) { (motion) in
