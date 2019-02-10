@@ -12,21 +12,46 @@ import GooglePlaces
 import MapKit
 import RealmSwift
 
-class TimelineController: UIViewController {
+class TimelinePin: NSObject, MKAnnotation {
+  dynamic var coordinate: CLLocationCoordinate2D
+  dynamic var title: String?
+  dynamic var subtitle: String?
+  
+  init(coordinate: CLLocationCoordinate2D, title: String? = nil, subtitle: String? = nil) {
+    self.coordinate = coordinate
+    self.title = title
+    self.subtitle = subtitle
+    
+    super.init()
+  }
+}
+
+class TimelineController: UIViewController, MKMapViewDelegate {
+  
   // Constants.
   let MAP_SPAN_LAT = 10000.0
   let MAP_SPAN_LONG = 10000.0
+  let ROUTE_WIDTH: CGFloat = 4.0
+  let ROUTE_COLOR: UIColor = UIColor(
+    red: 232.0 / 255.0,
+    green: 84.0 / 255.0,
+    blue: 142.0 / 255.0,
+    alpha: 0.8
+  )
   
   // Setup all the links to the UI.
   @IBOutlet weak var currentDateLabel: UILabel!
   @IBOutlet weak var mapView: MKMapView!
+  @IBOutlet weak var timelineView: UITableView!
   
   // TODO: Should this be moved into a function?
   let realm = try! Realm()
-  
+  let formatter = DateFormatter()
+
   // viewWillAppear and viewDidLoad all follow the cycle delineated
   // here: https://apple.co/2DqFnH6
   override func viewWillAppear(_ animated: Bool) {
+    mapView.delegate = self
     
     // Setup all the UI elements to the proper dynamic values.
     
@@ -34,32 +59,101 @@ class TimelineController: UIViewController {
     // TODO(kevin): Update this to display date as Feb 9, 2019,
     //              instead of Feb 09, 2019.
     let date = Date()
-    let formatter = DateFormatter()
     formatter.dateFormat = "MMM dd, yyyy"
     currentDateLabel.text = formatter.string(from: date)
     currentDateLabel.center.x = self.view.center.x
+    
+    // Stable tableView inset to zero.
+    timelineView.separatorInset = UIEdgeInsets.zero
     
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // Update map view to center around user's current location.
-    let userLocations = realm.objects(RealmLocation.self);
-    if (userLocations.count > 0) {
-      let userLocation = userLocations.last!
-      print(userLocation.latitude)
-      print(userLocation.longitude)
+    // Get all LocationEntries from today.
+    let formatter = DateFormatter()
+    formatter.dateFormat = "HH:mm:ss"
+    let locationEntries = ModelManager.shared.getLocationEntries()
+    
+    // Iterate through each LocationEntry to draw pins and routes, as well
+    // as generate cards for the timeline.
+    var lastCoord: CLLocationCoordinate2D?
+    for locationEntry in locationEntries {
       
-      let coordinateRegion = MKCoordinateRegion.init(
-        center: CLLocationCoordinate2D(
-          latitude: CLLocationDegrees(userLocation.latitude),
-          longitude: CLLocationDegrees(userLocation.longitude)),
-        latitudinalMeters: MAP_SPAN_LAT,
-        longitudinalMeters: MAP_SPAN_LONG)
-      mapView.setRegion(coordinateRegion, animated: true)
+      if locationEntry.movement_type == MovementType.STATIONARY.rawValue {
+        drawPin(&lastCoord, locationEntry)
+      } else {
+        drawRoute(&lastCoord, locationEntry)
+      }
+      
+    }
+  }
+  
+  func drawPin(_ lastCoord: inout CLLocationCoordinate2D?, _ locationEntry: LocationEntry) {
+    
+    // Add a pin for each stationary location on the map.
+    var subtitle = formatter.string(from: locationEntry.start as Date)
+    if locationEntry.end != nil {
+      subtitle += " to " + formatter.string(from: locationEntry.end! as Date)
+    } else {
+      subtitle += " to now"
     }
     
+    // If lastCoord exists before pin is drawn, draw a line from the
+    // lastCoord to this point.
+    let currCoord = CLLocationCoordinate2D(
+      latitude: locationEntry.latitude,
+      longitude: locationEntry.longitude
+    )
+    if (lastCoord != nil) {
+      let routeCoords: [CLLocationCoordinate2D] = [lastCoord!, currCoord]
+      let routeLine = MKPolyline(coordinates: routeCoords, count: routeCoords.count)
+      mapView.addOverlay(routeLine)
+    }
+    
+    // Update lastCoord and draw pin.
+    lastCoord = currCoord
+    let annotation: TimelinePin = TimelinePin(
+      coordinate: lastCoord!,
+      subtitle: subtitle
+    )
+    mapView.addAnnotation(annotation)
+    print("Stationary annotation added.")
+    
+  }
+  
+  func drawRoute(_ lastCoord: inout CLLocationCoordinate2D?, _ locationEntry: LocationEntry) {
+    
+    // Draw a route for commuting component.
+    var routeCoords: [CLLocationCoordinate2D] = []
+    
+    // Insert lastCoord as first coordinate in route.
+    if (lastCoord != nil) {
+      routeCoords.append(lastCoord!)
+    }
+    
+    for rawCoord in locationEntry.raw_coordinates {
+      let coord = CLLocationCoordinate2DMake(rawCoord.latitude, rawCoord.longitude)
+      routeCoords.append(coord)
+    }
+    lastCoord = routeCoords.last
+    let routeLine = MKPolyline(coordinates: routeCoords, count: routeCoords.count)
+    mapView.addOverlay(routeLine)
+    print("Route added.")
+    
+  }
+  
+  func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+    //Return an `MKPolylineRenderer` for the `MKPolyline` in the `MKMapViewDelegate`s method
+    if let polyline = overlay as? MKPolyline {
+      let mapLineRenderer = MKPolylineRenderer(polyline: polyline)
+      mapLineRenderer.strokeColor = ROUTE_COLOR
+      mapLineRenderer.lineWidth = ROUTE_WIDTH
+      return mapLineRenderer
+    }
+    fatalError("Something wrong...")
+    //return MKOverlayRenderer()
   }
   
 }

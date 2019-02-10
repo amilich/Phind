@@ -9,6 +9,7 @@
 import GoogleMaps
 import GooglePlaces
 import UIKit
+import CoreMotion
 import RealmSwift
 
 
@@ -16,14 +17,13 @@ import RealmSwift
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
-  
-  var phindLocationManager = PhindLocationManager()
+
   var locationManager = CLLocationManager()
+  var motionActivityManager = CMMotionActivityManager()
   let placesClient = GMSPlacesClient()
   let realm = try! Realm()
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
     
     self.locationManager.requestAlwaysAuthorization()
     
@@ -31,8 +31,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     if CLLocationManager.locationServicesEnabled() {
       locationManager.delegate = self
       locationManager.desiredAccuracy = kCLLocationAccuracyBest
-      locationManager.distanceFilter = 15
+      locationManager.distanceFilter = PhindLocationManager.DEFAULT_DISTANCE_FILTER
       locationManager.startUpdatingLocation()
+    }
+    
+    // Activate CoreMotion Activity Manager to check and update current movement type.
+    if CMMotionActivityManager.isActivityAvailable() {
+      motionActivityManager.startActivityUpdates(to: OperationQueue.main) { (motion) in
+        PhindLocationManager.shared.updateMovementType(motion: motion!)
+      }
     }
     
     return true
@@ -65,9 +72,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate : CLLocationManagerDelegate{
+  
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    
-    phindLocationManager.updateLocation(manager, didUpdateLocations: locations)
-    
-  }
+    PhindLocationManager.shared.updateLocation(manager, didUpdateLocations: locations)
+  } 
+  
 }

@@ -2,85 +2,172 @@
 //  PhindLocationManager.swift
 //  Phind
 //
+//  All application logic related to location collection is handled in here.
+//
 //  Created by Kevin Chang on 2/9/19.
 //  Copyright © 2019 Team-7. All rights reserved.
 //
 
 import GoogleMaps
 import GooglePlaces
+import CoreMotion
 import UIKit
 import RealmSwift
 
-// All application logic related to location collection is handled in here.
-
-// TODO: Move this out into its own method.
-enum MovementType : String {
-  case CAR, BIKE, WALK, STATIONARY
-  static let allTypes = [CAR, BIKE, WALK, STATIONARY]
+// Motion activites based on Apple definitions here: https://apple.co/2SlBGg2
+public enum MovementType : String {
+  case AUTOMOTIVE, CYCLING, WALKING, STATIONARY
+  static let allTypes = [AUTOMOTIVE, CYCLING, WALKING, STATIONARY]
 }
 
-class PhindLocationManager : NSObject, CLLocationManagerDelegate {
+public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
   
-  // Minimum speed threshold for shifting between movement types.
-  // All units are in meters / sec.
-  let MovementThresholds : [MovementType: Double] = [
-    MovementType.CAR : 9.0,
-    MovementType.BIKE : 1.5,
-    MovementType.WALK : 0.0
-  ]
-  // These indicate the distances used for locationManager.distanceFilter,
+  // Public static fields.
+  
+  // Singleton declaration.
+  public static let shared = PhindLocationManager()
+  public static let DEFAULT_DISTANCE_FILTER : CLLocationDistance = 15
+  // Minimum threshold for a new location to register as a new LocationEntry (in meters).
+#if targetEnvironment(simulator)
+  public static let NOTABLE_DISTANCE_THRESHOLD = 5.0
+#else
+  public static let NOTABLE_DISTANCE_THRESHOLD = 100.0
+#endif
+
+  
+  // These are the distances used for locationManager.distanceFilter,
   // dependent upon the current movement type.
-  let MovementDistanceFilters : [MovementType: Double] = [
-    MovementType.CAR : 150,
-    MovementType.BIKE : 45,
-    MovementType.WALK : 30
+  let MV_DISTANCE_FILTERS: [MovementType:Double] = [
+    MovementType.AUTOMOTIVE : 150.0,
+    MovementType.CYCLING    : 45.0,
+    MovementType.WALKING    : 30.0,
+    MovementType.STATIONARY : DEFAULT_DISTANCE_FILTER
   ]
   
-  // Fields.
-  public var currentMovement = MovementType.STATIONARY
+  // Public fields.
+  public private(set) var currMovementType = MovementType.STATIONARY
   
+  // Private fields.
+  private var locationManager = AppDelegate().locationManager
+  private var realm = AppDelegate().realm
+  
+  
+  // Default Swift constructor for classes.
   override init() {
-    
     super.init()
     print("PhindLocationManager has been initialized.")
-    
   }
   
-  
-  private func updateMovementType(speed: CLLocationSpeed) {
+  // Update movement type based on CMMotionActivity passed in from AppDelegate.
+  public func updateMovementType(motion: CMMotionActivity) {
     
-    // TODO: Clean this up to be less ugly.
-    // Update currentMovement based on the current movement speed.
-    if (speed == 0) {
-      self.currentMovement = MovementType.STATIONARY
+    // Update currMovementType based CoreMotion-reported motion type.
+    var movementType : MovementType
+    if motion.walking {
+      movementType = MovementType.WALKING
+    } else if motion.cycling {
+      movementType = MovementType.CYCLING
+    } else if motion.automotive {
+      movementType = MovementType.AUTOMOTIVE
     } else {
-      for movementType in MovementType.allTypes {
-        // TODO: Fix this so we don't use this hacky ?? 0 thing.
-        // TODO: Make sure order of enums is preserved when iterating.
-        if speed > MovementThresholds[movementType] ?? 0 {
-          self.currentMovement = movementType
-        
-          break
-        }
-      }
+      movementType = MovementType.STATIONARY
     }
     
-    // Update distance filter.
-    AppDelegate().locationManager.distanceFilter =
-      MovementDistanceFilters[self.currentMovement] ?? 0
-    
-    print("Current speed: \(speed)"9)
-    print("Movement upated to \(currentMovement)")
+    if movementType != currMovementType {
+      // Update distance filter if movement type is different.
+      currMovementType = movementType
+      locationManager.distanceFilter = MV_DISTANCE_FILTERS[currMovementType] ?? 0
+      print("Movement type switched to: \(currMovementType)")
+    }
     
   }
   
-  /*
-   * Callback functions for location manager.
-   */
+  // Update location entries based on CLLocation. If location data indicates new location,
+  // then close the latest LocationEntry by adding a departure time and create a new LocationEntry.
+  // In all cases, add in a new RawCoordinates entry.
+  private func updateLocation(location: CLLocation) {
+    
+    let rawCoordinates = ModelManager.shared.addRawCoordinates(location)
+    
+    // Check latest location entry in realm objects, from today.
+    let lastLocationEntry = ModelManager.shared.getMostRecentLocationEntry()
+    var currLocationEntry : LocationEntry? = lastLocationEntry
+
+    // Update and create new LocationEntries depending on whether or not
+    // lastLocationEntry exists and the distance between last location (if it exists)
+    // and the current location.
+    if (lastLocationEntry != nil) {
+      print(lastLocationEntry?.movement_type)
+      // If last location exists, check how far the current location is from it.
+      let lastLocation = CLLocation(
+        latitude: lastLocationEntry?.latitude ?? -1.0,
+        longitude: lastLocationEntry?.longitude ?? -1.0
+      )
+      let distanceFromLastLocation = lastLocation.distance(from: location)
+      print(distanceFromLastLocation)
+
+      // If the distance between the location of the most recent LocationEntry and the current
+      // coordinates is greater than NOTABLE_DISTANCE_THRESHOLD, then need to evaluate a few cases
+      // to determine what is happening.
+      if (distanceFromLastLocation >= PhindLocationManager.NOTABLE_DISTANCE_THRESHOLD) {
+      #if targetEnvironment(simulator)
+        currMovementType = MovementType.CYCLING
+      #endif
+        if lastLocationEntry?.movement_type == currMovementType.rawValue {
+          if currMovementType != MovementType.STATIONARY {
+            // Case 1: Move from non-stationary to non-stationary.
+            // This means user is still non-stationary, and as such we will simply append
+            // raw coordinates to the last entry and do nothing else.
+            print("Case 1.")
+            currLocationEntry = lastLocationEntry!
+          } else {
+            // Case 2: Move from stationary to stationary.
+            // This means the user has hopped from one stationary location to another, with a distance
+            // > NOTABLE_DISTANCE_THRESHOLD in between the two. This is unlikely to happen, since
+            // there would likely be some mode of movement in between. In any case, we will create
+            print("Case 2.")
+            ModelManager.shared.closeLocationEntry(lastLocationEntry!)
+            currLocationEntry = ModelManager.shared.addLocationEntry(rawCoordinates, currMovementType)
+          }
+        } else {
+          if lastLocationEntry?.movement_type != MovementType.STATIONARY.rawValue {
+            // Case 3: Move from non-stationary to stationary.
+            // This means the user has likely moved from a non-stationary / commuting phase to a
+            // stationary phase, i.e. the user has stopped moving and is now in a new location.
+            print("Case 3.")
+            ModelManager.shared.closeLocationEntry(lastLocationEntry!)
+            currLocationEntry = ModelManager.shared.addLocationEntry(rawCoordinates, currMovementType)
+          } else {
+            // Case 4: Move from stationary to non-stationary.
+            // This means the user has likely moved from a stationary phase to a non-stationary
+            // (commuting) phase, i.e. the user has started moving.
+            print("Case 4.")
+            ModelManager.shared.closeLocationEntry(lastLocationEntry!)
+            currLocationEntry = ModelManager.shared.addLocationEntry(rawCoordinates, currMovementType)
+          }
+        }
+      } else {
+      #if targetEnvironment(simulator)
+        currMovementType = MovementType.STATIONARY
+      #endif
+        currLocationEntry = lastLocationEntry!
+      }
+    } else {
+      // If location entry is not found, then create a new one.
+      print("Last location entry not found.")
+      currLocationEntry = ModelManager.shared.addLocationEntry(rawCoordinates, currMovementType)
+    }
+    
+    ModelManager.shared.appendRawCoordinates(currLocationEntry!, rawCoordinates)
+    
+  }
+  
+  // Callback functions for location manager.
   
   public func updateLocation(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     
-    updateMovementType(speed: manager.location?.speed ?? 0.0)
+    let location:CLLocation = locations[0] as CLLocation
+    updateLocation(location: location)
     
   }
   

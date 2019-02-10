@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../../../Downloads/stanford_to_google.gpx">
+   </FileRef>
+   <FileRef
+      location = "group:../../../Downloads/stanford_bike.gpx">
+   </FileRef>
+   <FileRef
       location = "group:Phind.xcodeproj">
    </FileRef>
    <FileRef
