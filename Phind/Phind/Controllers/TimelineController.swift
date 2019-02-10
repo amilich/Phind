@@ -84,8 +84,11 @@ class TimelineController: UIViewController, MKMapViewDelegate {
     }
     
     // Center map around lastCoord.
-    let viewRegion = MKCoordinateRegion(center: lastCoord!, latitudinalMeters: MAP_SPAN_LAT, longitudinalMeters: MAP_SPAN_LONG)
-    mapView.setRegion(viewRegion, animated: true)
+    if lastCoord != nil {
+      // TODO: If lastCoord is nil, then use current coordinates.
+      let viewRegion = MKCoordinateRegion(center: lastCoord!, latitudinalMeters: MAP_SPAN_LAT, longitudinalMeters: MAP_SPAN_LONG)
+      mapView.setRegion(viewRegion, animated: true)
+    }
     
   }
   
