@@ -159,7 +159,6 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     } else {
       subtitle += " to now"
     }
-    print(locationEntry.start)
     
     // If lastCoord exists before pin is drawn, draw a line from the
     // lastCoord to this point.
