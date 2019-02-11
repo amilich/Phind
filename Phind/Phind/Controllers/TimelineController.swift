@@ -66,21 +66,26 @@ class TimelineController: UIViewController, MKMapViewDelegate {
     currentDateLabel.text = formatter.string(from: date)
     currentDateLabel.center.x = self.view.center.x
     
+    // Reload map plot and timeline
+    reloadMapView();
   }
   
   override func viewDidLoad() {
-    print("Loading timeline view")
     super.viewDidLoad()
     
     // Register the table cell as custom type
-    self.tableView.register(TimelineUITableViewCell.self, forCellReuseIdentifier: "TimelineUITableViewCell")
-    self.tableView.separatorStyle = .none
-    self.tableView.dataSource = self
+    setupTableView();
     
     // Get all LocationEntries from today.
     let formatter = DateFormatter()
     formatter.dateFormat = "HH:mm:ss"
     
+    // Add the route to the map and sync the timeline to today
+    reloadMapView();
+  }
+  
+  // Add locations from today to map and timeline
+  func reloadMapView() {
     // Get all LocationEntries from today.
     let locationEntries = ModelManager.shared.getLocationEntries()
     self.tableItems.removeAll()
@@ -102,7 +107,13 @@ class TimelineController: UIViewController, MKMapViewDelegate {
       let viewRegion = MKCoordinateRegion(center: lastCoord!, latitudinalMeters: MAP_SPAN_LAT, longitudinalMeters: MAP_SPAN_LONG)
       mapView.setRegion(viewRegion, animated: true)
     }
-    
+  }
+  
+  // Register cell element and data source with table view
+  func setupTableView() {
+    self.tableView.register(TimelineUITableViewCell.self, forCellReuseIdentifier: "TimelineUITableViewCell")
+    self.tableView.separatorStyle = .none
+    self.tableView.dataSource = self
   }
   
   func drawPin(_ lastCoord: inout CLLocationCoordinate2D?, _ locationEntry: LocationEntry) {
