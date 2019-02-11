@@ -21,6 +21,7 @@
 		492F5C7921FD814F009B6411 /* PhindUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5C7821FD814F009B6411 /* PhindUITests.swift */; };
 		492F5C8921FE8FAA009B6411 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5C8821FE8FAA009B6411 /* ThirdViewController.swift */; };
 		4934F6BF220296D90025C749 /* RealmTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4934F6BE220296D90025C749 /* RealmTypes.swift */; };
+		494E7EE52210F76E00979950 /* TimelineUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494E7EE42210F76E00979950 /* TimelineUITableViewCell.swift */; };
 		A8B58E4B9A76F185F279E9B3 /* Pods_Phind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B9BCD483594BE1F3920C60E /* Pods_Phind.framework */; };
 		D99A2BE5E03FCC60F6A0A835 /* Pods_PhindTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F367DD7A00A628AE7BAFE25 /* Pods_PhindTests.framework */; };
 		DDA0325C5B6569847B2BEFFA /* Pods_PhindUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E0A151A788F73CC420773FD /* Pods_PhindUITests.framework */; };
@@ -67,6 +68,7 @@
 		492F5C7A21FD814F009B6411 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		492F5C8821FE8FAA009B6411 /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 		4934F6BE220296D90025C749 /* RealmTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTypes.swift; sourceTree = "<group>"; };
+		494E7EE42210F76E00979950 /* TimelineUITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineUITableViewCell.swift; sourceTree = "<group>"; };
 		5E3C30D3DCE258D332C8BCEC /* Pods-PhindTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhindTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhindTests/Pods-PhindTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6B9BCD483594BE1F3920C60E /* Pods_Phind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Phind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E0A151A788F73CC420773FD /* Pods_PhindUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhindUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +110,7 @@
 			children = (
 				492F5C5C21FD814E009B6411 /* Main.storyboard */,
 				492F5C6121FD814F009B6411 /* LaunchScreen.storyboard */,
+				494E7EE42210F76E00979950 /* TimelineUITableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 				0A04B962220FAD1100D94EB9 /* PhindLocationManager.swift in Sources */,
 				4934F6BF220296D90025C749 /* RealmTypes.swift in Sources */,
 				492F5C5B21FD814E009B6411 /* SecondViewController.swift in Sources */,
+				494E7EE52210F76E00979950 /* TimelineUITableViewCell.swift in Sources */,
 				492F5C5721FD814E009B6411 /* AppDelegate.swift in Sources */,
 				0AA7BF112210374D0038A274 /* Util.swift in Sources */,
 				0A5A2254221047CE00879A38 /* ModelManager.swift in Sources */,

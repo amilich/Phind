@@ -26,6 +26,16 @@ class TimelinePin: NSObject, MKAnnotation {
   }
 }
 
+//class TimelineTableRow: NSObject {
+//  init(coordinate: CLLocationCoordinate2D, title: String? = nil, subtitle: String? = nil) {
+//    self.coordinate = coordinate
+//    self.title = title
+//    self.subtitle = subtitle
+//
+//    super.init()
+//  }
+//}
+
 class TimelineController: UIViewController, MKMapViewDelegate {
   
   // Constants.
@@ -42,10 +52,14 @@ class TimelineController: UIViewController, MKMapViewDelegate {
   // Setup all the links to the UI.
   @IBOutlet weak var currentDateLabel: UILabel!
   @IBOutlet weak var mapView: MKMapView!
+  @IBOutlet weak var tableView: UITableView!
   
   // TODO: Should this be moved into a function?
   let realm = try! Realm()
   let formatter = DateFormatter()
+  
+  // Table content for dynamically reusable cells
+  var tableItems: [String] = []
 
   // viewWillAppear and viewDidLoad all follow the cycle delineated
   // here: https://apple.co/2DqFnH6
@@ -62,16 +76,8 @@ class TimelineController: UIViewController, MKMapViewDelegate {
     currentDateLabel.text = formatter.string(from: date)
     currentDateLabel.center.x = self.view.center.x
     
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    // Get all LocationEntries from today.
-    let formatter = DateFormatter()
-    formatter.dateFormat = "HH:mm:ss"
     let locationEntries = ModelManager.shared.getLocationEntries()
-    
+    self.tableItems.removeAll()
     // Iterate through each LocationEntry to draw pins and routes, as well
     // as generate cards for the timeline.
     var lastCoord: CLLocationCoordinate2D?
@@ -82,8 +88,22 @@ class TimelineController: UIViewController, MKMapViewDelegate {
       } else {
         drawRoute(&lastCoord, locationEntry)
       }
-      
+
+      self.tableItems.append(String(format:"%f, %f", locationEntry.latitude, locationEntry.longitude));
     }
+  }
+  
+  override func viewDidLoad() {
+    print("Loading timeline view")
+    super.viewDidLoad()
+    
+    self.tableView.register(TimelineUITableViewCell.self, forCellReuseIdentifier: "TimelineUITableViewCell")
+    self.tableView.separatorStyle = .none
+    self.tableView.dataSource = self
+    
+    // Get all LocationEntries from today.
+    let formatter = DateFormatter()
+    formatter.dateFormat = "HH:mm:ss"
   }
   
   func drawPin(_ lastCoord: inout CLLocationCoordinate2D?, _ locationEntry: LocationEntry) {
@@ -151,6 +171,19 @@ class TimelineController: UIViewController, MKMapViewDelegate {
     fatalError("Something wrong...")
     //return MKOverlayRenderer()
   }
-  
 }
 
+extension TimelineController: UITableViewDataSource {
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let tableCell = tableView.dequeueReusableCell(withIdentifier: "TimelineUITableViewCell", for: indexPath) as! TimelineUITableViewCell
+    let item = self.tableItems[indexPath.item]
+    tableCell.cellLabel?.text = item
+    return tableCell
+  }
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return self.tableItems.count
+  }
+  
+}
