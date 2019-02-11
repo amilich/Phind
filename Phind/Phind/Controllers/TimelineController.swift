@@ -26,21 +26,11 @@ class TimelinePin: NSObject, MKAnnotation {
   }
 }
 
-//class TimelineTableRow: NSObject {
-//  init(coordinate: CLLocationCoordinate2D, title: String? = nil, subtitle: String? = nil) {
-//    self.coordinate = coordinate
-//    self.title = title
-//    self.subtitle = subtitle
-//
-//    super.init()
-//  }
-//}
-
 class TimelineController: UIViewController, MKMapViewDelegate {
   
   // Constants.
-  let MAP_SPAN_LAT = 10000.0
-  let MAP_SPAN_LONG = 10000.0
+  let MAP_SPAN_LAT = 1000.0
+  let MAP_SPAN_LONG = 1000.0
   let ROUTE_WIDTH: CGFloat = 4.0
   let ROUTE_COLOR: UIColor = UIColor(
     red: 232.0 / 255.0,
@@ -76,27 +66,13 @@ class TimelineController: UIViewController, MKMapViewDelegate {
     currentDateLabel.text = formatter.string(from: date)
     currentDateLabel.center.x = self.view.center.x
     
-    let locationEntries = ModelManager.shared.getLocationEntries()
-    self.tableItems.removeAll()
-    // Iterate through each LocationEntry to draw pins and routes, as well
-    // as generate cards for the timeline.
-    var lastCoord: CLLocationCoordinate2D?
-    for locationEntry in locationEntries {
-      
-      if locationEntry.movement_type == MovementType.STATIONARY.rawValue {
-        drawPin(&lastCoord, locationEntry)
-      } else {
-        drawRoute(&lastCoord, locationEntry)
-      }
-
-      self.tableItems.append(String(format:"%f, %f", locationEntry.latitude, locationEntry.longitude));
-    }
   }
   
   override func viewDidLoad() {
     print("Loading timeline view")
     super.viewDidLoad()
     
+    // Register the table cell as custom type
     self.tableView.register(TimelineUITableViewCell.self, forCellReuseIdentifier: "TimelineUITableViewCell")
     self.tableView.separatorStyle = .none
     self.tableView.dataSource = self
@@ -104,17 +80,42 @@ class TimelineController: UIViewController, MKMapViewDelegate {
     // Get all LocationEntries from today.
     let formatter = DateFormatter()
     formatter.dateFormat = "HH:mm:ss"
+    
+    // Get all LocationEntries from today.
+    let locationEntries = ModelManager.shared.getLocationEntries()
+    self.tableItems.removeAll()
+    // Iterate through each LocationEntry to draw pins and routes, as well
+    // as generate cards for the timeline.
+    var lastCoord: CLLocationCoordinate2D?
+    for locationEntry in locationEntries {
+      if locationEntry.movement_type == MovementType.STATIONARY.rawValue {
+        drawPin(&lastCoord, locationEntry)
+      } else {
+        drawRoute(&lastCoord, locationEntry)
+      }
+      self.tableItems.append(String(format:"%f, %f", locationEntry.latitude, locationEntry.longitude));
+    }
+    
+    // Center map around lastCoord.
+    if lastCoord != nil {
+      // TODO: If lastCoord is nil, then use current coordinates.
+      let viewRegion = MKCoordinateRegion(center: lastCoord!, latitudinalMeters: MAP_SPAN_LAT, longitudinalMeters: MAP_SPAN_LONG)
+      mapView.setRegion(viewRegion, animated: true)
+    }
+    
   }
   
   func drawPin(_ lastCoord: inout CLLocationCoordinate2D?, _ locationEntry: LocationEntry) {
     
     // Add a pin for each stationary location on the map.
+    formatter.dateFormat = "HH:mm:ss"
     var subtitle = formatter.string(from: locationEntry.start as Date)
     if locationEntry.end != nil {
       subtitle += " to " + formatter.string(from: locationEntry.end! as Date)
     } else {
       subtitle += " to now"
     }
+    print(locationEntry.start)
     
     // If lastCoord exists before pin is drawn, draw a line from the
     // lastCoord to this point.

@@ -33,7 +33,12 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
 #else
   public static let NOTABLE_DISTANCE_THRESHOLD = 100.0
 #endif
-
+  
+  // Private constants.
+  // We only allow locations for which
+  // (distance delta)/(time delta) * SPEED_BUFFER < real measured speed
+  // to avoid GPS bugs from skewing our results.
+  private let SPEED_BUFFER = 3.0
   
   // These are the distances used for locationManager.distanceFilter,
   // dependent upon the current movement type.
@@ -84,10 +89,10 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
   
   // Update location entries based on CLLocation. If location data indicates new location,
   // then close the latest LocationEntry by adding a departure time and create a new LocationEntry.
-  // In all cases, add in a new RawCoordinates entry.
+  // In all cases, add in a new rawCoord entry.
   private func updateLocation(location: CLLocation) {
     
-    let rawCoordinates = ModelManager.shared.addRawCoordinates(location)
+    let rawCoord = ModelManager.shared.addRawCoord(location)
     
     // Check latest location entry in realm objects, from today.
     let lastLocationEntry = ModelManager.shared.getMostRecentLocationEntry()
@@ -97,7 +102,8 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
     // lastLocationEntry exists and the distance between last location (if it exists)
     // and the current location.
     if (lastLocationEntry != nil) {
-      print(lastLocationEntry?.movement_type)
+      print(lastLocationEntry?.movement_type ?? "")
+      
       // If last location exists, check how far the current location is from it.
       let lastLocation = CLLocation(
         latitude: lastLocationEntry?.latitude ?? -1.0,
@@ -110,55 +116,58 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
       // coordinates is greater than NOTABLE_DISTANCE_THRESHOLD, then need to evaluate a few cases
       // to determine what is happening.
       if (distanceFromLastLocation >= PhindLocationManager.NOTABLE_DISTANCE_THRESHOLD) {
-      #if targetEnvironment(simulator)
-        currMovementType = MovementType.CYCLING
-      #endif
         if lastLocationEntry?.movement_type == currMovementType.rawValue {
           if currMovementType != MovementType.STATIONARY {
             // Case 1: Move from non-stationary to non-stationary.
-            // This means user is still non-stationary, and as such we will simply append
-            // raw coordinates to the last entry and do nothing else.
-            print("Case 1.")
+            // This means the user was moving and is still moving, and as such, we will simply append
+            // the raw coord to the last location entry.
+            print("Case 1: NON-STATIONARY TO NON-STATIONARY")
             currLocationEntry = lastLocationEntry!
           } else {
             // Case 2: Move from stationary to stationary.
             // This means the user has hopped from one stationary location to another, with a distance
             // > NOTABLE_DISTANCE_THRESHOLD in between the two. This is unlikely to happen, since
-            // there would likely be some mode of movement in between. In any case, we will create
-            print("Case 2.")
+            // there would likely be some mode of movement in between. It is likely this is a GPS bug,
+            // so we should just ignore this point if the speed is 0.
+            print("Case 2: STATIONARY TO STATIONARY")
+            
+            #if !targetEnvironment(simulator)
+            // Prevent buggy GPS signals in "jumping" the location.
+            if (location.speed <= 0) {
+              return
+            }
+            #endif
+            
             ModelManager.shared.closeLocationEntry(lastLocationEntry!)
-            currLocationEntry = ModelManager.shared.addLocationEntry(rawCoordinates, currMovementType)
+            currLocationEntry = ModelManager.shared.addLocationEntry(rawCoord, currMovementType)
           }
         } else {
           if lastLocationEntry?.movement_type != MovementType.STATIONARY.rawValue {
             // Case 3: Move from non-stationary to stationary.
             // This means the user has likely moved from a non-stationary / commuting phase to a
             // stationary phase, i.e. the user has stopped moving and is now in a new location.
-            print("Case 3.")
+            print("Case 3: NON-STATIONARY TO STATIONARY")
             ModelManager.shared.closeLocationEntry(lastLocationEntry!)
-            currLocationEntry = ModelManager.shared.addLocationEntry(rawCoordinates, currMovementType)
+            currLocationEntry = ModelManager.shared.addLocationEntry(rawCoord, currMovementType)
           } else {
             // Case 4: Move from stationary to non-stationary.
             // This means the user has likely moved from a stationary phase to a non-stationary
             // (commuting) phase, i.e. the user has started moving.
-            print("Case 4.")
+            print("Case 4: STATIONARY to NON-STATIONARY")
             ModelManager.shared.closeLocationEntry(lastLocationEntry!)
-            currLocationEntry = ModelManager.shared.addLocationEntry(rawCoordinates, currMovementType)
+            currLocationEntry = ModelManager.shared.addLocationEntry(rawCoord, currMovementType)
           }
         }
       } else {
-      #if targetEnvironment(simulator)
-        currMovementType = MovementType.STATIONARY
-      #endif
         currLocationEntry = lastLocationEntry!
       }
     } else {
       // If location entry is not found, then create a new one.
       print("Last location entry not found.")
-      currLocationEntry = ModelManager.shared.addLocationEntry(rawCoordinates, currMovementType)
+      currLocationEntry = ModelManager.shared.addLocationEntry(rawCoord, currMovementType)
     }
     
-    ModelManager.shared.appendRawCoordinates(currLocationEntry!, rawCoordinates)
+    ModelManager.shared.appendRawCoord(currLocationEntry!, rawCoord)
     
   }
   
