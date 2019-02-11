@@ -26,7 +26,7 @@ class TimelinePin: NSObject, MKAnnotation {
   }
 }
 
-class TimelineController: UIViewController, MKMapViewDelegate {
+class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelegate {
   
   // Constants.
   let MAP_SPAN_LAT = 1000.0
@@ -42,10 +42,14 @@ class TimelineController: UIViewController, MKMapViewDelegate {
   // Setup all the links to the UI.
   @IBOutlet weak var currentDateLabel: UILabel!
   @IBOutlet weak var mapView: MKMapView!
+  @IBOutlet weak var tableView: UITableView!
   
   // TODO: Should this be moved into a function?
   let realm = try! Realm()
   let formatter = DateFormatter()
+  
+  // Table content for dynamically reusable cells
+  var tableItems: [String] = []
 
   // viewWillAppear and viewDidLoad all follow the cycle delineated
   // here: https://apple.co/2DqFnH6
@@ -62,25 +66,48 @@ class TimelineController: UIViewController, MKMapViewDelegate {
     currentDateLabel.text = formatter.string(from: date)
     currentDateLabel.center.x = self.view.center.x
     
+    // Reload map plot and timeline
+    reloadMapView();
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    // Register the table cell as custom type
+    setupTableView();
+    
     // Get all LocationEntries from today.
     let locationEntries = ModelManager.shared.getLocationEntries()
+    let formatter = DateFormatter()
+    formatter.dateFormat = "HH:mm:ss"
     
+    // Add the route to the map and sync the timeline to today
+    reloadMapView();
+  }
+  
+  // Add locations from today to map and timeline
+  func reloadMapView() {
+    // Get all LocationEntries from today.
+    let locationEntries = ModelManager.shared.getLocationEntries()
+    self.tableItems.removeAll()
     // Iterate through each LocationEntry to draw pins and routes, as well
     // as generate cards for the timeline.
     var lastCoord: CLLocationCoordinate2D?
     for locationEntry in locationEntries {
-      
       if locationEntry.movement_type == MovementType.STATIONARY.rawValue {
         drawPin(&lastCoord, locationEntry)
       } else {
         drawRoute(&lastCoord, locationEntry)
       }
-      
+      self.tableItems.append(String(format:"%f, %f", locationEntry.latitude, locationEntry.longitude));
+    }
+    tableView.reloadData()
+    
+    // Center map around lastCoord.
+    if lastCoord != nil {
+      // TODO: If lastCoord is nil, then use current coordinates.
+      let viewRegion = MKCoordinateRegion(center: lastCoord!, latitudinalMeters: MAP_SPAN_LAT, longitudinalMeters: MAP_SPAN_LONG)
+      mapView.setRegion(viewRegion, animated: true)
     }
     
     // Center map around lastCoord.
@@ -90,6 +117,14 @@ class TimelineController: UIViewController, MKMapViewDelegate {
       mapView.setRegion(viewRegion, animated: true)
     }
     
+  }
+  
+  // Register cell element and data source with table view
+  func setupTableView() {
+    self.tableView.register(TimelineUITableViewCell.self, forCellReuseIdentifier: "TimelineCell")
+    self.tableView.separatorStyle = .none
+    self.tableView.dataSource = self
+    self.tableView.delegate = self
   }
   
   func drawPin(_ lastCoord: inout CLLocationCoordinate2D?, _ locationEntry: LocationEntry) {
@@ -159,6 +194,22 @@ class TimelineController: UIViewController, MKMapViewDelegate {
     fatalError("Something wrong...")
     //return MKOverlayRenderer()
   }
-  
 }
 
+extension TimelineController: UITableViewDataSource {
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let tableCell = tableView.dequeueReusableCell(withIdentifier: "TimelineCell", for: indexPath) as! TimelineUITableViewCell
+    // Get the location description string set by the TimelineController
+    let locationDescription = self.tableItems[indexPath.item]
+    let cellLabel = tableCell.cellLabel
+    cellLabel!.text = locationDescription
+    // TODO(Andrew) set the UIImage if index is zero or last
+    return tableCell
+  }
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return self.tableItems.count
+  }
+  
+}

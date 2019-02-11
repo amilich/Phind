@@ -170,11 +170,10 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
     } else {
       // If location entry is not found, then create a new one.
       print("Last location entry not found.")
-      ModelManager.shared.addLocationEntry(rawCoord, currMovementType)
+      currLocationEntry = ModelManager.shared.addLocationEntry(rawCoord, currMovementType)
     }
    
     ModelManager.shared.appendRawCoord(currLocationEntry!, rawCoord)
-    
     
   }
   
