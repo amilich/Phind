@@ -26,7 +26,7 @@ class TimelinePin: NSObject, MKAnnotation {
   }
 }
 
-class TimelineController: UIViewController, MKMapViewDelegate {
+class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelegate {
   
   // Constants.
   let MAP_SPAN_LAT = 1000.0
@@ -100,6 +100,7 @@ class TimelineController: UIViewController, MKMapViewDelegate {
       }
       self.tableItems.append(String(format:"%f, %f", locationEntry.latitude, locationEntry.longitude));
     }
+    tableView.reloadData()
     
     // Center map around lastCoord.
     if lastCoord != nil {
@@ -111,9 +112,10 @@ class TimelineController: UIViewController, MKMapViewDelegate {
   
   // Register cell element and data source with table view
   func setupTableView() {
-    self.tableView.register(TimelineUITableViewCell.self, forCellReuseIdentifier: "TimelineUITableViewCell")
+    self.tableView.register(TimelineUITableViewCell.self, forCellReuseIdentifier: "TimelineCell")
     self.tableView.separatorStyle = .none
     self.tableView.dataSource = self
+    self.tableView.delegate = self
   }
   
   func drawPin(_ lastCoord: inout CLLocationCoordinate2D?, _ locationEntry: LocationEntry) {
@@ -188,9 +190,12 @@ class TimelineController: UIViewController, MKMapViewDelegate {
 extension TimelineController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let tableCell = tableView.dequeueReusableCell(withIdentifier: "TimelineUITableViewCell", for: indexPath) as! TimelineUITableViewCell
-    let item = self.tableItems[indexPath.item]
-    tableCell.cellLabel?.text = item
+    let tableCell = tableView.dequeueReusableCell(withIdentifier: "TimelineCell", for: indexPath) as! TimelineUITableViewCell
+    // Get the location description string set by the TimelineController
+    let locationDescription = self.tableItems[indexPath.item]
+    let cellLabel = tableCell.cellLabel
+    cellLabel!.text = locationDescription
+    // TODO(Andrew) set the UIImage if index is zero or last
     return tableCell
   }
   
