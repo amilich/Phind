@@ -85,25 +85,79 @@ public class ModelManager : NSObject {
     }
     
   }
-  
-  // Create a new LocationEntry and close up previous LocationEntry if necessary.
-  public func addLocationEntry(_ rawCoordinates: RawCoordinates,
-                               _ currMovementType: MovementType) -> LocationEntry {
     
-    // TODO: Need to search for PlaceID and add it in here as well.
-    let locationEntry = LocationEntry()
-    locationEntry.start = NSDate()
-    locationEntry.longitude = rawCoordinates.longitude
-    locationEntry.latitude = rawCoordinates.latitude
-    locationEntry.movement_type = currMovementType.rawValue
-    try! realm.write {
-      realm.add(locationEntry)
-      print("Add new LocationEntry: (\(locationEntry.uuid))")
+    private func getLikelyPlaceList(placeLikelihoodList: Array<GMSPlaceLikelihood>) -> [Place]{
+        var likelyPlaces = [Place]()
+        for likelihood in placeLikelihoodList {
+            let place = likelihood.place
+            print("Current Place name \(String(describing: place.name)) at likelihood \(likelihood.likelihood)")
+            print("Current PlaceID \(String(describing: place.placeID))")
+            
+            let likelyPlace = Place()
+            likelyPlace.gms_id = place.placeID ?? "" // TODO need default value
+            likelyPlace.name = place.name ?? ""
+            likelyPlace.address = place.formattedAddress ?? ""
+            likelyPlaces.append(likelyPlace);
+            
+        }
+        return likelyPlaces
     }
     
-    return locationEntry
     
-  }
+    public func addLocationEntry(_ rawCoordinates: RawCoordinates,
+                                 _ currMovementType: MovementType) -> LocationEntry{
+        let locationEntry = LocationEntry()
+        
+        locationEntry.start = NSDate()
+        locationEntry.longitude = rawCoordinates.longitude
+        locationEntry.latitude = rawCoordinates.latitude
+        locationEntry.movement_type = currMovementType.rawValue
+        locationEntry.raw_coordinates.append(rawCoordinates)
+        
+        try! self.realm.write {
+            self.realm.add(locationEntry)
+            print("Add new LocationEntry: (\(locationEntry.uuid))")
+        }
+        return locationEntry
+    }
+    
+// TODO
+//    public func getPlaceFromCoordinates() {
+//
+//    }
+    
+    public func assignPlaceIdToCurrentLocation(_ locationEntry: LocationEntry) {
+        let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
+            UInt(GMSPlaceField.placeID.rawValue))!
+        
+        GMSPlacesClient.shared().findPlaceLikelihoodsFromCurrentLocation(withPlaceFields: fields, callback: {
+            (placeLikelihoodList: Array<GMSPlaceLikelihood>?, error: Error?) in
+            
+            if let error = error {
+                print("An error occurred: \(error.localizedDescription)")
+                return
+            }
+            if let placeLikelihoodList = placeLikelihoodList {
+                
+                var likelyPlaces = self.getLikelyPlaceList(placeLikelihoodList: placeLikelihoodList)
+                
+                if likelyPlaces.count > 0 {
+                    print(likelyPlaces[0].name)
+                    // TODO: consider place likelihoods instead of only grabbing first
+                    
+                    try! self.realm.write {
+                        locationEntry.place_id = likelyPlaces[0].gms_id
+                        print("Add new LocationEntry: (\(locationEntry.uuid))")
+                    }
+                }
+                else {
+                    print("No places found for coordinates.")
+                }
+                
+            }
+        })
+    }
+  
   
   // Append a RawCoordinates to a LocationEntry.
   public func appendRawCoord(_ locationEntry: LocationEntry, _ rawCoord: RawCoordinates) {
