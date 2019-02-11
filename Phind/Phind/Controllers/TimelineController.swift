@@ -108,6 +108,10 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   // Add locations from today to map and timeline
   func reloadMapView() {
     
+    // Reset mapkit view.
+    mapView.removeAnnotations(mapView.annotations)
+    mapView.removeOverlays(mapView.overlays)
+    
     // Get all LocationEntries from today.
     let locationEntries = ModelManager.shared.getLocationEntries(from: currentDate)
     self.tableItems.removeAll()
