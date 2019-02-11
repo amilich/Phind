@@ -131,12 +131,10 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
             // so we should just ignore this point if the speed is 0.
             print("Case 2: STATIONARY TO STATIONARY")
             
-            #if !targetEnvironment(simulator)
             // Prevent buggy GPS signals in "jumping" the location.
             if (location.speed <= 0) {
               return
             }
-            #endif
             
             ModelManager.shared.closeLocationEntry(lastLocationEntry!)
             currLocationEntry = ModelManager.shared.addLocationEntry(rawCoord, currMovementType)
@@ -147,7 +145,7 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
             // Case 3: Move from non-stationary to stationary.
             // This means the user has likely moved from a non-stationary / commuting phase to a
             // stationary phase, i.e. the user has stopped moving and is now in a new location.
-            print("Case 3: NON-STATIONARY TO STATIONARY")
+            print("Case 3: NON-STATIONARY TO STATIONARY/NON-STATIONARY")
             ModelManager.shared.closeLocationEntry(lastLocationEntry!)
             currLocationEntry = ModelManager.shared.addLocationEntry(rawCoord, currMovementType)
             ModelManager.shared.assignPlaceIdToCurrentLocation(currLocationEntry!)

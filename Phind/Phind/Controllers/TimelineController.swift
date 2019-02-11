@@ -50,7 +50,8 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   let formatter = DateFormatter()
   
   // Table content for dynamically reusable cells
-  var tableItems: [String] = []
+  private var tableItems: [String] = []
+  private var currentDate: Date = Date()
   
   // viewWillAppear and viewDidLoad all follow the cycle delineated
   // here: https://apple.co/2DqFnH6
@@ -62,18 +63,31 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     // Update current date label at the top of the screen.
     // TODO(kevin): Update this to display date as Feb 9, 2019,
     //              instead of Feb 09, 2019.
-    let date = Date()
-    formatter.dateFormat = "MMM dd, yyyy"
-    currentDateLabel.text = formatter.string(from: date)
-    currentDateLabel.center.x = self.view.center.x
+    updateDate(Date())
     
-    // Reload map plot and timeline
-    reloadMapView();
   }
   
   @IBAction func refreshButton(_ sender: Any) {
-    print("Button clicked.")
     reloadMapView()
+  }
+  
+  @IBAction func previousDayButton(_ sender: Any) {
+    updateDate(Calendar.current.date(byAdding: .day, value: -1, to: currentDate)!)
+  }
+  
+  @IBAction func nextDayButton(_ sender: Any) {
+    updateDate(Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!)
+  }
+  
+  private func updateDate(_ date: Date) {
+    
+    formatter.dateFormat = "MMM dd, yyyy"
+    currentDate = date
+    currentDateLabel.text = formatter.string(from: currentDate)
+    currentDateLabel.center.x = self.view.center.x
+    
+    reloadMapView()
+    
   }
   
   override func viewDidLoad() {
@@ -93,9 +107,11 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   
   // Add locations from today to map and timeline
   func reloadMapView() {
+    
     // Get all LocationEntries from today.
-    let locationEntries = ModelManager.shared.getLocationEntries()
+    let locationEntries = ModelManager.shared.getLocationEntries(from: currentDate)
     self.tableItems.removeAll()
+    
     // Iterate through each LocationEntry to draw pins and routes, as well
     // as generate cards for the timeline.
     var lastCoord: CLLocationCoordinate2D?
@@ -127,10 +143,12 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   
   // Register cell element and data source with table view
   func setupTableView() {
+    
     self.tableView.register(TimelineUITableViewCell.self, forCellReuseIdentifier: "TimelineCell")
     self.tableView.separatorStyle = .none
     self.tableView.dataSource = self
     self.tableView.delegate = self
+    
   }
   
   func drawPin(_ lastCoord: inout CLLocationCoordinate2D?, _ locationEntry: LocationEntry) {
@@ -150,16 +168,15 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
       latitude: locationEntry.latitude,
       longitude: locationEntry.longitude
     )
-    if (lastCoord != nil) {
-      let routeCoords: [CLLocationCoordinate2D] = [lastCoord!, currCoord]
-      let routeLine = MKPolyline(coordinates: routeCoords, count: routeCoords.count)
-      mapView.addOverlay(routeLine)
-    }
+//    if (lastCoord != nil) {
+//      let routeCoords: [CLLocationCoordinate2D] = [lastCoord!, currCoord]
+//      let routeLine = MKPolyline(coordinates: routeCoords, count: routeCoords.count)
+//      mapView.addOverlay(routeLine)
+//    }
     
     // Update lastCoord and draw pin.
-    lastCoord = currCoord
     let annotation: TimelinePin = TimelinePin(
-      coordinate: lastCoord!,
+      coordinate: currCoord,
       subtitle: subtitle
     )
     mapView.addAnnotation(annotation)
@@ -204,6 +221,7 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
 extension TimelineController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
     let tableCell = tableView.dequeueReusableCell(withIdentifier: "TimelineCell", for: indexPath) as! TimelineUITableViewCell
     // Get the location description string set by the TimelineController
     let locationDescription = self.tableItems[indexPath.item]
@@ -211,6 +229,7 @@ extension TimelineController: UITableViewDataSource {
     cellLabel!.text = locationDescription
     // TODO(Andrew) set the UIImage if index is zero or last
     return tableCell
+    
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

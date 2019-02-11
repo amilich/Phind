@@ -90,8 +90,8 @@ public class ModelManager : NSObject {
     var likelyPlaces = [Place]()
     for likelihood in placeLikelihoodList {
       let place = likelihood.place
-      print("Current Place name \(String(describing: place.name)) at likelihood \(likelihood.likelihood)")
-      print("Current PlaceID \(String(describing: place.placeID))")
+//      print("Current Place name \(String(describing: place.name)) at likelihood \(likelihood.likelihood)")
+//      print("Current PlaceID \(String(describing: place.placeID))")
       
       let likelyPlace = Place()
       likelyPlace.gms_id = place.placeID ?? "" // TODO need default value
