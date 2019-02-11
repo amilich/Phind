@@ -28,11 +28,11 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
   public static let shared = PhindLocationManager()
   public static let DEFAULT_DISTANCE_FILTER : CLLocationDistance = 15
   // Minimum threshold for a new location to register as a new LocationEntry (in meters).
-#if targetEnvironment(simulator)
+  #if targetEnvironment(simulator)
   public static let NOTABLE_DISTANCE_THRESHOLD = 5.0
-#else
+  #else
   public static let NOTABLE_DISTANCE_THRESHOLD = 100.0
-#endif
+  #endif
   
   // Private constants.
   // We only allow locations for which
@@ -97,7 +97,7 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
     // Check latest location entry in realm objects, from today.
     let lastLocationEntry = ModelManager.shared.getMostRecentLocationEntry()
     var currLocationEntry : LocationEntry? = lastLocationEntry
-
+    
     // Update and create new LocationEntries depending on whether or not
     // lastLocationEntry exists and the distance between last location (if it exists)
     // and the current location.
@@ -111,14 +111,11 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
       )
       let distanceFromLastLocation = lastLocation.distance(from: location)
       print(distanceFromLastLocation)
-
+      
       // If the distance between the location of the most recent LocationEntry and the current
       // coordinates is greater than NOTABLE_DISTANCE_THRESHOLD, then need to evaluate a few cases
       // to determine what is happening.
       if (distanceFromLastLocation >= PhindLocationManager.NOTABLE_DISTANCE_THRESHOLD) {
-//      #if targetEnvironment(simulator)
-//        currMovementType = MovementType.CYCLING
-//      #endif
         if lastLocationEntry?.movement_type == currMovementType.rawValue {
           if currMovementType != MovementType.STATIONARY {
             // Case 1: Move from non-stationary to non-stationary.
@@ -172,7 +169,7 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
       print("Last location entry not found.")
       currLocationEntry = ModelManager.shared.addLocationEntry(rawCoord, currMovementType)
     }
-   
+    
     ModelManager.shared.appendRawCoord(currLocationEntry!, rawCoord)
     
   }

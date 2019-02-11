@@ -50,7 +50,7 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   
   // Table content for dynamically reusable cells
   var tableItems: [String] = []
-
+  
   // viewWillAppear and viewDidLoad all follow the cycle delineated
   // here: https://apple.co/2DqFnH6
   override func viewWillAppear(_ animated: Bool) {
@@ -137,7 +137,6 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     } else {
       subtitle += " to now"
     }
-    print(locationEntry.start)
     
     // If lastCoord exists before pin is drawn, draw a line from the
     // lastCoord to this point.

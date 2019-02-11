@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--First-->
+        <!--Timeline-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
                 <viewController id="9pv-A4-QxB" customClass="TimelineController" customModule="Phind" customModuleProvider="target" sceneMemberID="viewController">
@@ -72,7 +72,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Timeline" image="first" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="currentDateLabel" destination="dZp-kZ-NQO" id="C06-br-bTd"/>
                         <outlet property="mapView" destination="6sS-y6-5VB" id="wpO-JB-wws"/>
