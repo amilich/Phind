@@ -121,38 +121,45 @@ public class ModelManager : NSObject {
         return locationEntry
     }
     
+    public func getPlaceFromCoordinates() {
+        
+    }
+    
+    public func getPlaceIdFromDeviceLocation(_ locationEntry: LocationEntry) {
+        let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
+            UInt(GMSPlaceField.placeID.rawValue))!
+        
+        GMSPlacesClient.shared().findPlaceLikelihoodsFromCurrentLocation(withPlaceFields: fields, callback: {
+            (placeLikelihoodList: Array<GMSPlaceLikelihood>?, error: Error?) in
+            
+            if let error = error {
+                print("An error occurred: \(error.localizedDescription)")
+                return
+            }
+            if let placeLikelihoodList = placeLikelihoodList {
+                
+                var likelyPlaces = self.getLikelyPlaceList(placeLikelihoodList: placeLikelihoodList)
+                
+                if likelyPlaces.count > 0 {
+                    print(likelyPlaces[0].name)
+                    // TODO: consider place likelihoods instead of only grabbing first
+                    
+                    try! self.realm.write {
+                        locationEntry.place_id = likelyPlaces[0].gms_id
+                        print("Add new LocationEntry: (\(locationEntry.uuid))")
+                    }
+                }
+                else {
+                    print("No places found for coordinates.")
+                }
+                
+            }
+        })
+    }
   
     public func assignPlaceIdToCurrentLocation(_ locationEntry: LocationEntry) {
     
-    let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
-        UInt(GMSPlaceField.placeID.rawValue))!
-    
-    GMSPlacesClient.shared().findPlaceLikelihoodsFromCurrentLocation(withPlaceFields: fields, callback: {
-        (placeLikelihoodList: Array<GMSPlaceLikelihood>?, error: Error?) in
-    
-        if let error = error {
-            print("An error occurred: \(error.localizedDescription)")
-            return
-        }
-        if let placeLikelihoodList = placeLikelihoodList {
-            
-            var likelyPlaces = self.getLikelyPlaceList(placeLikelihoodList: placeLikelihoodList)
-            
-            if likelyPlaces.count > 0 {
-                print(likelyPlaces[0].name)
-                // TODO: consider place likelihoods instead of only grabbing first
-                
-                try! self.realm.write {
-                    locationEntry.place_id = likelyPlaces[0].gms_id
-                    print("Add new LocationEntry: (\(locationEntry.uuid))")
-                }
-            }
-            else {
-                print("No places found for coordinates.")
-            }
-            
-        }
-    })
+
     
   }
   
