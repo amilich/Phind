@@ -45,6 +45,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
     }
     
+    #if targetEnvironment(simulator)
+      print("Realm fileURL")
+      print(Realm.Configuration.defaultConfiguration.fileURL ?? "<no url found>")
+    #endif
+  
     return true
   }
   

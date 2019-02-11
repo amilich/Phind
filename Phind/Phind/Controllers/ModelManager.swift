@@ -37,6 +37,18 @@ public class ModelManager : NSObject {
     
   }
   
+  // Get the GMS place name for a locationEntry by performing lookup on
+  // place UUID.
+  func getPlaceLabelForLocationEntry(locationEntry: LocationEntry) -> Place? {
+    let placeUUID = locationEntry.place_id
+    let gmsPlaces = realm.objects(Place.self)
+      .filter("uuid = %@", placeUUID)
+    if (gmsPlaces.count > 0) {
+      return gmsPlaces[0]
+    }
+    return nil
+  }
+  
   // Return all location entries from a certain day, limited to max, and ascending default to false.
   public func getLocationEntries(from: Date = Date(), ascending: Bool = false) -> [LocationEntry] {
     
@@ -90,15 +102,14 @@ public class ModelManager : NSObject {
         var likelyPlaces = [Place]()
         for likelihood in placeLikelihoodList {
             let place = likelihood.place
-            print("Current Place name \(String(describing: place.name)) at likelihood \(likelihood.likelihood)")
-            print("Current PlaceID \(String(describing: place.placeID))")
-            
+//            print("Current Place name \(String(describing: place.name)) at likelihood \(likelihood.likelihood)")
+//            print("Current PlaceID \(String(describing: place.placeID))")
+          
             let likelyPlace = Place()
             likelyPlace.gms_id = place.placeID ?? "" // TODO need default value
             likelyPlace.name = place.name ?? ""
             likelyPlace.address = place.formattedAddress ?? ""
             likelyPlaces.append(likelyPlace);
-            
         }
         return likelyPlaces
     }
@@ -116,15 +127,9 @@ public class ModelManager : NSObject {
         
         try! self.realm.write {
             self.realm.add(locationEntry)
-            print("Add new LocationEntry: (\(locationEntry.uuid))")
         }
         return locationEntry
     }
-    
-// TODO
-//    public func getPlaceFromCoordinates() {
-//
-//    }
     
     public func assignPlaceIdToCurrentLocation(_ locationEntry: LocationEntry) {
         let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
@@ -144,10 +149,15 @@ public class ModelManager : NSObject {
                 if likelyPlaces.count > 0 {
                     print(likelyPlaces[0].name)
                     // TODO: consider place likelihoods instead of only grabbing first
-                    
+                    let place = Place()
+                    place.address = likelyPlaces[0].address
+                    place.name = likelyPlaces[0].name
+                    place.gms_id = likelyPlaces[0].gms_id
+
                     try! self.realm.write {
-                        locationEntry.place_id = likelyPlaces[0].gms_id
-                        print("Add new LocationEntry: (\(locationEntry.uuid))")
+                        locationEntry.place_id = place.uuid
+                        self.realm.add(place)
+                        print("Add new LocationEntry: (\(locationEntry.uuid)) with place_id (\(likelyPlaces[0].uuid))")
                     }
                 }
                 else {
