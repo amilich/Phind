@@ -121,11 +121,12 @@ public class ModelManager : NSObject {
         return locationEntry
     }
     
-    public func getPlaceFromCoordinates() {
-        
-    }
+// TODO
+//    public func getPlaceFromCoordinates() {
+//
+//    }
     
-    public func getPlaceIdFromDeviceLocation(_ locationEntry: LocationEntry) {
+    public func assignPlaceIdToCurrentLocation(_ locationEntry: LocationEntry) {
         let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
             UInt(GMSPlaceField.placeID.rawValue))!
         
@@ -157,11 +158,6 @@ public class ModelManager : NSObject {
         })
     }
   
-    public func assignPlaceIdToCurrentLocation(_ locationEntry: LocationEntry) {
-    
-
-    
-  }
   
   // Append a RawCoordinates to a LocationEntry.
   public func appendRawCoord(_ locationEntry: LocationEntry, _ rawCoord: RawCoordinates) {
