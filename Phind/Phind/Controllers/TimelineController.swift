@@ -43,6 +43,7 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   @IBOutlet weak var currentDateLabel: UILabel!
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var refreshButton: UIButton!
   
   // TODO: Should this be moved into a function?
   let realm = try! Realm()
@@ -68,6 +69,11 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     
     // Reload map plot and timeline
     reloadMapView();
+  }
+  
+  @IBAction func refreshButton(_ sender: Any) {
+    print("Button clicked.")
+    reloadMapView()
   }
   
   override func viewDidLoad() {
