@@ -104,20 +104,28 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     // Iterate through each LocationEntry to draw pins and routes, as well
     // as generate cards for the timeline.
     var lastCoord: CLLocationCoordinate2D?
+    var lastPlaceString = ""
+
+    // Set date format for timeline labels
+    formatter.dateFormat = "h:mm a"
+
     for locationEntry in locationEntries {
       if locationEntry.movement_type == MovementType.STATIONARY.rawValue {
         drawPin(&lastCoord, locationEntry)
         
         let place = ModelManager.shared.getPlaceLabelForLocationEntry(locationEntry: locationEntry)
         if place != nil {
-          formatter.dateFormat = "h:mm a"
           let startTime = formatter.string(from: locationEntry.start as Date)
           let endTime = (locationEntry.end != nil) ? formatter.string(from: locationEntry.end! as Date) : ""
           let placeString = place != nil ? place!.name : ""
-          let timeString = (locationEntry.end != nil) ? String(format: "from %@ to %@", startTime, endTime) : String(format: "from %@", startTime)
-          let timelineLabel = TimelineLabel(timeLabel: timeString, placeLabel: placeString)
-
-          self.tableItems.append(timelineLabel);
+          if lastPlaceString == placeString {
+            // TODO(Andrew): Update the time to elongate the time range
+          } else {
+            let timeString = (locationEntry.end != nil) ? String(format: "from %@ to %@", startTime, endTime) : String(format: "from %@", startTime)
+            let timelineLabel = TimelineLabel(timeLabel: timeString, placeLabel: placeString)
+            self.tableItems.append(timelineLabel)
+          }
+          lastPlaceString = placeString
         }
       } else {
         drawRoute(&lastCoord, locationEntry)
