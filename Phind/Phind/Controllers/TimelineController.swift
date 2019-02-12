@@ -13,14 +13,15 @@ import MapKit
 import RealmSwift
 
 class TimelineLabel: NSObject {
-  var timeLabel: String?
-  var placeLabel: String?
+  var startTime: Date
+  var endTime: Date?
+  var placeLabel: String
   var imagePath: String?
   
-  init(timeLabel: String, placeLabel: String) {
-    self.timeLabel = timeLabel
+  init(placeLabel: String, startTime: Date, endTime: Date?) {
     self.placeLabel = placeLabel
-    
+    self.startTime = startTime
+    self.endTime = endTime
     super.init()
   }
 }
@@ -104,28 +105,25 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     // Iterate through each LocationEntry to draw pins and routes, as well
     // as generate cards for the timeline.
     var lastCoord: CLLocationCoordinate2D?
-    var lastPlaceString = ""
+    var lastPlace = TimelineLabel(placeLabel: "", startTime: Date(), endTime: Date()) // TODO(Andrew) make nil?
 
     // Set date format for timeline labels
-    formatter.dateFormat = "h:mm a"
-
     for locationEntry in locationEntries {
       if locationEntry.movement_type == MovementType.STATIONARY.rawValue {
         drawPin(&lastCoord, locationEntry)
         
         let place = ModelManager.shared.getPlaceLabelForLocationEntry(locationEntry: locationEntry)
         if place != nil {
-          let startTime = formatter.string(from: locationEntry.start as Date)
-          let endTime = (locationEntry.end != nil) ? formatter.string(from: locationEntry.end! as Date) : ""
           let placeString = place != nil ? place!.name : ""
-          if lastPlaceString == placeString {
+          
+          if placeString == lastPlace.placeLabel {
             // TODO(Andrew): Update the time to elongate the time range
+            lastPlace.endTime = locationEntry.end as Date?
           } else {
-            let timeString = (locationEntry.end != nil) ? String(format: "from %@ to %@", startTime, endTime) : String(format: "from %@", startTime)
-            let timelineLabel = TimelineLabel(timeLabel: timeString, placeLabel: placeString)
+            let timelineLabel = TimelineLabel(placeLabel: placeString, startTime: locationEntry.start as Date, endTime: locationEntry.end as Date?)
             self.tableItems.append(timelineLabel)
+            lastPlace = timelineLabel
           }
-          lastPlaceString = placeString
         }
       } else {
         drawRoute(&lastCoord, locationEntry)
@@ -213,7 +211,7 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   }
   
   func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-    //Return an `MKPolylineRenderer` for the `MKPolyline` in the `MKMapViewDelegate`s method
+    // Return an `MKPolylineRenderer` for the `MKPolyline` in the `MKMapViewDelegate`s method
     if let polyline = overlay as? MKPolyline {
       let mapLineRenderer = MKPolylineRenderer(polyline: polyline)
       mapLineRenderer.strokeColor = ROUTE_COLOR
@@ -228,14 +226,24 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
 extension TimelineController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
     let tableCell = tableView.dequeueReusableCell(withIdentifier: "TimelineCell", for: indexPath) as! TimelineUITableViewCell
+    
     // Get the location description string set by the TimelineController
     let locationDescription = self.tableItems[indexPath.item]
     let cellLabel = tableCell.cellLabel
-    let timeLabel = tableCell.timeLabel
     cellLabel!.text = locationDescription.placeLabel
-    timeLabel!.text = locationDescription.timeLabel
+
+    formatter.dateFormat = "h:mm a"
+
+    let timeLabel = tableCell.timeLabel
+    let startTime = formatter.string(from: locationDescription.startTime as Date)
+    let endTime = (locationDescription.endTime != nil) ? formatter.string(from: locationDescription.startTime as Date) : ""
+    let timeString = (locationDescription.endTime != nil) ? String(format: "from %@ to %@", startTime, endTime) : String(format: "from %@", startTime)
+    timeLabel!.text = timeString
+    
     // TODO(Andrew) set the UIImage if index is zero or last
+    
     return tableCell
   }
   
