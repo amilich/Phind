@@ -61,19 +61,19 @@ class SecondViewController: UIViewController, UICollectionViewDelegate {
     let statclass1 = String("Number of Places Visited:")
     print(statclass1)
     let statisticLabel1 = StatisticLabel1(stat1: numberPlaces, statType: statclass1)
+    self.collectionItems.append(statisticLabel1)
+    
     
     let locationEntry = ModelManager.shared.mostCommonLocation()
-    let place = ModelManager.shared.getPlaceLabelForLocationEntry(locationEntry: locationEntry)
-    let placeString = place != nil ? place!.name : ""
-    let mostCommonLocation = String(placeString)
-    let statclass2 = String("Most Commonly Visited Place:")
-    let statisticLabel2 = StatisticLabel1(stat1: mostCommonLocation, statType: statclass2)
+    if locationEntry != nil{
+      let place = ModelManager.shared.getPlaceLabelForLocationEntry(locationEntry: locationEntry!)
+      let placeString = place != nil ? place!.name : ""
+      let mostCommonLocation = String(placeString)
+      let statclass2 = String("Most Commonly Visited Place:")
+      let statisticLabel2 = StatisticLabel1(stat1: mostCommonLocation, statType: statclass2)
+      self.collectionItems.append(statisticLabel2)
+    }
     
-    
-    
-    
-    self.collectionItems.append(statisticLabel1)
-    self.collectionItems.append(statisticLabel2)
     collectionView.reloadData()
   }
   

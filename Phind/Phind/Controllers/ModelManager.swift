@@ -73,13 +73,16 @@ public class ModelManager : NSObject {
     
   }
   
-  public func mostCommonLocation(from: Date = Date(), ascending: Bool = false) -> LocationEntry {
+  public func mostCommonLocation(from: Date = Date(), ascending: Bool = false) -> LocationEntry? {
     
     let dayStart = Calendar.current.startOfDay(for: from)
     let dayEnd = Calendar.current.date(byAdding: .day, value: 1, to: dayStart)
     let locationEntries = realm.objects(LocationEntry.self)
       .filter("start >= %@ AND start < %@", dayStart, dayEnd)
       .sorted(byKeyPath: "start", ascending: ascending)
+    if locationEntries.count <= 0{
+      return nil
+    }
     let locationEntry = locationEntries[0]
     return locationEntry
     
