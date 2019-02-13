@@ -26,7 +26,8 @@ class StatisticLabel1: NSObject {
 class SecondViewController: UIViewController, UICollectionViewDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var DateLabel: UILabel!
-    
+  @IBOutlet weak var refreshButton: UIButton!
+  
     let realm = try! Realm()
     let formatter = DateFormatter()
     
@@ -39,6 +40,10 @@ class SecondViewController: UIViewController, UICollectionViewDelegate {
         DateLabel.center.x = self.view.center.x
         populateCollectionView()
     }
+  
+  @IBAction func refreshButton(_ sender: Any) {
+    populateCollectionView()
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()

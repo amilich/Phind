@@ -192,6 +192,17 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aGA-K9-CRh">
+                                        <rect key="frame" x="366" y="52" width="32" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="16"/>
+                                        <state key="normal" title="redo">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="refreshButton:" destination="8rJ-Kc-sve" eventType="touchDown" id="g3E-xB-ycc"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.3294117647" green="0.44705882349999998" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
@@ -250,6 +261,7 @@
                     <connections>
                         <outlet property="DateLabel" destination="YvF-HU-iyf" id="fbi-yL-00D"/>
                         <outlet property="collectionView" destination="AD2-UW-7Xu" id="Rug-4f-jgC"/>
+                        <outlet property="refreshButton" destination="aGA-K9-CRh" id="F4m-MI-9kC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
