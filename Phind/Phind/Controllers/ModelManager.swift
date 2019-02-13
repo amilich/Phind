@@ -37,6 +37,18 @@ public class ModelManager : NSObject {
     
   }
   
+  // Get the GMS place name for a locationEntry by performing lookup on
+  // place UUID.
+  func getPlaceLabelForLocationEntry(locationEntry: LocationEntry) -> Place? {
+    let placeUUID = locationEntry.place_id
+    let gmsPlaces = realm.objects(Place.self)
+      .filter("uuid = %@", placeUUID)
+    if (gmsPlaces.count > 0) {
+      return gmsPlaces[0]
+    }
+    return nil
+  }
+  
   // Return all location entries from a certain day, limited to max, and ascending default to false.
   public func getLocationEntries(from: Date = Date(), ascending: Bool = false) -> [LocationEntry] {
     
@@ -50,6 +62,22 @@ public class ModelManager : NSObject {
     
   }
   
+//    // Return all stationary location entries from a certain day, limited to max, and ascending default to false.
+//    public func getStationaryLocationEntires(from: Date = Date(), ascending: Bool = false) -> [LocationEntry] {
+//        
+//        let dayStart = Calendar.current.startOfDay(for: from)
+//        let dayEnd = Calendar.current.date(byAdding: .day, value: 1, to: dayStart)
+//        let locationEntries = realm.objects(LocationEntry.self)
+//            .filter("start >= %@ AND start < %@ AND movement_type==STATIONARY", dayStart, dayEnd)
+//            .sorted(byKeyPath: "start", ascending: ascending)
+//        
+//        return Array(locationEntries)
+//        
+//    }
+//    
+    
+    
+    
   // Return most recent location entry.
   public func getMostRecentRawCoord() -> RawCoordinates? {
     
@@ -85,7 +113,7 @@ public class ModelManager : NSObject {
     }
     
   }
-  
+
   private func getLikelyPlaceList(placeLikelihoodList: Array<GMSPlaceLikelihood>) -> [Place]{
     var likelyPlaces = [Place]()
     for likelihood in placeLikelihoodList {
@@ -98,11 +126,9 @@ public class ModelManager : NSObject {
       likelyPlace.name = place.name ?? ""
       likelyPlace.address = place.formattedAddress ?? ""
       likelyPlaces.append(likelyPlace);
-      
     }
     return likelyPlaces
   }
-  
   
   public func addLocationEntry(_ rawCoordinates: RawCoordinates,
                                _ currMovementType: MovementType) -> LocationEntry{
@@ -144,10 +170,15 @@ public class ModelManager : NSObject {
         if likelyPlaces.count > 0 {
           print(likelyPlaces[0].name)
           // TODO: consider place likelihoods instead of only grabbing first
+          let place = Place()
+          place.address = likelyPlaces[0].address
+          place.name = likelyPlaces[0].name
+          place.gms_id = likelyPlaces[0].gms_id
           
           try! self.realm.write {
-            locationEntry.place_id = likelyPlaces[0].gms_id
-            print("Add new LocationEntry: (\(locationEntry.uuid))")
+            locationEntry.place_id = place.uuid
+            self.realm.add(place)
+            print("Add new LocationEntry: (\(locationEntry.uuid)) with place_id (\(likelyPlaces[0].uuid))")
           }
         }
         else {
@@ -157,7 +188,6 @@ public class ModelManager : NSObject {
       }
     })
   }
-  
   
   // Append a RawCoordinates to a LocationEntry.
   public func appendRawCoord(_ locationEntry: LocationEntry, _ rawCoord: RawCoordinates) {

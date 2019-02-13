@@ -12,6 +12,20 @@ import GooglePlaces
 import MapKit
 import RealmSwift
 
+class TimelineLabel: NSObject {
+  var startTime: Date
+  var endTime: Date?
+  var placeLabel: String
+  var imagePath: String?
+  
+  init(placeLabel: String, startTime: Date, endTime: Date?) {
+    self.placeLabel = placeLabel
+    self.startTime = startTime
+    self.endTime = endTime
+    super.init()
+  }
+}
+
 class TimelinePin: NSObject, MKAnnotation {
   dynamic var coordinate: CLLocationCoordinate2D
   dynamic var title: String?
@@ -50,9 +64,9 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   let formatter = DateFormatter()
   
   // Table content for dynamically reusable cells
-  private var tableItems: [String] = []
+  private var tableItems: [TimelineLabel] = []
   private var currentDate: Date = Date()
-  
+
   // viewWillAppear and viewDidLoad all follow the cycle delineated
   // here: https://apple.co/2DqFnH6
   override func viewWillAppear(_ animated: Bool) {
@@ -96,8 +110,6 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     // Register the table cell as custom type
     setupTableView();
     
-    // Get all LocationEntries from today.
-    let locationEntries = ModelManager.shared.getLocationEntries()
     let formatter = DateFormatter()
     formatter.dateFormat = "HH:mm:ss"
     
@@ -119,28 +131,49 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     // Iterate through each LocationEntry to draw pins and routes, as well
     // as generate cards for the timeline.
     var lastCoord: CLLocationCoordinate2D?
+    var lastPlace = TimelineLabel(placeLabel: "", startTime: Date(), endTime: Date()) // TODO(Andrew) make nil?
+
+    // Set date format for timeline labels
     for locationEntry in locationEntries {
       if locationEntry.movement_type == MovementType.STATIONARY.rawValue {
         drawPin(&lastCoord, locationEntry)
+        
+        let place = ModelManager.shared.getPlaceLabelForLocationEntry(locationEntry: locationEntry)
+        if place != nil {
+          let placeString = place != nil ? place!.name : ""
+          
+          if placeString == lastPlace.placeLabel {
+            // TODO(Andrew): Update the time to elongate the time range
+            if locationEntry.end != nil{
+              let endTime = locationEntry.end! as Date
+              if endTime >= lastPlace.endTime ?? endTime { // Will be run if no lastPlace.endTime
+                lastPlace.endTime = endTime
+              }
+            }
+            let startTime = locationEntry.start as Date
+            if startTime < lastPlace.startTime {
+              lastPlace.startTime = startTime
+            }
+            
+          } else {
+            let timelineLabel = TimelineLabel(placeLabel: placeString, startTime: locationEntry.start as Date, endTime: locationEntry.end as Date?)
+            self.tableItems.append(timelineLabel)
+            lastPlace = timelineLabel
+          }
+        }
       } else {
-        drawRoute(&lastCoord, locationEntry)
+        // TODO decide if we want lines
+        // drawRoute(&lastCoord, locationEntry)
       }
-      self.tableItems.append(String(format:"%f, %f", locationEntry.latitude, locationEntry.longitude));
     }
     tableView.reloadData()
     
     // Center map around lastCoord.
     if lastCoord != nil {
       // TODO: If lastCoord is nil, then use current coordinates.
-      let viewRegion = MKCoordinateRegion(center: lastCoord!, latitudinalMeters: MAP_SPAN_LAT, longitudinalMeters: MAP_SPAN_LONG)
-      mapView.setRegion(viewRegion, animated: true)
-    }
-    
-    // Center map around lastCoord.
-    if lastCoord != nil {
-      // TODO: If lastCoord is nil, then use current coordinates.
-      let viewRegion = MKCoordinateRegion(center: lastCoord!, latitudinalMeters: MAP_SPAN_LAT, longitudinalMeters: MAP_SPAN_LONG)
-      mapView.setRegion(viewRegion, animated: true)
+      // let viewRegion = MKCoordinateRegion(center: lastCoord!, latitudinalMeters: MAP_SPAN_LAT, longitudinalMeters: MAP_SPAN_LONG)
+      // mapView.setRegion(viewRegion, animated: true)
+      self.mapView.showAnnotations(self.mapView.annotations, animated: true)
     }
     
   }
@@ -158,7 +191,7 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   func drawPin(_ lastCoord: inout CLLocationCoordinate2D?, _ locationEntry: LocationEntry) {
     
     // Add a pin for each stationary location on the map.
-    formatter.dateFormat = "HH:mm:ss"
+    formatter.dateFormat = "h:mm a"
     var subtitle = formatter.string(from: locationEntry.start as Date)
     if locationEntry.end != nil {
       subtitle += " to " + formatter.string(from: locationEntry.end! as Date)
@@ -172,11 +205,13 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
       latitude: locationEntry.latitude,
       longitude: locationEntry.longitude
     )
-//    if (lastCoord != nil) {
-//      let routeCoords: [CLLocationCoordinate2D] = [lastCoord!, currCoord]
-//      let routeLine = MKPolyline(coordinates: routeCoords, count: routeCoords.count)
-//      mapView.addOverlay(routeLine)
-//    }
+    
+    if (lastCoord != nil) {
+      let routeCoords: [CLLocationCoordinate2D] = [lastCoord!, currCoord]
+      let routeLine = MKPolyline(coordinates: routeCoords, count: routeCoords.count)
+      // TODO decide if we want lines
+      // mapView.addOverlay(routeLine)
+    }
     
     // Update lastCoord and draw pin.
     let annotation: TimelinePin = TimelinePin(
@@ -210,7 +245,7 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   }
   
   func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-    //Return an `MKPolylineRenderer` for the `MKPolyline` in the `MKMapViewDelegate`s method
+    // Return an `MKPolylineRenderer` for the `MKPolyline` in the `MKMapViewDelegate`s method
     if let polyline = overlay as? MKPolyline {
       let mapLineRenderer = MKPolylineRenderer(polyline: polyline)
       mapLineRenderer.strokeColor = ROUTE_COLOR
@@ -227,10 +262,20 @@ extension TimelineController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     let tableCell = tableView.dequeueReusableCell(withIdentifier: "TimelineCell", for: indexPath) as! TimelineUITableViewCell
+    
     // Get the location description string set by the TimelineController
     let locationDescription = self.tableItems[indexPath.item]
     let cellLabel = tableCell.cellLabel
-    cellLabel!.text = locationDescription
+    cellLabel!.text = locationDescription.placeLabel
+
+    formatter.dateFormat = "h:mm a"
+
+    let timeLabel = tableCell.timeLabel
+    let startTime = formatter.string(from: locationDescription.startTime as Date)
+    let endTime = (locationDescription.endTime != nil) ? formatter.string(from: locationDescription.endTime! as Date) : ""
+    let timeString = (locationDescription.endTime != nil) ? String(format: "from %@ to %@", startTime, endTime) : String(format: "from %@", startTime)
+    timeLabel!.text = timeString
+    
     // TODO(Andrew) set the UIImage if index is zero or last
     return tableCell
     
