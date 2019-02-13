@@ -118,7 +118,17 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
           
           if placeString == lastPlace.placeLabel {
             // TODO(Andrew): Update the time to elongate the time range
-            lastPlace.endTime = locationEntry.end as Date?
+            if locationEntry.end != nil{
+              let endTime = locationEntry.end! as Date
+              if endTime >= lastPlace.endTime ?? endTime { // Will be run if no lastPlace.endTime
+                lastPlace.endTime = endTime
+              }
+            }
+            let startTime = locationEntry.start as Date
+            if startTime < lastPlace.startTime {
+              lastPlace.startTime = startTime
+            }
+            
           } else {
             let timelineLabel = TimelineLabel(placeLabel: placeString, startTime: locationEntry.start as Date, endTime: locationEntry.end as Date?)
             self.tableItems.append(timelineLabel)
@@ -126,7 +136,8 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
           }
         }
       } else {
-        drawRoute(&lastCoord, locationEntry)
+        // TODO decide if we want lines
+        // drawRoute(&lastCoord, locationEntry)
       }
     }
     tableView.reloadData()
@@ -134,15 +145,9 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     // Center map around lastCoord.
     if lastCoord != nil {
       // TODO: If lastCoord is nil, then use current coordinates.
-      let viewRegion = MKCoordinateRegion(center: lastCoord!, latitudinalMeters: MAP_SPAN_LAT, longitudinalMeters: MAP_SPAN_LONG)
-      mapView.setRegion(viewRegion, animated: true)
-    }
-    
-    // Center map around lastCoord.
-    if lastCoord != nil {
-      // TODO: If lastCoord is nil, then use current coordinates.
-      let viewRegion = MKCoordinateRegion(center: lastCoord!, latitudinalMeters: MAP_SPAN_LAT, longitudinalMeters: MAP_SPAN_LONG)
-      mapView.setRegion(viewRegion, animated: true)
+      // let viewRegion = MKCoordinateRegion(center: lastCoord!, latitudinalMeters: MAP_SPAN_LAT, longitudinalMeters: MAP_SPAN_LONG)
+      // mapView.setRegion(viewRegion, animated: true)
+      self.mapView.showAnnotations(self.mapView.annotations, animated: true)
     }
     
   }
@@ -158,7 +163,7 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   func drawPin(_ lastCoord: inout CLLocationCoordinate2D?, _ locationEntry: LocationEntry) {
     
     // Add a pin for each stationary location on the map.
-    formatter.dateFormat = "HH:mm:ss"
+    formatter.dateFormat = "h:mm a"
     var subtitle = formatter.string(from: locationEntry.start as Date)
     if locationEntry.end != nil {
       subtitle += " to " + formatter.string(from: locationEntry.end! as Date)
@@ -175,7 +180,8 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     if (lastCoord != nil) {
       let routeCoords: [CLLocationCoordinate2D] = [lastCoord!, currCoord]
       let routeLine = MKPolyline(coordinates: routeCoords, count: routeCoords.count)
-      mapView.addOverlay(routeLine)
+      // TODO decide if we want lines
+      // mapView.addOverlay(routeLine)
     }
     
     // Update lastCoord and draw pin.
@@ -238,12 +244,11 @@ extension TimelineController: UITableViewDataSource {
 
     let timeLabel = tableCell.timeLabel
     let startTime = formatter.string(from: locationDescription.startTime as Date)
-    let endTime = (locationDescription.endTime != nil) ? formatter.string(from: locationDescription.startTime as Date) : ""
+    let endTime = (locationDescription.endTime != nil) ? formatter.string(from: locationDescription.endTime! as Date) : ""
     let timeString = (locationDescription.endTime != nil) ? String(format: "from %@ to %@", startTime, endTime) : String(format: "from %@", startTime)
     timeLabel!.text = timeString
     
     // TODO(Andrew) set the UIImage if index is zero or last
-    
     return tableCell
   }
   
