@@ -62,19 +62,18 @@ public class ModelManager : NSObject {
     
   }
   
-//    // Return all stationary location entries from a certain day, limited to max, and ascending default to false.
-//    public func getStationaryLocationEntires(from: Date = Date(), ascending: Bool = false) -> [LocationEntry] {
-//        
-//        let dayStart = Calendar.current.startOfDay(for: from)
-//        let dayEnd = Calendar.current.date(byAdding: .day, value: 1, to: dayStart)
-//        let locationEntries = realm.objects(LocationEntry.self)
-//            .filter("start >= %@ AND start < %@ AND movement_type==STATIONARY", dayStart, dayEnd)
-//            .sorted(byKeyPath: "start", ascending: ascending)
-//        
-//        return Array(locationEntries)
-//        
-//    }
-//    
+    // Return all stationary location entries from a certain day, limited to max, and ascending default to false.
+    public func getUniqueLocationEntires(from: Date = Date(), ascending: Bool = false) -> [LocationEntry] {
+        
+        let dayStart = Calendar.current.startOfDay(for: from)
+        let dayEnd = Calendar.current.date(byAdding: .day, value: 1, to: dayStart)
+        let locationEntries = realm.objects(LocationEntry.self)
+            .filter("start >= %@ AND start < %@", dayStart, dayEnd)
+            .sorted(byKeyPath: "start", ascending: ascending).distinct(by: ["place_id"])
+        return Array(locationEntries)
+        
+    }
+    
     
     
     
