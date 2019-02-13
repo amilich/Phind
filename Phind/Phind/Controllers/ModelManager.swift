@@ -62,22 +62,32 @@ public class ModelManager : NSObject {
     
   }
   
-//    // Return all stationary location entries from a certain day, limited to max, and ascending default to false.
-//    public func getStationaryLocationEntires(from: Date = Date(), ascending: Bool = false) -> [LocationEntry] {
-//        
-//        let dayStart = Calendar.current.startOfDay(for: from)
-//        let dayEnd = Calendar.current.date(byAdding: .day, value: 1, to: dayStart)
-//        let locationEntries = realm.objects(LocationEntry.self)
-//            .filter("start >= %@ AND start < %@ AND movement_type==STATIONARY", dayStart, dayEnd)
-//            .sorted(byKeyPath: "start", ascending: ascending)
-//        
-//        return Array(locationEntries)
-//        
-//    }
-//    
+  // Return all stationary location entries from a certain day, limited to max, and ascending default to false.
+  public func getUniqueLocationEntires(from: Date = Date(), ascending: Bool = false) -> [LocationEntry] {
     
+    let dayStart = Calendar.current.startOfDay(for: from)
+    let dayEnd = Calendar.current.date(byAdding: .day, value: 1, to: dayStart)
+    let locationEntries = realm.objects(LocationEntry.self).filter("start >= %@ AND start < %@", dayStart, dayEnd).distinct(by: ["place_id"])
+    return Array(locationEntries)
     
+  }
+  
+  public func mostCommonLocation(from: Date = Date(), ascending: Bool = false) -> LocationEntry? {
     
+    let dayStart = Calendar.current.startOfDay(for: from)
+    let dayEnd = Calendar.current.date(byAdding: .day, value: 1, to: dayStart)
+    let locationEntries = realm.objects(LocationEntry.self)
+      .filter("start >= %@ AND start < %@", dayStart, dayEnd)
+      .sorted(byKeyPath: "start", ascending: ascending)
+    if locationEntries.count <= 0{
+      return nil
+    }
+    let locationEntry = locationEntries[0]
+    return locationEntry
+    
+  }
+  
+  
   // Return most recent location entry.
   public func getMostRecentRawCoord() -> RawCoordinates? {
     
@@ -113,7 +123,7 @@ public class ModelManager : NSObject {
     }
     
   }
-
+  
   private func getLikelyPlaceList(placeLikelihoodList: Array<GMSPlaceLikelihood>) -> [Place]{
     var likelyPlaces = [Place]()
     for likelihood in placeLikelihoodList {
@@ -171,24 +181,22 @@ public class ModelManager : NSObject {
         if likelyPlaces.count > 0 {
           print(likelyPlaces[0].name)
           // TODO: consider place likelihoods instead of only grabbing first
-          var place = Place()
-          place.address = likelyPlaces[0].address
-          place.name = likelyPlaces[0].name
-          place.gms_id = likelyPlaces[0].gms_id
-          let gmsPlaces = self.realm.objects(Place.self)
-            .filter("gms_id = %@", place.gms_id)
-          if gmsPlaces.count > 0 {
-            print("Found place with name \(place.name)")
+          var place = self.realm.objects(Place.self).filter("gms_id = %@", likelyPlaces[0].gms_id).first
+          if place == nil {
+            place = Place()
+            place!.address = likelyPlaces[0].address
+            place!.name = likelyPlaces[0].name
+            place!.gms_id = likelyPlaces[0].gms_id
+            
             try! self.realm.write {
-              place = gmsPlaces[0]
-              locationEntry.place_id = place.uuid
+              self.realm.add(place!)
             }
-          } else {
-            try! self.realm.write {
-              locationEntry.place_id = place.uuid
-              self.realm.add(place)
-              print("Add new LocationEntry: (\(locationEntry.uuid)) with place_id (\(likelyPlaces[0].uuid))")
-            }
+          }
+          
+          // Link place id to location entry.
+          try! self.realm.write {
+            locationEntry.place_id = place!.uuid
+            print("Add new LocationEntry: (\(locationEntry.uuid)) with place_id (\(likelyPlaces[0].uuid))")
           }
         }
         else {
