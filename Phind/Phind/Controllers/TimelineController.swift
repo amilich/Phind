@@ -107,6 +107,8 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    setupSwipeGestures()
+    
     // Register the table cell as custom type
     setupTableView();
     
@@ -256,6 +258,25 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     }
     fatalError("Something wrong...")
     //return MKOverlayRenderer()
+  }
+  
+  func setupSwipeGestures() {
+    // Setup swipe gestures
+    let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+    let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+    leftSwipe.direction = .left
+    rightSwipe.direction = .right
+    self.view.addGestureRecognizer(leftSwipe)
+    self.view.addGestureRecognizer(rightSwipe)
+  }
+  
+  @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
+    if sender.direction == .left {
+      self.tabBarController!.selectedIndex += 1
+    }
+    if sender.direction == .right {
+      self.tabBarController!.selectedIndex -= 1
+    }
   }
 }
 

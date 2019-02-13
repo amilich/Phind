@@ -40,6 +40,26 @@ class ThirdViewController: UIViewController {
 //        longitudinalMeters: 100000)
 //      mapView.setRegion(coordinateRegion, animated: true)
 //    }
+    setupSwipeGestures()
+  }
+  
+  func setupSwipeGestures() {
+    // Setup swipe gestures
+    let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+    let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+    leftSwipe.direction = .left
+    rightSwipe.direction = .right
+    self.view.addGestureRecognizer(leftSwipe)
+    self.view.addGestureRecognizer(rightSwipe)
+  }
+  
+  @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
+    if sender.direction == .left {
+      self.tabBarController!.selectedIndex += 1
+    }
+    if sender.direction == .right {
+      self.tabBarController!.selectedIndex -= 1
+    }
   }
   
   /*

@@ -42,8 +42,9 @@ class SecondViewController: UIViewController, UICollectionViewDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupCollectionView();
-    populateCollectionView();
+    setupCollectionView()
+    populateCollectionView()
+    setupSwipeGestures()
   }
 
 
@@ -83,6 +84,25 @@ class SecondViewController: UIViewController, UICollectionViewDelegate {
         "StatisticsCell")
     self.collectionView.dataSource = self
     self.collectionView.delegate = self
+  }
+  
+  func setupSwipeGestures() {
+    // Setup swipe gestures
+    let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+    let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+    leftSwipe.direction = .left
+    rightSwipe.direction = .right
+    self.view.addGestureRecognizer(leftSwipe)
+    self.view.addGestureRecognizer(rightSwipe)
+  }
+  
+  @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
+    if sender.direction == .left {
+      self.tabBarController!.selectedIndex += 1
+    }
+    if sender.direction == .right {
+      self.tabBarController!.selectedIndex -= 1
+    }
   }
 }
 
