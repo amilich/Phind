@@ -12,6 +12,7 @@ import RealmSwift
 import GoogleMaps
 import GooglePlaces
 import CoreLocation
+import TransitionableTab
 
 class ThirdViewController: UIViewController {
   
@@ -23,43 +24,23 @@ class ThirdViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-//    // https://stackoverflow.com/questions/47256304/creating-a-google-map-in-ios-that-doesnt-fit-the-whole-screen
-//    mapView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
-//
-//    let userLocations = realm.objects(RealmLocation.self);
-//    if (userLocations.count > 0) {
-//      let userLocation =  userLocations.last!
-//      print(userLocation.latitude)
-//      print(userLocation.longitude)
-//
-//      let coordinateRegion = MKCoordinateRegion.init(
-//        center: CLLocationCoordinate2D(
-//          latitude: CLLocationDegrees(userLocation.latitude),
-//          longitude: CLLocationDegrees(userLocation.longitude)),
-//        latitudinalMeters: 100000,
-//        longitudinalMeters: 100000)
-//      mapView.setRegion(coordinateRegion, animated: true)
-//    }
-    setupSwipeGestures()
-  }
-  
-  func setupSwipeGestures() {
-    // Setup swipe gestures
-    let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
-    let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
-    leftSwipe.direction = .left
-    rightSwipe.direction = .right
-    self.view.addGestureRecognizer(leftSwipe)
-    self.view.addGestureRecognizer(rightSwipe)
-  }
-  
-  @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
-    if sender.direction == .left {
-      self.tabBarController!.selectedIndex += 1
-    }
-    if sender.direction == .right {
-      self.tabBarController!.selectedIndex -= 1
-    }
+    // https://stackoverflow.com/questions/47256304/creating-a-google-map-in-ios-that-doesnt-fit-the-whole-screen
+    //  mapView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
+
+    //  let userLocations = realm.objects(RealmLocation.self);
+    //  if (userLocations.count > 0) {
+    //    let userLocation =  userLocations.last!
+    //    print(userLocation.latitude)
+    //    print(userLocation.longitude)
+
+    //    let coordinateRegion = MKCoordinateRegion.init(
+    //      center: CLLocationCoordinate2D(
+    //        latitude: CLLocationDegrees(userLocation.latitude),
+    //        longitude: CLLocationDegrees(userLocation.longitude)),
+    //      latitudinalMeters: 100000,
+    //      longitudinalMeters: 100000)
+    //    mapView.setRegion(coordinateRegion, animated: true)
+    //  }
   }
   
   /*
@@ -71,5 +52,6 @@ class ThirdViewController: UIViewController {
    // Pass the selected object to the new view controller.
    }
    */
+  
   
 }

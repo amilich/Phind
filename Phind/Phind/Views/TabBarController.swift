@@ -12,7 +12,7 @@ import TransitionableTab
 // Basic animated TransitionableTab controller
 // https://github.com/Interactive-Studio/TransitionableTab
 
-class TabBarController: UITabBarController {
+class CustomTabBarController: UITabBarController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -20,9 +20,15 @@ class TabBarController: UITabBarController {
   }
 }
 
-extension TabBarController: TransitionableTab {
+extension CustomTabBarController: TransitionableTab {
   
   func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
     return animateTransition(tabBarController, shouldSelect: viewController)
+  }
+  
+  func setSelectedIndex(index: Int) {
+    guard let viewControllers = self.viewControllers else { return }
+    _ = self.tabBarController(self, shouldSelect: viewControllers[index])
+    self.selectedIndex = index
   }
 }
