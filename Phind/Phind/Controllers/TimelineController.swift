@@ -173,9 +173,10 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
       // TODO: If lastCoord is nil, then use current coordinates.
       // let viewRegion = MKCoordinateRegion(center: lastCoord!, latitudinalMeters: MAP_SPAN_LAT, longitudinalMeters: MAP_SPAN_LONG)
       // mapView.setRegion(viewRegion, animated: true)
-      self.mapView.showAnnotations(self.mapView.annotations, animated: true)
+      // self.mapView.showAnnotations(self.mapView.annotations, animated: true)
     }
-    
+    // self.mapView.showAnnotations(self.mapView.annotations, animated: true)
+    self.mapView!.fitAll()
   }
   
   // Register cell element and data source with table view
