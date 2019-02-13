@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		0A04B962220FAD1100D94EB9 /* PhindLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A04B961220FAD1100D94EB9 /* PhindLocationManager.swift */; };
+		0A080131221230EE00460A1A /* Font Awesome 5 Brands-Regular-400.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A08012E221230EE00460A1A /* Font Awesome 5 Brands-Regular-400.otf */; };
+		0A080132221230EE00460A1A /* Font Awesome 5 Brands-Regular-400.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A08012E221230EE00460A1A /* Font Awesome 5 Brands-Regular-400.otf */; };
+		0A080133221230EE00460A1A /* Font Awesome 5 Brands-Regular-400.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A08012E221230EE00460A1A /* Font Awesome 5 Brands-Regular-400.otf */; };
+		0A080134221230EE00460A1A /* Font Awesome 5 Free-Regular-400.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A08012F221230EE00460A1A /* Font Awesome 5 Free-Regular-400.otf */; };
+		0A080135221230EE00460A1A /* Font Awesome 5 Free-Regular-400.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A08012F221230EE00460A1A /* Font Awesome 5 Free-Regular-400.otf */; };
+		0A080136221230EE00460A1A /* Font Awesome 5 Free-Regular-400.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A08012F221230EE00460A1A /* Font Awesome 5 Free-Regular-400.otf */; };
+		0A080137221230EE00460A1A /* Font Awesome 5 Free-Solid-900.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A080130221230EE00460A1A /* Font Awesome 5 Free-Solid-900.otf */; };
+		0A080138221230EE00460A1A /* Font Awesome 5 Free-Solid-900.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A080130221230EE00460A1A /* Font Awesome 5 Free-Solid-900.otf */; };
+		0A080139221230EE00460A1A /* Font Awesome 5 Free-Solid-900.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A080130221230EE00460A1A /* Font Awesome 5 Free-Solid-900.otf */; };
 		0A5A2254221047CE00879A38 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A2253221047CE00879A38 /* ModelManager.swift */; };
 		0AA7BF112210374D0038A274 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA7BF102210374D0038A274 /* Util.swift */; };
 		0AA9103F220F6BF9001B1270 /* Pods in Resources */ = {isa = PBXBuildFile; fileRef = 0AA9103E220F6BF9001B1270 /* Pods */; };
@@ -48,6 +57,9 @@
 
 /* Begin PBXFileReference section */
 		0A04B961220FAD1100D94EB9 /* PhindLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhindLocationManager.swift; sourceTree = "<group>"; };
+		0A08012E221230EE00460A1A /* Font Awesome 5 Brands-Regular-400.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome 5 Brands-Regular-400.otf"; sourceTree = "<group>"; };
+		0A08012F221230EE00460A1A /* Font Awesome 5 Free-Regular-400.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome 5 Free-Regular-400.otf"; sourceTree = "<group>"; };
+		0A080130221230EE00460A1A /* Font Awesome 5 Free-Solid-900.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome 5 Free-Solid-900.otf"; sourceTree = "<group>"; };
 		0A5A2253221047CE00879A38 /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		0AA7BF102210374D0038A274 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		0AA9103E220F6BF9001B1270 /* Pods */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pods; sourceTree = "<group>"; };
@@ -142,6 +154,24 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		0A08013A221230F200460A1A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				0A08012E221230EE00460A1A /* Font Awesome 5 Brands-Regular-400.otf */,
+				0A08012F221230EE00460A1A /* Font Awesome 5 Free-Regular-400.otf */,
+				0A080130221230EE00460A1A /* Font Awesome 5 Free-Solid-900.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		0AF2615222123032009BD580 /* MediaResources */ = {
+			isa = PBXGroup;
+			children = (
+				0A08013A221230F200460A1A /* Fonts */,
+			);
+			path = MediaResources;
+			sourceTree = "<group>";
+		};
 		14330F41CA0973F749EFC1BF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +208,7 @@
 		492F5C5521FD814D009B6411 /* Phind */ = {
 			isa = PBXGroup;
 			children = (
+				0AF2615222123032009BD580 /* MediaResources */,
 				0A04B960220F7DE500D94EB9 /* Controllers */,
 				0A04B95F220F7DE000D94EB9 /* Models */,
 				0A04B95E220F7DB600D94EB9 /* Views */,
@@ -292,6 +323,11 @@
 				TargetAttributes = {
 					492F5C5221FD814D009B6411 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					492F5C6821FD814F009B6411 = {
 						CreatedOnToolsVersion = 10.1;
@@ -328,10 +364,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A080131221230EE00460A1A /* Font Awesome 5 Brands-Regular-400.otf in Resources */,
+				0A080134221230EE00460A1A /* Font Awesome 5 Free-Regular-400.otf in Resources */,
 				492F5C6321FD814F009B6411 /* LaunchScreen.storyboard in Resources */,
 				492F5C6021FD814F009B6411 /* Assets.xcassets in Resources */,
 				0AA9103F220F6BF9001B1270 /* Pods in Resources */,
 				492F5C5E21FD814E009B6411 /* Main.storyboard in Resources */,
+				0A080137221230EE00460A1A /* Font Awesome 5 Free-Solid-900.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +378,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A080138221230EE00460A1A /* Font Awesome 5 Free-Solid-900.otf in Resources */,
+				0A080132221230EE00460A1A /* Font Awesome 5 Brands-Regular-400.otf in Resources */,
+				0A080135221230EE00460A1A /* Font Awesome 5 Free-Regular-400.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +388,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A080139221230EE00460A1A /* Font Awesome 5 Free-Solid-900.otf in Resources */,
+				0A080133221230EE00460A1A /* Font Awesome 5 Brands-Regular-400.otf in Resources */,
+				0A080136221230EE00460A1A /* Font Awesome 5 Free-Regular-400.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,7 +705,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6R82YX5UBD;
+				DEVELOPMENT_TEAM = XY8GGY7CCK;
 				INFOPLIST_FILE = Phind/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "team-7.Phind";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -675,7 +720,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6R82YX5UBD;
+				DEVELOPMENT_TEAM = XY8GGY7CCK;
 				INFOPLIST_FILE = Phind/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "team-7.Phind";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSMotionUsageDescription</key>
-	<string>We use your motion usage to detect your current movement type (driving, cycling, walking, etc.)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -28,6 +26,12 @@
 	<string>...</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Can we know your current location?</string>
+	<key>NSMotionUsageDescription</key>
+	<string>We use your motion usage to detect your current movement type (driving, cycling, walking, etc.)</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

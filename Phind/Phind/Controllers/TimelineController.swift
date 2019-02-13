@@ -57,13 +57,15 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   @IBOutlet weak var currentDateLabel: UILabel!
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var refreshButton: UIButton!
   
   // TODO: Should this be moved into a function?
   let realm = try! Realm()
   let formatter = DateFormatter()
   
   // Table content for dynamically reusable cells
-  var tableItems: [TimelineLabel] = []
+  private var tableItems: [TimelineLabel] = []
+  private var currentDate: Date = Date()
 
   // viewWillAppear and viewDidLoad all follow the cycle delineated
   // here: https://apple.co/2DqFnH6
@@ -75,13 +77,31 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     // Update current date label at the top of the screen.
     // TODO(kevin): Update this to display date as Feb 9, 2019,
     //              instead of Feb 09, 2019.
-    let date = Date()
-    formatter.dateFormat = "MMM dd, yyyy"
-    currentDateLabel.text = formatter.string(from: date)
+    updateDate(Date())
+    
+  }
+  
+  @IBAction func refreshButton(_ sender: Any) {
+    reloadMapView()
+  }
+  
+  @IBAction func previousDayButton(_ sender: Any) {
+    updateDate(Calendar.current.date(byAdding: .day, value: -1, to: currentDate)!)
+  }
+  
+  @IBAction func nextDayButton(_ sender: Any) {
+    updateDate(Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!)
+  }
+  
+  private func updateDate(_ date: Date) {
+    
+    formatter.dateFormat = "MMM d, yyyy"
+    currentDate = date
+    currentDateLabel.text = formatter.string(from: currentDate)
     currentDateLabel.center.x = self.view.center.x
     
-    // Reload map plot and timeline
-    reloadMapView();
+    reloadMapView()
+    
   }
   
   override func viewDidLoad() {
@@ -99,9 +119,15 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   
   // Add locations from today to map and timeline
   func reloadMapView() {
+    
+    // Reset mapkit view.
+    mapView.removeAnnotations(mapView.annotations)
+    mapView.removeOverlays(mapView.overlays)
+    
     // Get all LocationEntries from today.
-    let locationEntries = ModelManager.shared.getLocationEntries()
+    let locationEntries = ModelManager.shared.getLocationEntries(from: currentDate)
     self.tableItems.removeAll()
+    
     // Iterate through each LocationEntry to draw pins and routes, as well
     // as generate cards for the timeline.
     var lastCoord: CLLocationCoordinate2D?
@@ -150,15 +176,19 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
       // self.mapView.showAnnotations(self.mapView.annotations, animated: true)
     }
     // self.mapView.showAnnotations(self.mapView.annotations, animated: true)
-    self.mapView!.fitAll()
+    if self.mapView.annotations.count > 0 {
+      self.mapView!.fitAll()
+    }
   }
   
   // Register cell element and data source with table view
   func setupTableView() {
+    
     self.tableView.register(TimelineUITableViewCell.self, forCellReuseIdentifier: "TimelineCell")
     self.tableView.separatorStyle = .none
     self.tableView.dataSource = self
     self.tableView.delegate = self
+    
   }
   
   func drawPin(_ lastCoord: inout CLLocationCoordinate2D?, _ locationEntry: LocationEntry) {
@@ -178,6 +208,7 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
       latitude: locationEntry.latitude,
       longitude: locationEntry.longitude
     )
+    
     if (lastCoord != nil) {
       let routeCoords: [CLLocationCoordinate2D] = [lastCoord!, currCoord]
       let routeLine = MKPolyline(coordinates: routeCoords, count: routeCoords.count)
@@ -186,13 +217,11 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     }
     
     // Update lastCoord and draw pin.
-    lastCoord = currCoord
     let annotation: TimelinePin = TimelinePin(
-      coordinate: lastCoord!,
+      coordinate: currCoord,
       subtitle: subtitle
     )
     mapView.addAnnotation(annotation)
-    print("Stationary annotation added.")
     
   }
   
@@ -251,6 +280,7 @@ extension TimelineController: UITableViewDataSource {
     
     // TODO(Andrew) set the UIImage if index is zero or last
     return tableCell
+    
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

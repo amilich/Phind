@@ -10,6 +10,8 @@ import MapKit
 
 // Taking this extension to fit our map around annotations
 // https://stackoverflow.com/questions/39747957/mapview-to-show-all-annotations-and-zoom-in-as-much-as-possible-of-the-map?rq=1
+// Could also use a showAnnotations() call, but this had better
+// padding behavior.
 extension MKMapView {
 
   /// When we call this function, we have already added the annotations to the map, and just want all of them to be displayed.
