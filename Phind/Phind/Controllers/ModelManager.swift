@@ -156,6 +156,7 @@ public class ModelManager : NSObject {
     let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
       UInt(GMSPlaceField.placeID.rawValue))!
     
+    print("Assigning place IDs to location")
     GMSPlacesClient.shared().findPlaceLikelihoodsFromCurrentLocation(withPlaceFields: fields, callback: {
       (placeLikelihoodList: Array<GMSPlaceLikelihood>?, error: Error?) in
       
@@ -170,15 +171,24 @@ public class ModelManager : NSObject {
         if likelyPlaces.count > 0 {
           print(likelyPlaces[0].name)
           // TODO: consider place likelihoods instead of only grabbing first
-          let place = Place()
+          var place = Place()
           place.address = likelyPlaces[0].address
           place.name = likelyPlaces[0].name
           place.gms_id = likelyPlaces[0].gms_id
-          
-          try! self.realm.write {
-            locationEntry.place_id = place.uuid
-            self.realm.add(place)
-            print("Add new LocationEntry: (\(locationEntry.uuid)) with place_id (\(likelyPlaces[0].uuid))")
+          let gmsPlaces = self.realm.objects(Place.self)
+            .filter("gms_id = %@", place.gms_id)
+          if gmsPlaces.count > 0 {
+            print("Found place with name \(place.name)")
+            try! self.realm.write {
+              place = gmsPlaces[0]
+              locationEntry.place_id = place.uuid
+            }
+          } else {
+            try! self.realm.write {
+              locationEntry.place_id = place.uuid
+              self.realm.add(place)
+              print("Add new LocationEntry: (\(locationEntry.uuid)) with place_id (\(likelyPlaces[0].uuid))")
+            }
           }
         }
         else {

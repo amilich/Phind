@@ -133,7 +133,9 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
             
             // Prevent buggy GPS signals in "jumping" the location.
             if (location.speed <= 0) {
-              return
+              print("Skip due to negative speed TODO")
+              // TODO
+              // return
             }
             
             ModelManager.shared.closeLocationEntry(lastLocationEntry!)
@@ -166,6 +168,7 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
       // If location entry is not found, then create a new one.
       print("Last location entry not found.")
       currLocationEntry = ModelManager.shared.addLocationEntry(rawCoord, currMovementType)
+      ModelManager.shared.assignPlaceIdToCurrentLocation(currLocationEntry!)
     }
     
     ModelManager.shared.appendRawCoord(currLocationEntry!, rawCoord)

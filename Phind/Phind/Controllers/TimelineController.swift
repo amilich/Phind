@@ -95,7 +95,7 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   
   private func updateDate(_ date: Date) {
     
-    formatter.dateFormat = "MMM dd, yyyy"
+    formatter.dateFormat = "MMM d, yyyy"
     currentDate = date
     currentDateLabel.text = formatter.string(from: currentDate)
     currentDateLabel.center.x = self.view.center.x
@@ -176,7 +176,9 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
       // self.mapView.showAnnotations(self.mapView.annotations, animated: true)
     }
     // self.mapView.showAnnotations(self.mapView.annotations, animated: true)
-    self.mapView!.fitAll()
+    if self.mapView.annotations.count > 0 {
+      self.mapView!.fitAll()
+    }
   }
   
   // Register cell element and data source with table view
@@ -220,7 +222,6 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
       subtitle: subtitle
     )
     mapView.addAnnotation(annotation)
-    print("Stationary annotation added.")
     
   }
   
