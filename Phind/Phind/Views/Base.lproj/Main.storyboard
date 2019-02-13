@@ -120,7 +120,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Timeline" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Timeline" image="worldwide_location" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="currentDateLabel" destination="dZp-kZ-NQO" id="C06-br-bTd"/>
                         <outlet property="mapView" destination="6sS-y6-5VB" id="wpO-JB-wws"/>
@@ -132,7 +132,7 @@
             </objects>
             <point key="canvasLocation" x="749.27536231884062" y="-320.08928571428572"/>
         </scene>
-        <!--Third-->
+        <!--Search-->
         <scene sceneID="2dJ-9o-n8G">
             <objects>
                 <viewController id="aEk-OU-hjs" customClass="ThirdViewController" customModule="Phind" customModuleProvider="target" sceneMemberID="viewController">
@@ -164,7 +164,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="3ZL-Jf-Ee8"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Third" image="first" id="ykC-F6-KKJ"/>
+                    <tabBarItem key="tabBarItem" title="Search" image="search" id="ykC-F6-KKJ"/>
                     <connections>
                         <outlet property="mapView" destination="vfl-HH-1OI" id="pGL-Gv-EUd"/>
                     </connections>
@@ -173,7 +173,7 @@
             </objects>
             <point key="canvasLocation" x="1464.8" y="-0.44977511244377816"/>
         </scene>
-        <!--Second-->
+        <!--Statistics-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
                 <viewController id="8rJ-Kc-sve" customClass="SecondViewController" customModule="Phind" customModuleProvider="target" sceneMemberID="viewController">
@@ -281,7 +281,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Second" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Statistics" image="combo_chart" id="cPa-gy-q4n" userLabel="Statistics"/>
                     <connections>
                         <outlet property="DateLabel" destination="YvF-HU-iyf" id="fbi-yL-00D"/>
                         <outlet property="collectionView" destination="AD2-UW-7Xu" id="Rug-4f-jgC"/>
@@ -313,8 +313,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
+        <image name="combo_chart" width="30" height="30"/>
+        <image name="search" width="30" height="30"/>
+        <image name="worldwide_location" width="30" height="30"/>
     </resources>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
