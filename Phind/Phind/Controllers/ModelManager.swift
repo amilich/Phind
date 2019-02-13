@@ -78,13 +78,27 @@ public class ModelManager : NSObject {
     let dayEnd = Calendar.current.date(byAdding: .day, value: 1, to: dayStart)
     let locationEntries = realm.objects(LocationEntry.self)
       .filter("start >= %@ AND start < %@", dayStart, dayEnd)
-      .sorted(byKeyPath: "start", ascending: ascending)
+      .sorted(byKeyPath: "place_id", ascending: ascending)
     if locationEntries.count <= 0{
       return nil
     }
-    let locationEntry = locationEntries[0]
-    return locationEntry
-    
+    var bestLocationEntry = locationEntries[0]
+    var max_count = 0
+    var count = 0
+    var lastLocationEntry = locationEntries[0]
+    for locationEntry in locationEntries{
+      if locationEntry.place_id == lastLocationEntry.place_id{
+        count = count + 1
+      }else{
+        count = 1
+      }
+      lastLocationEntry = locationEntry
+      if count > max_count{
+        max_count = count
+        bestLocationEntry = locationEntry
+      }
+    }
+        return bestLocationEntry
   }
   
   
