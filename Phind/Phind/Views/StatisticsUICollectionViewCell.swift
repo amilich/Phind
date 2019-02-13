@@ -16,10 +16,10 @@ class StatisticsUICollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         StatValue = UILabel()
-        StatValue.frame = CGRect(x: 180, y: 20, width: 300, height: 80)
+        StatValue.frame = CGRect(x: 44, y: 20, width: 300, height: 80)
         StatValue.font = UIFont(name: "Roboto", size: 17)
         StatType = UILabel()
-        StatType.frame = CGRect(x: 94, y: 2, width: 300, height: 80)
+        StatType.frame = CGRect(x: 44, y: 2, width: 300, height: 80)
         StatType.font = UIFont(name: "Roboto", size: 17)
         self.contentView.addSubview(StatType)
         self.contentView.addSubview(StatValue)
