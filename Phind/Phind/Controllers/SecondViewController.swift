@@ -26,11 +26,13 @@ class StatisticLabel1: NSObject {
 class SecondViewController: UIViewController, UICollectionViewDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var DateLabel: UILabel!
-    
+  @IBOutlet weak var refreshButton: UIButton!
+  
     let realm = try! Realm()
     let formatter = DateFormatter()
     
-    var collectionItems: [StatisticLabel1] = []
+  private var collectionItems: [StatisticLabel1] = []
+  private var currentDate: Date = Date()
     
     override func viewWillAppear(_ animated: Bool) {
         let date = Date()
@@ -39,6 +41,34 @@ class SecondViewController: UIViewController, UICollectionViewDelegate {
         DateLabel.center.x = self.view.center.x
         populateCollectionView()
     }
+  
+  @IBAction func refreshButton(_ sender: Any) {
+    populateCollectionView()
+  }
+
+
+  @IBAction func previousDayButton(_ sender: Any) {
+    updateDate(Calendar.current.date(byAdding: .day, value: -1, to: currentDate)!)
+  }
+  
+  @IBAction func nextDayButton(_ sender: Any) {
+    updateDate(Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!)
+  }
+  
+  //kind of buggy
+  private func updateDate(_ date: Date) {
+    
+    formatter.dateFormat = "MMM d, yyyy"
+    currentDate = date
+    DateLabel.text = formatter.string(from: currentDate)
+    DateLabel.center.x = self.view.center.x
+    if (Calendar.current.isDateInToday(currentDate) == false){
+      self.collectionItems.removeAll()
+      collectionView.reloadData()
+    } else{
+      populateCollectionView()
+    }
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
