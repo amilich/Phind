@@ -41,6 +41,9 @@ class ThirdViewController: UIViewController {
     //      longitudinalMeters: 100000)
     //    mapView.setRegion(coordinateRegion, animated: true)
     //  }
+    try! self.realm.write {
+      self.realm.deleteAll()
+    }
   }
   
   /*
