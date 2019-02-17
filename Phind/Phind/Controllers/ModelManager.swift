@@ -37,16 +37,20 @@ public class ModelManager : NSObject {
     
   }
   
-  // Get the GMS place name for a locationEntry by performing lookup on
-  // place UUID.
-  func getPlaceLabelForLocationEntry(locationEntry: LocationEntry) -> Place? {
-    let placeUUID = locationEntry.place_id
+  func getPlaceWithUUID(uuid: String) -> Place? {
     let gmsPlaces = realm.objects(Place.self)
-      .filter("uuid = %@", placeUUID)
+      .filter("uuid = %@", uuid)
     if (gmsPlaces.count > 0) {
       return gmsPlaces[0]
     }
     return nil
+  }
+  
+  // Get the GMS place name for a locationEntry by performing lookup on
+  // place UUID.
+  func getPlaceLabelForLocationEntry(locationEntry: LocationEntry) -> Place? {
+    let placeUUID = locationEntry.place_id
+    return getPlaceWithUUID(uuid: placeUUID)
   }
   
   // Return all location entries from a certain day, limited to max, and ascending default to false.
