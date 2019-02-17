@@ -172,19 +172,10 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
         }
       } else {
         // TODO decide if we want lines
-        // drawRoute(&lastCoord, locationEntry)
       }
     }
     tableView.reloadData()
     
-    // Center map around lastCoord.
-    if lastCoord != nil {
-      // TODO: If lastCoord is nil, then use current coordinates.
-      // let viewRegion = MKCoordinateRegion(center: lastCoord!, latitudinalMeters: MAP_SPAN_LAT, longitudinalMeters: MAP_SPAN_LONG)
-      // mapView.setRegion(viewRegion, animated: true)
-      // self.mapView.showAnnotations(self.mapView.annotations, animated: true)
-    }
-    // self.mapView.showAnnotations(self.mapView.annotations, animated: true)
     if self.mapView.annotations.count > 0 {
       self.mapView!.fitAll()
     }
@@ -217,13 +208,6 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
       latitude: locationEntry.latitude,
       longitude: locationEntry.longitude
     )
-    
-    if (lastCoord != nil) {
-      // let routeCoords: [CLLocationCoordinate2D] = [lastCoord!, currCoord]
-      // let routeLine = MKPolyline(coordinates: routeCoords, count: routeCoords.count)
-      // TODO decide if we want lines
-      // mapView.addOverlay(routeLine)
-    }
     
     // Update lastCoord and draw pin.
     let annotation: TimelinePin = TimelinePin(
