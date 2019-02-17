@@ -10,7 +10,7 @@ import GoogleMaps
 import GooglePlaces
 import MapKit
 import RealmSwift
-
+import TransitionableTab
 
 class StatisticLabel1: NSObject {
     var stat1: String
@@ -72,8 +72,8 @@ class SecondViewController: UIViewController, UICollectionViewDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupCollectionView();
-    populateCollectionView();
+    setupCollectionView()
+    populateCollectionView()
   }
 
 
@@ -114,6 +114,7 @@ class SecondViewController: UIViewController, UICollectionViewDelegate {
     self.collectionView.dataSource = self
     self.collectionView.delegate = self
   }
+
 }
 
 extension SecondViewController: UICollectionViewDataSource {

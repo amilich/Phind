@@ -9,6 +9,7 @@ target 'Phind' do
   pod 'RealmSwift'
   pod 'GooglePlaces'
   pod 'GoogleMaps'
+  pod 'TransitionableTab', '~> 0.2.0'
 
   target 'PhindTests' do
     inherit! :search_paths

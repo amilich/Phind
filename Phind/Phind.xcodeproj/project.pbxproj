@@ -30,6 +30,7 @@
 		492F5C7921FD814F009B6411 /* PhindUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5C7821FD814F009B6411 /* PhindUITests.swift */; };
 		492F5C8921FE8FAA009B6411 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5C8821FE8FAA009B6411 /* ThirdViewController.swift */; };
 		4934F6BF220296D90025C749 /* RealmTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4934F6BE220296D90025C749 /* RealmTypes.swift */; };
+		4940E9BF2214BD830090DDB6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4940E9BE2214BD830090DDB6 /* TabBarController.swift */; };
 		494E7EE52210F76E00979950 /* TimelineUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494E7EE42210F76E00979950 /* TimelineUITableViewCell.swift */; };
 		49AD3CD32213E32F000494D9 /* MapViewFitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AD3CD22213E32F000494D9 /* MapViewFitExtension.swift */; };
 		A8B58E4B9A76F185F279E9B3 /* Pods_Phind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B9BCD483594BE1F3920C60E /* Pods_Phind.framework */; };
@@ -82,6 +83,7 @@
 		492F5C7A21FD814F009B6411 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		492F5C8821FE8FAA009B6411 /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 		4934F6BE220296D90025C749 /* RealmTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTypes.swift; sourceTree = "<group>"; };
+		4940E9BE2214BD830090DDB6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		494E7EE42210F76E00979950 /* TimelineUITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineUITableViewCell.swift; sourceTree = "<group>"; };
 		49AD3CD22213E32F000494D9 /* MapViewFitExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MapViewFitExtension.swift; path = Phind/Views/MapViewFitExtension.swift; sourceTree = SOURCE_ROOT; };
 		5E3C30D3DCE258D332C8BCEC /* Pods-PhindTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhindTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhindTests/Pods-PhindTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				492F5C6121FD814F009B6411 /* LaunchScreen.storyboard */,
 				494E7EE42210F76E00979950 /* TimelineUITableViewCell.swift */,
 				F97F19BB22133490008CF75E /* StatisticsUICollectionViewCell.swift */,
+				4940E9BE2214BD830090DDB6 /* TabBarController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -405,7 +408,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Phind/Pods-Phind-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Phind/Pods-Phind-resources.sh",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 			);
@@ -418,7 +421,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Phind/Pods-Phind-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Phind/Pods-Phind-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		183D1A69B7A5071981EB41B9 /* [CP] Embed Pods Frameworks */ = {
@@ -429,9 +432,10 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Phind/Pods-Phind-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Phind/Pods-Phind-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/TransitionableTab/TransitionableTab.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -439,10 +443,11 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TransitionableTab.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Phind/Pods-Phind-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Phind/Pods-Phind-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		4810CF93FA1394644D47F1F7 /* [CP] Check Pods Manifest.lock */ = {
@@ -527,6 +532,7 @@
 				F97F19BC22133490008CF75E /* StatisticsUICollectionViewCell.swift in Sources */,
 				0AA7BF112210374D0038A274 /* Util.swift in Sources */,
 				0A5A2254221047CE00879A38 /* ModelManager.swift in Sources */,
+				4940E9BF2214BD830090DDB6 /* TabBarController.swift in Sources */,
 				492F5C8921FE8FAA009B6411 /* ThirdViewController.swift in Sources */,
 				492F5C5921FD814E009B6411 /* TimelineController.swift in Sources */,
 			);

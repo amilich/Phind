@@ -106,7 +106,7 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+        
     // Register the table cell as custom type
     setupTableView();
     
@@ -210,8 +210,8 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     )
     
     if (lastCoord != nil) {
-      let routeCoords: [CLLocationCoordinate2D] = [lastCoord!, currCoord]
-      let routeLine = MKPolyline(coordinates: routeCoords, count: routeCoords.count)
+      // let routeCoords: [CLLocationCoordinate2D] = [lastCoord!, currCoord]
+      // let routeLine = MKPolyline(coordinates: routeCoords, count: routeCoords.count)
       // TODO decide if we want lines
       // mapView.addOverlay(routeLine)
     }
