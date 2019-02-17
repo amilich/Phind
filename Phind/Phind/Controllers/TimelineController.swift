@@ -64,6 +64,7 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   // TODO: Should this be moved into a function?
   let realm = try! Realm()
   let formatter = DateFormatter()
+  let placePopupViewController = PlacePopupViewController()
   
   // Table content for dynamically reusable cells
   private var tableItems: [TimelineLabel] = []
@@ -117,6 +118,12 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     
     // Add the route to the map and sync the timeline to today
     reloadMapView();
+    
+    // placePopupViewController.modalPresentationStyle = .popover
+//    placePopupViewController.modalPresentationStyle = .overCurrentContext
+//    placePopupViewController.modalTransitionStyle = .crossDissolve
+//    placePopupViewController.preferredContentSize = CGSize(width: 200, height: 300)
+//    present(placePopupViewController, animated: true, completion: nil)
   }
   
   // Add locations from today to map and timeline
@@ -262,9 +269,22 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   
   func displayPlacePopup(selected: Bool, placeUUID: String?) {
     print("Set selected \(selected)")
-    if (!selected) {
+    if (selected) {
       let uuid = placeUUID!
       let place = ModelManager.shared.getPlaceWithUUID(uuid: uuid)
+      print(place!.address)
+      if place != nil {
+        // TODO(Andrew) why does place lat/lon return -180.0 for both
+        // Temporarily looking for a location entry with given place UUID
+        // let centCoord = CLLocationCoordinate2D(latitude: place!.latitude, longitude: place!.longitude)
+        let coord = ModelManager.shared.getCoordForPlace(uuid: uuid)
+        if coord != nil {
+          let viewRegion = MKCoordinateRegion(center: coord!, latitudinalMeters: MAP_SPAN_LAT, longitudinalMeters: MAP_SPAN_LONG)
+           mapView.setRegion(viewRegion, animated: true)
+        }
+      }
+    } else {
+      // TODO
     }
   }
 }
@@ -301,6 +321,7 @@ extension TimelineController: UITableViewDataSource {
     print("Selected row \(indexPath)")
     let timelineIdx = indexPath[1]
     print(self.tableItems[timelineIdx].placeLabel)
+    displayPlacePopup(selected: true, placeUUID: self.tableItems[timelineIdx].placeUUID)
   }
   
 }

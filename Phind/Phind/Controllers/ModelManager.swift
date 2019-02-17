@@ -37,7 +37,16 @@ public class ModelManager : NSObject {
     
   }
   
-  func getPlaceWithUUID(uuid: String) -> Place? {
+  public func getCoordForPlace(uuid: String) -> CLLocationCoordinate2D? {
+    let placesWithUuid = realm.objects(LocationEntry.self)
+      .filter("place_id = %@", uuid)
+    if (placesWithUuid.count > 0) {
+      return CLLocationCoordinate2D(latitude: placesWithUuid[0].latitude, longitude: placesWithUuid[0].longitude)
+    }
+    return nil
+  }
+  
+  public func getPlaceWithUUID(uuid: String) -> Place? {
     let gmsPlaces = realm.objects(Place.self)
       .filter("uuid = %@", uuid)
     if (gmsPlaces.count > 0) {
@@ -153,6 +162,8 @@ public class ModelManager : NSObject {
       likelyPlace.gms_id = place.placeID ?? "" // TODO need default value
       likelyPlace.name = place.name ?? ""
       likelyPlace.address = place.formattedAddress ?? ""
+      likelyPlace.latitude = place.coordinate.latitude
+      likelyPlace.longitude = place.coordinate.longitude
       likelyPlaces.append(likelyPlace);
     }
     return likelyPlaces
@@ -205,6 +216,8 @@ public class ModelManager : NSObject {
             place!.address = likelyPlaces[0].address
             place!.name = likelyPlaces[0].name
             place!.gms_id = likelyPlaces[0].gms_id
+            place!.latitude = likelyPlaces[0].latitude
+            place!.longitude = likelyPlaces[0].longitude
             
             try! self.realm.write {
               self.realm.add(place!)
