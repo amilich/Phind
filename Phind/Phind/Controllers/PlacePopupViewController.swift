@@ -12,16 +12,38 @@ import RealmSwift
 
 class PlacePopupViewController: UIViewController {
   
+  public var place = Place()
+  let label = UILabel()
+  let backButton = UIButton()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     self.definesPresentationContext = true
     
-    let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-    label.center = CGPoint(x: 50, y: 50)
+    label.frame = CGRect(x: 100, y: 300, width: 100, height: 100)
     label.text = "HELLO"
     label.textAlignment = NSTextAlignment.center
-    self.view.addSubview(label)
     
+    backButton.frame = CGRect(x: 10, y: 10, width: 50, height: 25)
+    backButton.backgroundColor = .green
+    backButton.addTarget(self, action: #selector(self.pressed(_:)), for: .touchUpInside)
+    // backButton.setTitle("Back", for: UIControl.State.Normal)
+    
+    self.view.addSubview(label)
+    self.view.addSubview(backButton)
+    self.view.backgroundColor = .white
+    self.view.isHidden = true
+  }
+  
+  @objc func pressed(_ sender: UIButton!) {
+    print("Back button pressed")
+    self.view.isHidden = !self.view.isHidden
+  }
+  
+  public func setPlace(place: Place) {
+    self.place = place;
+    print("Label place set to \(place.name)")
+    self.label.text = self.place.name
   }
 }

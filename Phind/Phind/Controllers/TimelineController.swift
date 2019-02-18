@@ -119,11 +119,12 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     // Add the route to the map and sync the timeline to today
     reloadMapView();
     
-    // placePopupViewController.modalPresentationStyle = .popover
-//    placePopupViewController.modalPresentationStyle = .overCurrentContext
-//    placePopupViewController.modalTransitionStyle = .crossDissolve
-//    placePopupViewController.preferredContentSize = CGSize(width: 200, height: 300)
-//    present(placePopupViewController, animated: true, completion: nil)
+    self.addChild(placePopupViewController)
+    self.view.addSubview(placePopupViewController.view)
+    //    placePopupViewController.view.frame = self.tableView.frame
+      // CGRect(x: 0, y: 0, width: 200, height: 100)
+    placePopupViewController.didMove(toParent: self)
+    placePopupViewController.view.frame = self.tableView.frame
   }
   
   // Add locations from today to map and timeline
@@ -266,6 +267,9 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
           let viewRegion = MKCoordinateRegion(center: coord!, latitudinalMeters: MAP_SPAN_LAT, longitudinalMeters: MAP_SPAN_LONG)
            mapView.setRegion(viewRegion, animated: true)
         }
+        
+        self.placePopupViewController.setPlace(place: place!)
+        self.placePopupViewController.view.isHidden = false
       }
     } else {
       // TODO
