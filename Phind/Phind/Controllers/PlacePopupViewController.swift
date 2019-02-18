@@ -14,23 +14,36 @@ class PlacePopupViewController: UIViewController {
   
   public var place = Place()
   let label = UILabel()
+  let addressLabel = UILabel()
+  // let websiteLabel = UILabel()
   let backButton = UIButton()
   
+  // Initialize the button and text elements inside the
+  // place popup view.
   override func viewDidLoad() {
     super.viewDidLoad()
     
     self.definesPresentationContext = true
     
-    label.frame = CGRect(x: 100, y: 300, width: 100, height: 100)
-    label.text = "HELLO"
-    label.textAlignment = NSTextAlignment.center
+    label.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 80)
+    label.textAlignment = .center
+    label.font = label.font.withSize(25)
     
-    backButton.frame = CGRect(x: 10, y: 10, width: 50, height: 25)
-    backButton.backgroundColor = .green
+    addressLabel.frame = CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 80)
+    addressLabel.textAlignment = .center
+    addressLabel.font = label.font.withSize(15)
+
+    // websiteLabel.frame = CGRect(x: 0, y: 80, width: UIScreen.main.bounds.width, height: 80)
+    // websiteLabel.textAlignment = .center
+    // websiteLabel.font = label.font.withSize(15)
+    
+    backButton.frame = CGRect(x: 10, y: 15, width: 50, height: 50)
+    backButton.setImage(UIImage(named: "back.png"), for: .normal)
+    backButton.setTitle("Back", for: .normal)
     backButton.addTarget(self, action: #selector(self.pressed(_:)), for: .touchUpInside)
-    // backButton.setTitle("Back", for: UIControl.State.Normal)
-    
+
     self.view.addSubview(label)
+    self.view.addSubview(addressLabel)
     self.view.addSubview(backButton)
     self.view.backgroundColor = .white
     self.view.isHidden = true
@@ -41,9 +54,10 @@ class PlacePopupViewController: UIViewController {
     self.view.isHidden = !self.view.isHidden
   }
   
+  // Called to set the place to be displayed on the popup view.
   public func setPlace(place: Place) {
     self.place = place;
-    print("Label place set to \(place.name)")
     self.label.text = self.place.name
+    self.addressLabel.text = self.place.address
   }
 }

@@ -192,8 +192,11 @@ public class ModelManager : NSObject {
   //    }
   
   public func assignPlaceIdToCurrentLocation(_ locationEntry: LocationEntry) {
-    let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
-      UInt(GMSPlaceField.placeID.rawValue))!
+    let fields: GMSPlaceField = GMSPlaceField(rawValue:
+            UInt(GMSPlaceField.name.rawValue) |
+            UInt(GMSPlaceField.placeID.rawValue) |
+            UInt(GMSPlaceField.formattedAddress.rawValue) |
+            UInt(GMSPlaceField.coordinate.rawValue))!
     
     print("Assigning place IDs to location")
     GMSPlacesClient.shared().findPlaceLikelihoodsFromCurrentLocation(withPlaceFields: fields, callback: {
@@ -201,6 +204,7 @@ public class ModelManager : NSObject {
       
       if let error = error {
         print("An error occurred: \(error.localizedDescription)")
+        print(error)
         return
       }
       if let placeLikelihoodList = placeLikelihoodList {

@@ -252,33 +252,36 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     //return MKOverlayRenderer()
   }
   
+  // Display the place popup view and send the right information
+  // to the popup view controller.
   func displayPlacePopup(selected: Bool, placeUUID: String?) {
     print("Set selected \(selected)")
     if (selected) {
       let uuid = placeUUID!
       let place = ModelManager.shared.getPlaceWithUUID(uuid: uuid)
+      print("Address")
       print(place!.address)
       if place != nil {
         // TODO(Andrew) why does place lat/lon return -180.0 for both
         // Temporarily looking for a location entry with given place UUID
-        // let centCoord = CLLocationCoordinate2D(latitude: place!.latitude, longitude: place!.longitude)
-        let coord = ModelManager.shared.getCoordForPlace(uuid: uuid)
-        if coord != nil {
-          let viewRegion = MKCoordinateRegion(center: coord!, latitudinalMeters: MAP_SPAN_LAT, longitudinalMeters: MAP_SPAN_LONG)
+        self.reloadMapView()
+        let centCoord = CLLocationCoordinate2D(latitude: place!.latitude, longitude: place!.longitude)
+        let viewRegion = MKCoordinateRegion(center: centCoord, latitudinalMeters: MAP_SPAN_LAT, longitudinalMeters: MAP_SPAN_LONG)
            mapView.setRegion(viewRegion, animated: true)
-        }
         
         self.placePopupViewController.setPlace(place: place!)
         self.placePopupViewController.view.isHidden = false
       }
     } else {
-      // TODO
+      // Do not need an else case; unselecting happens by
+      // the user pressing the back button.
     }
   }
 }
 
 extension TimelineController: UITableViewDataSource {
   
+  // Computes cell content based on the shared array of tableItems
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     let tableCell = tableView.dequeueReusableCell(withIdentifier: "TimelineCell", for: indexPath) as! TimelineUITableViewCell
@@ -305,10 +308,9 @@ extension TimelineController: UITableViewDataSource {
     return self.tableItems.count
   }
   
+  // Called when you tap a row in the table; displays the place popup
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    print("Selected row \(indexPath)")
     let timelineIdx = indexPath[1]
-    print(self.tableItems[timelineIdx].placeLabel)
     displayPlacePopup(selected: true, placeUUID: self.tableItems[timelineIdx].placeUUID)
   }
   
