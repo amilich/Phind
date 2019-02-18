@@ -17,8 +17,10 @@ class TimelineLabel: NSObject {
   var endTime: Date?
   var placeLabel: String
   var imagePath: String?
+  var placeUUID: String?
   
-  init(placeLabel: String, startTime: Date, endTime: Date?) {
+  init(placeUUID: String, placeLabel: String, startTime: Date, endTime: Date?) {
+    self.placeUUID = placeUUID
     self.placeLabel = placeLabel
     self.startTime = startTime
     self.endTime = endTime
@@ -62,6 +64,7 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   // TODO: Should this be moved into a function?
   let realm = try! Realm()
   let formatter = DateFormatter()
+  let placePopupViewController = PlacePopupViewController()
   
   // Table content for dynamically reusable cells
   private var tableItems: [TimelineLabel] = []
@@ -115,6 +118,13 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     
     // Add the route to the map and sync the timeline to today
     reloadMapView();
+    
+    self.addChild(placePopupViewController)
+    self.view.addSubview(placePopupViewController.view)
+    //    placePopupViewController.view.frame = self.tableView.frame
+      // CGRect(x: 0, y: 0, width: 200, height: 100)
+    placePopupViewController.didMove(toParent: self)
+    placePopupViewController.view.frame = self.tableView.frame
   }
   
   // Add locations from today to map and timeline
@@ -131,7 +141,7 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     // Iterate through each LocationEntry to draw pins and routes, as well
     // as generate cards for the timeline.
     var lastCoord: CLLocationCoordinate2D?
-    var lastPlace = TimelineLabel(placeLabel: "", startTime: Date(), endTime: Date()) // TODO(Andrew) make nil?
+    var lastPlace = TimelineLabel(placeUUID: "<NONE>", placeLabel: "", startTime: Date(), endTime: Date()) // TODO(Andrew) make nil?
 
     // Set date format for timeline labels
     for locationEntry in locationEntries {
@@ -156,26 +166,17 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
             }
             
           } else {
-            let timelineLabel = TimelineLabel(placeLabel: placeString, startTime: locationEntry.start as Date, endTime: locationEntry.end as Date?)
+            let timelineLabel = TimelineLabel(placeUUID: place!.uuid, placeLabel: placeString, startTime: locationEntry.start as Date, endTime: locationEntry.end as Date?)
             self.tableItems.append(timelineLabel)
             lastPlace = timelineLabel
           }
         }
       } else {
         // TODO decide if we want lines
-        // drawRoute(&lastCoord, locationEntry)
       }
     }
     tableView.reloadData()
     
-    // Center map around lastCoord.
-    if lastCoord != nil {
-      // TODO: If lastCoord is nil, then use current coordinates.
-      // let viewRegion = MKCoordinateRegion(center: lastCoord!, latitudinalMeters: MAP_SPAN_LAT, longitudinalMeters: MAP_SPAN_LONG)
-      // mapView.setRegion(viewRegion, animated: true)
-      // self.mapView.showAnnotations(self.mapView.annotations, animated: true)
-    }
-    // self.mapView.showAnnotations(self.mapView.annotations, animated: true)
     if self.mapView.annotations.count > 0 {
       self.mapView!.fitAll()
     }
@@ -208,13 +209,6 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
       latitude: locationEntry.latitude,
       longitude: locationEntry.longitude
     )
-    
-    if (lastCoord != nil) {
-      // let routeCoords: [CLLocationCoordinate2D] = [lastCoord!, currCoord]
-      // let routeLine = MKPolyline(coordinates: routeCoords, count: routeCoords.count)
-      // TODO decide if we want lines
-      // mapView.addOverlay(routeLine)
-    }
     
     // Update lastCoord and draw pin.
     let annotation: TimelinePin = TimelinePin(
@@ -257,10 +251,37 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     fatalError("Something wrong...")
     //return MKOverlayRenderer()
   }
+  
+  // Display the place popup view and send the right information
+  // to the popup view controller.
+  func displayPlacePopup(selected: Bool, placeUUID: String?) {
+    print("Set selected \(selected)")
+    if (selected) {
+      let uuid = placeUUID!
+      let place = ModelManager.shared.getPlaceWithUUID(uuid: uuid)
+      print("Address")
+      print(place!.address)
+      if place != nil {
+        // TODO(Andrew) why does place lat/lon return -180.0 for both
+        // Temporarily looking for a location entry with given place UUID
+        self.reloadMapView()
+        let centCoord = CLLocationCoordinate2D(latitude: place!.latitude, longitude: place!.longitude)
+        let viewRegion = MKCoordinateRegion(center: centCoord, latitudinalMeters: MAP_SPAN_LAT, longitudinalMeters: MAP_SPAN_LONG)
+           mapView.setRegion(viewRegion, animated: true)
+        
+        self.placePopupViewController.setPlace(place: place!)
+        self.placePopupViewController.view.isHidden = false
+      }
+    } else {
+      // Do not need an else case; unselecting happens by
+      // the user pressing the back button.
+    }
+  }
 }
 
 extension TimelineController: UITableViewDataSource {
   
+  // Computes cell content based on the shared array of tableItems
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     let tableCell = tableView.dequeueReusableCell(withIdentifier: "TimelineCell", for: indexPath) as! TimelineUITableViewCell
@@ -285,6 +306,12 @@ extension TimelineController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return self.tableItems.count
+  }
+  
+  // Called when you tap a row in the table; displays the place popup
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let timelineIdx = indexPath[1]
+    displayPlacePopup(selected: true, placeUUID: self.tableItems[timelineIdx].placeUUID)
   }
   
 }

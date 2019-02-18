@@ -37,16 +37,29 @@ public class ModelManager : NSObject {
     
   }
   
-  // Get the GMS place name for a locationEntry by performing lookup on
-  // place UUID.
-  func getPlaceLabelForLocationEntry(locationEntry: LocationEntry) -> Place? {
-    let placeUUID = locationEntry.place_id
+  public func getCoordForPlace(uuid: String) -> CLLocationCoordinate2D? {
+    let placesWithUuid = realm.objects(LocationEntry.self)
+      .filter("place_id = %@", uuid)
+    if (placesWithUuid.count > 0) {
+      return CLLocationCoordinate2D(latitude: placesWithUuid[0].latitude, longitude: placesWithUuid[0].longitude)
+    }
+    return nil
+  }
+  
+  public func getPlaceWithUUID(uuid: String) -> Place? {
     let gmsPlaces = realm.objects(Place.self)
-      .filter("uuid = %@", placeUUID)
+      .filter("uuid = %@", uuid)
     if (gmsPlaces.count > 0) {
       return gmsPlaces[0]
     }
     return nil
+  }
+  
+  // Get the GMS place name for a locationEntry by performing lookup on
+  // place UUID.
+  func getPlaceLabelForLocationEntry(locationEntry: LocationEntry) -> Place? {
+    let placeUUID = locationEntry.place_id
+    return getPlaceWithUUID(uuid: placeUUID)
   }
   
   // Return all location entries from a certain day, limited to max, and ascending default to false.
@@ -149,6 +162,8 @@ public class ModelManager : NSObject {
       likelyPlace.gms_id = place.placeID ?? "" // TODO need default value
       likelyPlace.name = place.name ?? ""
       likelyPlace.address = place.formattedAddress ?? ""
+      likelyPlace.latitude = place.coordinate.latitude
+      likelyPlace.longitude = place.coordinate.longitude
       likelyPlaces.append(likelyPlace);
     }
     return likelyPlaces
@@ -177,8 +192,11 @@ public class ModelManager : NSObject {
   //    }
   
   public func assignPlaceIdToCurrentLocation(_ locationEntry: LocationEntry) {
-    let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
-      UInt(GMSPlaceField.placeID.rawValue))!
+    let fields: GMSPlaceField = GMSPlaceField(rawValue:
+            UInt(GMSPlaceField.name.rawValue) |
+            UInt(GMSPlaceField.placeID.rawValue) |
+            UInt(GMSPlaceField.formattedAddress.rawValue) |
+            UInt(GMSPlaceField.coordinate.rawValue))!
     
     print("Assigning place IDs to location")
     GMSPlacesClient.shared().findPlaceLikelihoodsFromCurrentLocation(withPlaceFields: fields, callback: {
@@ -186,6 +204,7 @@ public class ModelManager : NSObject {
       
       if let error = error {
         print("An error occurred: \(error.localizedDescription)")
+        print(error)
         return
       }
       if let placeLikelihoodList = placeLikelihoodList {
@@ -201,6 +220,8 @@ public class ModelManager : NSObject {
             place!.address = likelyPlaces[0].address
             place!.name = likelyPlaces[0].name
             place!.gms_id = likelyPlaces[0].gms_id
+            place!.latitude = likelyPlaces[0].latitude
+            place!.longitude = likelyPlaces[0].longitude
             
             try! self.realm.write {
               self.realm.add(place!)

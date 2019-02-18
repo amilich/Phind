@@ -20,6 +20,7 @@
 		0A5A2254221047CE00879A38 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A2253221047CE00879A38 /* ModelManager.swift */; };
 		0AA7BF112210374D0038A274 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA7BF102210374D0038A274 /* Util.swift */; };
 		0AA9103F220F6BF9001B1270 /* Pods in Resources */ = {isa = PBXBuildFile; fileRef = 0AA9103E220F6BF9001B1270 /* Pods */; };
+		490E559A221A07260009906E /* PlacePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490E5599221A07260009906E /* PlacePopupViewController.swift */; };
 		492F5C5721FD814E009B6411 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5C5621FD814E009B6411 /* AppDelegate.swift */; };
 		492F5C5921FD814E009B6411 /* TimelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5C5821FD814E009B6411 /* TimelineController.swift */; };
 		492F5C5B21FD814E009B6411 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5C5A21FD814E009B6411 /* SecondViewController.swift */; };
@@ -67,6 +68,7 @@
 		0F367DD7A00A628AE7BAFE25 /* Pods_PhindTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhindTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		23004EA1A217FA918547CD4A /* Pods-PhindTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhindTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhindTests/Pods-PhindTests.release.xcconfig"; sourceTree = "<group>"; };
 		25F60A492D95300955497A01 /* Pods-PhindUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhindUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhindUITests/Pods-PhindUITests.release.xcconfig"; sourceTree = "<group>"; };
+		490E5599221A07260009906E /* PlacePopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacePopupViewController.swift; sourceTree = "<group>"; };
 		492F5C5321FD814D009B6411 /* Phind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Phind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		492F5C5621FD814E009B6411 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		492F5C5821FD814E009B6411 /* TimelineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineController.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				492F5C5821FD814E009B6411 /* TimelineController.swift */,
+				490E5599221A07260009906E /* PlacePopupViewController.swift */,
 				492F5C5A21FD814E009B6411 /* SecondViewController.swift */,
 				492F5C5621FD814E009B6411 /* AppDelegate.swift */,
 				492F5C8821FE8FAA009B6411 /* ThirdViewController.swift */,
@@ -531,6 +534,7 @@
 				492F5C5721FD814E009B6411 /* AppDelegate.swift in Sources */,
 				F97F19BC22133490008CF75E /* StatisticsUICollectionViewCell.swift in Sources */,
 				0AA7BF112210374D0038A274 /* Util.swift in Sources */,
+				490E559A221A07260009906E /* PlacePopupViewController.swift in Sources */,
 				0A5A2254221047CE00879A38 /* ModelManager.swift in Sources */,
 				4940E9BF2214BD830090DDB6 /* TabBarController.swift in Sources */,
 				492F5C8921FE8FAA009B6411 /* ThirdViewController.swift in Sources */,

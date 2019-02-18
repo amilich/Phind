@@ -42,4 +42,6 @@ public class Place: Object {
   @objc dynamic var gms_id : String = "<none>" // TODO find default
   @objc dynamic var name : String = ""
   @objc dynamic var address : String = ""
+  @objc dynamic var latitude : Double = -1.0
+  @objc dynamic var longitude : Double = -1.0
 }

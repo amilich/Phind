@@ -53,6 +53,6 @@ class TimelineUITableViewCell: UITableViewCell {
   
   override func setSelected(_ selected: Bool, animated: Bool) {
     // TODO(Andrew) write code to make it selected if we want
-    super.setSelected(selected, animated: animated)
+    // super.setSelected(selected, animated: animated)    
   }
 }
