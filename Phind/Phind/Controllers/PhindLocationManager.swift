@@ -13,6 +13,7 @@ import GooglePlaces
 import CoreMotion
 import UIKit
 import RealmSwift
+import JustLog
 
 // Motion activites based on Apple definitions here: https://apple.co/2SlBGg2
 public enum MovementType : String {
@@ -26,34 +27,35 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
   
   // Singleton declaration.
   public static let shared = PhindLocationManager()
-  public static let DEFAULT_DISTANCE_FILTER : CLLocationDistance = 15
+  // TODO: Change this back to 15.0m when done debugging.
+  public static let DEFAULT_DISTANCE_FILTER : CLLocationDistance = 1
   // Minimum threshold for a new location to register as a new LocationEntry (in meters).
-  #if targetEnvironment(simulator)
-  public static let NOTABLE_DISTANCE_THRESHOLD = 5.0
-  #else
-  public static let NOTABLE_DISTANCE_THRESHOLD = 100.0
-  #endif
+  // TODO: Change this back to 100.0m when done debugging.
+  public static let NOTABLE_DISTANCE_THRESHOLD = DEFAULT_DISTANCE_FILTER
   
   // Private constants.
+  private let ACTIVITY_TRACKING_WINDOW = 60
+  
   // We only allow locations for which
   // (distance delta)/(time delta) * SPEED_BUFFER < real measured speed
   // to avoid GPS bugs from skewing our results.
-  private let SPEED_BUFFER = 3.0
+//  private let SPEED_BUFFER = 3.0
   
   // These are the distances used for locationManager.distanceFilter,
   // dependent upon the current movement type.
-  let MV_DISTANCE_FILTERS: [MovementType:Double] = [
-    MovementType.AUTOMOTIVE : 150.0,
-    MovementType.CYCLING    : 45.0,
-    MovementType.WALKING    : 30.0,
-    MovementType.STATIONARY : DEFAULT_DISTANCE_FILTER
-  ]
+//  let MV_DISTANCE_FILTERS: [MovementType:Double] = [
+//    MovementType.AUTOMOTIVE : 150.0,
+//    MovementType.CYCLING    : 45.0,
+//    MovementType.WALKING    : 30.0,
+//    MovementType.STATIONARY : DEFAULT_DISTANCE_FILTER
+//  ]
   
   // Public fields.
   public private(set) var currMovementType = MovementType.STATIONARY
   
   // Private fields.
   private var locationManager = AppDelegate().locationManager
+  private var motionActivityManager = AppDelegate().motionActivityManager
   private var realm = AppDelegate().realm
   
   
@@ -81,9 +83,58 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
     if movementType != currMovementType {
       // Update distance filter if movement type is different.
       currMovementType = movementType
-      locationManager.distanceFilter = MV_DISTANCE_FILTERS[currMovementType] ?? 0
-      print("Movement type switched to: \(currMovementType)")
+      Logger.shared.verbose("Movement type switched to: \(currMovementType)")
     }
+    
+  }
+  
+  // Get most likely movement type from a certain time period.
+  public func updateMovementType(from: Date, to: Date) {
+    
+    Logger.shared.debug("Begin updating movement type...")
+    
+    // TODO: There must be a cleaner way to do this.
+    var movementTypeCounts: [MovementType:Int] = [
+      MovementType.STATIONARY : 0,
+      MovementType.WALKING    : 0,
+      MovementType.CYCLING    : 0,
+      MovementType.AUTOMOTIVE : 0
+    ]
+    
+    let semaphore = DispatchSemaphore(value: 0)
+    motionActivityManager.queryActivityStarting(from: from, to: to, to: OperationQueue()) { activities, error in
+      
+      Logger.shared.verbose(" \(activities)")
+      
+      for activity in activities! {
+        if (activity.confidence == CMMotionActivityConfidence.low) { continue }
+        
+        if activity.walking {
+          movementTypeCounts[MovementType.WALKING]! += 1
+        } else if activity.cycling {
+          movementTypeCounts[MovementType.CYCLING]! += 1
+        } else if activity.automotive {
+          movementTypeCounts[MovementType.AUTOMOTIVE]! += 1
+        } else {
+          movementTypeCounts[MovementType.STATIONARY]! += 1
+        }
+      }
+      
+      var cur_max = -1
+      var tmpMovementType = self.currMovementType
+      for movementType in MovementType.allTypes {
+        if movementTypeCounts[movementType]! > cur_max {
+          cur_max = movementTypeCounts[movementType]!
+          tmpMovementType = movementType
+          Logger.shared.debug("Movement updated in loop to: \(tmpMovementType)")
+        }
+      }
+    
+      Logger.shared.verbose("Movement type: \(self.currMovementType) to \(tmpMovementType)")
+      self.currMovementType = tmpMovementType
+    }
+    semaphore.signal()
+    _ = semaphore.wait(timeout: DispatchTime.distantFuture)
     
   }
   
@@ -98,11 +149,17 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
     let lastLocationEntry = ModelManager.shared.getMostRecentLocationEntry()
     var currLocationEntry : LocationEntry? = lastLocationEntry
     
+    // Get current movement type from CoreMotion.
+    let motionActivityFrom = lastLocationEntry != nil ?
+      lastLocationEntry!.start as Date :
+      Calendar.current.date(byAdding: .second, value: ACTIVITY_TRACKING_WINDOW, to: Date())
+    updateMovementType(from: motionActivityFrom!, to: Date())
+    
     // Update and create new LocationEntries depending on whether or not
     // lastLocationEntry exists and the distance between last location (if it exists)
     // and the current location.
     if (lastLocationEntry != nil) {
-      print(lastLocationEntry?.movement_type ?? "")
+      Logger.shared.verbose("Last location movement type: \(lastLocationEntry?.movement_type ?? "")")
       
       // If last location exists, check how far the current location is from it.
       let lastLocation = CLLocation(
@@ -110,7 +167,7 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
         longitude: lastLocationEntry?.longitude ?? -1.0
       )
       let distanceFromLastLocation = lastLocation.distance(from: location)
-      print(distanceFromLastLocation)
+      Logger.shared.verbose("Distance from last location: \(distanceFromLastLocation)")
       
       // If the distance between the location of the most recent LocationEntry and the current
       // coordinates is greater than NOTABLE_DISTANCE_THRESHOLD, then need to evaluate a few cases
@@ -121,7 +178,7 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
             // Case 1: Move from non-stationary to non-stationary.
             // This means the user was moving and is still moving, and as such, we will simply append
             // the raw coord to the last location entry.
-            print("Case 1: NON-STATIONARY TO NON-STATIONARY")
+            Logger.shared.verbose("Case 1: NON-STATIONARY TO NON-STATIONARY")
             currLocationEntry = lastLocationEntry!
           } else {
             // Case 2: Move from stationary to stationary.
@@ -129,11 +186,11 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
             // > NOTABLE_DISTANCE_THRESHOLD in between the two. This is unlikely to happen, since
             // there would likely be some mode of movement in between. It is likely this is a GPS bug,
             // so we should just ignore this point if the speed is 0.
-            print("Case 2: STATIONARY TO STATIONARY")
+            Logger.shared.verbose("Case 2: STATIONARY TO STATIONARY")
             
             // Prevent buggy GPS signals in "jumping" the location.
             if (location.speed <= 0) {
-              print("Skip due to negative speed TODO")
+              Logger.shared.verbose("Skip due to negative speed TODO")
               // TODO
               // return
             }
@@ -147,7 +204,7 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
             // Case 3: Move from non-stationary to stationary.
             // This means the user has likely moved from a non-stationary / commuting phase to a
             // stationary phase, i.e. the user has stopped moving and is now in a new location.
-            print("Case 3: NON-STATIONARY TO STATIONARY/NON-STATIONARY")
+            Logger.shared.verbose("Case 3: NON-STATIONARY TO STATIONARY/NON-STATIONARY")
             ModelManager.shared.closeLocationEntry(lastLocationEntry!)
             currLocationEntry = ModelManager.shared.addLocationEntry(rawCoord, currMovementType)
             ModelManager.shared.assignPlaceIdToCurrentLocation(currLocationEntry!)
@@ -155,7 +212,7 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
             // Case 4: Move from stationary to non-stationary.
             // This means the user has likely moved from a stationary phase to a non-stationary
             // (commuting) phase, i.e. the user has started moving.
-            print("Case 4: STATIONARY to NON-STATIONARY")
+            Logger.shared.verbose("Case 4: STATIONARY to NON-STATIONARY")
             ModelManager.shared.closeLocationEntry(lastLocationEntry!)
             currLocationEntry = ModelManager.shared.addLocationEntry(rawCoord, currMovementType)
             ModelManager.shared.assignPlaceIdToCurrentLocation(currLocationEntry!)
@@ -166,7 +223,7 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
       }
     } else {
       // If location entry is not found, then create a new one.
-      print("Last location entry not found.")
+      Logger.shared.verbose("Last location entry not found.")
       currLocationEntry = ModelManager.shared.addLocationEntry(rawCoord, currMovementType)
       ModelManager.shared.assignPlaceIdToCurrentLocation(currLocationEntry!)
     }

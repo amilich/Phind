@@ -10,6 +10,7 @@ target 'Phind' do
   pod 'GooglePlaces'
   pod 'GoogleMaps'
   pod 'TransitionableTab', '~> 0.2.0'
+  pod 'JustLog'
 
   target 'PhindTests' do
     inherit! :search_paths

@@ -173,6 +173,7 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
         }
       } else {
         // TODO decide if we want lines
+        drawRoute(&lastCoord, locationEntry)
       }
     }
     tableView.reloadData()

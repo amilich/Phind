@@ -13,6 +13,7 @@ import GooglePlaces
 import CoreMotion
 import UIKit
 import RealmSwift
+import JustLog
 
 public class ModelManager : NSObject {
   
@@ -146,7 +147,7 @@ public class ModelManager : NSObject {
     // Close up last location entry if one is provided to this function.
     try! realm.write {
       locationEntry.end = NSDate()
-      print("LocationEntry closed.")
+      Logger.shared.verbose("LocationEntry closed.")
     }
     
   }
@@ -181,7 +182,7 @@ public class ModelManager : NSObject {
     
     try! self.realm.write {
       self.realm.add(locationEntry)
-      print("Add new LocationEntry: (\(locationEntry.uuid))")
+      Logger.shared.verbose("Add new LocationEntry: (\(locationEntry.uuid))")
     }
     return locationEntry
   }
@@ -203,8 +204,7 @@ public class ModelManager : NSObject {
       (placeLikelihoodList: Array<GMSPlaceLikelihood>?, error: Error?) in
       
       if let error = error {
-        print("An error occurred: \(error.localizedDescription)")
-        print(error)
+        Logger.shared.error("An error occurred in assigning location: \(error.localizedDescription)")
         return
       }
       if let placeLikelihoodList = placeLikelihoodList {
@@ -260,7 +260,7 @@ public class ModelManager : NSObject {
     rawCoord.timestamp = NSDate()
     try! realm.write {
       realm.add(rawCoord)
-      print("Add new RawCoordinates: (\(location.coordinate))")
+      Logger.shared.verbose("Add new RawCoordinates: (\(location.coordinate))")
     }
     return rawCoord
     

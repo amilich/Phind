@@ -11,7 +11,7 @@ import GooglePlaces
 import UIKit
 import CoreMotion
 import RealmSwift
-
+import JustLog
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,6 +25,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
+    // JustLog setup.
+    let logger = Logger.shared
+    logger.logFilename = "phind.log"
+    logger.logstashHost = "listener.logz.io"
+    logger.logstashPort = 5052
+    logger.logzioToken = "WwwhuifBTWaSUATASxASOztzmHvXkRZJ"
+    logger.setup()
+    
     self.locationManager.requestAlwaysAuthorization()
     
     // Do any additional setup after loading the view.
@@ -37,13 +45,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     GMSServices.provideAPIKey("AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU")
     GMSPlacesClient.provideAPIKey("AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU")
-    
-    // Activate CoreMotion Activity Manager to check and update current movement type.
-    if CMMotionActivityManager.isActivityAvailable() {
-      motionActivityManager.startActivityUpdates(to: OperationQueue.main) { (motion) in
-        PhindLocationManager.shared.updateMovementType(motion: motion!)
-      }
-    }
+
+    // TODO: Remove this.
+//    // Activate CoreMotion Activity Manager to check and update current movement type.
+//    if CMMotionActivityManager.isActivityAvailable() {
+//      motionActivityManager.startActivityUpdates(to: OperationQueue.main) { (motion) in
+//        PhindLocationManager.shared.updateMovementType(motion: motion!)
+//      }
+//    }
     
     #if targetEnvironment(simulator)
       print("Realm fileURL")
@@ -61,6 +70,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func applicationDidEnterBackground(_ application: UIApplication) {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    forceSendLogs(application)
   }
   
   func applicationWillEnterForeground(_ application: UIApplication) {
@@ -75,6 +86,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func applicationWillTerminate(_ application: UIApplication) {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    forceSendLogs(application)
+  }
+  
+  private func forceSendLogs(_ application: UIApplication) {
+    
+    var identifier = UIBackgroundTaskIdentifier(rawValue: 0)
+    
+    identifier = application.beginBackgroundTask(expirationHandler: {
+      application.endBackgroundTask(identifier)
+      identifier = UIBackgroundTaskIdentifier.invalid
+    })
+    
+    Logger.shared.forceSend { completionHandler in
+      application.endBackgroundTask(identifier)
+      identifier = UIBackgroundTaskIdentifier.invalid
+    }
   }
   
 }
