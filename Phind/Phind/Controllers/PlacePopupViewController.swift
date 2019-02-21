@@ -35,7 +35,8 @@ class PlacePopupViewController: UIViewController {
     addressLabel.textAlignment = .center
     addressLabel.font = label.font.withSize(15)
     
-    imageView.frame = CGRect(x: 0, y: 60, width: UIScreen.main.bounds.width, height: 100)
+    imageView.frame = CGRect(x: 0, y: 150, width: UIScreen.main.bounds.width, height: 100)
+    imageView.contentMode = .scaleAspectFit
 
     // websiteLabel.frame = CGRect(x: 0, y: 80, width: UIScreen.main.bounds.width, height: 80)
     // websiteLabel.textAlignment = .center
@@ -55,7 +56,6 @@ class PlacePopupViewController: UIViewController {
   }
   
   @objc func pressed(_ sender: UIButton!) {
-    print("Back button pressed")
     self.view.isHidden = !self.view.isHidden
   }
   
@@ -64,17 +64,21 @@ class PlacePopupViewController: UIViewController {
     self.place = place;
     self.label.text = self.place.name
     self.addressLabel.text = self.place.address
-    
+    // Get rid of the previous image
+    self.imageView.image = nil
+    // Now load a new image
     self.loadPhotoForPlaceID(gms_id: place.gms_id)
   }
   
+  // Given a place ID, lookup the photos for the place and add one
+  // to the UIImageview in the popup view detail.
   func loadPhotoForPlaceID(gms_id: String) {
-    GMSPlacesClient.shared().lookUpPhotos(forPlaceID: gms_id) { (photos, error) -> Void in
+    GMSPlacesClient.shared().lookUpPhotos(forPlaceID: gms_id) { (photoMetadata, error) -> Void in
       if let error = error {
         print("Error: \(error.localizedDescription)")
         print(error)
       } else {
-        if let metadata = photos?.results.first {
+        if let metadata = photoMetadata?.results.first {
           GMSPlacesClient.shared().loadPlacePhoto(metadata, callback: { (photo, error) -> Void in
             if let error = error {
               print("Error: \(error.localizedDescription)")
