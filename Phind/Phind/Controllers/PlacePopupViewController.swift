@@ -9,14 +9,16 @@
 import UIKit
 import MapKit
 import RealmSwift
+import GoogleMaps
+import GooglePlaces
 
 class PlacePopupViewController: UIViewController {
   
   public var place = Place()
   let label = UILabel()
   let addressLabel = UILabel()
-  // let websiteLabel = UILabel()
   let backButton = UIButton()
+  let imageView = UIImageView()
   
   // Initialize the button and text elements inside the
   // place popup view.
@@ -32,6 +34,8 @@ class PlacePopupViewController: UIViewController {
     addressLabel.frame = CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 80)
     addressLabel.textAlignment = .center
     addressLabel.font = label.font.withSize(15)
+    
+    imageView.frame = CGRect(x: 0, y: 60, width: UIScreen.main.bounds.width, height: 100)
 
     // websiteLabel.frame = CGRect(x: 0, y: 80, width: UIScreen.main.bounds.width, height: 80)
     // websiteLabel.textAlignment = .center
@@ -45,6 +49,7 @@ class PlacePopupViewController: UIViewController {
     self.view.addSubview(label)
     self.view.addSubview(addressLabel)
     self.view.addSubview(backButton)
+    self.view.addSubview(imageView)
     self.view.backgroundColor = .white
     self.view.isHidden = true
   }
@@ -59,5 +64,27 @@ class PlacePopupViewController: UIViewController {
     self.place = place;
     self.label.text = self.place.name
     self.addressLabel.text = self.place.address
+    
+    self.loadPhotoForPlaceID(gms_id: place.gms_id)
+  }
+  
+  func loadPhotoForPlaceID(gms_id: String) {
+    GMSPlacesClient.shared().lookUpPhotos(forPlaceID: gms_id) { (photos, error) -> Void in
+      if let error = error {
+        print("Error: \(error.localizedDescription)")
+        print(error)
+      } else {
+        if let metadata = photos?.results.first {
+          GMSPlacesClient.shared().loadPlacePhoto(metadata, callback: { (photo, error) -> Void in
+            if let error = error {
+              print("Error: \(error.localizedDescription)")
+              print(error)
+            } else {
+              self.imageView.image = photo;
+            }
+          })
+        }
+      }
+    }
   }
 }
