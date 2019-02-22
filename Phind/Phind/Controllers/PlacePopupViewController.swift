@@ -9,14 +9,16 @@
 import UIKit
 import MapKit
 import RealmSwift
+import GoogleMaps
+import GooglePlaces
 
 class PlacePopupViewController: UIViewController {
   
   public var place = Place()
   let label = UILabel()
   let addressLabel = UILabel()
-  // let websiteLabel = UILabel()
   let backButton = UIButton()
+  let imageView = UIImageView()
   
   // Initialize the button and text elements inside the
   // place popup view.
@@ -32,6 +34,9 @@ class PlacePopupViewController: UIViewController {
     addressLabel.frame = CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 80)
     addressLabel.textAlignment = .center
     addressLabel.font = label.font.withSize(15)
+    
+    imageView.frame = CGRect(x: 0, y: 150, width: UIScreen.main.bounds.width, height: 100)
+    imageView.contentMode = .scaleAspectFit
 
     // websiteLabel.frame = CGRect(x: 0, y: 80, width: UIScreen.main.bounds.width, height: 80)
     // websiteLabel.textAlignment = .center
@@ -45,12 +50,12 @@ class PlacePopupViewController: UIViewController {
     self.view.addSubview(label)
     self.view.addSubview(addressLabel)
     self.view.addSubview(backButton)
+    self.view.addSubview(imageView)
     self.view.backgroundColor = .white
     self.view.isHidden = true
   }
   
   @objc func pressed(_ sender: UIButton!) {
-    print("Back button pressed")
     self.view.isHidden = !self.view.isHidden
   }
   
@@ -59,5 +64,31 @@ class PlacePopupViewController: UIViewController {
     self.place = place;
     self.label.text = self.place.name
     self.addressLabel.text = self.place.address
+    // Get rid of the previous image
+    self.imageView.image = nil
+    // Now load a new image
+    self.loadPhotoForPlaceID(gms_id: place.gms_id)
+  }
+  
+  // Given a place ID, lookup the photos for the place and add one
+  // to the UIImageview in the popup view detail.
+  func loadPhotoForPlaceID(gms_id: String) {
+    GMSPlacesClient.shared().lookUpPhotos(forPlaceID: gms_id) { (photoMetadata, error) -> Void in
+      if let error = error {
+        print("Error: \(error.localizedDescription)")
+        print(error)
+      } else {
+        if let metadata = photoMetadata?.results.first {
+          GMSPlacesClient.shared().loadPlacePhoto(metadata, callback: { (photo, error) -> Void in
+            if let error = error {
+              print("Error: \(error.localizedDescription)")
+              print(error)
+            } else {
+              self.imageView.image = photo;
+            }
+          })
+        }
+      }
+    }
   }
 }
