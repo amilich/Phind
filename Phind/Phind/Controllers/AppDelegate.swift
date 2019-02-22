@@ -45,14 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     GMSServices.provideAPIKey("AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU")
     GMSPlacesClient.provideAPIKey("AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU")
-
-    // TODO: Remove this.
-//    // Activate CoreMotion Activity Manager to check and update current movement type.
-//    if CMMotionActivityManager.isActivityAvailable() {
-//      motionActivityManager.startActivityUpdates(to: OperationQueue.main) { (motion) in
-//        PhindLocationManager.shared.updateMovementType(motion: motion!)
-//      }
-//    }
     
     #if targetEnvironment(simulator)
       print("Realm fileURL")

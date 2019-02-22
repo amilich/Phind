@@ -31,9 +31,9 @@ public class ModelManager : NSObject {
   /// </section>
   
   // Return most recent location entry.
-  public func getMostRecentLocationEntry() -> LocationEntry? {
+  public func getMostRecentLocationEntry(from: Date = Date()) -> LocationEntry? {
     
-    let locationEntries = getLocationEntries()
+    let locationEntries = getLocationEntries(from: from)
     return locationEntries.count > 0 ? locationEntries[0]  : nil
     
   }

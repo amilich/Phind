@@ -28,27 +28,12 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
   // Singleton declaration.
   public static let shared = PhindLocationManager()
   // TODO: Change this back to 15.0m when done debugging.
-  public static let DEFAULT_DISTANCE_FILTER : CLLocationDistance = 1
+  public static let DEFAULT_DISTANCE_FILTER : CLLocationDistance = 15.0
   // Minimum threshold for a new location to register as a new LocationEntry (in meters).
-  // TODO: Change this back to 100.0m when done debugging.
-  public static let NOTABLE_DISTANCE_THRESHOLD = DEFAULT_DISTANCE_FILTER
+  public static let NOTABLE_DISTANCE_THRESHOLD = 50.0
   
   // Private constants.
   private let ACTIVITY_TRACKING_WINDOW = 60
-  
-  // We only allow locations for which
-  // (distance delta)/(time delta) * SPEED_BUFFER < real measured speed
-  // to avoid GPS bugs from skewing our results.
-//  private let SPEED_BUFFER = 3.0
-  
-  // These are the distances used for locationManager.distanceFilter,
-  // dependent upon the current movement type.
-//  let MV_DISTANCE_FILTERS: [MovementType:Double] = [
-//    MovementType.AUTOMOTIVE : 150.0,
-//    MovementType.CYCLING    : 45.0,
-//    MovementType.WALKING    : 30.0,
-//    MovementType.STATIONARY : DEFAULT_DISTANCE_FILTER
-//  ]
   
   // Public fields.
   public private(set) var currMovementType = MovementType.STATIONARY
@@ -104,9 +89,10 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
     let semaphore = DispatchSemaphore(value: 0)
     motionActivityManager.queryActivityStarting(from: from, to: to, to: OperationQueue()) { activities, error in
       
-      Logger.shared.verbose(" \(activities)")
+      Logger.shared.verbose("Activities: \(activities)")
       
       for activity in activities! {
+        // Only examine activity entries that are "medium" or "high" confidence.
         if (activity.confidence == CMMotionActivityConfidence.low) { continue }
         
         if activity.walking {
@@ -120,6 +106,8 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
         }
       }
       
+      // Check to find the most common type of movement amongst the activity entries
+      // returned by the CoreMotion API.
       var cur_max = -1
       var tmpMovementType = self.currMovementType
       for movementType in MovementType.allTypes {
@@ -132,8 +120,9 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
     
       Logger.shared.verbose("Movement type: \(self.currMovementType) to \(tmpMovementType)")
       self.currMovementType = tmpMovementType
+      
+      semaphore.signal()
     }
-    semaphore.signal()
     _ = semaphore.wait(timeout: DispatchTime.distantFuture)
     
   }
@@ -145,9 +134,17 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
     
     let rawCoord = ModelManager.shared.addRawCoord(location)
     
-    // Check latest location entry in realm objects, from today.
-    let lastLocationEntry = ModelManager.shared.getMostRecentLocationEntry()
+    // Check latest location entry in realm objects.
+    var lastLocationEntry = ModelManager.shared.getMostRecentLocationEntry(from: Date.init(timeIntervalSince1970: 0))
     var currLocationEntry : LocationEntry? = lastLocationEntry
+    
+    // Check to see lastLocationEntry is from today. If not, then close it and
+    // treat it as though there are no valid LocationEntries from the current date.
+    let calendar = Calendar.current
+    if lastLocationEntry != nil && !calendar.isDateInToday(lastLocationEntry!.start as Date) {
+      ModelManager.shared.closeLocationEntry(lastLocationEntry!)
+      lastLocationEntry = nil
+    }
     
     // Get current movement type from CoreMotion.
     let motionActivityFrom = lastLocationEntry != nil ?
