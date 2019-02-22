@@ -21,8 +21,11 @@ public class ModelManager : NSObject {
   // Singleton declaration.
   public static let shared = ModelManager()
   
-  // Private fields.
+  // Public fields.
   public var realm = AppDelegate().realm
+ 
+  // Private fields
+    private var sharedURLSession = AppDelegate().sharedUrlSession
   
   
   /// <section>
@@ -185,63 +188,113 @@ public class ModelManager : NSObject {
     }
     return locationEntry
   }
-  
-  // TODO
-  //    public func getPlaceFromCoordinates() {
-  //
-  //    }
-  
-  public func assignPlaceIdToCurrentLocation(_ locationEntry: LocationEntry) {
-    let fields: GMSPlaceField = GMSPlaceField(rawValue:
-            UInt(GMSPlaceField.name.rawValue) |
-            UInt(GMSPlaceField.placeID.rawValue) |
-            UInt(GMSPlaceField.formattedAddress.rawValue) |
-            UInt(GMSPlaceField.coordinate.rawValue))!
-    
-    print("Assigning place IDs to location")
-    GMSPlacesClient.shared().findPlaceLikelihoodsFromCurrentLocation(withPlaceFields: fields, callback: {
-      (placeLikelihoodList: Array<GMSPlaceLikelihood>?, error: Error?) in
-      
-      if let error = error {
-        print("An error occurred: \(error.localizedDescription)")
-        print(error)
-        return
-      }
-      if let placeLikelihoodList = placeLikelihoodList {
+
+    // TODO (annamitchell): move API requests to a separate class?
+    private func createPlaceObject(placeApiResponse: [String: Any]) -> Place {
+        let place = Place()
         
-        var likelyPlaces = self.getLikelyPlaceList(placeLikelihoodList: placeLikelihoodList)
-        
-        if likelyPlaces.count > 0 {
-          print(likelyPlaces[0].name)
-          // TODO: consider place likelihoods instead of only grabbing first
-          var place = self.realm.objects(Place.self).filter("gms_id = %@", likelyPlaces[0].gms_id).first
-          if place == nil {
-            place = Place()
-            place!.address = likelyPlaces[0].address
-            place!.name = likelyPlaces[0].name
-            place!.gms_id = likelyPlaces[0].gms_id
-            place!.latitude = likelyPlaces[0].latitude
-            place!.longitude = likelyPlaces[0].longitude
-            
-            try! self.realm.write {
-              self.realm.add(place!)
+        place.address = placeApiResponse["formatted_address"] as! String
+        if let addressComponents = placeApiResponse["address_components"] as! [AnyObject]? {
+            place.name = addressComponents[0]["long_name"] as! String
+            print("name: \(place.name)")
+        }
+        if let geometry = placeApiResponse["geometry"] as AnyObject? {
+            if let location = geometry["location"] as AnyObject? {
+                place.latitude = location["lat"] as! Double
+                place.longitude = location["lng"] as! Double
+                print("latitude: \(place.latitude)")
+                print("longitude: \(place.longitude)")
             }
-          }
-          
-          // Link place id to location entry.
-          try! self.realm.write {
-            locationEntry.place_id = place!.uuid
-            print("Add new LocationEntry: (\(locationEntry.uuid)) with place_id (\(likelyPlaces[0].uuid))")
-          }
         }
-        else {
-          print("No places found for coordinates.")
+        place.gms_id = placeApiResponse["place_id"] as! String
+        print("gms id: \(place.gms_id)")
+        return place
+    }
+    
+    private func getPlaceApiResponse(data: Data?, response: URLResponse?, error: Error?) -> [String: Any]? {
+        guard error == nil else {
+            print("Error retrieving place ID.")
+            return nil
         }
         
-      }
-    })
-  }
-  
+        guard let content = data else {
+            print("No content retrieved.")
+            return nil
+        }
+        
+        guard let json = (try? JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers)) as? [String: Any] else {
+            print("JSON conversion failed.")
+            return nil
+        }
+        
+        guard let results = json["results"] as? [AnyObject]? else {
+            print("No results found.")
+            return nil
+        }
+        
+        if !((results?.count)! > 0) {
+            print("Results array empty.")
+            return nil
+        }
+        
+        guard let placesResponse = results?[0] as? [String: Any] else {
+            print("No complete first result.")
+            return nil
+        }
+        
+        guard let gmsId = placesResponse["place_id"] as! String? else {
+            print("No place id found.")
+            return nil
+            
+        }
+        
+        print("Success! Retrieved Place ID: \(gmsId)")
+        return placesResponse
+    }
+    
+    public func assignPlaceIdToLocation(_ locationEntry: LocationEntry) {
+
+        let locationRef = ThreadSafeReference(to: locationEntry)
+        
+        let url = URL(string: "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(locationEntry.latitude),\(locationEntry.longitude)&key=AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU")!
+
+        let task = sharedURLSession.dataTask(with: url) {(data, response, error) in
+            
+            let placeApiResponse = self.getPlaceApiResponse(data: data, response: response, error: error)
+            if placeApiResponse == nil {
+                print("No places found for coordinates.")
+                return
+            }
+            
+            // look for associated place in Realm; if it doesn't exist, create it
+            let bg_realm = try! Realm()
+            let gms_id = placeApiResponse!["place_id"]
+            var place = bg_realm.objects(Place.self).filter("gms_id = %@", gms_id!).first
+            print("got id")
+            
+            if place == nil {
+                place = self.createPlaceObject(placeApiResponse: placeApiResponse!)
+                try! bg_realm.write {
+                    bg_realm.add(place!)
+                }
+                print("written to realm")
+            }
+            
+            guard let location = bg_realm.resolve(locationRef) else {
+                return
+            }
+              // Link place id to location entry
+            try! bg_realm.write {
+                location.place_id = place!.uuid
+                print("Add new LocationEntry: (\(location.uuid)) with place_id (\(place!.gms_id))")
+            }
+            
+        }
+
+        task.resume()
+    }
+    
+
   // Append a RawCoordinates to a LocationEntry.
   public func appendRawCoord(_ locationEntry: LocationEntry, _ rawCoord: RawCoordinates) {
     
@@ -266,4 +319,28 @@ public class ModelManager : NSObject {
     
   }
   
+}
+
+
+
+extension Realm {
+    func writeAsync<T : ThreadConfined>(obj: T, errorHandler: @escaping ((_ error : Swift.Error) -> Void) = { _ in return }, block: @escaping ((Realm, T?) -> Void)) {
+        let wrappedObj = ThreadSafeReference(to: obj)
+        let config = self.configuration
+        DispatchQueue(label: "background").async {
+            autoreleasepool {
+                do {
+                    let realm = try Realm(configuration: config)
+                    let obj = realm.resolve(wrappedObj)
+                    
+                    try realm.write {
+                        block(realm, obj)
+                    }
+                }
+                catch {
+                    errorHandler(error)
+                }
+            }
+        }
+    }
 }
