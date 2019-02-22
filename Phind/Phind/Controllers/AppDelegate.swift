@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
-    // JustLog setup.
+    // Setup JustLog.
     let logger = Logger.shared
     logger.logFilename = "phind.log"
     logger.logstashHost = "listener.logz.io"

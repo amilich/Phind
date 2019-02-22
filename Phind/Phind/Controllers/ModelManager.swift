@@ -58,7 +58,7 @@ public class ModelManager : NSObject {
   
   // Get the GMS place name for a locationEntry by performing lookup on
   // place UUID.
-  func getPlaceLabelForLocationEntry(locationEntry: LocationEntry) -> Place? {
+  func getPlace(locationEntry: LocationEntry) -> Place? {
     let placeUUID = locationEntry.place_id
     return getPlaceWithUUID(uuid: placeUUID)
   }
@@ -72,7 +72,13 @@ public class ModelManager : NSObject {
       .filter("start >= %@ AND start < %@", dayStart, dayEnd)
       .sorted(byKeyPath: "start", ascending: ascending)
     
-    return Array(locationEntries)
+    var locationEntriesArr = Array(locationEntries)
+    locationEntriesArr.sort(
+      by: { $0.start.compare($1.start as Date) == ComparisonResult.orderedAscending }
+    )
+    
+    return locationEntriesArr
+    
     
   }
   

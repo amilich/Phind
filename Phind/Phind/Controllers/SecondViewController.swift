@@ -96,7 +96,7 @@ class SecondViewController: UIViewController, UICollectionViewDelegate {
     
     let locationEntry = ModelManager.shared.mostCommonLocation()
     if locationEntry != nil{
-      let place = ModelManager.shared.getPlaceLabelForLocationEntry(locationEntry: locationEntry!)
+      let place = ModelManager.shared.getPlace(locationEntry: locationEntry!)
       let placeString = place != nil ? place!.name : ""
       let mostCommonLocation = String(placeString)
       let statclass2 = String("Most Commonly Visited Place:")

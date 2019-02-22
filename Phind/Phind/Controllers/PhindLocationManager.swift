@@ -114,7 +114,7 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
         if movementTypeCounts[movementType]! > cur_max {
           cur_max = movementTypeCounts[movementType]!
           tmpMovementType = movementType
-          Logger.shared.debug("Movement updated in loop to: \(tmpMovementType)")
+          Logger.shared.debug("Movement updated (in loop!) to: \(tmpMovementType)")
         }
       }
     
@@ -187,7 +187,7 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
             
             // Prevent buggy GPS signals in "jumping" the location.
             if (location.speed <= 0) {
-              Logger.shared.verbose("Skip due to negative speed TODO")
+              Logger.shared.verbose("Negative speed recorded.")
               // TODO
               // return
             }
