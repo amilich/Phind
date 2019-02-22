@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var motionActivityManager = CMMotionActivityManager()
   let placesClient = GMSPlacesClient()
   let realm = try! Realm()
+  let sharedUrlSession = URLSession.shared
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
@@ -86,3 +87,4 @@ extension AppDelegate : CLLocationManagerDelegate{
   } 
   
 }
+
