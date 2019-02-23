@@ -39,12 +39,13 @@ class PlacePopupViewController: UIViewController, UICollectionViewDataSource, UI
     
     let width = UIScreen.main.bounds.width
     
-    let labelBorder = CGFloat(10)
-    let labelX = labelBorder / 2
-    label.frame = CGRect(x: labelX, y: 0, width: width, height: 160)
-    // label.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 80)
+    // let labelBorder = CGFloat(10)
+    // let labelX = labelBorder / 2
+    // label.frame = CGRect(x: labelX, y: 0, width: width, height: 160)
+    label.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 80)
     label.textAlignment = .center
     label.font = label.font.withSize(25)
+    label.adjustsFontSizeToFitWidth = true
     // label.sizeToFit()
     // label.lineBreakMode = .byWordWrapping
     // label.numberOfLines = 0
