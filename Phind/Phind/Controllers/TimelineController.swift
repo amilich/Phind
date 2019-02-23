@@ -70,6 +70,10 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   private var tableItems: [TimelineLabel] = []
   private var currentDate: Date = Date()
 
+  convenience init() {
+    self.init()
+  }
+  
   // viewWillAppear and viewDidLoad all follow the cycle delineated
   // here: https://apple.co/2DqFnH6
   override func viewWillAppear(_ animated: Bool) {
@@ -82,6 +86,24 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     //              instead of Feb 09, 2019.
     updateDate(Date())
     
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    let formatter = DateFormatter()
+    formatter.dateFormat = "HH:mm:ss"
+    
+    // Add the route to the map and sync the timeline to today
+    reloadMapView();
+    // Register the table cell as custom type
+    setupTableView();
+    
+    self.addChild(placePopupViewController)
+    self.view.addSubview(placePopupViewController.view)
+    
+    placePopupViewController.didMove(toParent: self)
+    placePopupViewController.view.frame = self.tableView.frame
   }
   
   @IBAction func refreshButton(_ sender: Any) {
@@ -104,27 +126,6 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     currentDateLabel.center.x = self.view.center.x
     
     reloadMapView()
-    
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-        
-    // Register the table cell as custom type
-    setupTableView();
-    
-    let formatter = DateFormatter()
-    formatter.dateFormat = "HH:mm:ss"
-    
-    // Add the route to the map and sync the timeline to today
-    reloadMapView();
-    
-    self.addChild(placePopupViewController)
-    self.view.addSubview(placePopupViewController.view)
-    //    placePopupViewController.view.frame = self.tableView.frame
-      // CGRect(x: 0, y: 0, width: 200, height: 100)
-    placePopupViewController.didMove(toParent: self)
-    placePopupViewController.view.frame = self.tableView.frame
   }
   
   // Add locations from today to map and timeline
@@ -189,6 +190,10 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     self.tableView.separatorStyle = .none
     self.tableView.dataSource = self
     self.tableView.delegate = self
+    let width = UIScreen.main.bounds.width
+    let mapY = self.mapView.frame.maxY
+    let tableHeight = self.tabBarController!.tabBar.frame.maxY - self.mapView.frame.maxY
+    self.tableView.frame = CGRect(x: 0, y: mapY, width: width, height: tableHeight)
     
   }
   
