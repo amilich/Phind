@@ -27,36 +27,28 @@ class PlacePopupViewController: UIViewController, UICollectionViewDataSource, UI
   var photoCollection : UICollectionView
   
   // UI design constants
-  let photoBorder = 30.0 as CGFloat
+  let photoBorder = 84.0 as CGFloat
   
   init() {
-    // self.photoCollection = UICollectionView(frame: CGRect(x: 0, y: 130, width: self.view.frame.width, height: 250), collectionViewLayout: flowLayout)
-    self.photoCollection = UICollectionView(frame: CGRect(x: 0, y: 130, width: 300, height: 250), collectionViewLayout: flowLayout)
+    let width = UIScreen.main.bounds.width
+    self.photoCollection = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
     
+    let photoBorder = CGFloat(20)
+    // self.photoCollection = UICollectionView(frame: CGRect(x: photoBorder / 2, y: 120, width: superWidth - photoBorder, height: 250), collectionViewLayout: flowLayout)
     super.init(nibName: nil, bundle: nil)
     
     self.definesPresentationContext = true
     
-    let width = UIScreen.main.bounds.width
-    
-    // let labelBorder = CGFloat(10)
-    // let labelX = labelBorder / 2
-    // label.frame = CGRect(x: labelX, y: 0, width: width, height: 160)
-    label.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 80)
+    label.frame = CGRect(x: 0, y: 10, width: self.view.frame.width, height: 80)
     label.textAlignment = .center
     label.font = label.font.withSize(25)
     label.adjustsFontSizeToFitWidth = true
-    // label.sizeToFit()
-    // label.lineBreakMode = .byWordWrapping
-    // label.numberOfLines = 0
 
-    addressLabel.frame = CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 80)
+    addressLabel.frame = CGRect(x: 0, y: 45, width: self.view.frame.width, height: 80)
     addressLabel.textAlignment = .center
     addressLabel.font = label.font.withSize(15)
     
-    flowLayout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-    
-    let photoSize = (width - photoBorder) / 3
+    let photoSize = (self.view.frame.width - photoBorder) / 3
     flowLayout.itemSize = CGSize(width: photoSize, height: photoSize)
     
     photoCollection.dataSource = self
@@ -69,7 +61,7 @@ class PlacePopupViewController: UIViewController, UICollectionViewDataSource, UI
     backButton.setTitle("Back", for: .normal)
     backButton.addTarget(self, action: #selector(self.backPressed(_:)), for: .touchUpInside)
     
-    editButton.frame = CGRect(x: width - 60, y: 15, width: 50, height: 50)
+    editButton.frame = CGRect(x: width - 80, y: 15, width: 40, height: 50)
     editButton.setTitle("Edit", for: .normal)
     editButton.backgroundColor = .red
     editButton.addTarget(self, action: #selector(self.editPressed(_:)), for: .touchUpInside)
@@ -93,11 +85,18 @@ class PlacePopupViewController: UIViewController, UICollectionViewDataSource, UI
     super.viewDidLoad()
     
     // TODO(Andrew) Move into init
-    self.photoCollection.frame = CGRect(x: 0, y: 130, width: self.view.frame.width, height: 250)
+    // TODO figure out correct frame, inset, and borders
+    self.photoCollection.frame = CGRect(x: 10, y: 120, width: 330, height: 130)
   }
   
   @objc func backPressed(_ sender: UIButton!) {
     self.view.isHidden = !self.view.isHidden
+    if let timelineVC = self.parent {
+      if let timelineVC = timelineVC as? TimelineController {
+        print("Found parent")
+        timelineVC.tableView.isHidden = false
+      }
+    }
   }
   
   @objc func editPressed(_ sender: UIButton!) {
@@ -138,7 +137,7 @@ class PlacePopupViewController: UIViewController, UICollectionViewDataSource, UI
           } else if numInGrid < 6 {
             photoWidth = widthMinusBorder / 2
           }
-          
+
           self.flowLayout.itemSize = CGSize(width: photoWidth, height: photoWidth)
           self.flowLayout.invalidateLayout()
 

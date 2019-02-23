@@ -86,11 +86,6 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     //              instead of Feb 09, 2019.
     updateDate(Date())
     
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
     let formatter = DateFormatter()
     formatter.dateFormat = "HH:mm:ss"
     
@@ -99,11 +94,18 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     // Register the table cell as custom type
     setupTableView();
     
-    self.addChild(placePopupViewController)
-    self.view.addSubview(placePopupViewController.view)
-    
     placePopupViewController.didMove(toParent: self)
     placePopupViewController.view.frame = self.tableView.frame
+    print("here")
+    print(self.placePopupViewController.view.frame)
+    print(self.tableView.frame)
+    self.addChild(placePopupViewController)
+    self.view.addSubview(placePopupViewController.view)
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    self.view.bringSubviewToFront(tableView)
   }
   
   @IBAction func refreshButton(_ sender: Any) {
@@ -190,10 +192,11 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     self.tableView.separatorStyle = .none
     self.tableView.dataSource = self
     self.tableView.delegate = self
+    let border = CGFloat(24)
     let width = UIScreen.main.bounds.width
-    let mapY = self.mapView.frame.maxY
-    let tableHeight = self.tabBarController!.tabBar.frame.maxY - self.mapView.frame.maxY
-    self.tableView.frame = CGRect(x: 0, y: mapY, width: width, height: tableHeight)
+    // let mapY = self.mapView.frame.maxY
+    // let tableHeight = self.tabBarController!.tabBar.frame.maxY - self.mapView.frame.maxY
+    self.tableView.frame = CGRect(x: border / 2, y: 450, width: width - border, height: 270)
     
   }
   
@@ -276,6 +279,7 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
         
         self.placePopupViewController.setPlace(place: place!)
         self.placePopupViewController.view.isHidden = false
+        self.tableView.isHidden = true
       }
     } else {
       // Do not need an else case; unselecting happens by
