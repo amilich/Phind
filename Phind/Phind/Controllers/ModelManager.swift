@@ -191,12 +191,12 @@ public class ModelManager : NSObject {
   }
 
     // TODO (annamitchell): move API requests to a separate class?
-    private func getPlaceObject(placeDetailsApiResponse: [String: Any]) -> Place {
+    private func getPlaceObject(nearestPlaceResult: [String: Any]) -> Place {
         let place = Place()
-        place.address = placeDetailsApiResponse["formatted_address"] as! String
-        place.name = placeDetailsApiResponse["name"] as! String
+        place.address = nearestPlaceResult["vicinity"] as! String
+        place.name = nearestPlaceResult["name"] as! String
         print("name: \(place.name)")
-        if let geometry = placeDetailsApiResponse["geometry"] as AnyObject? {
+        if let geometry = nearestPlaceResult["geometry"] as AnyObject? {
             if let location = geometry["location"] as AnyObject? {
                 place.latitude = location["lat"] as! Double
                 place.longitude = location["lng"] as! Double
@@ -204,55 +204,13 @@ public class ModelManager : NSObject {
                 print("longitude: \(place.longitude)")
             }
         }
-        place.gms_id = placeDetailsApiResponse["place_id"] as! String
-        place.types = placeDetailsApiResponse["types"] as! [String]
+        place.gms_id = nearestPlaceResult["place_id"] as! String
+        place.types = nearestPlaceResult["types"] as! [String]
         print("gms id: \(place.gms_id)")
         return place
     }
     
-    
-    private func getReverseGeocodeApiResponse(data: Data?, response: URLResponse?, error: Error?) -> [String: Any]? {
-        guard error == nil else {
-            print("Error retrieving geocoding response.")
-            return nil
-        }
-        
-        guard let content = data else {
-            print("No content retrieved.")
-            return nil
-        }
-        
-        guard let json = (try? JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers)) as? [String: Any] else {
-            print("JSON conversion failed.")
-            return nil
-        }
-        
-        guard let results = json["results"] as? [AnyObject]? else {
-            print("No results found.")
-            return nil
-        }
-        
-        if !((results?.count)! > 0) {
-            print("Results array empty.")
-            return nil
-        }
-        
-        guard let reverseGeocodeApiResponse = results?[0] as? [String: Any] else {
-            print("No complete first result.")
-            return nil
-        }
-        
-        guard let gmsId = reverseGeocodeApiResponse["place_id"] as! String? else {
-            print("No place id found.")
-            return nil
-            
-        }
-        
-        print("Success! Retrieved Place ID: \(gmsId)")
-        return reverseGeocodeApiResponse
-    }
-    
-    private func getPlaceDetailsApiResponse(data: Data?, response: URLResponse?, error: Error?) -> [String: Any]? {
+    private func getNearbySearchResponse(data: Data?, response: URLResponse?, error: Error?) -> [AnyObject]? {
         guard error == nil else {
             print("Error retrieving place details.")
             return nil
@@ -268,88 +226,66 @@ public class ModelManager : NSObject {
             return nil
         }
         
-        guard let placeDetailsApiResponse = json["result"] as? [String : Any]? else {
+        guard let nearbySearchApiResponse = json["results"] as? [AnyObject]? else {
             print("No result found.")
             return nil
         }
         
-        return placeDetailsApiResponse
+        return nearbySearchApiResponse
     }
-    
-    private func getPlaceDetailsTask(placeDetailsUrl: URL, locationUuid: String) ->  URLSessionDataTask {
-        print("inside get place details task")
-        
-        let placeDetailsTask = sharedURLSession.dataTask(with: placeDetailsUrl) {(data, response, error) in
-            print("about to get response")
-            let placeDetailsApiResponse = self.getPlaceDetailsApiResponse(data: data, response: response, error: error)
-            print("got response")
-            
-            if placeDetailsApiResponse == nil {
-                print("No place found for place id.")
-                return
-            }
-        
-            let placeObject = self.getPlaceObject(placeDetailsApiResponse: placeDetailsApiResponse!)
-            print("at line 288")
-            let placeDetailsRealm = try! Realm()
-        
-            try! placeDetailsRealm.write {
-                placeDetailsRealm.add(placeObject)
-            }
-            
-            let locationEntry = placeDetailsRealm.objects(LocationEntry.self).filter("uuid = %@", locationUuid).first
 
-            try! placeDetailsRealm.write {
-                locationEntry!.place_id = placeObject.uuid
-                print("Add new LocationEntry: (\(locationEntry!.uuid)) with place_id (\(placeObject.gms_id))")
-            }
-            
-        }
-        return placeDetailsTask
-    }
     
     public func assignPlaceIdToLocation(_ locationEntry: LocationEntry) {
         
         let locationUuid = locationEntry.uuid
+        
+        let nearbySearchUrl = URL(string: "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(locationEntry.latitude),\(locationEntry.longitude)&rankby=distance&key=\(gmsApiKey)")!
+        
+        print(nearbySearchUrl)
 
-        let geocodeUrl = URL(string: "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(locationEntry.latitude),\(locationEntry.longitude)&key=\(gmsApiKey)")!
-
-        let geocodeTask = sharedURLSession.dataTask(with: geocodeUrl) {(data, response, error) in
+        let nearbySearchTask = sharedURLSession.dataTask(with: nearbySearchUrl) {(data, response, error) in
             
-            let reverseGeocodeApiResponse = self.getReverseGeocodeApiResponse(data: data, response: response, error: error)
-            if reverseGeocodeApiResponse == nil {
+            let nearbySearchResponse = self.getNearbySearchResponse(data: data, response: response, error: error)
+            if nearbySearchResponse == nil {
                 print("No places found for coordinates.")
                 return
             }
             
             // look for associated place in Realm; if it doesn't exist, create it
-            let gmsId = reverseGeocodeApiResponse!["place_id"]
+            let nearestPlaceResult = nearbySearchResponse![0] as! [String : Any]
+            let gmsId = nearestPlaceResult["place_id"]
             
-            let geocodeRealm = try! Realm()
-            let place = geocodeRealm.objects(Place.self).filter("gms_id = %@", gmsId!).first
+            let nearbySearchRealm = try! Realm()
+            let place = nearbySearchRealm.objects(Place.self).filter("gms_id = %@", gmsId!).first
             
             // if non-nil place, add place id to location and return immediately
             if place != nil {
-                let locationEntry = geocodeRealm.objects(LocationEntry.self).filter("uuid = %@", locationUuid).first
+                let locationEntry = nearbySearchRealm.objects(LocationEntry.self).filter("uuid = %@", locationUuid).first
                 
-                try! geocodeRealm.write {
+                try! nearbySearchRealm.write {
                     locationEntry?.place_id = place!.uuid
                     print("Add new LocationEntry: (\(locationEntry!.uuid)) with place_id (\(place!.gms_id))")
                 }
                 return
             }
             
-            let defaultId = ""
-            let placeDetailsUrl = URL(string: "https://maps.googleapis.com/maps/api/place/details/json?placeid=\(gmsId ?? defaultId)&fields=name,geometry,place_id,formatted_address,types&key=\(self.gmsApiKey)")!
+            let placeObject = self.getPlaceObject(nearestPlaceResult: nearestPlaceResult)
+            let placeDetailsRealm = try! Realm()
             
-            print(placeDetailsUrl)
-        
-            let placeDetailsTask = self.getPlaceDetailsTask(placeDetailsUrl: placeDetailsUrl, locationUuid: locationUuid)
+            try! placeDetailsRealm.write {
+                placeDetailsRealm.add(placeObject)
+            }
             
-            placeDetailsTask.resume()
+            let locationEntry = placeDetailsRealm.objects(LocationEntry.self).filter("uuid = %@", locationUuid).first
+            
+            try! placeDetailsRealm.write {
+                locationEntry!.place_id = placeObject.uuid
+                print("Add new LocationEntry: (\(locationEntry!.uuid)) with place_id (\(placeObject.gms_id))")
+            }
+            
             
         }
-        geocodeTask.resume()
+        nearbySearchTask.resume()
     }
     
 
