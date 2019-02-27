@@ -96,9 +96,6 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     
     placePopupViewController.didMove(toParent: self)
     placePopupViewController.view.frame = self.tableView.frame
-    print("here")
-    print(self.placePopupViewController.view.frame)
-    print(self.tableView.frame)
     self.addChild(placePopupViewController)
     self.view.addSubview(placePopupViewController.view)
   }

@@ -29,6 +29,9 @@ class PlacePopupViewController: UIViewController, UICollectionViewDataSource, UI
   // UI design constants
   let photoBorder = 84.0 as CGFloat
   
+  // Edit view controller
+  let editViewController = EditPlaceViewController()
+
   init() {
     let width = UIScreen.main.bounds.width
     self.photoCollection = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
@@ -73,6 +76,9 @@ class PlacePopupViewController: UIViewController, UICollectionViewDataSource, UI
     self.view.addSubview(photoCollection)
     self.view.backgroundColor = .white
     self.view.isHidden = true
+    
+    editViewController.didMove(toParent: self)
+    editViewController.view.frame = self.view.frame
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -93,7 +99,6 @@ class PlacePopupViewController: UIViewController, UICollectionViewDataSource, UI
     self.view.isHidden = !self.view.isHidden
     if let timelineVC = self.parent {
       if let timelineVC = timelineVC as? TimelineController {
-        print("Found parent")
         timelineVC.tableView.isHidden = false
       }
     }
