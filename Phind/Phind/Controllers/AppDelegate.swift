@@ -20,8 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var locationManager = CLLocationManager()
   var motionActivityManager = CMMotionActivityManager()
+  var gmsApiKey = "AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU"
   let placesClient = GMSPlacesClient()
   let realm = try! Realm()
+  let sharedUrlSession = URLSession.shared
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
@@ -35,8 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       locationManager.startUpdatingLocation()
     }
     
-    GMSServices.provideAPIKey("AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU")
-    GMSPlacesClient.provideAPIKey("AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU")
+    GMSServices.provideAPIKey(gmsApiKey)
+    GMSPlacesClient.provideAPIKey(gmsApiKey)
     
     // Activate CoreMotion Activity Manager to check and update current movement type.
     if CMMotionActivityManager.isActivityAvailable() {
@@ -86,3 +88,4 @@ extension AppDelegate : CLLocationManagerDelegate{
   } 
   
 }
+
