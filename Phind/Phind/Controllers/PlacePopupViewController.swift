@@ -79,6 +79,7 @@ class PlacePopupViewController: UIViewController, UICollectionViewDataSource, UI
     
     editViewController.didMove(toParent: self)
     editViewController.view.frame = self.view.frame
+    self.view.addSubview(editViewController.view)
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -104,8 +105,10 @@ class PlacePopupViewController: UIViewController, UICollectionViewDataSource, UI
     }
   }
   
+  // Show the edit view controller
   @objc func editPressed(_ sender: UIButton!) {
-    print("Edit")
+    self.editViewController.view.isHidden = false
+    print("Edit visible")
   }
   
   // Called to set the place to be displayed on the popup view.

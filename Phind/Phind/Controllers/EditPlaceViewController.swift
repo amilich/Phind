@@ -47,10 +47,11 @@ class EditPlaceViewController: UIViewController {
     if let popupVC = self.parent {
       if let popupVC = popupVC as? PlacePopupViewController {
         print("Found parent")
+        // TODO the parent of this will be the popup controller.
+        // If the place is edited, the poopup controller will have
+        // to refresh its content.
+        // popupVC.setPlace(place: newPlace)
       }
     }
-    // TODO the parent of this will be the popup controller.
-    // If the place is edited, the poopup controller will have
-    // to refresh its content.
   }
 }
