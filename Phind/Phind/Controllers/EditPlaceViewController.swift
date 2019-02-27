@@ -37,7 +37,7 @@ class EditPlaceViewController: UIViewController {
   }
   
   // Initialize the button and text elements inside the
-  // place popup view.
+  // place edit view.
   override func viewDidLoad() {
     super.viewDidLoad()
   }
