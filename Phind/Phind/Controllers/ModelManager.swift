@@ -63,11 +63,15 @@ public class ModelManager : NSObject {
     return getPlaceWithUUID(uuid: placeUUID)
   }
   
-  // Return all location entries from a certain day, limited to max, and ascending default to false.
-  public func getLocationEntries(from: Date = Date(), ascending: Bool = false) -> [LocationEntry] {
+  // Return all location entries from a certain period, limited to max, and ascending default to false.
+  public func getLocationEntries(from: Date = Date(), number_of_days: Int = -1, ascending: Bool = false) -> [LocationEntry] {
     
     let dayStart = Calendar.current.startOfDay(for: from)
-    let dayEnd = Calendar.current.date(byAdding: .day, value: 1, to: dayStart)
+    var dayEnd = Date()
+    if number_of_days > 0 {
+      dayEnd = Calendar.current.date(byAdding: .day, value: number_of_days, to: dayStart)!
+    }
+    
     let locationEntries = realm.objects(LocationEntry.self)
       .filter("start >= %@ AND start < %@", dayStart, dayEnd)
       .sorted(byKeyPath: "start", ascending: ascending)
@@ -150,6 +154,7 @@ public class ModelManager : NSObject {
   // Close up previous LocationEntry if necessary by adding an end time.
   public func closeLocationEntry(_ locationEntry: LocationEntry) {
     
+    Logger.shared.verbose("Attempt to close location entry.")
     // Close up last location entry if one is provided to this function.
     try! realm.write {
       locationEntry.end = NSDate()

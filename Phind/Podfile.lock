@@ -1,5 +1,6 @@
 PODS:
   - CocoaAsyncSocket (7.6.3)
+  - garland-view (0.0.1)
   - GoogleMaps (3.0.1):
     - GoogleMaps/Maps (= 3.0.1)
   - GoogleMaps/Base (3.0.1)
@@ -19,6 +20,7 @@ PODS:
   - TransitionableTab (0.2.0)
 
 DEPENDENCIES:
+  - garland-view
   - GoogleMaps
   - GooglePlaces
   - JustLog
@@ -28,6 +30,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - CocoaAsyncSocket
+    - garland-view
     - GoogleMaps
     - GooglePlaces
     - JustLog
@@ -38,6 +41,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
+  garland-view: a1eb9c9c5d63bd8027ae3a8b58d9cc05ab89de3a
   GoogleMaps: ec8c032304e19f609aba11096eed7207ca1af32d
   GooglePlaces: 44d1be1cf4c2919563162fe369c117168e551e6d
   JustLog: 24d4dbdd4d4b65fc04069f222ee34b1d9c9004cf
@@ -46,6 +50,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: ccfcdf85a04d429f1633f668650b0ce8020bda3a
   TransitionableTab: 54a5d0af475033bdb83959fde4e5d6201af7e2ab
 
-PODFILE CHECKSUM: f2e66107ba857dd04db4fa98d6e3bac7327a5f1c
+PODFILE CHECKSUM: 892588671beb546c8978068e916b8ee583fcf204
 
 COCOAPODS: 1.6.0

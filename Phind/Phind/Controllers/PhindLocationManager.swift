@@ -233,6 +233,7 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
   
   public func updateLocation(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     
+    Logger.shared.verbose("Locations \(locations)")
     let location:CLLocation = locations[0] as CLLocation
     updateLocation(location: location)
     

@@ -128,6 +128,8 @@
 		0A04B95E220F7DB600D94EB9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0A2D40042225F55B00ED06E5 /* Collections */,
+				0A2D40032225F54E00ED06E5 /* Card */,
 				49AD3CD22213E32F000494D9 /* MapViewFitExtension.swift */,
 				492F5C5C21FD814E009B6411 /* Main.storyboard */,
 				492F5C6121FD814F009B6411 /* LaunchScreen.storyboard */,
@@ -168,6 +170,20 @@
 				0A080130221230EE00460A1A /* Font Awesome 5 Free-Solid-900.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		0A2D40032225F54E00ED06E5 /* Card */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Card;
+			sourceTree = "<group>";
+		};
+		0A2D40042225F55B00ED06E5 /* Collections */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Collections;
 			sourceTree = "<group>";
 		};
 		0AF2615222123032009BD580 /* MediaResources */ = {
@@ -442,6 +458,7 @@
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
 				"${BUILT_PRODUCTS_DIR}/TransitionableTab/TransitionableTab.framework",
+				"${BUILT_PRODUCTS_DIR}/garland-view/garland_view.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -453,6 +470,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TransitionableTab.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/garland_view.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

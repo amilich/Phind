@@ -1,0 +1,6 @@
+framework module garland_view {
+  umbrella header "garland-view-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -135,7 +135,7 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     mapView.removeOverlays(mapView.overlays)
     
     // Get all LocationEntries from today.
-    let locationEntries = ModelManager.shared.getLocationEntries(from: currentDate)
+    let locationEntries = ModelManager.shared.getLocationEntries(from: currentDate, number_of_days: 1)
     
     Logger.shared.debug("LocationEntries (all): \(locationEntries)")
     
@@ -232,16 +232,13 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     raw_coordinates.sort(
       by: { $0.timestamp.compare($1.timestamp as Date) == ComparisonResult.orderedAscending }
     )
-    Logger.shared.debug("LocationEntry Date in Route: \(locationEntry.start)")
-    Logger.shared.debug("RawCoordinates in Route: \(raw_coordinates)")
     
     for rawCoord in raw_coordinates {
       let coord = CLLocationCoordinate2DMake(rawCoord.latitude, rawCoord.longitude)
       routeCoords.append(coord)
     }
     lastCoord = routeCoords.last
-    
-    Logger.shared.debug("LastCoord in Route: \(lastCoord)")
+
     let routeLine = MKPolyline(coordinates: routeCoords, count: routeCoords.count)
     mapView.addOverlay(routeLine)
     print("Route added.")

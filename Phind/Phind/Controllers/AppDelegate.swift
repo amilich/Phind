@@ -33,23 +33,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     logger.logzioToken = "WwwhuifBTWaSUATASxASOztzmHvXkRZJ"
     logger.setup()
     
+    // Setup location manager and location updates.
     self.locationManager.requestAlwaysAuthorization()
-    
-    // Do any additional setup after loading the view.
-    if CLLocationManager.locationServicesEnabled() {
+    if CLLocationManager.significantLocationChangeMonitoringAvailable() {
       locationManager.delegate = self
-      locationManager.desiredAccuracy = kCLLocationAccuracyBest
-      locationManager.distanceFilter = PhindLocationManager.DEFAULT_DISTANCE_FILTER
-      locationManager.startUpdatingLocation()
+      locationManager.startMonitoringSignificantLocationChanges()
+    } else {
+      Logger.shared.error("Significant location change monitoring not available.")
     }
-    
+
+    // Setup Google Maps keys.
     GMSServices.provideAPIKey("AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU")
     GMSPlacesClient.provideAPIKey("AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU")
-    
-    #if targetEnvironment(simulator)
-      print("Realm fileURL")
-      print(Realm.Configuration.defaultConfiguration.fileURL ?? "<no url found>")
-    #endif
   
     return true
   }
@@ -102,6 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate : CLLocationManagerDelegate{
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    Logger.shared.verbose("Location manager delegate called.")
     PhindLocationManager.shared.updateLocation(manager, didUpdateLocations: locations)
   } 
   

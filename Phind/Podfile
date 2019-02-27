@@ -11,6 +11,7 @@ target 'Phind' do
   pod 'GoogleMaps'
   pod 'TransitionableTab', '~> 0.2.0'
   pod 'JustLog'
+  pod 'garland-view'
 
   target 'PhindTests' do
     inherit! :search_paths
