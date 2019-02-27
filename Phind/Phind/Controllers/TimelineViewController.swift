@@ -54,6 +54,10 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     blue: 142.0 / 255.0,
     alpha: 0.8
   )
+  // Table border on edges
+  let border = CGFloat(24)
+  // Height of one timeline entry
+  let timelineEntryHeight = CGFloat(50.0)
   
   // Setup all the links to the UI.
   @IBOutlet weak var currentDateLabel: UILabel!
@@ -89,13 +93,18 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     let formatter = DateFormatter()
     formatter.dateFormat = "HH:mm:ss"
     
-    // Add the route to the map and sync the timeline to today
-    reloadMapView();
     // Register the table cell as custom type
     setupTableView();
+    // Add the route to the map and sync the timeline to today
+    reloadMapView();
     
     placePopupViewController.didMove(toParent: self)
-    placePopupViewController.view.frame = self.tableView.frame
+    // placePopupViewController.view.frame = self.tableView.frame
+    let width = UIScreen.main.bounds.width
+    // TODO(Andrew) make constants for each height value
+    placePopupViewController.view.frame = CGRect(x: border / 2, y: 720 - 270, width: width - border, height: 270)
+
+    
     self.addChild(placePopupViewController)
     self.view.addSubview(placePopupViewController.view)
   }
@@ -137,6 +146,11 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     // Get all LocationEntries from today.
     let locationEntries = ModelManager.shared.getLocationEntries(from: currentDate)
     self.tableItems.removeAll()
+    
+    let width = UIScreen.main.bounds.width
+    let timelineHeight = timelineEntryHeight * CGFloat(locationEntries.count)
+    let tableHeight = max(min(timelineHeight, 270.0), 0.0)
+    self.tableView.frame = CGRect(x: border / 2, y: 720 - tableHeight, width: width - border, height: tableHeight)
     
     // Iterate through each LocationEntry to draw pins and routes, as well
     // as generate cards for the timeline.
@@ -189,12 +203,6 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     self.tableView.separatorStyle = .none
     self.tableView.dataSource = self
     self.tableView.delegate = self
-    let border = CGFloat(24)
-    let width = UIScreen.main.bounds.width
-    // let mapY = self.mapView.frame.maxY
-    // let tableHeight = self.tabBarController!.tabBar.frame.maxY - self.mapView.frame.maxY
-    self.tableView.frame = CGRect(x: border / 2, y: 450, width: width - border, height: 270)
-    
   }
   
   func drawPin(_ lastCoord: inout CLLocationCoordinate2D?, _ locationEntry: LocationEntry) {
