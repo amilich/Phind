@@ -225,7 +225,6 @@ public class ModelManager : NSObject {
             print("JSON conversion failed.")
             return nil
         }
-        print(json)
         
         guard let nearbySearchApiResponse = json["results"] as? [AnyObject]? else {
             print("No result found.")
@@ -271,7 +270,6 @@ public class ModelManager : NSObject {
             }
             
             let placeObject = self.getPlaceObject(nearestPlaceResult: nearestPlaceResult)
-            print("at line 288")
             let placeDetailsRealm = try! Realm()
             
             try! placeDetailsRealm.write {
