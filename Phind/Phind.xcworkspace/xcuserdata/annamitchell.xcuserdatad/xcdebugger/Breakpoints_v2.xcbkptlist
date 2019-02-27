@@ -6,11 +6,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Phind/Models/RealmTypes.swift"
-            timestampString = "572506772.366971"
+            timestampString = "572954080.071227"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "28"
@@ -19,14 +19,14 @@
             landmarkType = "0">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Phind.LocationEntry.__allocating_init() -&gt; Phind.LocationEntry"
                   moduleName = "Phind"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/annamitchell/Documents/Senior_Winter/CS194W/Team-7/Phind/Phind/Models/RealmTypes.swift"
-                  timestampString = "572212388.404093"
+                  timestampString = "572949896.102703"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -34,14 +34,14 @@
                   offsetFromSymbolStart = "4">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Phind.LocationEntry.init() -&gt; Phind.LocationEntry"
                   moduleName = "Phind"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/annamitchell/Documents/Senior_Winter/CS194W/Team-7/Phind/Phind/Models/RealmTypes.swift"
-                  timestampString = "572212388.40722"
+                  timestampString = "572949896.106009"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "30"
@@ -49,14 +49,14 @@
                   offsetFromSymbolStart = "29">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Phind.LocationEntry.__allocating_init(value: Any) -&gt; Phind.LocationEntry"
                   moduleName = "Phind"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/annamitchell/Documents/Senior_Winter/CS194W/Team-7/Phind/Phind/Models/RealmTypes.swift"
-                  timestampString = "572212388.410007"
+                  timestampString = "572949896.108806"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -64,14 +64,14 @@
                   offsetFromSymbolStart = "4">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Phind.LocationEntry.init(value: Any) -&gt; Phind.LocationEntry"
                   moduleName = "Phind"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/annamitchell/Documents/Senior_Winter/CS194W/Team-7/Phind/Phind/Models/RealmTypes.swift"
-                  timestampString = "572212388.413853"
+                  timestampString = "572949896.111689"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "30"
@@ -79,14 +79,14 @@
                   offsetFromSymbolStart = "41">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Phind.LocationEntry.__allocating_init(realm: __C.RLMRealm, schema: __C.RLMObjectSchema) -&gt; Phind.LocationEntry"
                   moduleName = "Phind"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/annamitchell/Documents/Senior_Winter/CS194W/Team-7/Phind/Phind/Models/RealmTypes.swift"
-                  timestampString = "572212388.417652"
+                  timestampString = "572949896.115496"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -94,14 +94,14 @@
                   offsetFromSymbolStart = "4">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Phind.LocationEntry.init(realm: __C.RLMRealm, schema: __C.RLMObjectSchema) -&gt; Phind.LocationEntry"
                   moduleName = "Phind"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/annamitchell/Documents/Senior_Winter/CS194W/Team-7/Phind/Phind/Models/RealmTypes.swift"
-                  timestampString = "572212388.421249"
+                  timestampString = "572949896.118347"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "30"
@@ -109,14 +109,14 @@
                   offsetFromSymbolStart = "53">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Phind.LocationEntry.__allocating_init(value: Any, schema: __C.RLMSchema) -&gt; Phind.LocationEntry"
                   moduleName = "Phind"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/annamitchell/Documents/Senior_Winter/CS194W/Team-7/Phind/Phind/Models/RealmTypes.swift"
-                  timestampString = "572212388.424377"
+                  timestampString = "572949896.121184"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -124,14 +124,14 @@
                   offsetFromSymbolStart = "4">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Phind.LocationEntry.init(value: Any, schema: __C.RLMSchema) -&gt; Phind.LocationEntry"
                   moduleName = "Phind"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/annamitchell/Documents/Senior_Winter/CS194W/Team-7/Phind/Phind/Models/RealmTypes.swift"
-                  timestampString = "572212388.427662"
+                  timestampString = "572949896.124789"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "30"
@@ -139,14 +139,14 @@
                   offsetFromSymbolStart = "53">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Phind.LocationEntry.__ivar_destroyer"
                   moduleName = "Phind"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/annamitchell/Documents/Senior_Winter/CS194W/Team-7/Phind/Phind/Models/RealmTypes.swift"
-                  timestampString = "572212388.434429"
+                  timestampString = "572949896.127901"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -154,14 +154,14 @@
                   offsetFromSymbolStart = "16">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Phind.LocationEntry.__deallocating_deinit"
                   moduleName = "Phind"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/annamitchell/Documents/Senior_Winter/CS194W/Team-7/Phind/Phind/Models/RealmTypes.swift"
-                  timestampString = "572212388.437801"
+                  timestampString = "572949896.131573"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -169,6 +169,16 @@
                   offsetFromSymbolStart = "16">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
