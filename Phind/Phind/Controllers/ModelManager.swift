@@ -27,6 +27,7 @@ public class ModelManager : NSObject {
   // Private fields
   private var sharedURLSession = AppDelegate().sharedUrlSession
   let placesClient = GMSPlacesClient()
+  let gmsApiKey = AppDelegate().gmsApiKey 
   
   /// <section>
   /// All the read methods.
@@ -204,6 +205,7 @@ public class ModelManager : NSObject {
             }
         }
         place.gms_id = placeDetailsApiResponse["place_id"] as! String
+        place.types = placeDetailsApiResponse["types"] as! [String]
         print("gms id: \(place.gms_id)")
         return place
     }
@@ -310,7 +312,7 @@ public class ModelManager : NSObject {
         
         let locationUuid = locationEntry.uuid
 
-        let geocodeUrl = URL(string: "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(locationEntry.latitude),\(locationEntry.longitude)&key=AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU")!
+        let geocodeUrl = URL(string: "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(locationEntry.latitude),\(locationEntry.longitude)&key=\(gmsApiKey)")!
 
         let geocodeTask = sharedURLSession.dataTask(with: geocodeUrl) {(data, response, error) in
             
@@ -338,7 +340,7 @@ public class ModelManager : NSObject {
             }
             
             let defaultId = ""
-            let placeDetailsUrl = URL(string: "https://maps.googleapis.com/maps/api/place/details/json?placeid=\(gmsId ?? defaultId)&fields=name,geometry,place_id,formatted_address&key=AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU")!
+            let placeDetailsUrl = URL(string: "https://maps.googleapis.com/maps/api/place/details/json?placeid=\(gmsId ?? defaultId)&fields=name,geometry,place_id,formatted_address,types&key=\(self.gmsApiKey)")!
             
             print(placeDetailsUrl)
         

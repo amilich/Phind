@@ -44,4 +44,5 @@ public class Place: Object {
   @objc dynamic var address : String = ""
   @objc dynamic var latitude : Double = -1.0
   @objc dynamic var longitude : Double = -1.0
+  var types = [String]()
 }
