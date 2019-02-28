@@ -73,7 +73,7 @@
                                 <color key="backgroundColor" red="0.32941176470588235" green="0.44705882352941173" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6sS-y6-5VB">
-                                <rect key="frame" x="0.0" y="144" width="414" height="288"/>
+                                <rect key="frame" x="0.0" y="144" width="414" height="669"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="tTT-jb-qS0">

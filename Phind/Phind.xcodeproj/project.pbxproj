@@ -22,7 +22,7 @@
 		0AA9103F220F6BF9001B1270 /* Pods in Resources */ = {isa = PBXBuildFile; fileRef = 0AA9103E220F6BF9001B1270 /* Pods */; };
 		490E559A221A07260009906E /* PlacePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490E5599221A07260009906E /* PlacePopupViewController.swift */; };
 		492F5C5721FD814E009B6411 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5C5621FD814E009B6411 /* AppDelegate.swift */; };
-		492F5C5921FD814E009B6411 /* TimelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5C5821FD814E009B6411 /* TimelineController.swift */; };
+		492F5C5921FD814E009B6411 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5C5821FD814E009B6411 /* TimelineViewController.swift */; };
 		492F5C5B21FD814E009B6411 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5C5A21FD814E009B6411 /* SecondViewController.swift */; };
 		492F5C5E21FD814E009B6411 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 492F5C5C21FD814E009B6411 /* Main.storyboard */; };
 		492F5C6021FD814F009B6411 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 492F5C5F21FD814F009B6411 /* Assets.xcassets */; };
@@ -34,6 +34,7 @@
 		4940E9BF2214BD830090DDB6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4940E9BE2214BD830090DDB6 /* TabBarController.swift */; };
 		494E7EE52210F76E00979950 /* TimelineUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494E7EE42210F76E00979950 /* TimelineUITableViewCell.swift */; };
 		49AD3CD32213E32F000494D9 /* MapViewFitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AD3CD22213E32F000494D9 /* MapViewFitExtension.swift */; };
+		49CCF3ED2227255C00C9840F /* EditPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CCF3EC2227255C00C9840F /* EditPlaceViewController.swift */; };
 		A8B58E4B9A76F185F279E9B3 /* Pods_Phind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B9BCD483594BE1F3920C60E /* Pods_Phind.framework */; };
 		D99A2BE5E03FCC60F6A0A835 /* Pods_PhindTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F367DD7A00A628AE7BAFE25 /* Pods_PhindTests.framework */; };
 		DDA0325C5B6569847B2BEFFA /* Pods_PhindUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E0A151A788F73CC420773FD /* Pods_PhindUITests.framework */; };
@@ -71,7 +72,7 @@
 		490E5599221A07260009906E /* PlacePopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacePopupViewController.swift; sourceTree = "<group>"; };
 		492F5C5321FD814D009B6411 /* Phind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Phind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		492F5C5621FD814E009B6411 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		492F5C5821FD814E009B6411 /* TimelineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineController.swift; sourceTree = "<group>"; };
+		492F5C5821FD814E009B6411 /* TimelineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
 		492F5C5A21FD814E009B6411 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		492F5C5D21FD814E009B6411 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		492F5C5F21FD814F009B6411 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -88,6 +89,7 @@
 		4940E9BE2214BD830090DDB6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		494E7EE42210F76E00979950 /* TimelineUITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineUITableViewCell.swift; sourceTree = "<group>"; };
 		49AD3CD22213E32F000494D9 /* MapViewFitExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MapViewFitExtension.swift; path = Phind/Views/MapViewFitExtension.swift; sourceTree = SOURCE_ROOT; };
+		49CCF3EC2227255C00C9840F /* EditPlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlaceViewController.swift; sourceTree = "<group>"; };
 		5E3C30D3DCE258D332C8BCEC /* Pods-PhindTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhindTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhindTests/Pods-PhindTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6B9BCD483594BE1F3920C60E /* Pods_Phind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Phind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E0A151A788F73CC420773FD /* Pods_PhindUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhindUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,13 +151,14 @@
 		0A04B960220F7DE500D94EB9 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				492F5C5821FD814E009B6411 /* TimelineController.swift */,
+				492F5C5821FD814E009B6411 /* TimelineViewController.swift */,
 				490E5599221A07260009906E /* PlacePopupViewController.swift */,
 				492F5C5A21FD814E009B6411 /* SecondViewController.swift */,
 				492F5C5621FD814E009B6411 /* AppDelegate.swift */,
 				492F5C8821FE8FAA009B6411 /* ThirdViewController.swift */,
 				0A04B961220FAD1100D94EB9 /* PhindLocationManager.swift */,
 				0A5A2253221047CE00879A38 /* ModelManager.swift */,
+				49CCF3EC2227255C00C9840F /* EditPlaceViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -530,6 +533,7 @@
 				4934F6BF220296D90025C749 /* RealmTypes.swift in Sources */,
 				49AD3CD32213E32F000494D9 /* MapViewFitExtension.swift in Sources */,
 				492F5C5B21FD814E009B6411 /* SecondViewController.swift in Sources */,
+				49CCF3ED2227255C00C9840F /* EditPlaceViewController.swift in Sources */,
 				494E7EE52210F76E00979950 /* TimelineUITableViewCell.swift in Sources */,
 				492F5C5721FD814E009B6411 /* AppDelegate.swift in Sources */,
 				F97F19BC22133490008CF75E /* StatisticsUICollectionViewCell.swift in Sources */,
@@ -538,7 +542,7 @@
 				0A5A2254221047CE00879A38 /* ModelManager.swift in Sources */,
 				4940E9BF2214BD830090DDB6 /* TabBarController.swift in Sources */,
 				492F5C8921FE8FAA009B6411 /* ThirdViewController.swift in Sources */,
-				492F5C5921FD814E009B6411 /* TimelineController.swift in Sources */,
+				492F5C5921FD814E009B6411 /* TimelineViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
