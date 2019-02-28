@@ -139,7 +139,7 @@ class PlacePopupViewController: UIViewController, UICollectionViewDataSource, UI
           // Rescale the images based on how many there are
           let widthMinusBorder = UIScreen.main.bounds.width - self.photoBorder
           var photoWidth = widthMinusBorder / 3
-          print(photoWidth)
+
           if numInGrid < 3 {
             photoWidth = widthMinusBorder
           } else if numInGrid < 6 {
@@ -161,7 +161,6 @@ class PlacePopupViewController: UIViewController, UICollectionViewDataSource, UI
                 print("Error: \(error.localizedDescription)")
                 print(error)
               } else {
-                print("Setting photo!")
                 if photo != nil {
                   self.placeImages.append(photo!)
                   self.photoCollection.reloadData()
