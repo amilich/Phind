@@ -12,13 +12,14 @@ import RealmSwift
 import GoogleMaps
 import GooglePlaces
 
-class EditPlaceViewController: UIViewController, UITableViewDelegate {
+class EditPlaceViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
   
   // Data storage elements
   public var place = Place()
     
   // UI components
   let backButton = UIButton()
+  var tableView = UITableView()
     
     
   init() {
@@ -43,7 +44,17 @@ class EditPlaceViewController: UIViewController, UITableViewDelegate {
   // Initialize the button and text elements inside the
   // place edit view.
   override func viewDidLoad() {
-    super.viewDidLoad()
+
+    
+    tableView = UITableView(frame: self.view.bounds, style: UITableView.Style.plain)
+    tableView.dataSource = self
+    tableView.delegate = self
+    tableView.backgroundColor = UIColor.white
+    
+    tableView.register(UITableViewCell.self, forCellReuseIdentifier: "myIdentifier")
+    tableView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+    
+    self.view.addSubview(tableView)
     
   }
   
@@ -54,7 +65,6 @@ class EditPlaceViewController: UIViewController, UITableViewDelegate {
     print("here")
     if let popupVC = self.parent as? PlacePopupViewController {
         print("Found parent")
-        print(popupVC.place.name)
         // TODO the parent of this will be the popup controller.
         // If the place is edited, the poopup controller will have
         // to refresh its content.
@@ -74,16 +84,22 @@ class EditPlaceViewController: UIViewController, UITableViewDelegate {
 //        self.loadPhotoForPlaceID(gms_id: place.gms_id)
     }
 
+    
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return 5
+        }
+    
+        internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "myIdentifier", for: indexPath)
+            cell.textLabel?.text = "This is row \(indexPath.row)"
+            return cell
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated
+    }
 }
 
 
-//extension EditPlaceViewController: UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return
-//    }
-//    
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        return
-//    }
-//
-//}
+
