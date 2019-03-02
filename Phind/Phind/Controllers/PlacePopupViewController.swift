@@ -107,6 +107,7 @@ class PlacePopupViewController: UIViewController, UICollectionViewDataSource, UI
   
   // Show the edit view controller
   @objc func editPressed(_ sender: UIButton!) {
+    self.editViewController.setPlace(place: place)
     self.editViewController.view.isHidden = false
     print("Edit visible")
   }
