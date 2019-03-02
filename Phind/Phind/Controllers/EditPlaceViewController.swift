@@ -19,7 +19,6 @@ class EditPlaceViewController: UIViewController, UITableViewDelegate {
     
   // UI components
   let backButton = UIButton()
-  let test = UIButton()
     
     
   init() {
@@ -33,7 +32,6 @@ class EditPlaceViewController: UIViewController, UITableViewDelegate {
     backButton.addTarget(self, action: #selector(self.backPressed(_:)), for: .touchUpInside)
     
     self.view.addSubview(backButton)
-    self.view.addSubview(test)
     self.view.backgroundColor = .white
     self.view.isHidden = true
   }
@@ -64,11 +62,28 @@ class EditPlaceViewController: UIViewController, UITableViewDelegate {
     }
   }
     
-    // Called to set the place to be displayed on the edit view.
+    // Called to set the place to be displayed on the popup view.
     public func setPlace(place: Place) {
         self.place = place;
+//        self.label.text = self.place.name
+//        self.addressLabel.text = self.place.address
+//        // Get rid of the previous image
+//        self.placeImages.removeAll()
+//        self.photoCollection.reloadData()
+//        // Now load a new image
+//        self.loadPhotoForPlaceID(gms_id: place.gms_id)
     }
 
 }
 
 
+//extension EditPlaceViewController: UITableViewDataSource {
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return
+//    }
+//    
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        return
+//    }
+//
+//}
