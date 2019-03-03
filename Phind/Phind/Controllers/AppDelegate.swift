@@ -37,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.locationManager.requestAlwaysAuthorization()
     if CLLocationManager.significantLocationChangeMonitoringAvailable() {
       locationManager.delegate = self
+      locationManager.startUpdatingLocation()
       locationManager.startMonitoringSignificantLocationChanges()
     } else {
       Logger.shared.error("Significant location change monitoring not available.")
@@ -45,8 +46,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Setup Google Maps keys.
     GMSServices.provideAPIKey("AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU")
     GMSPlacesClient.provideAPIKey("AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU")
-    
-    Util.IsDateToday(date: Date())
   
     return true
   }

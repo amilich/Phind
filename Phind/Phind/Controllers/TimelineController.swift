@@ -88,6 +88,8 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     //              instead of Feb 09, 2019.
     updateDate(Date())
     
+    reloadMapView()
+    
   }
   
   @IBAction func refreshButton(_ sender: Any) {
