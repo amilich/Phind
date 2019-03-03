@@ -91,35 +91,36 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
       
       Logger.shared.verbose("Activities: \(activities)")
       
-      for activity in activities! {
-        // Only examine activity entries that are "medium" or "high" confidence.
-        if (activity.confidence == CMMotionActivityConfidence.low) { continue }
+      if activities != nil {
+        for activity in activities! {
+          // Only examine activity entries that are "medium" or "high" confidence.
+          if (activity.confidence == CMMotionActivityConfidence.low) { continue }
+          
+          if activity.walking {
+            movementTypeCounts[MovementType.WALKING]! += 1
+          } else if activity.cycling {
+            movementTypeCounts[MovementType.CYCLING]! += 1
+          } else if activity.automotive {
+            movementTypeCounts[MovementType.AUTOMOTIVE]! += 1
+          } else {
+            movementTypeCounts[MovementType.STATIONARY]! += 1
+          }
+        }
         
-        if activity.walking {
-          movementTypeCounts[MovementType.WALKING]! += 1
-        } else if activity.cycling {
-          movementTypeCounts[MovementType.CYCLING]! += 1
-        } else if activity.automotive {
-          movementTypeCounts[MovementType.AUTOMOTIVE]! += 1
-        } else {
-          movementTypeCounts[MovementType.STATIONARY]! += 1
+        // Check to find the most common type of movement amongst the activity entries
+        // returned by the CoreMotion API.
+        var cur_max = -1
+        var tmpMovementType = self.currMovementType
+        for movementType in MovementType.allTypes {
+          if movementTypeCounts[movementType]! > cur_max {
+            cur_max = movementTypeCounts[movementType]!
+            tmpMovementType = movementType
+          }
         }
-      }
       
-      // Check to find the most common type of movement amongst the activity entries
-      // returned by the CoreMotion API.
-      var cur_max = -1
-      var tmpMovementType = self.currMovementType
-      for movementType in MovementType.allTypes {
-        if movementTypeCounts[movementType]! > cur_max {
-          cur_max = movementTypeCounts[movementType]!
-          tmpMovementType = movementType
-          Logger.shared.debug("Movement updated (in loop!) to: \(tmpMovementType)")
-        }
+        Logger.shared.verbose("Movement type: \(self.currMovementType) to \(tmpMovementType)")
+        self.currMovementType = tmpMovementType
       }
-    
-      Logger.shared.verbose("Movement type: \(self.currMovementType) to \(tmpMovementType)")
-      self.currMovementType = tmpMovementType
       
       semaphore.signal()
     }

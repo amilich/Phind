@@ -12,6 +12,7 @@ import GooglePlaces
 import MapKit
 import RealmSwift
 import JustLog
+import CardParts
 
 class TimelineEntry: NSObject {
   var startTime: Date
@@ -44,7 +45,7 @@ class MapPin: NSObject, MKAnnotation {
   }
 }
 
-class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelegate {
+class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelegate  {
   
   // Constants.
   let MAP_SPAN_LAT = 1000.0
@@ -62,6 +63,7 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var refreshButton: UIButton!
+  @IBOutlet weak var tableWrap: UIView!
   
   // TODO: Should this be moved into a function?
   let realm = try! Realm()
@@ -110,6 +112,7 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   }
   
   override func viewDidLoad() {
+    
     super.viewDidLoad()
         
     // Register the table cell as custom type
@@ -125,6 +128,7 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     self.view.addSubview(placePopupViewController.view)
     placePopupViewController.didMove(toParent: self)
     placePopupViewController.view.frame = self.tableView.frame
+    
   }
   
   // Add locations from today to map and timeline
@@ -172,6 +176,12 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   // Register cell element and data source with table view
   func setupTableView() {
     
+    // Style the table view.
+    tableWrap.layer.shadowOpacity = 0.16
+    tableWrap.layer.shadowColor = UIColor.black.cgColor
+    tableWrap.layer.shadowOffset = CGSize(width: 0, height: 1.0)
+    tableWrap.layer.shadowRadius = 4.0
+    
     self.tableView.register(TimelineUITableViewCell.self, forCellReuseIdentifier: "TimelineCell")
     self.tableView.separatorStyle = .none
     self.tableView.dataSource = self
@@ -179,15 +189,12 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     
   }
   
-  var pinI = 0
-  
   func drawPin(_ lastCoord: inout CLLocationCoordinate2D?, _ locationEntry: LocationEntry) {
     
     // Add a pin for each stationary location on the map.
     formatter.dateFormat = "h:mm a"
     // TODO: Remove the PinI.
-    var subtitle = "\(pinI): " + formatter.string(from: locationEntry.start as Date)
-    pinI += 1
+    var subtitle = formatter.string(from: locationEntry.start as Date)
     if locationEntry.end != nil {
       subtitle += " to " + formatter.string(from: locationEntry.end! as Date)
     } else {

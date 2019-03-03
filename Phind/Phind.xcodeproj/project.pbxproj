@@ -20,6 +20,7 @@
 		0A5A2254221047CE00879A38 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A2253221047CE00879A38 /* ModelManager.swift */; };
 		0AA7BF112210374D0038A274 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA7BF102210374D0038A274 /* Util.swift */; };
 		0AA9103F220F6BF9001B1270 /* Pods in Resources */ = {isa = PBXBuildFile; fileRef = 0AA9103E220F6BF9001B1270 /* Pods */; };
+		0AF069A3222752A000FDA395 /* TimelineCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF069A2222752A000FDA395 /* TimelineCardController.swift */; };
 		490E559A221A07260009906E /* PlacePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490E5599221A07260009906E /* PlacePopupViewController.swift */; };
 		492F5C5721FD814E009B6411 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5C5621FD814E009B6411 /* AppDelegate.swift */; };
 		492F5C5921FD814E009B6411 /* TimelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5C5821FD814E009B6411 /* TimelineController.swift */; };
@@ -29,7 +30,7 @@
 		492F5C6321FD814F009B6411 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 492F5C6121FD814F009B6411 /* LaunchScreen.storyboard */; };
 		492F5C6E21FD814F009B6411 /* PhindTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5C6D21FD814F009B6411 /* PhindTests.swift */; };
 		492F5C7921FD814F009B6411 /* PhindUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5C7821FD814F009B6411 /* PhindUITests.swift */; };
-		492F5C8921FE8FAA009B6411 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5C8821FE8FAA009B6411 /* ThirdViewController.swift */; };
+		492F5C8921FE8FAA009B6411 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5C8821FE8FAA009B6411 /* SearchController.swift */; };
 		4934F6BF220296D90025C749 /* RealmTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4934F6BE220296D90025C749 /* RealmTypes.swift */; };
 		4940E9BF2214BD830090DDB6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4940E9BE2214BD830090DDB6 /* TabBarController.swift */; };
 		494E7EE52210F76E00979950 /* TimelineUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494E7EE42210F76E00979950 /* TimelineUITableViewCell.swift */; };
@@ -65,6 +66,7 @@
 		0A5A2253221047CE00879A38 /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		0AA7BF102210374D0038A274 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		0AA9103E220F6BF9001B1270 /* Pods */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pods; sourceTree = "<group>"; };
+		0AF069A2222752A000FDA395 /* TimelineCardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineCardController.swift; sourceTree = "<group>"; };
 		0F367DD7A00A628AE7BAFE25 /* Pods_PhindTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhindTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		23004EA1A217FA918547CD4A /* Pods-PhindTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhindTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhindTests/Pods-PhindTests.release.xcconfig"; sourceTree = "<group>"; };
 		25F60A492D95300955497A01 /* Pods-PhindUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhindUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhindUITests/Pods-PhindUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -83,7 +85,7 @@
 		492F5C7421FD814F009B6411 /* PhindUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhindUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		492F5C7821FD814F009B6411 /* PhindUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhindUITests.swift; sourceTree = "<group>"; };
 		492F5C7A21FD814F009B6411 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		492F5C8821FE8FAA009B6411 /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
+		492F5C8821FE8FAA009B6411 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		4934F6BE220296D90025C749 /* RealmTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTypes.swift; sourceTree = "<group>"; };
 		4940E9BE2214BD830090DDB6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		494E7EE42210F76E00979950 /* TimelineUITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineUITableViewCell.swift; sourceTree = "<group>"; };
@@ -128,8 +130,7 @@
 		0A04B95E220F7DB600D94EB9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0A2D40042225F55B00ED06E5 /* Collections */,
-				0A2D40032225F54E00ED06E5 /* Card */,
+				0AF069A62227549E00FDA395 /* Cards */,
 				49AD3CD22213E32F000494D9 /* MapViewFitExtension.swift */,
 				492F5C5C21FD814E009B6411 /* Main.storyboard */,
 				492F5C6121FD814F009B6411 /* LaunchScreen.storyboard */,
@@ -155,7 +156,7 @@
 				490E5599221A07260009906E /* PlacePopupViewController.swift */,
 				492F5C5A21FD814E009B6411 /* SecondViewController.swift */,
 				492F5C5621FD814E009B6411 /* AppDelegate.swift */,
-				492F5C8821FE8FAA009B6411 /* ThirdViewController.swift */,
+				492F5C8821FE8FAA009B6411 /* SearchController.swift */,
 				0A04B961220FAD1100D94EB9 /* PhindLocationManager.swift */,
 				0A5A2253221047CE00879A38 /* ModelManager.swift */,
 			);
@@ -172,18 +173,12 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		0A2D40032225F54E00ED06E5 /* Card */ = {
+		0AF069A62227549E00FDA395 /* Cards */ = {
 			isa = PBXGroup;
 			children = (
+				0AF069A2222752A000FDA395 /* TimelineCardController.swift */,
 			);
-			path = Card;
-			sourceTree = "<group>";
-		};
-		0A2D40042225F55B00ED06E5 /* Collections */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Collections;
+			path = Cards;
 			sourceTree = "<group>";
 		};
 		0AF2615222123032009BD580 /* MediaResources */ = {
@@ -452,25 +447,49 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Phind/Pods-Phind-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CardParts/CardParts.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
+				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/JustLog/JustLog.framework",
+				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
+				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
+				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
+				"${BUILT_PRODUCTS_DIR}/MotionAnimator/MotionAnimator.framework",
+				"${BUILT_PRODUCTS_DIR}/MotionInterchange/MotionInterchange.framework",
+				"${BUILT_PRODUCTS_DIR}/MotionTransitioning/MotionTransitioning.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
+				"${BUILT_PRODUCTS_DIR}/RxGesture/RxGesture.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
 				"${BUILT_PRODUCTS_DIR}/TransitionableTab/TransitionableTab.framework",
-				"${BUILT_PRODUCTS_DIR}/garland-view/garland_view.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CardParts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JustLog.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MotionAnimator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MotionInterchange.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MotionTransitioning.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxGesture.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TransitionableTab.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/garland_view.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -561,7 +580,8 @@
 				490E559A221A07260009906E /* PlacePopupViewController.swift in Sources */,
 				0A5A2254221047CE00879A38 /* ModelManager.swift in Sources */,
 				4940E9BF2214BD830090DDB6 /* TabBarController.swift in Sources */,
-				492F5C8921FE8FAA009B6411 /* ThirdViewController.swift in Sources */,
+				492F5C8921FE8FAA009B6411 /* SearchController.swift in Sources */,
+				0AF069A3222752A000FDA395 /* TimelineCardController.swift in Sources */,
 				492F5C5921FD814E009B6411 /* TimelineController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
