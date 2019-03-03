@@ -17,10 +17,10 @@
 		0A080137221230EE00460A1A /* Font Awesome 5 Free-Solid-900.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A080130221230EE00460A1A /* Font Awesome 5 Free-Solid-900.otf */; };
 		0A080138221230EE00460A1A /* Font Awesome 5 Free-Solid-900.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A080130221230EE00460A1A /* Font Awesome 5 Free-Solid-900.otf */; };
 		0A080139221230EE00460A1A /* Font Awesome 5 Free-Solid-900.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A080130221230EE00460A1A /* Font Awesome 5 Free-Solid-900.otf */; };
+		0A45DFF7222B794800026985 /* timeline_joint.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A45DFF6222B794800026985 /* timeline_joint.png */; };
 		0A5A2254221047CE00879A38 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A2253221047CE00879A38 /* ModelManager.swift */; };
 		0AA7BF112210374D0038A274 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA7BF102210374D0038A274 /* Util.swift */; };
 		0AA9103F220F6BF9001B1270 /* Pods in Resources */ = {isa = PBXBuildFile; fileRef = 0AA9103E220F6BF9001B1270 /* Pods */; };
-		0AF069A3222752A000FDA395 /* TimelineCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF069A2222752A000FDA395 /* TimelineCardController.swift */; };
 		490E559A221A07260009906E /* PlacePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490E5599221A07260009906E /* PlacePopupViewController.swift */; };
 		492F5C5721FD814E009B6411 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5C5621FD814E009B6411 /* AppDelegate.swift */; };
 		492F5C5921FD814E009B6411 /* TimelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5C5821FD814E009B6411 /* TimelineController.swift */; };
@@ -63,10 +63,10 @@
 		0A08012E221230EE00460A1A /* Font Awesome 5 Brands-Regular-400.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome 5 Brands-Regular-400.otf"; sourceTree = "<group>"; };
 		0A08012F221230EE00460A1A /* Font Awesome 5 Free-Regular-400.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome 5 Free-Regular-400.otf"; sourceTree = "<group>"; };
 		0A080130221230EE00460A1A /* Font Awesome 5 Free-Solid-900.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome 5 Free-Solid-900.otf"; sourceTree = "<group>"; };
+		0A45DFF6222B794800026985 /* timeline_joint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timeline_joint.png; sourceTree = "<group>"; };
 		0A5A2253221047CE00879A38 /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		0AA7BF102210374D0038A274 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		0AA9103E220F6BF9001B1270 /* Pods */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pods; sourceTree = "<group>"; };
-		0AF069A2222752A000FDA395 /* TimelineCardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineCardController.swift; sourceTree = "<group>"; };
 		0F367DD7A00A628AE7BAFE25 /* Pods_PhindTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhindTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		23004EA1A217FA918547CD4A /* Pods-PhindTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhindTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhindTests/Pods-PhindTests.release.xcconfig"; sourceTree = "<group>"; };
 		25F60A492D95300955497A01 /* Pods-PhindUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhindUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhindUITests/Pods-PhindUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -130,7 +130,6 @@
 		0A04B95E220F7DB600D94EB9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0AF069A62227549E00FDA395 /* Cards */,
 				49AD3CD22213E32F000494D9 /* MapViewFitExtension.swift */,
 				492F5C5C21FD814E009B6411 /* Main.storyboard */,
 				492F5C6121FD814F009B6411 /* LaunchScreen.storyboard */,
@@ -173,17 +172,10 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		0AF069A62227549E00FDA395 /* Cards */ = {
-			isa = PBXGroup;
-			children = (
-				0AF069A2222752A000FDA395 /* TimelineCardController.swift */,
-			);
-			path = Cards;
-			sourceTree = "<group>";
-		};
 		0AF2615222123032009BD580 /* MediaResources */ = {
 			isa = PBXGroup;
 			children = (
+				0A45DFF6222B794800026985 /* timeline_joint.png */,
 				0A08013A221230F200460A1A /* Fonts */,
 			);
 			path = MediaResources;
@@ -382,6 +374,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A080131221230EE00460A1A /* Font Awesome 5 Brands-Regular-400.otf in Resources */,
+				0A45DFF7222B794800026985 /* timeline_joint.png in Resources */,
 				0A080134221230EE00460A1A /* Font Awesome 5 Free-Regular-400.otf in Resources */,
 				492F5C6321FD814F009B6411 /* LaunchScreen.storyboard in Resources */,
 				492F5C6021FD814F009B6411 /* Assets.xcassets in Resources */,
@@ -555,7 +548,6 @@
 				0A5A2254221047CE00879A38 /* ModelManager.swift in Sources */,
 				4940E9BF2214BD830090DDB6 /* TabBarController.swift in Sources */,
 				492F5C8921FE8FAA009B6411 /* SearchController.swift in Sources */,
-				0AF069A3222752A000FDA395 /* TimelineCardController.swift in Sources */,
 				492F5C5921FD814E009B6411 /* TimelineController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

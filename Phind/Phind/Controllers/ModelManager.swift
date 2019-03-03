@@ -31,49 +31,53 @@ public class ModelManager : NSObject {
   /// </section>
   
   // Return most recent location entry.
-  public func getMostRecentLocationEntry(from: Date = Date()) -> LocationEntry? {
+  public func getMostRecentLocationEntry() -> LocationEntry? {
     
-    let locationEntries = getLocationEntries(from: from)
-    return locationEntries.count > 0 ? locationEntries[0]  : nil
+    let locationEntry = realm.objects(LocationEntry.self)
+      .sorted(byKeyPath: "start", ascending: false)
+      .first
+    
+    Logger.shared.verbose("Last location entry: \(String(describing: locationEntry))")
+    return locationEntry
     
   }
   
   public func getCoordForPlace(uuid: String) -> CLLocationCoordinate2D? {
+    
     let placesWithUuid = realm.objects(LocationEntry.self)
       .filter("place_id = %@", uuid)
     if (placesWithUuid.count > 0) {
       return CLLocationCoordinate2D(latitude: placesWithUuid[0].latitude, longitude: placesWithUuid[0].longitude)
     }
     return nil
+    
   }
   
   public func getPlaceWithUUID(uuid: String) -> Place? {
+    
     let gmsPlaces = realm.objects(Place.self)
       .filter("uuid = %@", uuid)
     if (gmsPlaces.count > 0) {
       return gmsPlaces[0]
     }
     return nil
+    
   }
   
   // Get the GMS place name for a locationEntry by performing lookup on
   // place UUID.
   func getPlace(locationEntry: LocationEntry) -> Place? {
+    
     let placeUUID = locationEntry.place_id
     return getPlaceWithUUID(uuid: placeUUID)
+    
   }
   
   // Return all location entries from a certain period, limited to max, and ascending default to false.
-  public func getLocationEntries(from: Date = Date(), number_of_days: Int = -1, ascending: Bool = false) -> [LocationEntry] {
-    
-    let dayStart = Calendar.current.startOfDay(for: from)
-    var dayEnd = Date()
-    if number_of_days > 0 {
-      dayEnd = Calendar.current.date(byAdding: .day, value: number_of_days, to: dayStart)!
-    }
-    
+  public func getLocationEntries(start: Date = Date(), end: Date = Date(), ascending: Bool = false) -> [LocationEntry] {
+
     let locationEntries = realm.objects(LocationEntry.self)
-      .filter("start >= %@ AND start < %@", dayStart, dayEnd)
+      .filter("start >= %@ AND start < %@", start, end)
       .sorted(byKeyPath: "start", ascending: ascending)
     
     var locationEntriesArr = Array(locationEntries)
@@ -83,25 +87,24 @@ public class ModelManager : NSObject {
     
     return locationEntriesArr
     
-    
   }
   
   // Return all stationary location entries from a certain day, limited to max, and ascending default to false.
   public func getUniqueLocationEntires(from: Date = Date(), ascending: Bool = false) -> [LocationEntry] {
     
-    let dayStart = Calendar.current.startOfDay(for: from)
-    let dayEnd = Calendar.current.date(byAdding: .day, value: 1, to: dayStart)
-    let locationEntries = realm.objects(LocationEntry.self).filter("start >= %@ AND start < %@", dayStart, dayEnd).distinct(by: ["place_id"])
+    let dayStart = Util.GetLocalizedDayStart(date: from)
+    let dayEnd = Util.GetLocalizedDayEnd(date: from)
+    let locationEntries = realm.objects(LocationEntry.self).filter("start >= %@ AND start <= %@", dayStart, dayEnd).distinct(by: ["place_id"])
     return Array(locationEntries)
     
   }
   
   public func mostCommonLocation(from: Date = Date(), ascending: Bool = false) -> LocationEntry? {
     
-    let dayStart = Calendar.current.startOfDay(for: from)
-    let dayEnd = Calendar.current.date(byAdding: .day, value: 1, to: dayStart)
+    let dayStart = Util.GetLocalizedDayStart(date: from)
+    let dayEnd = Util.GetLocalizedDayEnd(date: from)
     let locationEntries = realm.objects(LocationEntry.self)
-      .filter("start >= %@ AND start < %@", dayStart, dayEnd)
+      .filter("start >= %@ AND start <= %@", dayStart, dayEnd)
       .sorted(byKeyPath: "place_id", ascending: ascending)
     if locationEntries.count <= 0{
       return nil
@@ -123,28 +126,6 @@ public class ModelManager : NSObject {
       }
     }
         return bestLocationEntry
-  }
-  
-  
-  // Return most recent location entry.
-  public func getMostRecentRawCoord() -> RawCoordinates? {
-    
-    let rawCoordinates = getRawCoords()
-    return rawCoordinates.count > 0 ? rawCoordinates[0]  : nil
-    
-  }
-  
-  // Return all location entries from a certain day, limited to max, and ascending default to false.
-  public func getRawCoords(from: Date = Date(), ascending: Bool = false) -> [RawCoordinates] {
-    
-    let dayStart = Calendar.current.startOfDay(for: from)
-    let dayEnd = Calendar.current.date(byAdding: .day, value: 1, to: dayStart)
-    let rawCoordinates = realm.objects(RawCoordinates.self)
-      .filter("timestamp >= %@ AND timestamp < %@", dayStart, dayEnd)
-      .sorted(byKeyPath: "timestamp", ascending: ascending)
-    
-    return Array(rawCoordinates)
-    
   }
   
   /// <section>
@@ -182,10 +163,11 @@ public class ModelManager : NSObject {
   }
   
   public func addLocationEntry(_ rawCoordinates: RawCoordinates,
-                               _ currMovementType: MovementType) -> LocationEntry{
+                               _ currMovementType: MovementType,
+                               _ start: Date = Date()) -> LocationEntry{
     let locationEntry = LocationEntry()
     
-    locationEntry.start = NSDate()
+    locationEntry.start = start as NSDate
     locationEntry.longitude = rawCoordinates.longitude
     locationEntry.latitude = rawCoordinates.latitude
     locationEntry.movement_type = currMovementType.rawValue

@@ -12,7 +12,7 @@ import GooglePlaces
 import MapKit
 import RealmSwift
 import JustLog
-import CardParts
+
 
 class TimelineEntry: NSObject {
   var startTime: Date
@@ -64,6 +64,7 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var refreshButton: UIButton!
   @IBOutlet weak var tableWrap: UIView!
+  @IBOutlet weak var headerView: UIView!
   
   // TODO: Should this be moved into a function?
   let realm = try! Realm()
@@ -77,6 +78,7 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   // viewWillAppear and viewDidLoad all follow the cycle delineated
   // here: https://apple.co/2DqFnH6
   override func viewWillAppear(_ animated: Bool) {
+    
     mapView.delegate = self
     
     // Setup all the UI elements to the proper dynamic values.
@@ -114,6 +116,12 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   override func viewDidLoad() {
     
     super.viewDidLoad()
+    
+    // Setup header view.
+    headerView.layer.shadowOpacity = 0.16
+    headerView.layer.shadowColor = UIColor.black.cgColor
+    headerView.layer.shadowOffset = CGSize(width: 0, height: 1.0)
+    headerView.layer.shadowRadius = 4.0
         
     // Register the table cell as custom type
     setupTableView();
@@ -139,7 +147,10 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     mapView.removeOverlays(mapView.overlays)
     
     // Get all LocationEntries from today.
-    let locationEntries = ModelManager.shared.getLocationEntries(from: currentDate, number_of_days: 1)
+    let dayStart = Util.GetLocalizedDayStart(date: currentDate)
+    let dayEnd = Util.GetLocalizedDayEnd(date: currentDate)
+    
+    let locationEntries = ModelManager.shared.getLocationEntries(start: dayStart, end: dayEnd)
     
     Logger.shared.debug("LocationEntries (all): \(locationEntries)")
     
@@ -177,10 +188,13 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   func setupTableView() {
     
     // Style the table view.
+    // TODO: Move this into a struct or something.
     tableWrap.layer.shadowOpacity = 0.16
     tableWrap.layer.shadowColor = UIColor.black.cgColor
     tableWrap.layer.shadowOffset = CGSize(width: 0, height: 1.0)
     tableWrap.layer.shadowRadius = 4.0
+    
+    self.tableView.contentInset = UIEdgeInsets(top: 24, left: 0,bottom: 0, right: 0)
     
     self.tableView.register(TimelineUITableViewCell.self, forCellReuseIdentifier: "TimelineCell")
     self.tableView.separatorStyle = .none
@@ -262,7 +276,7 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
         startTime: locationEntry.start as Date,
         endTime: locationEntry.end as Date?
       )
-      self.tableItems.append(timelineEntry)
+      self.tableItems.insert(timelineEntry, at: 0)
     }
 
     // TODO: What do we do if place ID is nil?
@@ -341,6 +355,12 @@ extension TimelineController: UITableViewDataSource {
     // TODO(Andrew) set the UIImage if index is zero or last
     return tableCell
     
+  }
+  
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+  {
+    // TODO: Make this a constant.
+    return 64.0
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

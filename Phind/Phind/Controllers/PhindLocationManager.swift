@@ -33,7 +33,8 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
   public static let NOTABLE_DISTANCE_THRESHOLD = 50.0
   
   // Private constants.
-  private let ACTIVITY_TRACKING_WINDOW = 60
+  // The window for how far back we go to check CoreMotion activities.
+  private let ACTIVITY_TRACKING_WINDOW = 180
   
   // Public fields.
   public private(set) var currMovementType = MovementType.STATIONARY
@@ -136,21 +137,31 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
     let rawCoord = ModelManager.shared.addRawCoord(location)
     
     // Check latest location entry in realm objects.
-    var lastLocationEntry = ModelManager.shared.getMostRecentLocationEntry(from: Date.init(timeIntervalSince1970: 0))
+    var lastLocationEntry = ModelManager.shared.getMostRecentLocationEntry()
     var currLocationEntry : LocationEntry? = lastLocationEntry
     
     // Check to see lastLocationEntry is from today. If not, then close it and
-    // treat it as though there are no valid LocationEntries from the current date.
-    let calendar = Calendar.current
-    if lastLocationEntry != nil && !calendar.isDateInToday(lastLocationEntry!.start as Date) {
+    // create a new one for the current date.
+    if lastLocationEntry != nil && !Util.IsDateToday(date: lastLocationEntry!.start as Date) {
       ModelManager.shared.closeLocationEntry(lastLocationEntry!)
-      lastLocationEntry = nil
+      // TODO: Is raw_coords proper sorted?
+      let lastLocationEntryRawCoord = lastLocationEntry?.raw_coordinates.last
+      lastLocationEntry = ModelManager.shared.addLocationEntry(
+        lastLocationEntryRawCoord!,
+        MovementType(rawValue: (lastLocationEntry?.movement_type)!)!,
+        Util.GetLocalizedDayStart(date: Date())
+      )
+      currLocationEntry = lastLocationEntry
     }
     
     // Get current movement type from CoreMotion.
     let motionActivityFrom = lastLocationEntry != nil ?
       lastLocationEntry!.start as Date :
-      Calendar.current.date(byAdding: .second, value: ACTIVITY_TRACKING_WINDOW, to: Date())
+      Calendar.current.date(
+        byAdding: .second,
+        value: -ACTIVITY_TRACKING_WINDOW,
+        to: Date()
+      )
     updateMovementType(from: motionActivityFrom!, to: Date())
     
     // Update and create new LocationEntries depending on whether or not

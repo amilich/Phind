@@ -11,9 +11,7 @@ import UIKit
 class TimelineUITableViewCell: UITableViewCell {
   
   @IBOutlet var cellImage: UIImageView!
-  
   @IBOutlet var cellLabel: UILabel!
-  
   @IBOutlet var timeLabel: UILabel!
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -21,21 +19,21 @@ class TimelineUITableViewCell: UITableViewCell {
     
     // Create the UILabel for place name
     cellLabel = UILabel()
-    cellLabel.frame = CGRect(x: 94, y: 0, width: 300, height: 29)
-    cellLabel.font = UIFont(name: "Roboto", size: 17)
+    cellLabel.frame = CGRect(x: 80, y: 8, width: 300, height: 24)
+    cellLabel.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.medium)
     
     // Create UILabel for time
     timeLabel = UILabel()
-    timeLabel.frame = CGRect(x: 94, y: 20, width: 300, height: 29)
-    timeLabel.font = UIFont(name: "Roboto-Light", size: 8)
+    timeLabel.frame = CGRect(x: 80, y: 32, width: 300, height: 16)
+    timeLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.light)
 
     // Create UIImage
     // TODO(Andrew) set UIImage differently for first and last timeline
     // items.
-    let imagePath = "timeline_icon_temp.png"
+    let imagePath = "timeline_joint.png"
     let image = UIImage(named: imagePath)
     cellImage = UIImageView(image: image!)
-    cellImage.frame = CGRect(x: 25, y: 0, width: 50, height: 48)
+    cellImage.frame = CGRect(x: 32, y: 0, width: 24, height: 64)
     cellImage.contentMode = UIView.ContentMode.scaleAspectFill;
 
     self.contentView.addSubview(cellLabel)
