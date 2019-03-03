@@ -12,7 +12,7 @@ import RealmSwift
 import GoogleMaps
 import GooglePlaces
 
-class EditPlaceViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class EditPlaceViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating {
   
   // Data storage elements
   public var place = Place()
@@ -20,7 +20,7 @@ class EditPlaceViewController: UIViewController, UITableViewDelegate, UITableVie
   // UI components
   let backButton = UIButton()
   var tableView = UITableView()
-    
+  let searchController = UISearchController(searchResultsController: nil)
     
   init() {
     super.init(nibName: nil, bundle: nil)
@@ -32,7 +32,26 @@ class EditPlaceViewController: UIViewController, UITableViewDelegate, UITableVie
     backButton.setTitle("Back", for: .normal)
     backButton.addTarget(self, action: #selector(self.backPressed(_:)), for: .touchUpInside)
     
+    searchController.searchResultsUpdater = self
+    searchController.obscuresBackgroundDuringPresentation = false
+    searchController.searchBar.placeholder = "Search for place"
+    self.navigationItem.searchController = searchController
+    self.navigationItem.hidesSearchBarWhenScrolling = false
+    
+    tableView = UITableView(frame: self.view.bounds, style: UITableView.Style.plain)
+    tableView.dataSource = self
+    tableView.delegate = self
+    tableView.backgroundColor = UIColor.white
+    tableView.tableHeaderView = searchController.searchBar
+    
+    let backButtonMaxY = backButton.frame.maxY
+    tableView.register(UITableViewCell.self, forCellReuseIdentifier: "myIdentifier")
+    tableView.frame = CGRect(x: 0, y: backButtonMaxY, width: self.view.frame.width, height: self.view.frame.height - backButtonMaxY)
+    
+    self.view.addSubview(tableView)
     self.view.addSubview(backButton)
+    self.view.addSubview(searchController.view)
+    
     self.view.backgroundColor = .white
     self.view.isHidden = true
   }
@@ -41,25 +60,11 @@ class EditPlaceViewController: UIViewController, UITableViewDelegate, UITableVie
     fatalError("init(coder:) has not been implemented")
   }
   
-  // Initialize the button and text elements inside the
-  // place edit view.
+  // Prepare place edit view for loading
   override func viewDidLoad() {
-
-    
-    tableView = UITableView(frame: self.view.bounds, style: UITableView.Style.plain)
-    tableView.dataSource = self
-    tableView.delegate = self
-    tableView.backgroundColor = UIColor.white
-    
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: "myIdentifier")
-    tableView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-    
-    self.view.addSubview(tableView)
-    
   }
   
-    // TODO: add table view in here with nearby places
-    
+  // TODO: add table view in here with nearby places
   @objc func backPressed(_ sender: UIButton!) {
     self.view.isHidden = !self.view.isHidden
     print("here")
@@ -71,35 +76,29 @@ class EditPlaceViewController: UIViewController, UITableViewDelegate, UITableVie
         // popupVC.setPlace(place: newPlace)
     }
   }
-    
-    // Called to set the place to be displayed on the popup view.
-    public func setPlace(place: Place) {
-        self.place = place;
-//        self.label.text = self.place.name
-//        self.addressLabel.text = self.place.address
-//        // Get rid of the previous image
-//        self.placeImages.removeAll()
-//        self.photoCollection.reloadData()
-//        // Now load a new image
-//        self.loadPhotoForPlaceID(gms_id: place.gms_id)
-    }
 
-    
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return 5
-        }
-    
-        internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "myIdentifier", for: indexPath)
-            cell.textLabel?.text = "This is row \(indexPath.row)"
-            return cell
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated
-    }
+  // Set the place that should be edited
+  public func setPlace(place: Place) {
+    // TODO, delete from Realm if place is changed
+    // backPressed will trigger update in parent
+  }
+
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return 5
+  }
+
+  internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "myIdentifier", for: indexPath)
+    cell.textLabel?.text = "This is row \(indexPath.row)"
+    return cell
+  }
+
+  override func didReceiveMemoryWarning() {
+      super.didReceiveMemoryWarning()
+      // Dispose of any resources that can be recreated
+  }
+  
+  func updateSearchResults(for searchController: UISearchController) {
+    // TODO update results
+  }
 }
-
-
-

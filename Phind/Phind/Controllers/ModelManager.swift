@@ -243,7 +243,7 @@ public class ModelManager : NSObject {
         
         print(nearbySearchUrl)
 
-        let nearbySearchTask = sharedURLSession.dataTask(with: nearbySearchUrl) {(data, response, error) in
+        let nearbySearchTask = sharedURLSession.dataTask(with: nearbySearchUrl) { (data, response, error) in
             
             let nearbySearchResponse = self.getNearbySearchResponse(data: data, response: response, error: error)
             if nearbySearchResponse == nil {
