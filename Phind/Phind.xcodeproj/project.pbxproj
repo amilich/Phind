@@ -18,7 +18,10 @@
 		0A080138221230EE00460A1A /* Font Awesome 5 Free-Solid-900.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A080130221230EE00460A1A /* Font Awesome 5 Free-Solid-900.otf */; };
 		0A080139221230EE00460A1A /* Font Awesome 5 Free-Solid-900.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0A080130221230EE00460A1A /* Font Awesome 5 Free-Solid-900.otf */; };
 		0A45DFF7222B794800026985 /* timeline_joint.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A45DFF6222B794800026985 /* timeline_joint.png */; };
+		0A45DFFA222C874400026985 /* timeline_joint_last.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A45DFF8222C874400026985 /* timeline_joint_last.png */; };
+		0A45DFFB222C874400026985 /* timeline_joint_first.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A45DFF9222C874400026985 /* timeline_joint_first.png */; };
 		0A5A2254221047CE00879A38 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A2253221047CE00879A38 /* ModelManager.swift */; };
+		0A607A13222C9382006EDA7A /* timeline_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A607A12222C9382006EDA7A /* timeline_line.png */; };
 		0AA7BF112210374D0038A274 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA7BF102210374D0038A274 /* Util.swift */; };
 		0AA9103F220F6BF9001B1270 /* Pods in Resources */ = {isa = PBXBuildFile; fileRef = 0AA9103E220F6BF9001B1270 /* Pods */; };
 		490E559A221A07260009906E /* PlacePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490E5599221A07260009906E /* PlacePopupViewController.swift */; };
@@ -64,7 +67,10 @@
 		0A08012F221230EE00460A1A /* Font Awesome 5 Free-Regular-400.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome 5 Free-Regular-400.otf"; sourceTree = "<group>"; };
 		0A080130221230EE00460A1A /* Font Awesome 5 Free-Solid-900.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome 5 Free-Solid-900.otf"; sourceTree = "<group>"; };
 		0A45DFF6222B794800026985 /* timeline_joint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timeline_joint.png; sourceTree = "<group>"; };
+		0A45DFF8222C874400026985 /* timeline_joint_last.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timeline_joint_last.png; sourceTree = "<group>"; };
+		0A45DFF9222C874400026985 /* timeline_joint_first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timeline_joint_first.png; sourceTree = "<group>"; };
 		0A5A2253221047CE00879A38 /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
+		0A607A12222C9382006EDA7A /* timeline_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timeline_line.png; sourceTree = "<group>"; };
 		0AA7BF102210374D0038A274 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		0AA9103E220F6BF9001B1270 /* Pods */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pods; sourceTree = "<group>"; };
 		0F367DD7A00A628AE7BAFE25 /* Pods_PhindTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhindTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,6 +181,9 @@
 		0AF2615222123032009BD580 /* MediaResources */ = {
 			isa = PBXGroup;
 			children = (
+				0A607A12222C9382006EDA7A /* timeline_line.png */,
+				0A45DFF9222C874400026985 /* timeline_joint_first.png */,
+				0A45DFF8222C874400026985 /* timeline_joint_last.png */,
 				0A45DFF6222B794800026985 /* timeline_joint.png */,
 				0A08013A221230F200460A1A /* Fonts */,
 			);
@@ -377,9 +386,12 @@
 				0A45DFF7222B794800026985 /* timeline_joint.png in Resources */,
 				0A080134221230EE00460A1A /* Font Awesome 5 Free-Regular-400.otf in Resources */,
 				492F5C6321FD814F009B6411 /* LaunchScreen.storyboard in Resources */,
+				0A45DFFA222C874400026985 /* timeline_joint_last.png in Resources */,
 				492F5C6021FD814F009B6411 /* Assets.xcassets in Resources */,
+				0A607A13222C9382006EDA7A /* timeline_line.png in Resources */,
 				0AA9103F220F6BF9001B1270 /* Pods in Resources */,
 				492F5C5E21FD814E009B6411 /* Main.storyboard in Resources */,
+				0A45DFFB222C874400026985 /* timeline_joint_first.png in Resources */,
 				0A080137221230EE00460A1A /* Font Awesome 5 Free-Solid-900.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

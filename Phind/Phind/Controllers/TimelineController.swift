@@ -20,14 +20,19 @@ class TimelineEntry: NSObject {
   var placeLabel: String
   var imagePath: String?
   var placeUUID: String?
+  var movementType: String
   
-  init(placeUUID: String, placeLabel: String, startTime: Date, endTime: Date?) {
+  init(placeUUID: String, placeLabel: String, startTime: Date,
+       endTime: Date?, movementType: String) {
+    
     self.placeUUID = placeUUID
     self.placeLabel = placeLabel
     self.startTime = startTime
     self.endTime = endTime
+    self.movementType = movementType
     
     super.init()
+    
   }
 }
 
@@ -51,12 +56,7 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   let MAP_SPAN_LAT = 1000.0
   let MAP_SPAN_LONG = 1000.0
   let ROUTE_WIDTH: CGFloat = 4.0
-  let ROUTE_COLOR: UIColor = UIColor(
-    red: 232.0 / 255.0,
-    green: 84.0 / 255.0,
-    blue: 142.0 / 255.0,
-    alpha: 0.8
-  )
+  let ROUTE_COLOR: UIColor = Util.SECONDARY_COLOR
   
   // Setup all the links to the UI.
   @IBOutlet weak var currentDateLabel: UILabel!
@@ -65,6 +65,8 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
   @IBOutlet weak var refreshButton: UIButton!
   @IBOutlet weak var tableWrap: UIView!
   @IBOutlet weak var headerView: UIView!
+  @IBOutlet weak var shadowWrap: UIView!
+  @IBOutlet weak var barIcon: UITabBarItem!
   
   // TODO: Should this be moved into a function?
   let realm = try! Realm()
@@ -84,10 +86,6 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     // Setup all the UI elements to the proper dynamic values.
     
     // Update current date label at the top of the screen.
-    // TODO(kevin): Update this to display date as Feb 9, 2019,
-    //              instead of Feb 09, 2019.
-    updateDate(Date())
-    
     reloadMapView()
     
   }
@@ -119,21 +117,16 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     
     super.viewDidLoad()
     
-    // Setup header view.
-    headerView.layer.shadowOpacity = 0.16
-    headerView.layer.shadowColor = UIColor.black.cgColor
-    headerView.layer.shadowOffset = CGSize(width: 0, height: 1.0)
-    headerView.layer.shadowRadius = 4.0
-        
+    updateDate(Date())
+  
+    setupHeaderView()
     // Register the table cell as custom type
     setupTableView();
     
     let formatter = DateFormatter()
     formatter.dateFormat = "HH:mm:ss"
-    
-    // Add the route to the map and sync the timeline to today
-    reloadMapView();
-    
+
+    // Add popup views.
     self.addChild(placePopupViewController)
     self.view.addSubview(placePopupViewController.view)
     placePopupViewController.didMove(toParent: self)
@@ -161,20 +154,14 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     // Iterate through each LocationEntry to draw pins and routes, as well
     // as generate cards for the timeline.
     var lastCoord: CLLocationCoordinate2D?
-    var lastPlace = TimelineEntry(
-      placeUUID: "<NONE>",
-      placeLabel: "",
-      startTime: Date(),
-      endTime: Date()
-    ) // TODO(Andrew) make nil?
 
-    // Set date format for timeline labels
+    // Iterate through location entries and draw them on the map.
     for locationEntry in locationEntries {
+      addTimelineEntry(locationEntry)
       if locationEntry.movement_type == MovementType.STATIONARY.rawValue {
         drawPin(&lastCoord, locationEntry)
-        addTimelineEntry(locationEntry)
       } else {
-        // TODO decide if we want lines
+        // TODO: Add location entries to timeline even if they are not stationary.
         drawRoute(&lastCoord, locationEntry)
       }
     }
@@ -184,18 +171,37 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
     if self.mapView.annotations.count > 0 {
       self.mapView!.fitAll()
     }
+    
+  }
+  
+  func setupHeaderView() {
+    
+    // Setup header view.
+    headerView.layer.shadowOpacity = 0.16
+    headerView.layer.shadowColor = UIColor.black.cgColor
+    headerView.layer.shadowOffset = CGSize(width: 0, height: 1.0)
+    headerView.layer.shadowRadius = 4.0
+    headerView.backgroundColor = Util.PRIMARY_COLOR
+    
   }
   
   // Register cell element and data source with table view
   func setupTableView() {
     
-    // Style the table view.
-    // TODO: Move this into a struct or something.
-    tableWrap.layer.shadowOpacity = 0.16
-    tableWrap.layer.shadowColor = UIColor.black.cgColor
-    tableWrap.layer.shadowOffset = CGSize(width: 0, height: 1.0)
-    tableWrap.layer.shadowRadius = 4.0
+    // Setup shadow.
+    shadowWrap.layer.shadowOpacity = 0.16
+    shadowWrap.layer.shadowColor = UIColor.black.cgColor
+    shadowWrap.layer.shadowOffset = CGSize(width: 0, height: 1.0)
+    shadowWrap.layer.shadowRadius = 4.0
+    shadowWrap.layer.cornerRadius = 32.0
+    shadowWrap.frame.size.width = UIScreen.main.bounds.width
     
+    // Timeline card setup.
+    tableWrap.layer.cornerRadius = 32.0
+    tableWrap.clipsToBounds = true
+    tableWrap.frame.size.width = shadowWrap.frame.size.width
+    
+    tableView.frame.size.width = shadowWrap.frame.size.width
     self.tableView.contentInset = UIEdgeInsets(top: 24, left: 0,bottom: 0, right: 0)
     
     self.tableView.register(TimelineUITableViewCell.self, forCellReuseIdentifier: "TimelineCell")
@@ -276,7 +282,8 @@ class TimelineController: UIViewController, MKMapViewDelegate, UITableViewDelega
         placeUUID: place!.uuid,
         placeLabel: place!.name,
         startTime: locationEntry.start as Date,
-        endTime: locationEntry.end as Date?
+        endTime: locationEntry.end as Date?,
+        movementType: locationEntry.movement_type
       )
       self.tableItems.insert(timelineEntry, at: 0)
     }
@@ -342,17 +349,47 @@ extension TimelineController: UITableViewDataSource {
     let tableCell = tableView.dequeueReusableCell(withIdentifier: "TimelineCell", for: indexPath) as! TimelineUITableViewCell
     
     // Get the location description string set by the TimelineController
-    let locationDescription = self.tableItems[indexPath.item]
+    let locationEntry = self.tableItems[indexPath.item]
+    let startTime = locationEntry.startTime as Date
+    let endTime = locationEntry.endTime as Date?
+    
+    // Table cell fields.
     let cellLabel = tableCell.cellLabel
-    cellLabel!.text = locationDescription.placeLabel
-
-    formatter.dateFormat = "h:mm a"
-
+    if (locationEntry.movementType == "STATIONARY") {
+      cellLabel!.text = locationEntry.placeLabel
+    } else {
+      cellLabel!.text = locationEntry.movementType.capitalized
+    }
+      
+    // Update time label.
     let timeLabel = tableCell.timeLabel
-    let startTime = formatter.string(from: locationDescription.startTime as Date)
-    let endTime = (locationDescription.endTime != nil) ? formatter.string(from: locationDescription.endTime! as Date) : ""
-    let timeString = (locationDescription.endTime != nil) ? String(format: "from %@ to %@", startTime, endTime) : String(format: "from %@", startTime)
-    timeLabel!.text = timeString
+    if (locationEntry.movementType == "STATIONARY") {
+      formatter.dateFormat = "h:mm a"
+      let startTimeString = formatter.string(from: startTime)
+      let endTimeString = (endTime != nil) ? formatter.string(from: endTime!) : "now"
+      let timeString = String(format: "from %@ to %@", startTimeString, endTimeString)
+      timeLabel!.text = timeString
+    } else {
+      timeLabel!.text = ""
+    }
+    
+    // Calculate and assign duration of stay at location.
+    let duration : Int = abs (Int( startTime.timeIntervalSince(endTime ?? Date()) ))
+    let hours : Int = Int (duration / 3600)
+    let min : Int = Int( (duration % 3600) / 60 )
+    tableCell.durationLabel!.text = String(hours) + "h " + String(min) + "m"
+    
+    // Assign proper UIImage.
+    let cellImage = tableCell.cellImage!
+    if (locationEntry.movementType != "STATIONARY") {
+      cellImage.image = UIImage(named: "timeline_line.png")
+    } else if (indexPath.item == 0) {
+      cellImage.image = UIImage(named: "timeline_joint_first.png")
+    } else if indexPath.item == self.tableItems.count - 1 {
+      cellImage.image = UIImage(named: "timeline_joint_last.png")
+    } else {
+      cellImage.image = UIImage(named: "timeline_joint.png")
+    }
     
     // TODO(Andrew) set the UIImage if index is zero or last
     return tableCell

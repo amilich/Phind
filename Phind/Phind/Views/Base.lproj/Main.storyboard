@@ -24,7 +24,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6sS-y6-5VB">
-                                <rect key="frame" x="0.0" y="111" width="414" height="288"/>
+                                <rect key="frame" x="0.0" y="111" width="414" height="352"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zyd-lo-zA9" userLabel="Header View">
@@ -76,25 +76,32 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.32941176470588235" green="0.44705882352941173" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f0p-bB-vpw" userLabel="TableWrap">
-                                <rect key="frame" x="0.0" y="397" width="414" height="416"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XUH-Mg-KTg" userLabel="ShadowWrap">
+                                <rect key="frame" x="0.0" y="418" width="414" height="544"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="tTT-jb-qS0">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f0p-bB-vpw" userLabel="TableWrap">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="416"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="tTT-jb-qS0">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="416"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <prototypes>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TimelineCell" rowHeight="70" id="3cC-z6-835" customClass="TimelineUITableViewCell" customModule="Phind" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="28" width="414" height="70"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3cC-z6-835" id="0c8-xS-xms">
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="69.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </tableViewCellContentView>
+                                                    </tableViewCell>
+                                                </prototypes>
+                                            </tableView>
+                                        </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TimelineCell" rowHeight="70" id="3cC-z6-835" customClass="TimelineUITableViewCell" customModule="Phind" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="414" height="70"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3cC-z6-835" id="0c8-xS-xms">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="69.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </tableViewCellContentView>
-                                            </tableViewCell>
-                                        </prototypes>
-                                    </tableView>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -104,10 +111,13 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Timeline" image="worldwide_location" id="acW-dT-cKf"/>
                     <connections>
+                        <outlet property="barIcon" destination="acW-dT-cKf" id="7Px-yF-xkg"/>
                         <outlet property="currentDateLabel" destination="dZp-kZ-NQO" id="C06-br-bTd"/>
                         <outlet property="headerView" destination="zyd-lo-zA9" id="cfB-ej-gi7"/>
                         <outlet property="mapView" destination="6sS-y6-5VB" id="wpO-JB-wws"/>
                         <outlet property="refreshButton" destination="u4u-a5-bFZ" id="0LX-gM-cbe"/>
+                        <outlet property="shadowWrap" destination="XUH-Mg-KTg" id="S18-V8-bwH"/>
+                        <outlet property="tabBarItem" destination="acW-dT-cKf" id="gNV-iW-Fk3"/>
                         <outlet property="tableView" destination="tTT-jb-qS0" id="Etg-dk-WKb"/>
                         <outlet property="tableWrap" destination="f0p-bB-vpw" id="OZY-8A-hKu"/>
                     </connections>
@@ -276,5 +286,4 @@
         <image name="search" width="30" height="30"/>
         <image name="worldwide_location" width="30" height="30"/>
     </resources>
-    <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

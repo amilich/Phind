@@ -46,6 +46,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Setup Google Maps keys.
     GMSServices.provideAPIKey("AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU")
     GMSPlacesClient.provideAPIKey("AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU")
+    
+    // Setup colors and styling.
+    UITabBar.appearance().tintColor = Util.PRIMARY_COLOR
   
     return true
   }

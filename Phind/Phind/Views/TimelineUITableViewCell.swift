@@ -12,20 +12,29 @@ class TimelineUITableViewCell: UITableViewCell {
   
   @IBOutlet var cellImage: UIImageView!
   @IBOutlet var cellLabel: UILabel!
+  @IBOutlet var durationLabel: UILabel!
   @IBOutlet var timeLabel: UILabel!
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
-    // Create the UILabel for place name
+    // Create UILabel for place name
     cellLabel = UILabel()
-    cellLabel.frame = CGRect(x: 80, y: 8, width: 300, height: 24)
-    cellLabel.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.medium)
+    cellLabel.frame = CGRect(x: 136, y: 8, width: 280, height: 24)
+    cellLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium)
+    
+    // Create UILabel for place duration.
+    durationLabel = UILabel()
+    durationLabel.frame = CGRect(x: 24, y: 8, width: 64, height: 24)
+    durationLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.bold)
+    durationLabel.textColor = Util.SECONDARY_COLOR
+    durationLabel.textAlignment = .right
     
     // Create UILabel for time
     timeLabel = UILabel()
-    timeLabel.frame = CGRect(x: 80, y: 32, width: 300, height: 16)
+    timeLabel.frame = CGRect(x: 136, y: 32, width: 280, height: 16)
     timeLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.light)
+    timeLabel.textColor = Util.BODY_COLOR
 
     // Create UIImage
     // TODO(Andrew) set UIImage differently for first and last timeline
@@ -33,11 +42,12 @@ class TimelineUITableViewCell: UITableViewCell {
     let imagePath = "timeline_joint.png"
     let image = UIImage(named: imagePath)
     cellImage = UIImageView(image: image!)
-    cellImage.frame = CGRect(x: 32, y: 0, width: 24, height: 64)
-    cellImage.contentMode = UIView.ContentMode.scaleAspectFill;
+    cellImage.frame = CGRect(x: 100, y: 0, width: 24, height: 64)
+    cellImage.contentMode = UIView.ContentMode.scaleAspectFit;
 
     self.contentView.addSubview(cellLabel)
     self.contentView.addSubview(timeLabel)
+    self.contentView.addSubview(durationLabel)
     self.contentView.addSubview(cellImage)
   }
   
