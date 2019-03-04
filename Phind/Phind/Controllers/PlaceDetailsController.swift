@@ -72,10 +72,6 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     self.view.addSubview(photoCollection)
     self.view.backgroundColor = .white
     self.view.isHidden = true
-    
-    //     editViewController.didMove(toParent: self)
-    //    editViewController.view.frame = self.view.frame
-    //    self.view.addSubview(editViewController.view)
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -96,8 +92,7 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     self.view.isHidden = !self.view.isHidden
     if let mainVC = self.parent {
       if let mainVC = mainVC as? MainViewController {
-        // mainVC.tableView.isHidden = false
-        mainVC.view.isHidden = false
+        mainVC.shadowWrap.isHidden = false
       }
     }
   }

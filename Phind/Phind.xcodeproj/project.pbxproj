@@ -45,6 +45,7 @@
 		49B70CC2222DDAA9001E7167 /* PlaceDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B70CC1222DDAA9001E7167 /* PlaceDetailsController.swift */; };
 		49B70CC5222DDBA4001E7167 /* PlaceDetails_Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B70CC4222DDBA4001E7167 /* PlaceDetails_Util.swift */; };
 		49B70CC7222DDC8E001E7167 /* PlaceDetails_PhotoTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B70CC6222DDC8E001E7167 /* PlaceDetails_PhotoTable.swift */; };
+		49B70CC9222DDE28001E7167 /* PlaceDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49B70CC8222DDE28001E7167 /* PlaceDetails.storyboard */; };
 		A8B58E4B9A76F185F279E9B3 /* Pods_Phind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B9BCD483594BE1F3920C60E /* Pods_Phind.framework */; };
 		D99A2BE5E03FCC60F6A0A835 /* Pods_PhindTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F367DD7A00A628AE7BAFE25 /* Pods_PhindTests.framework */; };
 		DDA0325C5B6569847B2BEFFA /* Pods_PhindUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E0A151A788F73CC420773FD /* Pods_PhindUITests.framework */; };
@@ -110,6 +111,7 @@
 		49B70CC1222DDAA9001E7167 /* PlaceDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsController.swift; sourceTree = "<group>"; };
 		49B70CC4222DDBA4001E7167 /* PlaceDetails_Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetails_Util.swift; sourceTree = "<group>"; };
 		49B70CC6222DDC8E001E7167 /* PlaceDetails_PhotoTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetails_PhotoTable.swift; sourceTree = "<group>"; };
+		49B70CC8222DDE28001E7167 /* PlaceDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PlaceDetails.storyboard; sourceTree = "<group>"; };
 		5E3C30D3DCE258D332C8BCEC /* Pods-PhindTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhindTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhindTests/Pods-PhindTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6B9BCD483594BE1F3920C60E /* Pods_Phind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Phind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E0A151A788F73CC420773FD /* Pods_PhindUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhindUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,7 +155,6 @@
 				49B70CC3222DDB99001E7167 /* Place */,
 				0AA824A3222CE491008BE873 /* Main */,
 				49AD3CD22213E32F000494D9 /* MapViewFitExtension.swift */,
-				492F5C5C21FD814E009B6411 /* Main.storyboard */,
 				492F5C6121FD814F009B6411 /* LaunchScreen.storyboard */,
 				F97F19BB22133490008CF75E /* StatisticsUICollectionViewCell.swift */,
 				4940E9BE2214BD830090DDB6 /* TabBarController.swift */,
@@ -216,6 +217,7 @@
 		0AA824A3222CE491008BE873 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				492F5C5C21FD814E009B6411 /* Main.storyboard */,
 				0AA824A4222CE4BA008BE873 /* MainView_Header.swift */,
 				0A4EAF87222CE76500D419BD /* MainView_Map.swift */,
 				494E7EE42210F76E00979950 /* TimelineUITableViewCell.swift */,
@@ -304,6 +306,7 @@
 			children = (
 				49B70CC4222DDBA4001E7167 /* PlaceDetails_Util.swift */,
 				49B70CC6222DDC8E001E7167 /* PlaceDetails_PhotoTable.swift */,
+				49B70CC8222DDE28001E7167 /* PlaceDetails.storyboard */,
 			);
 			path = Place;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 				0A080134221230EE00460A1A /* Font Awesome 5 Free-Regular-400.otf in Resources */,
 				492F5C6321FD814F009B6411 /* LaunchScreen.storyboard in Resources */,
 				0A45DFFA222C874400026985 /* timeline_joint_last.png in Resources */,
+				49B70CC9222DDE28001E7167 /* PlaceDetails.storyboard in Resources */,
 				492F5C6021FD814F009B6411 /* Assets.xcassets in Resources */,
 				0A607A13222C9382006EDA7A /* timeline_line.png in Resources */,
 				0AA9103F220F6BF9001B1270 /* Pods in Resources */,
