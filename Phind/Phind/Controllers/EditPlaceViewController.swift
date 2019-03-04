@@ -16,6 +16,10 @@ class EditPlaceViewController: UIViewController, UITableViewDelegate, UITableVie
   // Data storage elements
   public var place = Place()
     
+  // Private variables
+  private var sharedURLSession = AppDelegate().sharedUrlSession
+  let gmsApiKey = AppDelegate().gmsApiKey
+    
   // Table content for dynamically reusable cells
   private var tableItems: [String] = []
     
@@ -83,7 +87,9 @@ class EditPlaceViewController: UIViewController, UITableViewDelegate, UITableVie
     // Called to set the place to be displayed on the popup view.
     public func setPlace(place: Place) {
         self.place = place
-        self.tableItems = getNearestPlaces(place: place)
+        // delete old table items
+        self.tableItems.removeAll()
+        self.getNearestPlaces()
         self.tableView.reloadData()
         
         // TODO, delete from Realm if place is changed
@@ -98,9 +104,36 @@ class EditPlaceViewController: UIViewController, UITableViewDelegate, UITableVie
     }
 
 
-    private func getNearestPlaces(place: Place) -> [String] {
+    private func getNearestPlaces() {
+//        return ["a", "b", "c", "d"]
     // TODO: fill in with call to nearest places API
-    return ["a", "b", "c", "d"]
+        let nearbySearchUrl = URL(string: "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(self.place.latitude),\(self.place.longitude)&rankby=distance&key=\(gmsApiKey)")!
+
+        print(nearbySearchUrl)
+
+        let nearbySearchTask = sharedURLSession.dataTask(with: nearbySearchUrl) { (data, response, error) in
+            var nearbyPlaces = [String]()
+            
+            let nearbySearchResponse = ModelManager.shared.getNearbySearchResponse(data: data, response: response, error: error)
+            if nearbySearchResponse == nil {
+                print("No nearby places found.")
+                return
+            }
+
+            // look for associated place in Realm; if it doesn't exist, create it
+            let nearestPlaceResults = nearbySearchResponse!.prefix(5)
+
+            for nearestPlaceResult in nearestPlaceResults {
+                let name = nearestPlaceResult["name"] as! String
+                nearbyPlaces.append(name)
+                // write all to realm?
+            }
+
+            self.tableItems = nearbyPlaces
+            self.tableView.reloadData()
+
+        }
+        nearbySearchTask.resume()
 }
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

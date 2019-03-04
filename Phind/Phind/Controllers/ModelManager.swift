@@ -210,7 +210,7 @@ public class ModelManager : NSObject {
         return place
     }
     
-    private func getNearbySearchResponse(data: Data?, response: URLResponse?, error: Error?) -> [AnyObject]? {
+    public func getNearbySearchResponse(data: Data?, response: URLResponse?, error: Error?) -> [AnyObject]? {
         guard error == nil else {
             print("Error retrieving place details.")
             return nil
