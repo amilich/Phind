@@ -60,7 +60,7 @@ class MainViewController: UIViewController, UITableViewDelegate  {
   
   // TODO: Should this be moved into a function?
   let formatter = DateFormatter()
-  let placePopupViewController = PlacePopupViewController()
+  let placeDetailsController = PlaceDetailsController()
   
   // Table content for dynamically reusable cells
   internal var tableItems: [TimelineEntry] = []
@@ -97,10 +97,10 @@ class MainViewController: UIViewController, UITableViewDelegate  {
     self.mapView.delegate = self
 
     // Add popup views.
-    self.addChild(placePopupViewController)
-    self.view.addSubview(placePopupViewController.view)
-    placePopupViewController.didMove(toParent: self)
-    placePopupViewController.view.frame = self.tableView.frame
+    self.addChild(placeDetailsController)
+    self.view.addSubview(placeDetailsController.view)
+    placeDetailsController.didMove(toParent: self)
+    placeDetailsController.view.frame = self.tableView.frame
     
     // Load the view.
     self.reloadView()
@@ -148,8 +148,9 @@ class MainViewController: UIViewController, UITableViewDelegate  {
         )
         mapView.setRegion(viewRegion, animated: true)
         
-        self.placePopupViewController.setPlace(place: place!)
-        self.placePopupViewController.view.isHidden = false
+        self.placeDetailsController.setPlace(place: place!)
+        self.placeDetailsController.view.isHidden = false
+        self.shadowWrap.isHidden = true
       }
     } else {
       // Do not need an else case; unselecting happens by

@@ -43,7 +43,7 @@ class Style {
   
   public static let SCREEN_MARGIN : CGFloat = 12
   public static let CARD_CORNERS : CGFloat = 24
-  
+  public static let PHOTO_BORDER : CGFloat = 84.0
 }
 
 extension Style {
