@@ -51,7 +51,7 @@ extension PlaceDetailsController {
               } else {
                 if photo != nil {
                   self.placeImages.append(photo!)
-                  self.photoCollection.reloadData()
+                  self.collectionView.reloadData()
                 }
               }
             })
@@ -68,7 +68,7 @@ extension PlaceDetailsController {
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let photoCell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCell
     
-    let imageView = photoCell.placePhoto
+    let imageView = photoCell.placePhoto!
     if indexPath.row < self.placeImages.count {
       // imageView.frame = photoCell.frame
       imageView.image = self.placeImages[indexPath.row].squared

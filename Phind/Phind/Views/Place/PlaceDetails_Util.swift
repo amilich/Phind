@@ -10,11 +10,9 @@ import UIKit
 
 class PhotoCell: UICollectionViewCell {
   
-  var placePhoto : UIImageView
+  @IBOutlet var placePhoto: UIImageView!
   
   override init(frame: CGRect) {
-    placePhoto = UIImageView()
-    
     super.init(frame: frame)
     
     placePhoto.contentMode = .scaleAspectFill
@@ -26,7 +24,7 @@ class PhotoCell: UICollectionViewCell {
   }
   
   required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+    super.init(coder: aDecoder)
   }
   
   override func awakeFromNib() {

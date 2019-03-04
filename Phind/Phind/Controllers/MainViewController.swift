@@ -60,13 +60,21 @@ class MainViewController: UIViewController, UITableViewDelegate  {
   
   // TODO: Should this be moved into a function?
   let formatter = DateFormatter()
-  let placeDetailsController = PlaceDetailsController()
+  // var placeDetailsController = PlaceDetailsController() // TODO
+  let placeDetailsController:PlaceDetailsController = UIStoryboard(name: "PlaceDetails", bundle: nil).instantiateViewController(withIdentifier: "PlaceDetails") as! PlaceDetailsController
+
   
   // Table content for dynamically reusable cells
   internal var tableItems: [TimelineEntry] = []
   internal var currentDate: Date = Date()
   internal var locationEntries: [LocationEntry] = []
 
+  convenience init() {
+    self.init()
+    // let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)
+    // placeDetailsController = storyboard.instantiateViewController(withIdentifier: "PlaceDetails") as! PlaceDetailsController
+  }
+  
   // viewWillAppear and viewDidLoad all follow the cycle delineated
   // here: https://apple.co/2DqFnH6
   override func viewWillAppear(_ animated: Bool) {
