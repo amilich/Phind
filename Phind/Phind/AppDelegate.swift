@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     logger.logFilename = "phind.log"
     logger.logstashHost = "listener.logz.io"
     logger.logstashPort = 5052
-    logger.logzioToken = "WwwhuifBTWaSUATASxASOztzmHvXkRZJ"
+    logger.logzioToken = Credentials.LOGZ_IO_TOKEN
     logger.setup()
     
     // Setup location manager and location updates.
@@ -44,8 +44,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     // Setup Google Maps keys.
-    GMSServices.provideAPIKey("AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU")
-    GMSPlacesClient.provideAPIKey("AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU")
+    GMSServices.provideAPIKey(Credentials.GMS_KEY)
+    GMSPlacesClient.provideAPIKey(Credentials.GMS_KEY)
     
     // Setup colors and styling.
     UITabBar.appearance().tintColor = Style.PRIMARY_COLOR

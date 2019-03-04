@@ -23,6 +23,7 @@
 		0A4EAF88222CE76500D419BD /* MainView_Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4EAF87222CE76500D419BD /* MainView_Map.swift */; };
 		0A4EAF8A222CE9CD00D419BD /* MainView_Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4EAF89222CE9CD00D419BD /* MainView_Timeline.swift */; };
 		0A4EAF8D222CEC4600D419BD /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4EAF8C222CEC4600D419BD /* Style.swift */; };
+		0A4EAF90222CF4EE00D419BD /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4EAF8F222CF4EE00D419BD /* Credentials.swift */; };
 		0A5A2254221047CE00879A38 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A2253221047CE00879A38 /* ModelManager.swift */; };
 		0A607A13222C9382006EDA7A /* timeline_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A607A12222C9382006EDA7A /* timeline_line.png */; };
 		0AA7BF112210374D0038A274 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA7BF102210374D0038A274 /* Util.swift */; };
@@ -76,6 +77,7 @@
 		0A4EAF87222CE76500D419BD /* MainView_Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView_Map.swift; sourceTree = "<group>"; };
 		0A4EAF89222CE9CD00D419BD /* MainView_Timeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView_Timeline.swift; sourceTree = "<group>"; };
 		0A4EAF8C222CEC4600D419BD /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		0A4EAF8F222CF4EE00D419BD /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		0A5A2253221047CE00879A38 /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		0A607A12222C9382006EDA7A /* timeline_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timeline_line.png; sourceTree = "<group>"; };
 		0AA7BF102210374D0038A274 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
@@ -168,7 +170,6 @@
 				492F5C5821FD814E009B6411 /* MainViewController.swift */,
 				490E5599221A07260009906E /* PlacePopupViewController.swift */,
 				492F5C5A21FD814E009B6411 /* SecondViewController.swift */,
-				492F5C5621FD814E009B6411 /* AppDelegate.swift */,
 				492F5C8821FE8FAA009B6411 /* SearchController.swift */,
 				0A04B961220FAD1100D94EB9 /* PhindLocationManager.swift */,
 				0A5A2253221047CE00879A38 /* ModelManager.swift */,
@@ -195,6 +196,16 @@
 				0A45DFF6222B794800026985 /* timeline_joint.png */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		0A4EAF8E222CF4DA00D419BD /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				0AA7BF102210374D0038A274 /* Util.swift */,
+				0A4EAF8C222CEC4600D419BD /* Style.swift */,
+				0A4EAF8F222CF4EE00D419BD /* Credentials.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		0AA824A3222CE491008BE873 /* Main */ = {
@@ -253,14 +264,14 @@
 		492F5C5521FD814D009B6411 /* Phind */ = {
 			isa = PBXGroup;
 			children = (
+				492F5C5621FD814E009B6411 /* AppDelegate.swift */,
+				0A4EAF8E222CF4DA00D419BD /* Core */,
 				0AF2615222123032009BD580 /* MediaResources */,
 				0A04B960220F7DE500D94EB9 /* Controllers */,
 				0A04B95F220F7DE000D94EB9 /* Models */,
 				0A04B95E220F7DB600D94EB9 /* Views */,
 				492F5C5F21FD814F009B6411 /* Assets.xcassets */,
 				492F5C6421FD814F009B6411 /* Info.plist */,
-				0AA7BF102210374D0038A274 /* Util.swift */,
-				0A4EAF8C222CEC4600D419BD /* Style.swift */,
 			);
 			path = Phind;
 			sourceTree = "<group>";
@@ -586,6 +597,7 @@
 				0AA7BF112210374D0038A274 /* Util.swift in Sources */,
 				0A4EAF8A222CE9CD00D419BD /* MainView_Timeline.swift in Sources */,
 				490E559A221A07260009906E /* PlacePopupViewController.swift in Sources */,
+				0A4EAF90222CF4EE00D419BD /* Credentials.swift in Sources */,
 				0A5A2254221047CE00879A38 /* ModelManager.swift in Sources */,
 				4940E9BF2214BD830090DDB6 /* TabBarController.swift in Sources */,
 				0AA824A5222CE4BA008BE873 /* MainView_Header.swift in Sources */,
