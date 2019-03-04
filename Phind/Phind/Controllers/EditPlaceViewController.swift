@@ -5,7 +5,6 @@
 //  Created by Andrew B. Milich on 2/27/19.
 //  Copyright © 2019 Team-7. All rights reserved.
 //
-
 import UIKit
 import MapKit
 import RealmSwift
@@ -17,6 +16,9 @@ class EditPlaceViewController: UIViewController, UITableViewDelegate, UITableVie
   // Data storage elements
   public var place = Place()
     
+  // Table content for dynamically reusable cells
+  private var tableItems: [String] = []
+    
   // UI components
   let backButton = UIButton()
   var tableView = UITableView()
@@ -26,12 +28,12 @@ class EditPlaceViewController: UIViewController, UITableViewDelegate, UITableVie
     super.init(nibName: nil, bundle: nil)
     
     self.definesPresentationContext = true
-
+    
     backButton.frame = CGRect(x: 10, y: 15, width: 50, height: 50)
     backButton.setImage(UIImage(named: "back.png"), for: .normal)
     backButton.setTitle("Back", for: .normal)
     backButton.addTarget(self, action: #selector(self.backPressed(_:)), for: .touchUpInside)
-    
+        
     searchController.searchResultsUpdater = self
     searchController.obscuresBackgroundDuringPresentation = false
     searchController.searchBar.placeholder = "Search for place"
@@ -55,6 +57,7 @@ class EditPlaceViewController: UIViewController, UITableViewDelegate, UITableVie
     self.view.backgroundColor = .white
     self.view.isHidden = true
   }
+
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
@@ -77,19 +80,36 @@ class EditPlaceViewController: UIViewController, UITableViewDelegate, UITableVie
     }
   }
 
-  // Set the place that should be edited
-  public func setPlace(place: Place) {
-    // TODO, delete from Realm if place is changed
-    // backPressed will trigger update in parent
-  }
+    // Called to set the place to be displayed on the popup view.
+    public func setPlace(place: Place) {
+        self.place = place
+        self.tableItems = getNearestPlaces(place: place)
+        self.tableView.reloadData()
+        
+        // TODO, delete from Realm if place is changed
+         // backPressed will trigger update in parent
+        //        self.label.text = self.place.name
+        //        self.addressLabel.text = self.place.address
+        //        // Get rid of the previous image
+        //        self.placeImages.removeAll()
+        //        self.photoCollection.reloadData()
+        //        // Now load a new image
+        //        self.loadPhotoForPlaceID(gms_id: place.gms_id)
+    }
+
+
+    private func getNearestPlaces(place: Place) -> [String] {
+    // TODO: fill in with call to nearest places API
+    return ["a", "b", "c", "d"]
+}
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 5
+    return self.tableItems.count
   }
 
   internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "myIdentifier", for: indexPath)
-    cell.textLabel?.text = "This is row \(indexPath.row)"
+    cell.textLabel?.text = "\(self.tableItems[indexPath.row])"
     return cell
   }
 
@@ -102,3 +122,8 @@ class EditPlaceViewController: UIViewController, UITableViewDelegate, UITableVie
     // TODO update results
   }
 }
+    
+
+
+    
+
