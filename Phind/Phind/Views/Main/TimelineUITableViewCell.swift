@@ -18,6 +18,8 @@ class TimelineUITableViewCell: UITableViewCell {
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
+    // TODO: Set this up to be more general purpose.
+    
     // Create UILabel for place name
     cellLabel = UILabel()
     cellLabel.frame = CGRect(x: 136, y: 8, width: 280, height: 24)
@@ -27,14 +29,14 @@ class TimelineUITableViewCell: UITableViewCell {
     durationLabel = UILabel()
     durationLabel.frame = CGRect(x: 24, y: 8, width: 64, height: 24)
     durationLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.bold)
-    durationLabel.textColor = Util.SECONDARY_COLOR
+    durationLabel.textColor = Style.SECONDARY_COLOR
     durationLabel.textAlignment = .right
     
     // Create UILabel for time
     timeLabel = UILabel()
     timeLabel.frame = CGRect(x: 136, y: 32, width: 280, height: 16)
     timeLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.light)
-    timeLabel.textColor = Util.BODY_COLOR
+    timeLabel.textColor = Style.BODY_COLOR
 
     // Create UIImage
     // TODO(Andrew) set UIImage differently for first and last timeline

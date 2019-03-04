@@ -48,8 +48,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     GMSPlacesClient.provideAPIKey("AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU")
     
     // Setup colors and styling.
-    UITabBar.appearance().tintColor = Util.PRIMARY_COLOR
-  
+    UITabBar.appearance().tintColor = Style.PRIMARY_COLOR
+    
     return true
   }
   
