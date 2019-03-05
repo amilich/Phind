@@ -175,8 +175,6 @@ public class ModelManager : NSObject {
     var likelyPlaces = [Place]()
     for likelihood in placeLikelihoodList {
       let place = likelihood.place
-      //      print("Current Place name \(String(describing: place.name)) at likelihood \(likelihood.likelihood)")
-      //      print("Current PlaceID \(String(describing: place.placeID))")
       
       let likelyPlace = Place()
       likelyPlace.gms_id = place.placeID ?? "" // TODO need default value
@@ -212,39 +210,39 @@ public class ModelManager : NSObject {
     let place = Place()
     place.address = nearestPlaceResult["vicinity"] as! String
     place.name = nearestPlaceResult["name"] as! String
-    print("name: \(place.name)")
+    Logger.shared.debug("name: \(place.name)")
     if let geometry = nearestPlaceResult["geometry"] as AnyObject? {
       if let location = geometry["location"] as AnyObject? {
         place.latitude = location["lat"] as! Double
         place.longitude = location["lng"] as! Double
-        print("latitude: \(place.latitude)")
-        print("longitude: \(place.longitude)")
+        Logger.shared.debug("latitude: \(place.latitude)")
+        Logger.shared.debug("longitude: \(place.longitude)")
       }
     }
     place.gms_id = nearestPlaceResult["place_id"] as! String
     place.types = nearestPlaceResult["types"] as! [String]
-    print("gms id: \(place.gms_id)")
+    Logger.shared.debug("gms id: \(place.gms_id)")
     return place
   }
   
   private func getNearbySearchResponse(data: Data?, response: URLResponse?, error: Error?) -> [AnyObject]? {
     guard error == nil else {
-      print("Error retrieving place details.")
+      Logger.shared.debug("Error retrieving place details.")
       return nil
     }
     
     guard let content = data else {
-      print("No content retrieved.")
+      Logger.shared.debug("No content retrieved.")
       return nil
     }
     
     guard let json = (try? JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers)) as? [String: Any] else {
-      print("JSON conversion failed.")
+      Logger.shared.debug("JSON conversion failed.")
       return nil
     }
     
     guard let nearbySearchApiResponse = json["results"] as? [AnyObject]? else {
-      print("No result found.")
+      Logger.shared.debug("No result found.")
       return nil
     }
     
@@ -258,13 +256,13 @@ public class ModelManager : NSObject {
     
     let nearbySearchUrl = URL(string: "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(locationEntry.latitude),\(locationEntry.longitude)&rankby=distance&key=\(Credentials.GMS_KEY)")!
     
-    print(nearbySearchUrl)
+    Logger.shared.debug(nearbySearchUrl.absoluteString)
     
     let nearbySearchTask = sharedURLSession.dataTask(with: nearbySearchUrl) {(data, response, error) in
       
       let nearbySearchResponse = self.getNearbySearchResponse(data: data, response: response, error: error)
       if nearbySearchResponse == nil {
-        print("No places found for coordinates.")
+        Logger.shared.debug("No places found for coordinates.")
         return
       }
       
@@ -281,7 +279,7 @@ public class ModelManager : NSObject {
         
         try! nearbySearchRealm.write {
           locationEntry?.place_id = place!.uuid
-          print("Add new LocationEntry: (\(locationEntry!.uuid)) with place_id (\(place!.gms_id))")
+          Logger.shared.debug("Add new LocationEntry: (\(locationEntry!.uuid)) with place_id (\(place!.gms_id))")
         }
         return
       }
@@ -297,7 +295,7 @@ public class ModelManager : NSObject {
       
       try! placeDetailsRealm.write {
         locationEntry!.place_id = placeObject.uuid
-        print("Add new LocationEntry: (\(locationEntry!.uuid)) with place_id (\(placeObject.gms_id))")
+        Logger.shared.debug("Add new LocationEntry: (\(locationEntry!.uuid)) with place_id (\(placeObject.gms_id))")
       }
       
       
@@ -324,7 +322,6 @@ public class ModelManager : NSObject {
     rawCoord.timestamp = NSDate()
     try! realm.write {
       realm.add(rawCoord)
-      print("Add new RawCoordinates: (\(location.coordinate))")
     }
     return rawCoord
     

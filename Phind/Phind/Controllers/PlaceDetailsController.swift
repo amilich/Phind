@@ -7,10 +7,10 @@
 //
 
 import UIKit
-import MapKit
 import RealmSwift
 import GoogleMaps
 import GooglePlaces
+import JustLog
 
 class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
   
@@ -70,6 +70,8 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     Style.ApplyRoundedCorners(view: flowWrap, clip: true)
     Style.ApplyRoundedCorners(view: self.view)
     
+    self.collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+
      if let mainVC = self.parent {
        if let mainVC = mainVC as? MainViewController {
         self.view.frame = mainVC.shadowWrap.frame
@@ -82,12 +84,9 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
   
   @objc func backPressed(_ sender: UIButton!) {
     self.view.isHidden = !self.view.isHidden
-    print("press")
     if let mainVC = self.parent {
       if let mainVC = mainVC as? MainViewController {
         mainVC.shadowWrap.isHidden = false
-      } else {
-        print("Fail?")
       }
     }
   }
@@ -95,7 +94,7 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
   // Show the edit view controller
   @objc func editPressed(_ sender: UIButton!) {
     // self.editViewController.view.isHidden = false
-    print("Edit visible")
+    Logger.shared.debug("Edit button clicked")
   }
   
   // Called to set the place to be displayed on the popup view.

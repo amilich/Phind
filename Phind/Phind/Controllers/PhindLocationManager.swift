@@ -48,7 +48,7 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
   // Default Swift constructor for classes.
   override init() {
     super.init()
-    print("PhindLocationManager has been initialized.")
+    Logger.shared.debug("PhindLocationManager has been initialized.")
   }
   
   // Update movement type based on CMMotionActivity passed in from AppDelegate.

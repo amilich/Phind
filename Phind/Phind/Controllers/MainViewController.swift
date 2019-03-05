@@ -133,7 +133,6 @@ class MainViewController: UIViewController, UITableViewDelegate  {
   // to the popup view controller.
   func displayPlacePopup(selected: Bool, placeUUID: String?) {
     
-    print("Set selected \(selected)")
     if (selected) {
       let uuid = placeUUID!
       let place = ModelManager.shared.getPlaceWithUUID(uuid: uuid)
@@ -160,6 +159,6 @@ class MainViewController: UIViewController, UITableViewDelegate  {
       // Do not need an else case; unselecting happens by
       // the user pressing the back button.
     }
-    
   }
+  
 }
