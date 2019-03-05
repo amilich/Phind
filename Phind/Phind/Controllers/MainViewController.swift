@@ -61,6 +61,7 @@ class MainViewController: UIViewController, UITableViewDelegate  {
   // TODO: Should this be moved into a function?
   let formatter = DateFormatter()
   let placeDetailsController:PlaceDetailsController = UIStoryboard(name: "PlaceDetails", bundle: nil).instantiateViewController(withIdentifier: "PlaceDetails") as! PlaceDetailsController
+  let editViewController:EditViewController = UIStoryboard(name: "Edit", bundle: nil).instantiateViewController(withIdentifier: "Edit") as! EditViewController
 
   
   // Table content for dynamically reusable cells
