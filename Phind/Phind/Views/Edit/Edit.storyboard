@@ -47,10 +47,9 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <size key="freeformSize" width="414" height="438"/>
                     <connections>
-                        <outlet property="flowWrap" destination="lWt-be-1YD" id="ELa-Uk-vN3"/>
                         <outlet property="searchBar" destination="ixc-xV-5IH" id="Dzq-2k-8YR"/>
                         <outlet property="searchDisplayController" destination="e5h-5J-I73" id="ebD-Sp-vkB"/>
-                        <outlet property="searchWrap" destination="lWt-be-1YD" id="uvl-rJ-7f8"/>
+                        <outlet property="searchWrap" destination="lWt-be-1YD" id="qHg-b1-PYD"/>
                         <outlet property="shadowWrap" destination="ov5-su-Ehy" id="2ye-0W-OfR"/>
                     </connections>
                 </viewController>

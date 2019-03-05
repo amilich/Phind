@@ -103,6 +103,37 @@ public class ModelManager : NSObject {
     
   }
   
+  public func mostCommonPlaceType(from: Date = Date(), ascending: Bool = false, period: Int = 1) -> String {
+    
+    let dayStart = Util.GetLocalizedDayStart(date: from)
+    let dayEnd = Util.GetLocalizedDayEnd(date: from)
+    
+    let locationEntries = realm.objects(LocationEntry.self)
+      .filter("start >= %@ AND start < %@", dayStart, dayEnd)
+      .sorted(byKeyPath: "place_id", ascending: ascending)
+    if locationEntries.count <= 0{
+      return "No Entry"
+    }
+    
+    var emptyDict: [String: Int] = [String: Int]()
+    for locationEntry in locationEntries{
+      let place_id = locationEntry.place_id
+      let identifiedPlace = self.realm.objects(Place.self).filter("uuid = %@", place_id).first
+      //check this line
+      // TODO make sure length is enough
+      let placeType = identifiedPlace!.types[0]
+      if var val = emptyDict[placeType] {
+        val = val+1
+        emptyDict[placeType] = val
+      } else{
+        emptyDict[placeType] = 1
+      }
+    }
+    let mostCommonPlaceType = emptyDict.max { a, b in a.value < b.value }
+    
+    return mostCommonPlaceType!.key
+  }
+  
   public func mostCommonLocation(from: Date = Date(), ascending: Bool = false) -> LocationEntry? {
     
     let dayStart = Util.GetLocalizedDayStart(date: from)
@@ -225,7 +256,7 @@ public class ModelManager : NSObject {
     return place
   }
   
-  private func getNearbySearchResponse(data: Data?, response: URLResponse?, error: Error?) -> [AnyObject]? {
+  public func getNearbySearchResponse(data: Data?, response: URLResponse?, error: Error?) -> [AnyObject]? {
     guard error == nil else {
       Logger.shared.debug("Error retrieving place details.")
       return nil

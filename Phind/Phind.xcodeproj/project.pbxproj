@@ -29,6 +29,7 @@
 		0AA7BF112210374D0038A274 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA7BF102210374D0038A274 /* Util.swift */; };
 		0AA824A5222CE4BA008BE873 /* MainView_Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA824A4222CE4BA008BE873 /* MainView_Header.swift */; };
 		0AA9103F220F6BF9001B1270 /* Pods in Resources */ = {isa = PBXBuildFile; fileRef = 0AA9103E220F6BF9001B1270 /* Pods */; };
+		49077B30222E436C0024539E /* Edit_Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49077B2F222E436C0024539E /* Edit_Util.swift */; };
 		492F5C5721FD814E009B6411 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5C5621FD814E009B6411 /* AppDelegate.swift */; };
 		492F5C5921FD814E009B6411 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5C5821FD814E009B6411 /* MainViewController.swift */; };
 		492F5C5B21FD814E009B6411 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5C5A21FD814E009B6411 /* SecondViewController.swift */; };
@@ -90,6 +91,7 @@
 		0F367DD7A00A628AE7BAFE25 /* Pods_PhindTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhindTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		23004EA1A217FA918547CD4A /* Pods-PhindTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhindTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhindTests/Pods-PhindTests.release.xcconfig"; sourceTree = "<group>"; };
 		25F60A492D95300955497A01 /* Pods-PhindUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhindUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhindUITests/Pods-PhindUITests.release.xcconfig"; sourceTree = "<group>"; };
+		49077B2F222E436C0024539E /* Edit_Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edit_Util.swift; sourceTree = "<group>"; };
 		492F5C5321FD814D009B6411 /* Phind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Phind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		492F5C5621FD814E009B6411 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		492F5C5821FD814E009B6411 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 			isa = PBXGroup;
 			children = (
 				49B70CCF222E23A0001E7167 /* Edit.storyboard */,
+				49077B2F222E436C0024539E /* Edit_Util.swift */,
 			);
 			path = Edit;
 			sourceTree = "<group>";
@@ -633,6 +636,7 @@
 				0A5A2254221047CE00879A38 /* ModelManager.swift in Sources */,
 				49B70CCB222E2072001E7167 /* TabBarController.swift in Sources */,
 				0AA824A5222CE4BA008BE873 /* MainView_Header.swift in Sources */,
+				49077B30222E436C0024539E /* Edit_Util.swift in Sources */,
 				49B70CC5222DDBA4001E7167 /* PlaceDetails_Util.swift in Sources */,
 				0A4EAF8D222CEC4600D419BD /* Style.swift in Sources */,
 				492F5C5921FD814E009B6411 /* MainViewController.swift in Sources */,

@@ -102,6 +102,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
   }
   
+  func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any],fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void){
+    
+    Logger.shared.debug("Entire message \(userInfo)")
+    completionHandler(UIBackgroundFetchResult.newData)
+  }
+  
 }
 
 extension AppDelegate : CLLocationManagerDelegate{

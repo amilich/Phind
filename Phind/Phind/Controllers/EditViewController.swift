@@ -13,4 +13,14 @@ class EditViewController : UIViewController {
   @IBOutlet var shadowWrap: UIView!
   @IBOutlet var searchWrap: UIView!
   @IBOutlet var searchBar: UISearchBar!
+  
+  // Private variables
+  let sharedURLSession = AppDelegate().sharedUrlSession
+  
+  // Data storage
+  public var place = Place()
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+  }
 }
