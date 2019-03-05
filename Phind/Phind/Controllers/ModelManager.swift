@@ -332,8 +332,6 @@ public class ModelManager : NSObject {
   
 }
 
-
-
 extension Realm {
   func writeAsync<T : ThreadConfined>(obj: T, errorHandler: @escaping ((_ error : Swift.Error) -> Void) = { _ in return }, block: @escaping ((Realm, T?) -> Void)) {
     let wrappedObj = ThreadSafeReference(to: obj)

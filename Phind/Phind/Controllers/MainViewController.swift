@@ -60,7 +60,6 @@ class MainViewController: UIViewController, UITableViewDelegate  {
   
   // TODO: Should this be moved into a function?
   let formatter = DateFormatter()
-  // var placeDetailsController = PlaceDetailsController() // TODO
   let placeDetailsController:PlaceDetailsController = UIStoryboard(name: "PlaceDetails", bundle: nil).instantiateViewController(withIdentifier: "PlaceDetails") as! PlaceDetailsController
 
   
@@ -71,8 +70,6 @@ class MainViewController: UIViewController, UITableViewDelegate  {
 
   convenience init() {
     self.init()
-    // let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)
-    // placeDetailsController = storyboard.instantiateViewController(withIdentifier: "PlaceDetails") as! PlaceDetailsController
   }
   
   // viewWillAppear and viewDidLoad all follow the cycle delineated
@@ -107,8 +104,6 @@ class MainViewController: UIViewController, UITableViewDelegate  {
     // Add popup views.
     self.addChild(placeDetailsController)
     self.view.addSubview(placeDetailsController.view)
-    // placeDetailsController.didMove(toParent: self)
-    // placeDetailsController.shadowWrap.frame = self.shadowWrap.frame
     placeDetailsController.view.isHidden = true
     
     // Load the view.

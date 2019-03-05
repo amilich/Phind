@@ -68,15 +68,16 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     
     // Setup flow layout style.
     Style.ApplyRoundedCorners(view: flowWrap, clip: true)
-    // flowWrap.frame.size.width = shadowWrap.frame.size.width
+    Style.ApplyRoundedCorners(view: self.view)
     
-    // self.shadowWrap.frame = self.parent!.shadowWrap.frame
-    // if let mainVC = self.parent {
-    //   if let mainVC = mainVC as? MainViewController {
-    //     self.shadowWrap.frame = mainVC.shadowWrap.frame
-    //     self.flowWrap.frame = mainVC.tableWrap.frame
-    //   }
-    // }
+     if let mainVC = self.parent {
+       if let mainVC = mainVC as? MainViewController {
+        self.view.frame = mainVC.shadowWrap.frame
+        self.shadowWrap.frame = mainVC.shadowWrap.frame
+        self.flowWrap.frame = mainVC.tableWrap.frame
+        self.collectionView.frame = CGRect(x:mainVC.tableWrap.frame.minX, y: mainVC.tableWrap.frame.minY + Style.DETAILS_LABEL_OFFSET, width:mainVC.tableWrap.frame.width, height:Style.DETAILS_PHOTO_VIEW_HEIGHT)
+       }
+     }
   }
   
   @objc func backPressed(_ sender: UIButton!) {
