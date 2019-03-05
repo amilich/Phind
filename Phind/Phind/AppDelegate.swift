@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var motionActivityManager = CMMotionActivityManager()
   let placesClient = GMSPlacesClient()
   let realm = try! Realm()
+  let sharedUrlSession = URLSession.shared
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
@@ -42,6 +43,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     } else {
       Logger.shared.error("Significant location change monitoring not available.")
     }
+    
+    #if targetEnvironment(simulator)
+      print("Realm fileURL")
+      print(Realm.Configuration.defaultConfiguration.fileURL ?? "<no url found>")
+    #endif
 
     // Setup Google Maps keys.
     GMSServices.provideAPIKey(Credentials.GMS_KEY)

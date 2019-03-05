@@ -107,8 +107,9 @@ class MainViewController: UIViewController, UITableViewDelegate  {
     // Add popup views.
     self.addChild(placeDetailsController)
     self.view.addSubview(placeDetailsController.view)
-    placeDetailsController.didMove(toParent: self)
-    placeDetailsController.view.frame = self.tableView.frame
+    // placeDetailsController.didMove(toParent: self)
+    // placeDetailsController.shadowWrap.frame = self.shadowWrap.frame
+    placeDetailsController.view.isHidden = true
     
     // Load the view.
     self.reloadView()

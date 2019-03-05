@@ -25,7 +25,7 @@ extension MainViewController {
     // Timeline card setup.
     Style.ApplyRoundedCorners(view: tableWrap, clip: true)
     tableWrap.frame.size.width = shadowWrap.frame.size.width
-    
+
     // Timeline table setup.
     tableView.frame.size.width = shadowWrap.frame.size.width
     self.tableView.contentInset = UIEdgeInsets(top: 24, left: 0,bottom: 0, right: 0)
