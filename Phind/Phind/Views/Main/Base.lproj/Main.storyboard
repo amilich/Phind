@@ -126,22 +126,6 @@
             </objects>
             <point key="canvasLocation" x="749.27536231884062" y="-320.08928571428572"/>
         </scene>
-        <!--Search-->
-        <scene sceneID="2dJ-9o-n8G">
-            <objects>
-                <viewController id="aEk-OU-hjs" customClass="SearchController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="eh9-qn-TsG">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="3ZL-Jf-Ee8"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Search" image="search" id="ykC-F6-KKJ"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Fgm-rK-iW6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1462.3188405797102" y="-0.6696428571428571"/>
-        </scene>
         <!--Statistics-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
@@ -282,7 +266,6 @@
     </scenes>
     <resources>
         <image name="combo_chart" width="30" height="30"/>
-        <image name="search" width="30" height="30"/>
         <image name="worldwide_location" width="30" height="30"/>
     </resources>
 </document>
