@@ -11,7 +11,7 @@ import GooglePlaces
 import UIKit
 import CoreMotion
 import RealmSwift
-
+import JustLog
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,31 +27,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
+    // Setup JustLog.
+    let logger = Logger.shared
+    logger.logFilename = "phind.log"
+    logger.logstashHost = "listener.logz.io"
+    logger.logstashPort = 5052
+    logger.logzioToken = Credentials.LOGZ_IO_TOKEN
+    logger.setup()
+    
+    // Setup location manager and location updates.
     self.locationManager.requestAlwaysAuthorization()
-    
-    // Do any additional setup after loading the view.
-    if CLLocationManager.locationServicesEnabled() {
+    if CLLocationManager.significantLocationChangeMonitoringAvailable() {
       locationManager.delegate = self
-      locationManager.desiredAccuracy = kCLLocationAccuracyBest
-      locationManager.distanceFilter = PhindLocationManager.DEFAULT_DISTANCE_FILTER
       locationManager.startUpdatingLocation()
-    }
-    
-    GMSServices.provideAPIKey(gmsApiKey)
-    GMSPlacesClient.provideAPIKey(gmsApiKey)
-    
-    // Activate CoreMotion Activity Manager to check and update current movement type.
-    if CMMotionActivityManager.isActivityAvailable() {
-      motionActivityManager.startActivityUpdates(to: OperationQueue.main) { (motion) in
-        PhindLocationManager.shared.updateMovementType(motion: motion!)
-      }
+      locationManager.startMonitoringSignificantLocationChanges()
+    } else {
+      Logger.shared.error("Significant location change monitoring not available.")
     }
     
     #if targetEnvironment(simulator)
       print("Realm fileURL")
       print(Realm.Configuration.defaultConfiguration.fileURL ?? "<no url found>")
     #endif
-  
+
+    // Setup Google Maps keys.
+    GMSServices.provideAPIKey(Credentials.GMS_KEY)
+    GMSPlacesClient.provideAPIKey(Credentials.GMS_KEY)
+    
+    // Setup colors and styling.
+    UITabBar.appearance().tintColor = Style.PRIMARY_COLOR
+    
     return true
   }
   
@@ -63,6 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func applicationDidEnterBackground(_ application: UIApplication) {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    forceSendLogs(application)
   }
   
   func applicationWillEnterForeground(_ application: UIApplication) {
@@ -77,6 +84,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func applicationWillTerminate(_ application: UIApplication) {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    forceSendLogs(application)
+  }
+  
+  private func forceSendLogs(_ application: UIApplication) {
+    
+    var identifier = UIBackgroundTaskIdentifier(rawValue: 0)
+    
+    identifier = application.beginBackgroundTask(expirationHandler: {
+      application.endBackgroundTask(identifier)
+      identifier = UIBackgroundTaskIdentifier.invalid
+    })
+    
+    Logger.shared.forceSend { completionHandler in
+      application.endBackgroundTask(identifier)
+      identifier = UIBackgroundTaskIdentifier.invalid
+    }
+  }
+  
+  func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any],fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void){
+    
+    Logger.shared.debug("Entire message \(userInfo)")
+    completionHandler(UIBackgroundFetchResult.newData)
   }
   
 }
@@ -84,6 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate : CLLocationManagerDelegate{
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    Logger.shared.verbose("Location manager delegate called.")
     PhindLocationManager.shared.updateLocation(manager, didUpdateLocations: locations)
   } 
   

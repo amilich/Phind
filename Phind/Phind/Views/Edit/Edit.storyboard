@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Edit-->
+        <scene sceneID="BRj-kR-K4z">
+            <objects>
+                <viewController storyboardIdentifier="Edit" useStoryboardIdentifierAsRestorationIdentifier="YES" id="act-Br-OFt" userLabel="Edit" customClass="EditViewController" customModule="Phind" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nNI-oM-91I">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="438"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ov5-su-Ehy" userLabel="ShadowWrap">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="438"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lWt-be-1YD" userLabel="SearchWrap">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="438"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ixc-xV-5IH">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="act-Br-OFt" id="rR7-eq-zgd"/>
+                                                </connections>
+                                            </searchBar>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="hju-lf-vPu"/>
+                    </view>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <size key="freeformSize" width="414" height="438"/>
+                    <connections>
+                        <outlet property="searchBar" destination="ixc-xV-5IH" id="Dzq-2k-8YR"/>
+                        <outlet property="searchDisplayController" destination="e5h-5J-I73" id="ebD-Sp-vkB"/>
+                        <outlet property="searchWrap" destination="lWt-be-1YD" id="qHg-b1-PYD"/>
+                        <outlet property="shadowWrap" destination="ov5-su-Ehy" id="2ye-0W-OfR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zAt-1Z-zcl" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="e5h-5J-I73">
+                    <connections>
+                        <outlet property="delegate" destination="act-Br-OFt" id="D6Q-XB-AXK"/>
+                        <outlet property="searchBar" destination="ixc-xV-5IH" id="e9K-tt-6WS"/>
+                        <outlet property="searchContentsController" destination="act-Br-OFt" id="QDO-c4-8rK"/>
+                        <outlet property="searchResultsDataSource" destination="act-Br-OFt" id="Nm3-49-nPs"/>
+                        <outlet property="searchResultsDelegate" destination="act-Br-OFt" id="Y5Z-qR-1gn"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="748.79999999999995" y="-320.23988005997006"/>
+        </scene>
+    </scenes>
+</document>

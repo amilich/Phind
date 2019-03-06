@@ -1,4 +1,5 @@
 PODS:
+  - CocoaAsyncSocket (7.6.3)
   - GoogleMaps (3.0.1):
     - GoogleMaps/Maps (= 3.0.1)
   - GoogleMaps/Base (3.0.1)
@@ -6,34 +7,45 @@ PODS:
     - GoogleMaps/Base
   - GooglePlaces (3.0.1):
     - GoogleMaps/Base (= 3.0.1)
+  - JustLog (2.5.0):
+    - CocoaAsyncSocket (~> 7.6.3)
+    - SwiftyBeaver (~> 1.6.1)
   - Realm (3.13.1):
     - Realm/Headers (= 3.13.1)
   - Realm/Headers (3.13.1)
   - RealmSwift (3.13.1):
     - Realm (= 3.13.1)
+  - SwiftyBeaver (1.6.1)
   - TransitionableTab (0.2.0)
 
 DEPENDENCIES:
   - GoogleMaps
   - GooglePlaces
+  - JustLog
   - RealmSwift
   - TransitionableTab (~> 0.2.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - CocoaAsyncSocket
     - GoogleMaps
     - GooglePlaces
+    - JustLog
     - Realm
     - RealmSwift
+    - SwiftyBeaver
     - TransitionableTab
 
 SPEC CHECKSUMS:
+  CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
   GoogleMaps: ec8c032304e19f609aba11096eed7207ca1af32d
   GooglePlaces: 44d1be1cf4c2919563162fe369c117168e551e6d
+  JustLog: 24d4dbdd4d4b65fc04069f222ee34b1d9c9004cf
   Realm: 50071da38fe079e0735e47c9f2eae738c68c5996
   RealmSwift: 8a1e6a02b7a08cd17a31e3115143fb69fe5f3fb9
+  SwiftyBeaver: ccfcdf85a04d429f1633f668650b0ce8020bda3a
   TransitionableTab: 54a5d0af475033bdb83959fde4e5d6201af7e2ab
 
-PODFILE CHECKSUM: 0fb9465ecc52ae15daf6d89f7ccd64788330da3c
+PODFILE CHECKSUM: 6688b0b22f230ad33fb3105e6b3f6d33ce62b80a
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0
