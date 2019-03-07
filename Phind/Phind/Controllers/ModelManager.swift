@@ -151,7 +151,7 @@ public class ModelManager : NSObject {
     for locationEntry in locationEntries{
       if locationEntry.place_id == lastLocationEntry.place_id{
         count = count + 1
-      }else{
+      } else{
         count = 1
       }
       lastLocationEntry = locationEntry

@@ -22,20 +22,20 @@ extension PlaceDetailsController {
         if photoMetadata?.results != nil {
           let numImages = (photoMetadata?.results)!.count
           // Add at most 9 items to the UICollectionView
-          let numInGrid = min(numImages, 9)
+          let numInGrid = Int(min(numImages, 8) / 2) * 2
           
           // Rescale the images based on how many there are
-          let widthMinusBorder = UIScreen.main.bounds.width - Style.PHOTO_BORDER
-          var photoWidth = widthMinusBorder / 3
+          // let widthMinusBorder = UIScreen.main.bounds.width // - Style.PHOTO_BORDER // TODO
+          // let photoWidth = self.collectionView.frame.width / 2.1
+          // self.flowLayout.itemSize = CGSize(width: photoWidth, height: photoWidth)
           
-          if numInGrid < 3 {
-            photoWidth = widthMinusBorder
-          } else if numInGrid < 6 {
-            photoWidth = widthMinusBorder / 2
-          }
+          //          if numInGrid < 3 {
+          //            photoWidth = widthMinusBorder
+          //          } else if numInGrid < 6 {
+          //            photoWidth = widthMinusBorder / 2
+          //          }
           
-          self.flowLayout.itemSize = CGSize(width: photoWidth, height: photoWidth)
-          self.flowLayout.invalidateLayout()
+//          self.flowLayout.itemSize = CGSize(width: photoWidth, height: photoWidth)
           
           // Remove all old images
           self.placeImages.removeAll()
@@ -52,6 +52,7 @@ extension PlaceDetailsController {
                 if photo != nil {
                   self.placeImages.append(photo!)
                   self.collectionView.reloadData()
+                  self.flowLayout.invalidateLayout()
                 }
               }
             })

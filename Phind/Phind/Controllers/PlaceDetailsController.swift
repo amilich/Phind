@@ -16,6 +16,7 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
   
   // Data storage elements
   public var place = Place()
+  public var timelineEntry = TimelineEntry(placeUUID: "", placeLabel: "", startTime:Date(), endTime:Date(), movementType: "")
   var placeImages: [UIImage] = []
   
   // UI components
@@ -31,6 +32,7 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
   
   // Edit view controller
   // let editViewController = EditPlaceViewController()
+  let editViewController:EditViewController = UIStoryboard(name: "Edit", bundle: nil).instantiateViewController(withIdentifier: "Edit") as! EditViewController
   
   init() {
     super.init(nibName: nil, bundle: nil)
@@ -53,22 +55,38 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     backButton.addTarget(self, action: #selector(self.backPressed(_:)), for: .touchUpInside)
     editButton.addTarget(self, action: #selector(self.editPressed(_:)), for: .touchUpInside)
     
+    self.editViewController.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "PlaceCell")
+    
+    // Add the editViewController as a child view controller;
+    // needed so edit can access parent data
+    self.addChild(editViewController)
+    toggleEditVisibility(isHidden: true)
+    
     self.view.addSubview(label)
     self.view.addSubview(addressLabel)
     self.view.addSubview(backButton)
     self.view.addSubview(editButton)
     self.view.addSubview(collectionView)
+    self.view.addSubview(editViewController.searchWrap)
+    self.view.addSubview(editViewController.tableView)
+    self.view.addSubview(editViewController.searchBar)
   }
   
   internal func setupStyle() {
     // Setup shadow.
-    Style.ApplyDropShadow(view: shadowWrap)
-    Style.ApplyRoundedCorners(view: shadowWrap)
-    Style.SetFullWidth(view: shadowWrap)
+    Style.ApplyDropShadow(view: view)
+//    Style.ApplyDropShadow(view: flowWrap)
+//    Style.ApplyDropShadow(view: shadowWrap)
+//    Style.ApplyDropShadow(view: collectionView)
+    Style.ApplyDropShadow(view: editViewController.view)
     
+    Style.SetFullWidth(view: shadowWrap)
+
     // Setup flow layout style.
+    // Style.ApplyRoundedCorners(view: view, clip: false)
+    Style.ApplyRoundedCorners(view: shadowWrap, clip: true)
     Style.ApplyRoundedCorners(view: flowWrap, clip: true)
-    Style.ApplyRoundedCorners(view: self.view)
+    Style.ApplyRoundedCorners(view: editViewController.view, clip: true)
     
     self.collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
 
@@ -76,25 +94,79 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
        if let mainVC = mainVC as? MainViewController {
         self.view.frame = mainVC.shadowWrap.frame
         self.shadowWrap.frame = mainVC.shadowWrap.frame
-        self.flowWrap.frame = mainVC.tableWrap.frame
-        self.collectionView.frame = CGRect(x:mainVC.tableWrap.frame.minX, y: mainVC.tableWrap.frame.minY + Style.DETAILS_LABEL_OFFSET, width:mainVC.tableWrap.frame.width, height:Style.DETAILS_PHOTO_VIEW_HEIGHT)
+        self.flowWrap.frame = mainVC.shadowWrap.frame // mainVC.tableWrap.frame
+        
+        // TODO resolve the 4 and 8 constants
+        self.collectionView.frame = CGRect(x:mainVC.tableWrap.frame.minX - 2, y: mainVC.tableWrap.frame.minY + Style.DETAILS_LABEL_OFFSET, width:mainVC.tableWrap.frame.width + 2, height:Style.DETAILS_PHOTO_VIEW_HEIGHT)
+        
+        self.editViewController.view.frame = self.collectionView.frame
+        self.editViewController.searchWrap.frame = self.editViewController.view.frame
        }
      }
   }
   
-  @objc func backPressed(_ sender: UIButton!) {
-    self.view.isHidden = !self.view.isHidden
-    if let mainVC = self.parent {
-      if let mainVC = mainVC as? MainViewController {
-        mainVC.shadowWrap.isHidden = false
+  // Go back to timeline or PlaceDetails. Also called after new place is selected.
+  public func doBackPress(searchVisible: Bool) {
+    if (searchVisible) {
+      // Edit view is hidden; go back to map
+      self.view.isHidden = true
+      if let mainVC = self.parent {
+        if let mainVC = mainVC as? MainViewController {
+          mainVC.shadowWrap.isHidden = false
+          mainVC.reloadView()
+        }
       }
+    } else {
+      // Edit view is on screen; go back to place details
+      toggleEditVisibility(isHidden: true)
+      self.flowWrap.isHidden = false
+      self.addressLabel.isHidden = false
+      self.label.isHidden = false
+      self.collectionView.reloadData()
     }
+  }
+  
+  // Back press target function for back UIButton
+  @objc func backPressed(_ sender: UIButton!) {
+    doBackPress(searchVisible: self.editViewController.searchWrap.isHidden)
   }
   
   // Show the edit view controller
   @objc func editPressed(_ sender: UIButton!) {
-    // self.editViewController.view.isHidden = false
+    self.flowWrap.isHidden = true
+    self.addressLabel.isHidden = true
+    self.label.isHidden = true
+    
+    toggleEditVisibility(isHidden: false)
+    
     Logger.shared.debug("Edit button clicked")
+  }
+  
+  // Show or hide all edit components
+  internal func toggleEditVisibility(isHidden : Bool) {
+    self.editViewController.view.isHidden = isHidden
+    self.editViewController.searchWrap.isHidden = isHidden
+    self.editViewController.searchBar.isHidden = isHidden
+    self.editViewController.tableView.isHidden = isHidden
+  }
+  
+  // Update the place for the current location entry
+  public func updatePlaceForTimelineEntry(place: Place) {
+    // If the location entry is not closed, the end time is going to be the current time. So we supply "Date()"
+    let locationEntries = ModelManager.shared.getLocationEntries(start: self.timelineEntry.startTime, end: self.timelineEntry.endTime ?? Date(), ascending: true)
+    let detailsRealm = try! Realm()
+    try! detailsRealm.write {
+      detailsRealm.add(place)
+      for entry in locationEntries {
+        entry.place_id = place.uuid
+      }
+    }
+  }
+  
+  // Update the internal place and location
+  public func setPlaceAndLocation(place: Place, timelineEntry: TimelineEntry) {
+    setPlace(place: place)
+    self.timelineEntry = timelineEntry
   }
   
   // Called to set the place to be displayed on the popup view.
@@ -108,6 +180,9 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     // Now load a new image
     self.loadPhotoForPlaceID(gms_id: place.gms_id)
     self.collectionView.reloadData()
+    
+    // Preemptively load the nearest places for an edit operation
+    self.editViewController.getNearestPlaces()
   }
 }
 

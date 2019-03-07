@@ -161,7 +161,7 @@ extension MainViewController :  UITableViewDataSource {
   // Called when you tap a row in the table; displays the place popup
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let timelineIdx = indexPath[1]
-    displayPlacePopup(selected: true, placeUUID: self.tableItems[timelineIdx].placeUUID)
+    displayPlacePopup(selected: true, timelineEntry: self.tableItems[timelineIdx])
   }
   
 }

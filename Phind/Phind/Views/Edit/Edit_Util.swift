@@ -9,14 +9,26 @@
 import UIKit
 
 extension EditViewController {
-  private func getNearestPlaces() {
+  public func getNearestPlaces() {
     // TODO: fill in with call to nearest places API
-    let nearbySearchUrl = URL(string: "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(self.place.latitude),\(self.place.longitude)&rankby=distance&key=\(Credentials.GMS_KEY)")!
+    if let detailsVC = self.parent {
+      if let detailsVC = detailsVC as? PlaceDetailsController {
+        repopulatePlaces(place: detailsVC.place)
+      } else {
+        print("Failed to get parent place")
+        return
+      }
+    } else {
+      print("Failed to get parent place")
+      return
+    }
+  }
+  
+  internal func repopulatePlaces(place: Place) {
+    let nearbySearchUrl = URL(string: "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(place.latitude),\(place.longitude)&rankby=distance&key=\(Credentials.GMS_KEY)")!
     
-    print(nearbySearchUrl)
-    
+    self.places.removeAll()
     let nearbySearchTask = sharedURLSession.dataTask(with: nearbySearchUrl) { (data, response, error) in
-      var nearbyPlaces = [String]()
       
       let nearbySearchResponse = ModelManager.shared.getNearbySearchResponse(data: data, response: response, error: error)
       if nearbySearchResponse == nil {
@@ -24,13 +36,24 @@ extension EditViewController {
         return
       }
       
-      // look for associated place in Realm; if it doesn't exist, create it
+      // Look for associated place in Realm; if it doesn't exist, create it
       let nearestPlaceResults = nearbySearchResponse!.prefix(5)
-      
       for nearestPlaceResult in nearestPlaceResults {
-        let name = nearestPlaceResult["name"] as! String
-        nearbyPlaces.append(name)
-        // write all to realm?
+        let newPlace = Place()
+        newPlace.name = nearestPlaceResult["name"] as! String
+        newPlace.gms_id = nearestPlaceResult["place_id"] as! String
+        newPlace.address = nearestPlaceResult["vicinity"] as! String
+        if let geometry = nearestPlaceResult["geometry"] as AnyObject? {
+          if let location = geometry["location"] as AnyObject? {
+            newPlace.latitude = location["lat"] as! Double
+            newPlace.longitude = location["lng"] as! Double
+          }
+        }
+        self.places.append(newPlace)
+        DispatchQueue.main.async {
+          // From the main thread, reload the data in the tableView
+          self.tableView.reloadData()
+        }
       }
       
     }
