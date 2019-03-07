@@ -16,6 +16,7 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
   
   // Data storage elements
   public var place = Place()
+  public var timelineEntry = TimelineEntry(placeUUID: "", placeLabel: "", startTime:Date(), endTime:Date(), movementType: "")
   var placeImages: [UIImage] = []
   
   // UI components
@@ -56,20 +57,19 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     
     self.editViewController.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "PlaceCell")
     
-    toggleEditVisibility(isHidden: true)
-    
     // Add the editViewController as a child view controller;
     // needed so edit can access parent data
     self.addChild(editViewController)
+    toggleEditVisibility(isHidden: true)
     
     self.view.addSubview(label)
     self.view.addSubview(addressLabel)
     self.view.addSubview(backButton)
     self.view.addSubview(editButton)
     self.view.addSubview(collectionView)
+    self.view.addSubview(editViewController.searchWrap)
     self.view.addSubview(editViewController.tableView)
     self.view.addSubview(editViewController.searchBar)
-    self.view.addSubview(editViewController.searchWrap)
   }
   
   internal func setupStyle() {
@@ -99,26 +99,32 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
      }
   }
   
-  @objc func backPressed(_ sender: UIButton!) {
-    
-    if (self.editViewController.searchWrap.isHidden) {
+  // Go back to timeline or PlaceDetails. Also called after new place is selected.
+  public func doBackPress(searchVisible: Bool) {
+    if (searchVisible) {
       // Edit view is hidden; go back to map
       self.view.isHidden = true
       if let mainVC = self.parent {
         if let mainVC = mainVC as? MainViewController {
           mainVC.shadowWrap.isHidden = false
+          mainVC.reloadView()
         }
       }
       print("Back from details")
     } else {
       // Edit view is on screen; go back to place details
       print("Back from edit view")
+      toggleEditVisibility(isHidden: true)
       self.flowWrap.isHidden = false
       self.addressLabel.isHidden = false
       self.label.isHidden = false
-      
-     toggleEditVisibility(isHidden: true)
+      self.collectionView.reloadData()
     }
+  }
+  
+  // Back press target function for back UIButton
+  @objc func backPressed(_ sender: UIButton!) {
+    doBackPress(searchVisible: self.editViewController.searchWrap.isHidden)
   }
   
   // Show the edit view controller
@@ -129,7 +135,6 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     
     toggleEditVisibility(isHidden: false)
     
-    self.flowWrap.isHidden = true
     Logger.shared.debug("Edit button clicked")
   }
   
@@ -139,6 +144,25 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     self.editViewController.searchWrap.isHidden = isHidden
     self.editViewController.searchBar.isHidden = isHidden
     self.editViewController.tableView.isHidden = isHidden
+  }
+  
+  // Update the place for the current location entry
+  public func updatePlaceForTimelineEntry(place: Place) {
+    // If the location entry is not closed, the end time is going to be the current time. So we supply "Date()"
+    let locationEntries = ModelManager.shared.getLocationEntries(start: self.timelineEntry.startTime, end: self.timelineEntry.endTime ?? Date(), ascending: true)
+    let detailsRealm = try! Realm()
+    try! detailsRealm.write {
+      detailsRealm.add(place)
+      for entry in locationEntries {
+        entry.place_id = place.uuid
+      }
+    }
+  }
+  
+  // Update the internal place and location
+  public func setPlaceAndLocation(place: Place, timelineEntry: TimelineEntry) {
+    setPlace(place: place)
+    self.timelineEntry = timelineEntry
   }
   
   // Called to set the place to be displayed on the popup view.

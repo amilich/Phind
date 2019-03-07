@@ -130,14 +130,13 @@ class MainViewController: UIViewController, UITableViewDelegate  {
   
   // Display the place popup view and send the right information
   // to the popup view controller.
-  func displayPlacePopup(selected: Bool, placeUUID: String?) {
-    
+  func displayPlacePopup(selected: Bool, timelineEntry: TimelineEntry) {
+    let placeUUID = timelineEntry.placeUUID
     if (selected) {
       let uuid = placeUUID!
       let place = ModelManager.shared.getPlaceWithUUID(uuid: uuid)
       if place != nil {
-        // TODO(Andrew) why does place lat/lon return -180.0 for both
-        // Temporarily looking for a location entry with given place UUID
+        // Set the place for the place details view and load that view
         self.reloadMapView()
         let centCoord = CLLocationCoordinate2D(
           latitude: place!.latitude,
@@ -150,7 +149,7 @@ class MainViewController: UIViewController, UITableViewDelegate  {
         )
         mapView.setRegion(viewRegion, animated: true)
         
-        self.placeDetailsController.setPlace(place: place!)
+        self.placeDetailsController.setPlaceAndLocation(place: place!, timelineEntry: timelineEntry)
         self.placeDetailsController.view.isHidden = false
         self.shadowWrap.isHidden = true
       }

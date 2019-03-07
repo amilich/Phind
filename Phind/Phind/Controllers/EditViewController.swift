@@ -37,6 +37,14 @@ class EditViewController : UIViewController, UITableViewDelegate, UITableViewDat
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let selectedIdx = indexPath[1]
     print("Tapped \(selectedIdx)")
+    if let detailsVC = self.parent {
+      if let detailsVC = detailsVC as? PlaceDetailsController {
+        let newPlace = self.places[selectedIdx]
+        detailsVC.setPlace(place: newPlace)
+        detailsVC.updatePlaceForTimelineEntry(place: newPlace)
+        detailsVC.doBackPress(searchVisible: false)
+      }
+    }
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
