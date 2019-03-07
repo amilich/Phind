@@ -74,14 +74,19 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
   
   internal func setupStyle() {
     // Setup shadow.
-    Style.ApplyDropShadow(view: shadowWrap)
-    Style.ApplyRoundedCorners(view: shadowWrap)
-    Style.SetFullWidth(view: shadowWrap)
+    Style.ApplyDropShadow(view: view)
+//    Style.ApplyDropShadow(view: flowWrap)
+//    Style.ApplyDropShadow(view: shadowWrap)
+//    Style.ApplyDropShadow(view: collectionView)
+    Style.ApplyDropShadow(view: editViewController.view)
     
+    Style.SetFullWidth(view: shadowWrap)
+
     // Setup flow layout style.
+    // Style.ApplyRoundedCorners(view: view, clip: false)
+    Style.ApplyRoundedCorners(view: shadowWrap, clip: true)
     Style.ApplyRoundedCorners(view: flowWrap, clip: true)
-    Style.ApplyRoundedCorners(view: self.view)
-    Style.ApplyRoundedCorners(view: self.editViewController.view, clip: true)
+    Style.ApplyRoundedCorners(view: editViewController.view, clip: true)
     
     self.collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
 
@@ -89,9 +94,10 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
        if let mainVC = mainVC as? MainViewController {
         self.view.frame = mainVC.shadowWrap.frame
         self.shadowWrap.frame = mainVC.shadowWrap.frame
-        self.flowWrap.frame = mainVC.tableWrap.frame
+        self.flowWrap.frame = mainVC.shadowWrap.frame // mainVC.tableWrap.frame
         
-        self.collectionView.frame = CGRect(x:mainVC.tableWrap.frame.minX, y: mainVC.tableWrap.frame.minY + Style.DETAILS_LABEL_OFFSET, width:mainVC.tableWrap.frame.width, height:Style.DETAILS_PHOTO_VIEW_HEIGHT)
+        // TODO resolve the 4 and 8 constants
+        self.collectionView.frame = CGRect(x:mainVC.tableWrap.frame.minX - 2, y: mainVC.tableWrap.frame.minY + Style.DETAILS_LABEL_OFFSET, width:mainVC.tableWrap.frame.width + 2, height:Style.DETAILS_PHOTO_VIEW_HEIGHT)
         
         self.editViewController.view.frame = self.collectionView.frame
         self.editViewController.searchWrap.frame = self.editViewController.view.frame

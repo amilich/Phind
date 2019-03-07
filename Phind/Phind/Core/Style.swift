@@ -42,8 +42,8 @@ class Style {
   )
   
   public static let SCREEN_MARGIN : CGFloat = 12
-  public static let CARD_CORNERS : CGFloat = 24
-  public static let PHOTO_BORDER : CGFloat = 84.0
+  public static let CARD_CORNERS : CGFloat = 24.0
+  public static let PHOTO_BORDER : CGFloat = 48.0
   public static let DETAILS_LABEL_OFFSET : CGFloat = 120.0
   public static let DETAILS_PHOTO_VIEW_HEIGHT : CGFloat = 200.0
 }

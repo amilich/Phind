@@ -42,13 +42,13 @@ extension EditViewController {
         let newPlace = Place()
         newPlace.name = nearestPlaceResult["name"] as! String
         newPlace.gms_id = nearestPlaceResult["place_id"] as! String
+        newPlace.address = nearestPlaceResult["vicinity"] as! String
         if let geometry = nearestPlaceResult["geometry"] as AnyObject? {
           if let location = geometry["location"] as AnyObject? {
             newPlace.latitude = location["lat"] as! Double
             newPlace.longitude = location["lng"] as! Double
           }
         }
-        print("added new place \(newPlace.name)")
         self.places.append(newPlace)
         DispatchQueue.main.async {
           // From the main thread, reload the data in the tableView

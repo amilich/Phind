@@ -77,7 +77,7 @@
                                 <color key="backgroundColor" red="0.32941176470588235" green="0.44705882352941173" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XUH-Mg-KTg" userLabel="ShadowWrap">
-                                <rect key="frame" x="0.0" y="458" width="414" height="438"/>
+                                <rect key="frame" x="0.0" y="458" width="414" height="355"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f0p-bB-vpw" userLabel="TableWrap">
