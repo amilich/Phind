@@ -31,6 +31,7 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
   
   // Edit view controller
   // let editViewController = EditPlaceViewController()
+  let editViewController:EditViewController = UIStoryboard(name: "Edit", bundle: nil).instantiateViewController(withIdentifier: "Edit") as! EditViewController
   
   init() {
     super.init(nibName: nil, bundle: nil)
@@ -53,11 +54,22 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     backButton.addTarget(self, action: #selector(self.backPressed(_:)), for: .touchUpInside)
     editButton.addTarget(self, action: #selector(self.editPressed(_:)), for: .touchUpInside)
     
+    self.editViewController.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "PlaceCell")
+    
+    toggleEditVisibility(isHidden: true)
+    
+    // Add the editViewController as a child view controller;
+    // needed so edit can access parent data
+    self.addChild(editViewController)
+    
     self.view.addSubview(label)
     self.view.addSubview(addressLabel)
     self.view.addSubview(backButton)
     self.view.addSubview(editButton)
     self.view.addSubview(collectionView)
+    self.view.addSubview(editViewController.tableView)
+    self.view.addSubview(editViewController.searchBar)
+    self.view.addSubview(editViewController.searchWrap)
   }
   
   internal func setupStyle() {
@@ -69,6 +81,7 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     // Setup flow layout style.
     Style.ApplyRoundedCorners(view: flowWrap, clip: true)
     Style.ApplyRoundedCorners(view: self.view)
+    Style.ApplyRoundedCorners(view: self.editViewController.view, clip: true)
     
     self.collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
 
@@ -77,24 +90,55 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
         self.view.frame = mainVC.shadowWrap.frame
         self.shadowWrap.frame = mainVC.shadowWrap.frame
         self.flowWrap.frame = mainVC.tableWrap.frame
+        
         self.collectionView.frame = CGRect(x:mainVC.tableWrap.frame.minX, y: mainVC.tableWrap.frame.minY + Style.DETAILS_LABEL_OFFSET, width:mainVC.tableWrap.frame.width, height:Style.DETAILS_PHOTO_VIEW_HEIGHT)
+        
+        self.editViewController.view.frame = self.collectionView.frame
+        self.editViewController.searchWrap.frame = self.editViewController.view.frame
        }
      }
   }
   
   @objc func backPressed(_ sender: UIButton!) {
-    self.view.isHidden = !self.view.isHidden
-    if let mainVC = self.parent {
-      if let mainVC = mainVC as? MainViewController {
-        mainVC.shadowWrap.isHidden = false
+    
+    if (self.editViewController.searchWrap.isHidden) {
+      // Edit view is hidden; go back to map
+      self.view.isHidden = true
+      if let mainVC = self.parent {
+        if let mainVC = mainVC as? MainViewController {
+          mainVC.shadowWrap.isHidden = false
+        }
       }
+      print("Back from details")
+    } else {
+      // Edit view is on screen; go back to place details
+      print("Back from edit view")
+      self.flowWrap.isHidden = false
+      self.addressLabel.isHidden = false
+      self.label.isHidden = false
+      
+     toggleEditVisibility(isHidden: true)
     }
   }
   
   // Show the edit view controller
   @objc func editPressed(_ sender: UIButton!) {
-    // self.editViewController.view.isHidden = false
+    self.flowWrap.isHidden = true
+    self.addressLabel.isHidden = true
+    self.label.isHidden = true
+    
+    toggleEditVisibility(isHidden: false)
+    
+    self.flowWrap.isHidden = true
     Logger.shared.debug("Edit button clicked")
+  }
+  
+  // Show or hide all edit components
+  internal func toggleEditVisibility(isHidden : Bool) {
+    self.editViewController.view.isHidden = isHidden
+    self.editViewController.searchWrap.isHidden = isHidden
+    self.editViewController.searchBar.isHidden = isHidden
+    self.editViewController.tableView.isHidden = isHidden
   }
   
   // Called to set the place to be displayed on the popup view.
@@ -108,6 +152,9 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     // Now load a new image
     self.loadPhotoForPlaceID(gms_id: place.gms_id)
     self.collectionView.reloadData()
+    
+    // Preemptively load the nearest places for an edit operation
+    self.editViewController.getNearestPlaces()
   }
 }
 
