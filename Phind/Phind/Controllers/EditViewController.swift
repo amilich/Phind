@@ -36,7 +36,6 @@ class EditViewController : UIViewController, UITableViewDelegate, UITableViewDat
   // Called when you tap a row in the table; displays the place popup
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let selectedIdx = indexPath[1]
-    print("Tapped \(selectedIdx)")
     if let detailsVC = self.parent {
       if let detailsVC = detailsVC as? PlaceDetailsController {
         let newPlace = self.places[selectedIdx]

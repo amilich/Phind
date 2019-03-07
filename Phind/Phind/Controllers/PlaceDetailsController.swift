@@ -110,10 +110,8 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
           mainVC.reloadView()
         }
       }
-      print("Back from details")
     } else {
       // Edit view is on screen; go back to place details
-      print("Back from edit view")
       toggleEditVisibility(isHidden: true)
       self.flowWrap.isHidden = false
       self.addressLabel.isHidden = false

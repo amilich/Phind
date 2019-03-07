@@ -27,7 +27,6 @@ extension EditViewController {
   internal func repopulatePlaces(place: Place) {
     let nearbySearchUrl = URL(string: "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(place.latitude),\(place.longitude)&rankby=distance&key=\(Credentials.GMS_KEY)")!
     
-    print("populating places")
     self.places.removeAll()
     let nearbySearchTask = sharedURLSession.dataTask(with: nearbySearchUrl) { (data, response, error) in
       
