@@ -8,10 +8,12 @@
 
 import UIKit
 
+/// The PhotoCell encapsulates a single photo used to display place details.
 class PhotoCell: UICollectionViewCell {
   
   @IBOutlet var placePhoto: UIImageView!
   
+  // Initialize the cell with the necessary style parameters.
   override init(frame: CGRect) {
     super.init(frame: frame)
     
@@ -23,10 +25,12 @@ class PhotoCell: UICollectionViewCell {
     self.backgroundColor = .red
   }
   
+  // Used to encode and decode the place in the storyboard view.
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
   
+  // Awake the cell component when it is needed for rendering.
   override func awakeFromNib() {
     super.awakeFromNib();
   }

@@ -8,19 +8,16 @@
 
 import MapKit
 
-// Taking this extension to fit our map around annotations
-// https://stackoverflow.com/questions/39747957/mapview-to-show-all-annotations-and-zoom-in-as-much-as-possible-of-the-map?rq=1
-// Could also use a showAnnotations() call, but this had better
-// padding behavior.
+/// This extension enables us to fit the map view around all annotations (https://stackoverflow.com/questions/39747957/mapview-to-show-all-annotations-and-zoom-in-as-much-as-possible-of-the-map?rq=1). We could also use a showAnnotations() call, but this had better padding behavior and can be customized depending on the layout of the other cards.
 extension MKMapView {
 
   /// When we call this function, we have already added the annotations to the map, and just want all of them to be displayed.
   func fitAll() {
-    var zoomRect            = MKMapRect.null;
+    var zoomRect = MKMapRect.null;
     for annotation in annotations {
       let annotationPoint = MKMapPoint(annotation.coordinate)
-      let pointRect       = MKMapRect(x: annotationPoint.x, y: annotationPoint.y, width: 0.01, height: 0.01);
-      zoomRect            = zoomRect.union(pointRect);
+      let pointRect = MKMapRect(x: annotationPoint.x, y: annotationPoint.y, width: 0.01, height: 0.01)
+      zoomRect = zoomRect.union(pointRect)
     }
     setVisibleMapRect(zoomRect, edgePadding: UIEdgeInsets(top: 100, left: 100, bottom: 100, right: 100), animated: true)
   }
@@ -30,16 +27,15 @@ extension MKMapView {
     var zoomRect:MKMapRect  = MKMapRect.null
     
     for annotation in annotations {
-      let aPoint          = MKMapPoint(annotation.coordinate)
-      let rect            = MKMapRect(x: aPoint.x, y: aPoint.y, width: 0.1, height: 0.1)
-      
+      let aPoint = MKMapPoint(annotation.coordinate)
+      let rect = MKMapRect(x: aPoint.x, y: aPoint.y, width: 0.1, height: 0.1)
       if zoomRect.isNull {
         zoomRect = rect
       } else {
         zoomRect = zoomRect.union(rect)
       }
     }
-    if(show) {
+    if (show) {
       addAnnotations(annotations)
     }
     setVisibleMapRect(zoomRect, edgePadding: UIEdgeInsets(top: 100, left: 100, bottom: 100, right: 100), animated: true)

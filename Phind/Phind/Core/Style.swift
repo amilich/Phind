@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+/// Class containing all style constants for Phind, including colors, offsets, and shadow parameters.
 class Style {
   
   // Public constants.
@@ -46,15 +47,27 @@ class Style {
   public static let PHOTO_BORDER : CGFloat = 48.0
   public static let DETAILS_LABEL_OFFSET : CGFloat = 120.0
   public static let DETAILS_PHOTO_VIEW_HEIGHT : CGFloat = 200.0
+  
+  /// Width of the route drawn on the MapView
+  public static let ROUTE_WIDTH: CGFloat = 4.0
+  /// Color for the
+  public static let ROUTE_COLOR: UIColor = Style.SECONDARY_COLOR
+  
 }
 
 extension Style {
   
+  /// Round the corners of the UIView.
+  /// - parameter view: The UIView to add rounded corners to
+  /// - parameter clip: Whether to clip the corners of the UIView (default false)
   public static func ApplyRoundedCorners(view: UIView, clip: Bool = false) {
+    
     view.layer.cornerRadius = Style.CARD_CORNERS
     view.clipsToBounds = clip
   }
   
+  /// Apply shadow to the boundary of a UIView.
+  /// - parameter view: The UIView to add a shadow to
   public static func ApplyDropShadow(view: UIView) {
     
     view.layer.shadowOpacity = 0.16
@@ -64,11 +77,16 @@ extension Style {
     
   }
   
+  /// Set a UIView to the full width of the screen
+  /// - parameter view: The UIView to set the width of
+  /// - parameter positionWithMargin: Whether to set the frame to the screen margin position (default true).
   public static func SetFullWidth(view: UIView, positionWithMargin: Bool = true) {
+    
     view.frame.size.width = UIScreen.main.bounds.width - Style.SCREEN_MARGIN * 2
     if (positionWithMargin) {
       view.frame.origin.x = Style.SCREEN_MARGIN
     }
+    
   }
   
 }

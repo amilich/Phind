@@ -12,11 +12,15 @@ import GoogleMaps
 import GooglePlaces
 import JustLog
 
+///
 class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
   
   // Data storage elements
+  /// The place object represents the current Realm place used to display details
   public var place = Place()
+  /// The internal timelineEntry corresponds to the set of timeline entries related to the given place. A place may correspond to multiple timeline entries (such as an individual's home or workplace).
   public var timelineEntry = TimelineEntry(placeUUID: "", placeLabel: "", startTime:Date(), endTime:Date(), movementType: "")
+  /// This data structure holds the UIImages for the photo collection in the place details page.
   var placeImages: [UIImage] = []
   
   // UI components
@@ -72,18 +76,16 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     self.view.addSubview(editViewController.searchBar)
   }
   
+  /// Update the style for the PlaceDetails card. Applies rounder corners and shadow; then sets up the frames for the collection and table views.
   internal func setupStyle() {
+    
     // Setup shadow.
     Style.ApplyDropShadow(view: view)
-//    Style.ApplyDropShadow(view: flowWrap)
-//    Style.ApplyDropShadow(view: shadowWrap)
-//    Style.ApplyDropShadow(view: collectionView)
     Style.ApplyDropShadow(view: editViewController.view)
     
     Style.SetFullWidth(view: shadowWrap)
 
     // Setup flow layout style.
-    // Style.ApplyRoundedCorners(view: view, clip: false)
     Style.ApplyRoundedCorners(view: shadowWrap, clip: true)
     Style.ApplyRoundedCorners(view: flowWrap, clip: true)
     Style.ApplyRoundedCorners(view: editViewController.view, clip: true)
@@ -103,9 +105,11 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
         self.editViewController.searchWrap.frame = self.editViewController.view.frame
        }
      }
+    
   }
   
-  // Go back to timeline or PlaceDetails. Also called after new place is selected.
+  /// Go back to timeline or PlaceDetails. Also called after new place is selected.
+  /// - parameter searchVisible: Whether the user is currently in the edit page or the details page. This determines which components to set visible.
   public func doBackPress(searchVisible: Bool) {
     if (searchVisible) {
       // Edit view is hidden; go back to map
@@ -142,7 +146,8 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     Logger.shared.debug("Edit button clicked")
   }
   
-  // Show or hide all edit components
+  /// Show or hide all edit components
+  /// - parameter isHidden: Whether the edit view is visible or not.
   internal func toggleEditVisibility(isHidden : Bool) {
     self.editViewController.view.isHidden = isHidden
     self.editViewController.searchWrap.isHidden = isHidden
@@ -150,7 +155,8 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     self.editViewController.tableView.isHidden = isHidden
   }
   
-  // Update the place for the current location entry
+  /// Update the place for the current location entry
+  /// - parameter place: The place that the user has edited. Update the timeline to correspond to this place.
   public func updatePlaceForTimelineEntry(place: Place) {
     // If the location entry is not closed, the end time is going to be the current time. So we supply "Date()"
     let locationEntries = ModelManager.shared.getLocationEntries(start: self.timelineEntry.startTime, end: self.timelineEntry.endTime ?? Date(), ascending: true)
@@ -163,13 +169,16 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     }
   }
   
-  // Update the internal place and location
+  /// Update the internal place and location
+  /// - parameter place: The place to use for placeDetails.
+  /// - parameter timelineEntry: The timeline entry corresponding to the place that may be edited.
   public func setPlaceAndLocation(place: Place, timelineEntry: TimelineEntry) {
     setPlace(place: place)
     self.timelineEntry = timelineEntry
   }
   
-  // Called to set the place to be displayed on the popup view.
+  /// Called to set the place to be displayed on the popup view.
+  /// - parameter place: The place to set for displaying details and edting.
   public func setPlace(place: Place) {
     self.place = place;
     self.label.text = self.place.name

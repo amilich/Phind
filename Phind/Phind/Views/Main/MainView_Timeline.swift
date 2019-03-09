@@ -12,9 +12,10 @@ import Foundation
 import UIKit
 import JustLog
 
+/// Extensions for the MainViewController to set proper style for timeline.
 extension MainViewController {
   
-  // Register cell element and data source with table view
+  /// Register cell element and data source with the internal TableView.
   func setupTimelineView() {
     
     // Setup shadow.
@@ -37,6 +38,7 @@ extension MainViewController {
     
   }
   
+  /// Delete all elements from timeline and add new entries. Then reload the tableView UIView to push the data to the screen.
   internal func reloadTimelineView() {
     
     // Iterate through location entries and draw them on the map.
@@ -48,6 +50,8 @@ extension MainViewController {
     
   }
   
+  /// Add an entry to the timeline.
+  /// - parameter locationEntry: The location entry used to create a timeline entry; this entry is subsequently inserted to the set of items for the timeline table.
   func addTimelineEntry(_ locationEntry: LocationEntry) {
     
     let place = ModelManager.shared.getPlace(locationEntry: locationEntry)
@@ -61,12 +65,11 @@ extension MainViewController {
       )
       self.tableItems.insert(timelineEntry, at: 0)
     }
-    // TODO: What do we do if place ID is nil?
-    
   }
   
 }
 
+/// Data source extensions for the MainViewController to manage the timeline TableView.
 extension MainViewController :  UITableViewDataSource {
   
   // Computes cell content based on the shared array of tableItems
@@ -89,6 +92,9 @@ extension MainViewController :  UITableViewDataSource {
     
   }
   
+  /// Set the text for a timeline table cell.
+  /// - parameter tableCell: The tableCell used to set text.
+  /// - parameter timelineEntry: The TimelineEntry containing necessary information for the tableCell.
   func setupCellLabel(_ tableCell: TimelineUITableViewCell, _ timelineEntry: TimelineEntry) {
     
     // Update table cell fields.
@@ -101,6 +107,11 @@ extension MainViewController :  UITableViewDataSource {
     
   }
   
+  /// Set the text and start/end times for a given timeline cell.
+  /// - parameter tableCell: The tableCell used to set the time label.
+  /// - parameter timelineEntry: The TimelineEntry containing necessary information for the tableCell.
+  /// - parameter startTime: Start time for timeline entry.
+  /// - parameter endTime: End time for timeline entry.
   func setupTimeLabel(_ tableCell: TimelineUITableViewCell,
                       _ timelineEntry: TimelineEntry,
                       _ startTime: Date, _ endTime: Date?) {
@@ -118,6 +129,10 @@ extension MainViewController :  UITableViewDataSource {
     
   }
   
+  /// Style and setup the duration UILabel in each table cell.
+  /// - parameter tableCell: The tableCell used to set the time label.
+  /// - parameter startTime: Start time for timeline entry.
+  /// - parameter endTime: End time for timeline entry.
   func setupDurationLabel(_ tableCell: TimelineUITableViewCell,
                           _ startTime: Date, _ endTime: Date?) {
   
@@ -130,6 +145,10 @@ extension MainViewController :  UITableViewDataSource {
   
   }
   
+  /// Set the proper image for the given table cell.
+  /// - parameter tableCell: The tableCell used to set the time label.
+  /// - parameter timelineEntry: The timelineEntry is used to determine the movement type, which determines the proper image to use.
+  /// - parameter indexPath: The indexPath determines which cell and information should be used.
   func setupTimelineImage(_ tableCell: TimelineUITableViewCell,
                           _ timelineEntry: TimelineEntry,
                           _ indexPath: IndexPath) {
@@ -148,20 +167,27 @@ extension MainViewController :  UITableViewDataSource {
     
   }
   
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-  {
+  // The height of each cell in the table.
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    
     // TODO: Make this a constant.
     return 64.0
+    
   }
   
+  // The number of items in the table
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
     return self.tableItems.count
+    
   }
   
   // Called when you tap a row in the table; displays the place popup
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
     let timelineIdx = indexPath[1]
     displayPlacePopup(selected: true, timelineEntry: self.tableItems[timelineIdx])
+    
   }
   
 }

@@ -15,11 +15,17 @@ import GooglePlaces
 import MapKit
 import JustLog
 
+/// The MapPin object can be added as an annotation to a MapView; it stores an individual coordinate, title, and subtitle.
 class MapPin: NSObject, MKAnnotation {
+  
   dynamic var coordinate: CLLocationCoordinate2D
   dynamic var title: String?
   dynamic var subtitle: String?
   
+  /// Constructor for MapPin annotation object.
+  /// - parameter coordinate: 2D coordinate for MapPin
+  /// - parameter title: Title string for pin
+  /// - parameter subTitle: Subtitle text for map pin
   init(coordinate: CLLocationCoordinate2D, title: String? = nil, subtitle: String? = nil) {
     self.coordinate = coordinate
     self.title = title
@@ -27,11 +33,13 @@ class MapPin: NSObject, MKAnnotation {
     
     super.init()
   }
+  
 }
 
+/// Extension to MainViewController for MapView manipulation functions.
 extension MainViewController :  MKMapViewDelegate {
   
-  // Add locations from today to map and timeline
+  /// Add locations from today to the internal MapView and the timeline TableView.
   internal func reloadMapView() {
     
     // Reset mapkit view.
@@ -55,19 +63,21 @@ extension MainViewController :  MKMapViewDelegate {
     
   }
   
+  // Create the polyline renderer for the mapView.
   func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
     
     // Return an `MKPolylineRenderer` for the `MKPolyline` in the `MKMapViewDelegate`s method
     if let polyline = overlay as? MKPolyline {
       let mapLineRenderer = MKPolylineRenderer(polyline: polyline)
-      mapLineRenderer.strokeColor = ROUTE_COLOR
-      mapLineRenderer.lineWidth = ROUTE_WIDTH
+      mapLineRenderer.strokeColor = Style.ROUTE_COLOR
+      mapLineRenderer.lineWidth = Style.ROUTE_WIDTH
       return mapLineRenderer
     }
     fatalError("Something wrong...")
     
   }
   
+  // Draw a pin on the mapView.
   func drawPin(_ lastCoord: inout CLLocationCoordinate2D?, _ locationEntry: LocationEntry) {
     
     // Add a pin for each stationary location on the map.
@@ -103,6 +113,7 @@ extension MainViewController :  MKMapViewDelegate {
     
   }
   
+  // Draw the user's route onto the MapView.
   func drawRoute(_ lastCoord: inout CLLocationCoordinate2D?, _ locationEntry: LocationEntry) {
     
     // Ensure that coordinatse are in proper order, by timestamp.

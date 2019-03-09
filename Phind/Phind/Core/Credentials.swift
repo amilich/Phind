@@ -10,7 +10,9 @@ import Foundation
 
 class Credentials {
   
+  /// Logger API token
   public static let LOGZ_IO_TOKEN = "WwwhuifBTWaSUATASxASOztzmHvXkRZJ"
+  /// Google API token
   public static let GMS_KEY = "AIzaSyAvGhM_3ABGXNwCdC2pfjnb_MbbBJWeJFU"
   
 }

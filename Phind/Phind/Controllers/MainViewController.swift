@@ -12,7 +12,9 @@ import GooglePlaces
 import MapKit
 import JustLog
 
+/// The TimelineEntry object references a start and end time, a movement time, and a label for the place in the timeline UI.
 class TimelineEntry: NSObject {
+  
   var startTime: Date
   var endTime: Date?
   var placeLabel: String
@@ -20,6 +22,12 @@ class TimelineEntry: NSObject {
   var placeUUID: String?
   var movementType: String
   
+  /// Constructor for the TimelineEntry.
+  /// - parameter placeUUID: UUID corresponding to Realm object for the place for this TimelineEntry.
+  /// - parameter placeLabel: The label for the given place.
+  /// - parameter startTime: The date object corresponding to the start of the given entry.
+  /// - parameter endTime: The end date for the given timeline entry (optional).
+  /// - parameter movementType: The type of movement (from CoreMotion).
   init(placeUUID: String, placeLabel: String, startTime: Date,
        endTime: Date?, movementType: String) {
     
@@ -32,8 +40,10 @@ class TimelineEntry: NSObject {
     super.init()
     
   }
+  
 }
 
+/// MainViewController object manages the layout and views for the entire application. In addition to the mapView, date label, and timelineView, it manages a child PlaceDetailsController (which has an additional child UIViewController for editing the place).
 class MainViewController: UIViewController, UITableViewDelegate  {
   
   // Header UI links.
@@ -45,26 +55,30 @@ class MainViewController: UIViewController, UITableViewDelegate  {
   @IBOutlet weak var mapView: MKMapView!
   
   // Timeline UI links.
+  /// The tableView stores the timeline entries.
   @IBOutlet weak var tableView: UITableView!
+  /// The tableWrap UIView is the first UIView encapsulating the tableView.
   @IBOutlet weak var tableWrap: UIView!
+  /// The shadowWrap encapsulates the tableWrap but contains different stylistic preferences.
   @IBOutlet weak var shadowWrap: UIView!
-  
-  // Misc
+  /// Icon for the tabBar (to view additional place or stats information).
   @IBOutlet weak var barIcon: UITabBarItem!
   
-  // Constants.
+  /// Latitudinal span for MapView
   let MAP_SPAN_LAT = 1000.0
+  /// Longitudinal span for MapView
   let MAP_SPAN_LONG = 1000.0
-  let ROUTE_WIDTH: CGFloat = 4.0
-  let ROUTE_COLOR: UIColor = Style.SECONDARY_COLOR
   
-  // TODO: Should this be moved into a function?
+  /// Date formatter used to properly format the date in the timeline header
   let formatter = DateFormatter()
+  /// The PlaceDetailsController is a child UIViewController used to display, hide, and show details on the selected place.
   let placeDetailsController:PlaceDetailsController = UIStoryboard(name: "PlaceDetails", bundle: nil).instantiateViewController(withIdentifier: "PlaceDetails") as! PlaceDetailsController
   
-  // Table content for dynamically reusable cells
+  /// Table content for dynamically reusable cells
   internal var tableItems: [TimelineEntry] = []
+  /// Current date used for Header content
   internal var currentDate: Date = Date()
+  /// Location entries used to populate timeline.
   internal var locationEntries: [LocationEntry] = []
 
   convenience init() {
@@ -77,6 +91,8 @@ class MainViewController: UIViewController, UITableViewDelegate  {
     self.reloadView()
   }
   
+  /// Update the date used on the label to the provided date parameter.
+  /// - parameter date: Date object used to update timeline header.
   internal func updateDate(_ date: Date) {
     
     formatter.dateFormat = "MMM d, yyyy"
@@ -86,6 +102,7 @@ class MainViewController: UIViewController, UITableViewDelegate  {
     
   }
   
+  // loads style and relevant information for the timeline
   override func viewDidLoad() {
     
     super.viewDidLoad()
@@ -110,6 +127,7 @@ class MainViewController: UIViewController, UITableViewDelegate  {
     
   }
   
+  /// Reload all internal data and propagate to the timeline view. First updates the location entries for this day, then reloads the map view to show correct pins, and ends by clearing and repopulating the timeline.
   internal func reloadView() {
     
     self.updateLocationEntries()
@@ -118,6 +136,7 @@ class MainViewController: UIViewController, UITableViewDelegate  {
     
   }
   
+  /// Set the internal location entries for the timeline view.
   internal func updateLocationEntries() {
     
     // Get all LocationEntries from today.
@@ -128,8 +147,9 @@ class MainViewController: UIViewController, UITableViewDelegate  {
     
   }
   
-  // Display the place popup view and send the right information
-  // to the popup view controller.
+  /// Display the place popup view and send the right information to the popup view controller.
+  /// - parameter selected: Whether the user has selected a given table entry.
+  /// - parameter timelineEntry: The timelineEntry object related to the table entry selected by the user.
   func displayPlacePopup(selected: Bool, timelineEntry: TimelineEntry) {
     let placeUUID = timelineEntry.placeUUID
     if (selected) {

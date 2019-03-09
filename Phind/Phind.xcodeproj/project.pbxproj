@@ -45,7 +45,6 @@
 		49B70CC5222DDBA4001E7167 /* PlaceDetails_Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B70CC4222DDBA4001E7167 /* PlaceDetails_Util.swift */; };
 		49B70CC7222DDC8E001E7167 /* PlaceDetails_PhotoTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B70CC6222DDC8E001E7167 /* PlaceDetails_PhotoTable.swift */; };
 		49B70CC9222DDE28001E7167 /* PlaceDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49B70CC8222DDE28001E7167 /* PlaceDetails.storyboard */; };
-		49B70CCB222E2072001E7167 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B70CCA222E2071001E7167 /* TabBarController.swift */; };
 		49B70CCE222E238D001E7167 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B70CCD222E238D001E7167 /* EditViewController.swift */; };
 		49B70CD0222E23A0001E7167 /* Edit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49B70CCF222E23A0001E7167 /* Edit.storyboard */; };
 		A8B58E4B9A76F185F279E9B3 /* Pods_Phind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B9BCD483594BE1F3920C60E /* Pods_Phind.framework */; };
@@ -113,7 +112,6 @@
 		49B70CC4222DDBA4001E7167 /* PlaceDetails_Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetails_Util.swift; sourceTree = "<group>"; };
 		49B70CC6222DDC8E001E7167 /* PlaceDetails_PhotoTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetails_PhotoTable.swift; sourceTree = "<group>"; };
 		49B70CC8222DDE28001E7167 /* PlaceDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PlaceDetails.storyboard; sourceTree = "<group>"; };
-		49B70CCA222E2071001E7167 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		49B70CCD222E238D001E7167 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		49B70CCF222E23A0001E7167 /* Edit.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Edit.storyboard; sourceTree = "<group>"; };
 		5E3C30D3DCE258D332C8BCEC /* Pods-PhindTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhindTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhindTests/Pods-PhindTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -162,7 +160,6 @@
 				49AD3CD22213E32F000494D9 /* MapViewFitExtension.swift */,
 				492F5C6121FD814F009B6411 /* LaunchScreen.storyboard */,
 				F97F19BB22133490008CF75E /* StatisticsUICollectionViewCell.swift */,
-				49B70CCA222E2071001E7167 /* TabBarController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -627,7 +624,6 @@
 				49AD3CD32213E32F000494D9 /* MapViewFitExtension.swift in Sources */,
 				49B70CC7222DDC8E001E7167 /* PlaceDetails_PhotoTable.swift in Sources */,
 				492F5C5B21FD814E009B6411 /* SecondViewController.swift in Sources */,
-				49CCF3ED2227255C00C9840F /* EditPlaceViewController.swift in Sources */,
 				494E7EE52210F76E00979950 /* TimelineUITableViewCell.swift in Sources */,
 				492F5C5721FD814E009B6411 /* AppDelegate.swift in Sources */,
 				F97F19BC22133490008CF75E /* StatisticsUICollectionViewCell.swift in Sources */,
@@ -635,7 +631,6 @@
 				0A4EAF8A222CE9CD00D419BD /* MainView_Timeline.swift in Sources */,
 				0A4EAF90222CF4EE00D419BD /* Credentials.swift in Sources */,
 				0A5A2254221047CE00879A38 /* ModelManager.swift in Sources */,
-				49B70CCB222E2072001E7167 /* TabBarController.swift in Sources */,
 				0AA824A5222CE4BA008BE873 /* MainView_Header.swift in Sources */,
 				49077B30222E436C0024539E /* Edit_Util.swift in Sources */,
 				49B70CC5222DDBA4001E7167 /* PlaceDetails_Util.swift in Sources */,

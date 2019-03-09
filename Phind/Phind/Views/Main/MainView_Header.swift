@@ -13,26 +13,30 @@ import UIKit
 
 internal extension MainViewController {
   
+  // Action selector when user clicks refresh button
   @IBAction func refreshButton(_ sender: Any) {
+    // Triggers MainViewController reloadView()
     self.reloadView()
   }
   
+  // Action button selector to scroll to the previous day
   @IBAction func previousDayButton(_ sender: Any) {
     updateDate(Calendar.current.date(byAdding: .day, value: -1, to: currentDate)!)
     self.reloadView()
   }
   
+  // Action button selector to advance the date viewer to the next day
   @IBAction func nextDayButton(_ sender: Any) {
     updateDate(Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!)
     self.reloadView()
   }
   
-  
+  /// Setup the style for the header view coomponent
   internal func setupHeaderView() {
     
     // Setup header view.
     headerView.backgroundColor = Style.PRIMARY_COLOR
-    
+    // Add corners, shadow, and frame style settings.
     Style.ApplyDropShadow(view: headerView)
     Style.ApplyRoundedCorners(view: headerView)
     Style.SetFullWidth(view: headerView)

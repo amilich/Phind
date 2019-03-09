@@ -10,9 +10,10 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 
+/// Extend the PlaceDetailsController with the requisite function to load images for a place ID.
 extension PlaceDetailsController {
-  // Given a place ID, lookup the photos for the place and add one
-  // to the UIImageview in the popup view detail.
+  /// Given a place ID, lookup the photos for the place and add one to the UIImageview in the popup view detail.
+  /// - parameter gms_id: The Google place ID used to load a photo.
   func loadPhotoForPlaceID(gms_id: String) {
     GMSPlacesClient.shared().lookUpPhotos(forPlaceID: gms_id) { (photoMetadata, error) -> Void in
       if let error = error {
@@ -23,20 +24,6 @@ extension PlaceDetailsController {
           let numImages = (photoMetadata?.results)!.count
           // Add at most 9 items to the UICollectionView
           let numInGrid = Int(min(numImages, 8) / 2) * 2
-          
-          // Rescale the images based on how many there are
-          // let widthMinusBorder = UIScreen.main.bounds.width // - Style.PHOTO_BORDER // TODO
-          // let photoWidth = self.collectionView.frame.width / 2.1
-          // self.flowLayout.itemSize = CGSize(width: photoWidth, height: photoWidth)
-          
-          //          if numInGrid < 3 {
-          //            photoWidth = widthMinusBorder
-          //          } else if numInGrid < 6 {
-          //            photoWidth = widthMinusBorder / 2
-          //          }
-          
-//          self.flowLayout.itemSize = CGSize(width: photoWidth, height: photoWidth)
-          
           // Remove all old images
           self.placeImages.removeAll()
           for (index,metadata) in (photoMetadata?.results)!.enumerated() {

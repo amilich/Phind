@@ -8,13 +8,19 @@
 
 import UIKit
 
+/// The TimelineUITableViewCell stores the requisite UI components for displaying the timeline value to the user, including a label, image, duration, and time.
 class TimelineUITableViewCell: UITableViewCell {
   
+  /// The image for the timelineEntry
   @IBOutlet var cellImage: UIImageView!
+  /// Main label for timelineLabel (typically place or movement type)
   @IBOutlet var cellLabel: UILabel!
+  /// The duration for the timeline
   @IBOutlet var durationLabel: UILabel!
+  /// The time length for the timeline component (placed below main label)
   @IBOutlet var timeLabel: UILabel!
   
+  // Constructor for timeline cell.
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
@@ -53,14 +59,12 @@ class TimelineUITableViewCell: UITableViewCell {
     self.contentView.addSubview(cellImage)
   }
   
+  // Coder/decoder init (needed for use as a storyboard component)
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
-  override func awakeFromNib() {
-    super.awakeFromNib();
-  }
-  
+  // Called when user selects a timeline component
   override func setSelected(_ selected: Bool, animated: Bool) {
     // TODO(Andrew) write code to make it selected if we want
     // super.setSelected(selected, animated: animated)    
