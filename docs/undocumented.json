@@ -1,0 +1,229 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
+      "line": 17,
+      "symbol": "ModelManager",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
+      "line": 22,
+      "symbol": "ModelManager.shared",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
+      "line": 25,
+      "symbol": "ModelManager.realm",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
+      "line": 35,
+      "symbol": "ModelManager.getMostRecentLocationEntry()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
+      "line": 46,
+      "symbol": "ModelManager.getCoordForPlace(uuid:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
+      "line": 55,
+      "symbol": "ModelManager.getPlaceWithUUID(uuid:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
+      "line": 81,
+      "symbol": "ModelManager.getLocationEntries(start:end:ascending:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
+      "line": 97,
+      "symbol": "ModelManager.getUniqueLocationEntires(from:ascending:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
+      "line": 106,
+      "symbol": "ModelManager.mostCommonPlaceType(from:ascending:period:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
+      "line": 137,
+      "symbol": "ModelManager.mostCommonLocation(from:ascending:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
+      "line": 169,
+      "symbol": "ModelManager.getMostRecentRawCoord()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
+      "line": 177,
+      "symbol": "ModelManager.getRawCoords(from:ascending:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
+      "line": 194,
+      "symbol": "ModelManager.closeLocationEntry(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
+      "line": 221,
+      "symbol": "ModelManager.addLocationEntry(_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
+      "line": 259,
+      "symbol": "ModelManager.getNearbySearchResponse(data:response:error:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
+      "line": 284,
+      "symbol": "ModelManager.assignPlaceIdToLocation(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
+      "line": 339,
+      "symbol": "ModelManager.appendRawCoord(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
+      "line": 348,
+      "symbol": "ModelManager.addRawCoord(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/PhindLocationManager.swift",
+      "line": 19,
+      "symbol": "MovementType",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/PhindLocationManager.swift",
+      "line": 20,
+      "symbol": "MovementType.AUTOMOTIVE",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/PhindLocationManager.swift",
+      "line": 20,
+      "symbol": "MovementType.CYCLING",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/PhindLocationManager.swift",
+      "line": 20,
+      "symbol": "MovementType.STATIONARY",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/PhindLocationManager.swift",
+      "line": 20,
+      "symbol": "MovementType.WALKING",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/PhindLocationManager.swift",
+      "line": 24,
+      "symbol": "PhindLocationManager",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/PhindLocationManager.swift",
+      "line": 29,
+      "symbol": "PhindLocationManager.shared",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/PhindLocationManager.swift",
+      "line": 31,
+      "symbol": "PhindLocationManager.DEFAULT_DISTANCE_FILTER",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/PhindLocationManager.swift",
+      "line": 33,
+      "symbol": "PhindLocationManager.NOTABLE_DISTANCE_THRESHOLD",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/PhindLocationManager.swift",
+      "line": 40,
+      "symbol": "PhindLocationManager.currMovementType",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/PhindLocationManager.swift",
+      "line": 55,
+      "symbol": "PhindLocationManager.updateMovementType(motion:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/PhindLocationManager.swift",
+      "line": 78,
+      "symbol": "PhindLocationManager.updateMovementType(from:to:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/PhindLocationManager.swift",
+      "line": 246,
+      "symbol": "PhindLocationManager.updateLocation(_:didUpdateLocations:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Edit/Edit_Util.swift",
+      "line": 12,
+      "symbol": "EditViewController.getNearestPlaces()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind"
+}
