@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Credentials class stores API access information.
 class Credentials {
   
   /// Logger API token

@@ -42,11 +42,21 @@ class Style {
     alpha: 0.56
   )
   
+  /// Screen margin around UI card components
   public static let SCREEN_MARGIN : CGFloat = 12
+  /// Corner radius for cards
   public static let CARD_CORNERS : CGFloat = 24.0
+  /// Border size for photo collection view
   public static let PHOTO_BORDER : CGFloat = 48.0
+  /// Offset for the details label from top on place details plage
   public static let DETAILS_LABEL_OFFSET : CGFloat = 120.0
+  /// Photo domensions for photo collection in place details view
   public static let DETAILS_PHOTO_VIEW_HEIGHT : CGFloat = 200.0
+  
+  /// Latitudinal span for MapView
+  public static let MAP_SPAN_LAT = 1000.0
+  /// Longitudinal span for MapView
+  public static let MAP_SPAN_LONG = 1000.0
   
   /// Width of the route drawn on the MapView
   public static let ROUTE_WIDTH: CGFloat = 4.0

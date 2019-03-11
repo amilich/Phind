@@ -15,12 +15,12 @@ import JustLog
 /// The TimelineEntry object references a start and end time, a movement time, and a label for the place in the timeline UI.
 class TimelineEntry: NSObject {
   
-  var startTime: Date
-  var endTime: Date?
-  var placeLabel: String
-  var imagePath: String?
-  var placeUUID: String?
-  var movementType: String
+  internal var startTime: Date
+  internal var endTime: Date?
+  internal var placeLabel: String
+  internal var imagePath: String?
+  internal var placeUUID: String?
+  internal var movementType: String
   
   /// Constructor for the TimelineEntry.
   /// - parameter placeUUID: UUID corresponding to Realm object for the place for this TimelineEntry.
@@ -28,7 +28,7 @@ class TimelineEntry: NSObject {
   /// - parameter startTime: The date object corresponding to the start of the given entry.
   /// - parameter endTime: The end date for the given timeline entry (optional).
   /// - parameter movementType: The type of movement (from CoreMotion).
-  init(placeUUID: String, placeLabel: String, startTime: Date,
+  public init(placeUUID: String, placeLabel: String, startTime: Date,
        endTime: Date?, movementType: String) {
     
     self.placeUUID = placeUUID
@@ -64,13 +64,8 @@ class MainViewController: UIViewController, UITableViewDelegate  {
   /// Icon for the tabBar (to view additional place or stats information).
   @IBOutlet weak var barIcon: UITabBarItem!
   
-  /// Latitudinal span for MapView
-  let MAP_SPAN_LAT = 1000.0
-  /// Longitudinal span for MapView
-  let MAP_SPAN_LONG = 1000.0
-  
   /// Date formatter used to properly format the date in the timeline header
-  let formatter = DateFormatter()
+  internal let formatter = DateFormatter()
   /// The PlaceDetailsController is a child UIViewController used to display, hide, and show details on the selected place.
   let placeDetailsController:PlaceDetailsController = UIStoryboard(name: "PlaceDetails", bundle: nil).instantiateViewController(withIdentifier: "PlaceDetails") as! PlaceDetailsController
   
@@ -164,8 +159,8 @@ class MainViewController: UIViewController, UITableViewDelegate  {
         )
         let viewRegion = MKCoordinateRegion(
           center: centCoord,
-          latitudinalMeters: MAP_SPAN_LAT,
-          longitudinalMeters: MAP_SPAN_LONG
+          latitudinalMeters: Style.MAP_SPAN_LAT,
+          longitudinalMeters: Style.MAP_SPAN_LONG
         )
         mapView.setRegion(viewRegion, animated: true)
         

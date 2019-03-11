@@ -12,7 +12,7 @@ import GoogleMaps
 import GooglePlaces
 import JustLog
 
-///
+/// The PlaceDetailsController class is the UIViewController responsible for managing all UI components on the place details page.
 class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
   
   // Data storage elements
@@ -24,30 +24,33 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
   var placeImages: [UIImage] = []
   
   // UI components
+  /// Wrap for details page to add shadow
   @IBOutlet var shadowWrap: UIView!
+  /// Surrounding UIView wrap for the UICollectionViewFlowLayout
   @IBOutlet var flowWrap: UIView!
+  /// Place label
   @IBOutlet var label: UILabel!
+  /// Address label
   @IBOutlet var addressLabel: UILabel!
+  /// Back button to return to timeline view
   @IBOutlet var backButton: UIButton!
+  /// Edit button to change the saved place
   @IBOutlet var editButton: UIButton!
-  
+  /// Collection view for the set of photos
   @IBOutlet var collectionView: UICollectionView!
+  /// Flow layout for photos
   @IBOutlet var flowLayout: UICollectionViewFlowLayout!
   
   // Edit view controller
   // let editViewController = EditPlaceViewController()
   let editViewController:EditViewController = UIStoryboard(name: "Edit", bundle: nil).instantiateViewController(withIdentifier: "Edit") as! EditViewController
   
-  init() {
-    super.init(nibName: nil, bundle: nil)
-  }
-  
+  /// Coder/decoder init for use in storyboard
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
   
-  // Initialize the button and text elements inside the
-  // place popup view.
+  /// Initialize the button and text elements inside the place popup view.
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -130,12 +133,12 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     }
   }
   
-  // Back press target function for back UIButton
+  /// Back press target function for back UIButton
   @objc func backPressed(_ sender: UIButton!) {
     doBackPress(searchVisible: self.editViewController.searchWrap.isHidden)
   }
   
-  // Show the edit view controller
+  /// Show the edit view controller
   @objc func editPressed(_ sender: UIButton!) {
     self.flowWrap.isHidden = true
     self.addressLabel.isHidden = true

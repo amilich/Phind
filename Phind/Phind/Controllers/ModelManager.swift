@@ -14,17 +14,20 @@ import UIKit
 import RealmSwift
 import JustLog
 
+/// The ModelManager class is responsible for reading and writing to our database model (Realm).
 public class ModelManager : NSObject {
   
   // Public static fields.
   
-  // Singleton declaration.
+  /// Singleton declaration.
   public static let shared = ModelManager()
   
   // Public fields.
+  /// Access variable to our Realm database.
   public var realm = AppDelegate().realm
   
   // Private fields
+  /// URL session access 
   private var sharedURLSession = AppDelegate().sharedUrlSession
   
   /// <section>
