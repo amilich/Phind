@@ -4,86 +4,152 @@
     <title>Extensions  Reference</title>
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
+
     <a name="//apple_ref/swift/Section/Extensions" class="dashAnchor"></a>
+
     <a title="Extensions  Reference"></a>
-    <header>
-      <div class="content-wrapper">
-        <p><a href="index.html"> Docs</a> (20% documented)</p>
-      </div>
-    </header>
-    <div class="content-wrapper">
-      <p id="breadcrumbs">
-        <a href="index.html"> Reference</a>
-        <img id="carat" src="img/carat.png" />
-        Extensions  Reference
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="index.html">
+           Docs
+        </a>
+         (29% documented)
       </p>
-    </div>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="index.html"> Reference</a>
+      <img class="carat" src="img/carat.png" />
+      Extensions  Reference
+    </p>
+
     <div class="content-wrapper">
-      <nav class="sidebar">
+      <nav class="navigation">
         <ul class="nav-groups">
           <li class="nav-group-name">
-            <a href="Classes.html">Classes</a>
+            <a class="nav-group-name-link" href="Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Classes.html#/s:5Phind13LocationEntryC">LocationEntry</a>
+                <a class="nav-group-task-link" href="Classes/AppDelegate.html">AppDelegate</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/ModelManager.html">ModelManager</a>
+                <a class="nav-group-task-link" href="Classes/Credentials.html">Credentials</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/PhindLocationManager.html">PhindLocationManager</a>
+                <a class="nav-group-task-link" href="Classes/EditViewController.html">EditViewController</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes.html#/s:5Phind5PlaceC">Place</a>
+                <a class="nav-group-task-link" href="Classes/LocationEntry.html">LocationEntry</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes.html#/s:5Phind14RawCoordinatesC">RawCoordinates</a>
+                <a class="nav-group-task-link" href="Classes/MainViewController.html">MainViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/MapPin.html">MapPin</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/ModelManager.html">ModelManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/PhindLocationManager.html">PhindLocationManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/PhotoCell.html">PhotoCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/Place.html">Place</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/PlaceDetailsController.html">PlaceDetailsController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/RawCoordinates.html">RawCoordinates</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/SecondViewController.html">SecondViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/StatisticLabel1.html">StatisticLabel1</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/StatisticsUICollectionViewCell.html">StatisticsUICollectionViewCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/Style.html">Style</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/TimelineEntry.html">TimelineEntry</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/TimelineUITableViewCell.html">TimelineUITableViewCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/Util.html">Util</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="Enums.html">Enumerations</a>
+            <a class="nav-group-name-link" href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Enums/MovementType.html">MovementType</a>
+                <a class="nav-group-task-link" href="Enums/MovementType.html">MovementType</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="Extensions.html">Extensions</a>
+            <a class="nav-group-name-link" href="Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Extensions/EditViewController.html">EditViewController</a>
+                <a class="nav-group-task-link" href="Extensions/MKMapView.html">MKMapView</a>
               </li>
               <li class="nav-group-task">
-                <a href="Extensions/Style.html">Style</a>
+                <a class="nav-group-task-link" href="Extensions/Realm.html">Realm</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/UIImage.html">UIImage</a>
               </li>
             </ul>
           </li>
         </ul>
       </nav>
       <article class="main-content">
-        <section>
-          <section class="section">
+
+        <section class="section">
+          <div class="section-content">
             <h1>Extensions</h1>
             <p>The following extensions are available globally.</p>
 
-          </section>
-          <section class="section task-group-section">
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
             <div class="task-group">
-              <ul>
+              <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:5Phind5StyleC"></a>
-                    <a name="//apple_ref/swift/Extension/Style" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Phind5StyleC">Style</a>
+                    <a name="/s:10RealmSwift0A0C"></a>
+                    <a name="//apple_ref/swift/Extension/Realm" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10RealmSwift0A0C">Realm</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -92,13 +158,13 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         
-                        <a href="Extensions/Style.html" class="slightly-smaller">See more</a>
+                        <a href="Extensions/Realm.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">Style</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">final</span> <span class="kd">class</span> <span class="kt">Realm</span></code></pre>
 
                         </div>
                       </div>
@@ -108,13 +174,13 @@
               </ul>
             </div>
             <div class="task-group">
-              <ul>
+              <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@Phind@objc(cs)EditViewController"></a>
-                    <a name="//apple_ref/swift/Extension/EditViewController" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@Phind@objc(cs)EditViewController">EditViewController</a>
+                    <a name="/c:objc(cs)MKMapView"></a>
+                    <a name="//apple_ref/swift/Extension/MKMapView" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)MKMapView">MKMapView</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -122,14 +188,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
-                        <a href="Extensions/EditViewController.html" class="slightly-smaller">See more</a>
+                        <p>This extension enables us to fit the map view around all annotations (<a href="https://stackoverflow.com/questions/39747957/mapview-to-show-all-annotations-and-zoom-in-as-much-as-possible-of-the-map?rq=1">https://stackoverflow.com/questions/39747957/mapview-to-show-all-annotations-and-zoom-in-as-much-as-possible-of-the-map?rq=1</a>). We could also use a showAnnotations() call, but this had better padding behavior and can be customized depending on the layout of the other cards.</p>
+
+                        <a href="Extensions/MKMapView.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">EditViewController</span> <span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="kt">UITableViewDelegate</span><span class="p">,</span> <span class="kt">UITableViewDataSource</span><span class="p">,</span> <span class="kt">UISearchBarDelegate</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">MKMapView</span> <span class="p">:</span> <span class="kt">UIView</span><span class="p">,</span> <span class="kt">NSCoding</span></code></pre>
 
                         </div>
                       </div>
@@ -138,14 +205,46 @@
                 </li>
               </ul>
             </div>
-          </section>
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)UIImage"></a>
+                    <a name="//apple_ref/swift/Extension/UIImage" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)UIImage">UIImage</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                        <a href="Extensions/UIImage.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">UIImage</span> <span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">NSSecureCoding</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
         </section>
-        <section id="footer">
-          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-03-10)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
-        </section>
+
       </article>
     </div>
+    <section class="footer">
+      <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-03-10)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
   </body>
 </div>
 </html>
