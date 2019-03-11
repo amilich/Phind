@@ -27,14 +27,14 @@ public class ModelManager : NSObject {
   public var realm = AppDelegate().realm
   
   // Private fields
-  /// URL session access 
+  /// URL session access
   private var sharedURLSession = AppDelegate().sharedUrlSession
   
   /// <section>
   /// All the read methods.
   /// </section>
   
-  // Return most recent location entry.
+  /// Return most recent location entry.
   public func getMostRecentLocationEntry() -> LocationEntry? {
     
     let locationEntry = realm.objects(LocationEntry.self)
@@ -46,6 +46,8 @@ public class ModelManager : NSObject {
     
   }
   
+  /// Get the 2D coordinate for a given place UUID.
+  /// - parameter uuid: String UUID associated with a known place.
   public func getCoordForPlace(uuid: String) -> CLLocationCoordinate2D? {
     let placesWithUuid = realm.objects(LocationEntry.self)
       .filter("place_id = %@", uuid)
@@ -55,6 +57,8 @@ public class ModelManager : NSObject {
     return nil
   }
   
+  /// Return stored place object with given UUID.
+  /// - parameter uuid: String UUID associated with a known place.
   public func getPlaceWithUUID(uuid: String) -> Place? {
     let gmsPlaces = realm.objects(Place.self)
       .filter("uuid = %@", uuid)
@@ -64,8 +68,8 @@ public class ModelManager : NSObject {
     return nil
   }
   
-  // Get the GMS place name for a locationEntry by performing lookup on
-  // place UUID.
+  /// Get the GMS place name for a locationEntry by performing lookup on place UUID.
+  /// - parameter locationEntry: LocationEntry used to find proper place.
   func getPlace(locationEntry: LocationEntry) -> Place? {
     
     let placeUUID = locationEntry.place_id
@@ -73,14 +77,14 @@ public class ModelManager : NSObject {
     
   }
   
-  // Get the GMS place name for a locationEntry by performing lookup on
-  // place UUID.
+  /// Get the GMS place name for a locationEntry by performing lookup on place UUID.
+  /// - parameter locationEntry: LocationEntry used to find proper place UUID.
   func getPlaceLabelForLocationEntry(locationEntry: LocationEntry) -> Place? {
     let placeUUID = locationEntry.place_id
     return getPlaceWithUUID(uuid: placeUUID)
   }
   
-  // Return all location entries from a certain day, limited to max, and ascending default to false.
+  /// Return all location entries from a certain day, limited to max, and ascending default to false.
   public func getLocationEntries(start: Date = Date(), end: Date = Date(), ascending: Bool = false) -> [LocationEntry] {
     
     let locationEntries = realm.objects(LocationEntry.self)
@@ -96,7 +100,7 @@ public class ModelManager : NSObject {
     
   }
   
-  // Return all stationary location entries from a certain day, limited to max, and ascending default to false.
+  /// Return all stationary location entries from a certain day, limited to max, and ascending default to false.
   public func getUniqueLocationEntires(from: Date = Date(), ascending: Bool = false) -> [LocationEntry] {
     
     let dayStart = Util.GetLocalizedDayStart(date: from)
@@ -126,7 +130,7 @@ public class ModelManager : NSObject {
       // TODO make sure length is enough
       let placeType = identifiedPlace!.types[0]
       if var val = emptyDict[placeType] {
-        val = val+1
+        val += 1
         emptyDict[placeType] = val
       } else{
         emptyDict[placeType] = 1
@@ -153,7 +157,7 @@ public class ModelManager : NSObject {
     var lastLocationEntry = locationEntries[0]
     for locationEntry in locationEntries{
       if locationEntry.place_id == lastLocationEntry.place_id{
-        count = count + 1
+        count += 1
       } else{
         count = 1
       }
@@ -166,9 +170,7 @@ public class ModelManager : NSObject {
     return bestLocationEntry
   }
   
-  
-  
-  // Return most recent location entry.
+  /// Return most recent location entry.
   public func getMostRecentRawCoord() -> RawCoordinates? {
     
     let rawCoordinates = getRawCoords()
@@ -176,7 +178,7 @@ public class ModelManager : NSObject {
     
   }
   
-  // Return all location entries from a certain day, limited to max, and ascending default to false.
+  /// Return all location entries from a certain day, limited to max, and ascending default to false.
   public func getRawCoords(from: Date = Date(), ascending: Bool = false) -> [RawCoordinates] {
     
     let dayStart = Calendar.current.startOfDay(for: from)
@@ -193,7 +195,7 @@ public class ModelManager : NSObject {
   /// All the write methods.
   /// </section>
   
-  // Close up previous LocationEntry if necessary by adding an end time.
+  /// Close up previous LocationEntry if necessary by adding an end time.
   public func closeLocationEntry(_ locationEntry: LocationEntry) {
     
     Logger.shared.verbose("Attempt to close location entry.")
@@ -221,6 +223,10 @@ public class ModelManager : NSObject {
     return likelyPlaces
   }
   
+  /// Create a location entry from a coordinate update, a current movement type, and a start time.
+  /// - parameter rawCoordinates: The coordiantes to use for new location entry
+  /// - parameter currMovementType: The movement type update for the location entry
+  /// - parameter start: Start type for location. Default is current time.
   public func addLocationEntry(_ rawCoordinates: RawCoordinates,
                                _ currMovementType: MovementType,
                                _ start: Date = Date()) -> LocationEntry{
@@ -338,7 +344,9 @@ public class ModelManager : NSObject {
   }
   
   
-  // Append a RawCoordinates to a LocationEntry.
+  /// Append a RawCoordinates to a LocationEntry.
+  /// - parameter locationEntry: LocationEntry to append coord to.
+  /// - parameter rawCoord: RawCoordinate to add to locationEntry.
   public func appendRawCoord(_ locationEntry: LocationEntry, _ rawCoord: RawCoordinates) {
     
     try! realm.write {
@@ -347,7 +355,8 @@ public class ModelManager : NSObject {
     
   }
   
-  // Construct a RawCoordinates entry and add it.
+  /// Construct a RawCoordinates entry and add it.
+  /// - parameter location: The location containing information used to initialize the raw coordinate.
   public func addRawCoord(_ location: CLLocation) -> RawCoordinates {
     
     let rawCoord = RawCoordinates()
@@ -363,7 +372,10 @@ public class ModelManager : NSObject {
   
 }
 
+/// We extend Realm with asynchronous writing functionality so we are able to write to the database in API calls, which may be off the main thread.
+/// See https://realm.io/docs/cookbook/swift/object-to-background/ for original source and more information.
 extension Realm {
+  /// Asynchronously write to Realm from a background thread.
   func writeAsync<T : ThreadConfined>(obj: T, errorHandler: @escaping ((_ error : Swift.Error) -> Void) = { _ in return }, block: @escaping ((Realm, T?) -> Void)) {
     let wrappedObj = ThreadSafeReference(to: obj)
     let config = self.configuration

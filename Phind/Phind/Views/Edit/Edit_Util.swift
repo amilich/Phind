@@ -8,7 +8,9 @@
 
 import UIKit
 
+/// Extend the EditViewController with functions to perform API calls.
 extension EditViewController {
+  /// Get a set of nearest places using the Google places API.
   public func getNearestPlaces() {
     // TODO: fill in with call to nearest places API
     if let detailsVC = self.parent {
@@ -24,6 +26,8 @@ extension EditViewController {
     }
   }
   
+  /// Search for nearby places using Google API and populate them in EditViewController internal data storage.
+  /// - parameter place: Center place to search for places around.
   internal func repopulatePlaces(place: Place) {
     let nearbySearchUrl = URL(string: "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(place.latitude),\(place.longitude)&rankby=distance&key=\(Credentials.GMS_KEY)")!
     
