@@ -13,8 +13,8 @@ import CoreMotion
 import RealmSwift
 import JustLog
 
-@UIApplicationMain
 /// The AppDelegateClass provides the programmatic entry point to Phind. It manages app launch by setting up access methods to our database, APIs, location manager, and logging tool.
+@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?

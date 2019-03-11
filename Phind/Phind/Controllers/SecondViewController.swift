@@ -5,7 +5,6 @@
 //  Created by Andrew B. Milich on 1/26/19.
 //  Copyright © 2019 Team-7. All rights reserved.
 //
-
 import UIKit
 import GoogleMaps
 import GooglePlaces
@@ -107,6 +106,22 @@ class SecondViewController: UIViewController, UICollectionViewDelegate {
     let statclass3 = String("Most Commonly Visited Place Type:")
     let statisticLabel3 = StatisticLabel1(stat1: mostCommonPlaceType, statType: statclass3)
     self.collectionItems.append(statisticLabel3)
+    
+    //    print("Search Results: ")
+    //    let searchResults = ModelManager.shared.searchResult(placeName: "sidney")
+    //    print(searchResults!)
+    
+    //    print("Number of Visits: ")
+    //    let numberVisits = ModelManager.shared.numberVisits(placeName: "Key Physiotherapy Sydney Clinic")
+    //    print(numberVisits!)
+    //
+    //    print("Last Visit Date: ")
+    //    let lastVisitDate = ModelManager.shared.lastVisitDate(placeName: "Key Physiotherapy Sydney Clinic")
+    //    print(lastVisitDate!)
+    //
+    //    print("Location History")
+    //    let locationHistory = ModelManager.shared.locationHistory(placeName: "Key Physiotherapy Sydney Clinic")
+    //    print(locationHistory!)
     
     collectionView.reloadData()
   }
