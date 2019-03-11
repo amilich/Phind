@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PlaceDetailsController Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Class/PlaceDetailsController" class="dashAnchor"></a>
+
+    <a title="PlaceDetailsController Class Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+           Docs
+        </a>
+         (29% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html"> Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      PlaceDetailsController Class Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/AppDelegate.html">AppDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Credentials.html">Credentials</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/EditViewController.html">EditViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/LocationEntry.html">LocationEntry</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/MainViewController.html">MainViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/MapPin.html">MapPin</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/ModelManager.html">ModelManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/PhindLocationManager.html">PhindLocationManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/PhotoCell.html">PhotoCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Place.html">Place</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/PlaceDetailsController.html">PlaceDetailsController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RawCoordinates.html">RawCoordinates</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/SecondViewController.html">SecondViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/StatisticLabel1.html">StatisticLabel1</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/StatisticsUICollectionViewCell.html">StatisticsUICollectionViewCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Style.html">Style</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TimelineEntry.html">TimelineEntry</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TimelineUITableViewCell.html">TimelineUITableViewCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Util.html">Util</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/MovementType.html">MovementType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/MKMapView.html">MKMapView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Realm.html">Realm</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UIImage.html">UIImage</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content">
+            <h1>PlaceDetailsController</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">PlaceDetailsController</span> <span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="kt">UICollectionViewDataSource</span><span class="p">,</span> <span class="kt">UICollectionViewDelegate</span></code></pre>
+
+                </div>
+              </div>
+            
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Phind22PlaceDetailsControllerC5placeAA0B0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/place" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Phind22PlaceDetailsControllerC5placeAA0B0Cvp">place</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The place object represents the current Realm place used to display details</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">place</span><span class="p">:</span> <span class="kt"><a href="../Classes/Place.html">Place</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Phind22PlaceDetailsControllerC13timelineEntryAA08TimelineF0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/timelineEntry" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Phind22PlaceDetailsControllerC13timelineEntryAA08TimelineF0Cvp">timelineEntry</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The internal timelineEntry corresponds to the set of timeline entries related to the given place. A place may correspond to multiple timeline entries (such as an individual&rsquo;s home or workplace).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">timelineEntry</span><span class="p">:</span> <span class="kt"><a href="../Classes/TimelineEntry.html">TimelineEntry</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Phind22PlaceDetailsControllerC11placeImagesSaySo7UIImageCGvp"></a>
+                    <a name="//apple_ref/swift/Property/placeImages" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Phind22PlaceDetailsControllerC11placeImagesSaySo7UIImageCGvp">placeImages</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This data structure holds the UIImages for the photo collection in the place details page.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">placeImages</span><span class="p">:</span> <span class="p">[</span><span class="kt">UIImage</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Phind@objc(cs)PlaceDetailsController(py)shadowWrap"></a>
+                    <a name="//apple_ref/swift/Property/shadowWrap" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)PlaceDetailsController(py)shadowWrap">shadowWrap</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">var</span> <span class="nv">shadowWrap</span><span class="p">:</span> <span class="kt">UIView</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Phind@objc(cs)PlaceDetailsController(py)flowWrap"></a>
+                    <a name="//apple_ref/swift/Property/flowWrap" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)PlaceDetailsController(py)flowWrap">flowWrap</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">var</span> <span class="nv">flowWrap</span><span class="p">:</span> <span class="kt">UIView</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Phind@objc(cs)PlaceDetailsController(py)label"></a>
+                    <a name="//apple_ref/swift/Property/label" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)PlaceDetailsController(py)label">label</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">var</span> <span class="nv">label</span><span class="p">:</span> <span class="kt">UILabel</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Phind@objc(cs)PlaceDetailsController(py)addressLabel"></a>
+                    <a name="//apple_ref/swift/Property/addressLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)PlaceDetailsController(py)addressLabel">addressLabel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">var</span> <span class="nv">addressLabel</span><span class="p">:</span> <span class="kt">UILabel</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Phind@objc(cs)PlaceDetailsController(py)backButton"></a>
+                    <a name="//apple_ref/swift/Property/backButton" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)PlaceDetailsController(py)backButton">backButton</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">var</span> <span class="nv">backButton</span><span class="p">:</span> <span class="kt">UIButton</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Phind@objc(cs)PlaceDetailsController(py)editButton"></a>
+                    <a name="//apple_ref/swift/Property/editButton" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)PlaceDetailsController(py)editButton">editButton</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">var</span> <span class="nv">editButton</span><span class="p">:</span> <span class="kt">UIButton</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Phind@objc(cs)PlaceDetailsController(py)collectionView"></a>
+                    <a name="//apple_ref/swift/Property/collectionView" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)PlaceDetailsController(py)collectionView">collectionView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">var</span> <span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Phind@objc(cs)PlaceDetailsController(py)flowLayout"></a>
+                    <a name="//apple_ref/swift/Property/flowLayout" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)PlaceDetailsController(py)flowLayout">flowLayout</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">var</span> <span class="nv">flowLayout</span><span class="p">:</span> <span class="kt">UICollectionViewFlowLayout</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Phind22PlaceDetailsControllerC08editViewD0AA04EditfD0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/editViewController" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Phind22PlaceDetailsControllerC08editViewD0AA04EditfD0Cvp">editViewController</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">editViewController</span><span class="p">:</span> <span class="kt"><a href="../Classes/EditViewController.html">EditViewController</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Phind@objc(cs)PlaceDetailsController(im)init"></a>
+                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)PlaceDetailsController(im)init">init()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Phind@objc(cs)PlaceDetailsController(im)initWithCoder:"></a>
+                    <a name="//apple_ref/swift/Method/init(coder:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)PlaceDetailsController(im)initWithCoder:">init(coder:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">required</span> <span class="nf">init</span><span class="p">?(</span><span class="n">coder</span> <span class="nv">aDecoder</span><span class="p">:</span> <span class="kt">NSCoder</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Phind@objc(cs)PlaceDetailsController(im)viewDidLoad"></a>
+                    <a name="//apple_ref/swift/Method/viewDidLoad()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)PlaceDetailsController(im)viewDidLoad">viewDidLoad()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Phind22PlaceDetailsControllerC10setupStyleyyF"></a>
+                    <a name="//apple_ref/swift/Method/setupStyle()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Phind22PlaceDetailsControllerC10setupStyleyyF">setupStyle()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Update the style for the PlaceDetails card. Applies rounder corners and shadow; then sets up the frames for the collection and table views.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">internal</span> <span class="kd">func</span> <span class="nf">setupStyle</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Phind22PlaceDetailsControllerC11doBackPress13searchVisibleySb_tF"></a>
+                    <a name="//apple_ref/swift/Method/doBackPress(searchVisible:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Phind22PlaceDetailsControllerC11doBackPress13searchVisibleySb_tF">doBackPress(searchVisible:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Go back to timeline or PlaceDetails. Also called after new place is selected.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">doBackPress</span><span class="p">(</span><span class="nv">searchVisible</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>searchVisible</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether the user is currently in the edit page or the details page. This determines which components to set visible.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Phind@objc(cs)PlaceDetailsController(im)backPressed:"></a>
+                    <a name="//apple_ref/swift/Method/backPressed(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)PlaceDetailsController(im)backPressed:">backPressed(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">func</span> <span class="nf">backPressed</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">UIButton</span><span class="o">!</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Phind@objc(cs)PlaceDetailsController(im)editPressed:"></a>
+                    <a name="//apple_ref/swift/Method/editPressed(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)PlaceDetailsController(im)editPressed:">editPressed(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">func</span> <span class="nf">editPressed</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">UIButton</span><span class="o">!</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Phind22PlaceDetailsControllerC20toggleEditVisibility8isHiddenySb_tF"></a>
+                    <a name="//apple_ref/swift/Method/toggleEditVisibility(isHidden:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Phind22PlaceDetailsControllerC20toggleEditVisibility8isHiddenySb_tF">toggleEditVisibility(isHidden:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Show or hide all edit components</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">internal</span> <span class="kd">func</span> <span class="nf">toggleEditVisibility</span><span class="p">(</span><span class="nv">isHidden</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>isHidden</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether the edit view is visible or not.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Phind22PlaceDetailsControllerC06updateB16ForTimelineEntry5placeyAA0B0C_tF"></a>
+                    <a name="//apple_ref/swift/Method/updatePlaceForTimelineEntry(place:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Phind22PlaceDetailsControllerC06updateB16ForTimelineEntry5placeyAA0B0C_tF">updatePlaceForTimelineEntry(place:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Update the place for the current location entry</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updatePlaceForTimelineEntry</span><span class="p">(</span><span class="nv">place</span><span class="p">:</span> <span class="kt"><a href="../Classes/Place.html">Place</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>place</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The place that the user has edited. Update the timeline to correspond to this place.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Phind22PlaceDetailsControllerC03setB11AndLocation5place13timelineEntryyAA0B0C_AA08TimelineJ0CtF"></a>
+                    <a name="//apple_ref/swift/Method/setPlaceAndLocation(place:timelineEntry:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Phind22PlaceDetailsControllerC03setB11AndLocation5place13timelineEntryyAA0B0C_AA08TimelineJ0CtF">setPlaceAndLocation(place:timelineEntry:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Update the internal place and location</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setPlaceAndLocation</span><span class="p">(</span><span class="nv">place</span><span class="p">:</span> <span class="kt"><a href="../Classes/Place.html">Place</a></span><span class="p">,</span> <span class="nv">timelineEntry</span><span class="p">:</span> <span class="kt"><a href="../Classes/TimelineEntry.html">TimelineEntry</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>place</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The place to use for placeDetails.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>timelineEntry</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The timeline entry corresponding to the place that may be edited.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Phind22PlaceDetailsControllerC03setB05placeyAA0B0C_tF"></a>
+                    <a name="//apple_ref/swift/Method/setPlace(place:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Phind22PlaceDetailsControllerC03setB05placeyAA0B0C_tF">setPlace(place:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called to set the place to be displayed on the popup view.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setPlace</span><span class="p">(</span><span class="nv">place</span><span class="p">:</span> <span class="kt"><a href="../Classes/Place.html">Place</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>place</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The place to set for displaying details and edting.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Phind22PlaceDetailsControllerC012loadPhotoForB2ID6gms_idySS_tF"></a>
+                    <a name="//apple_ref/swift/Method/loadPhotoForPlaceID(gms_id:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Phind22PlaceDetailsControllerC012loadPhotoForB2ID6gms_idySS_tF">loadPhotoForPlaceID(gms_id:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Given a place ID, lookup the photos for the place and add one to the UIImageview in the popup view detail.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">loadPhotoForPlaceID</span><span class="p">(</span><span class="nv">gms_id</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@Phind@objc(cs)PlaceDetailsController(im)collectionView:numberOfItemsInSection:"></a>
+                    <a name="//apple_ref/swift/Method/collectionView(_:numberOfItemsInSection:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@Phind@objc(cs)PlaceDetailsController(im)collectionView:numberOfItemsInSection:">collectionView(_:numberOfItemsInSection:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">collectionView</span><span class="p">(</span><span class="n">_</span> <span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="p">,</span> <span class="n">numberOfItemsInSection</span> <span class="nv">section</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@Phind@objc(cs)PlaceDetailsController(im)collectionView:cellForItemAtIndexPath:"></a>
+                    <a name="//apple_ref/swift/Method/collectionView(_:cellForItemAt:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@Phind@objc(cs)PlaceDetailsController(im)collectionView:cellForItemAtIndexPath:">collectionView(_:cellForItemAt:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">collectionView</span><span class="p">(</span><span class="n">_</span> <span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="p">,</span> <span class="n">cellForItemAt</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UICollectionViewCell</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@Phind@objc(cs)PlaceDetailsController(im)collectionView:didSelectItemAtIndexPath:"></a>
+                    <a name="//apple_ref/swift/Method/collectionView(_:didSelectItemAt:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@Phind@objc(cs)PlaceDetailsController(im)collectionView:didSelectItemAtIndexPath:">collectionView(_:didSelectItemAt:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">collectionView</span><span class="p">(</span><span class="n">_</span> <span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="p">,</span> <span class="n">didSelectItemAt</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@Phind@objc(cs)PlaceDetailsController(im)didReceiveMemoryWarning"></a>
+                    <a name="//apple_ref/swift/Method/didReceiveMemoryWarning()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@Phind@objc(cs)PlaceDetailsController(im)didReceiveMemoryWarning">didReceiveMemoryWarning()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">didReceiveMemoryWarning</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-03-10)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>
