@@ -165,7 +165,7 @@ class MainViewController: UIViewController, UITableViewDelegate  {
         mapView.setRegion(viewRegion, animated: true)
         
         self.placeDetailsController.setPlaceAndLocation(place: place!, timelineEntry: timelineEntry)
-        self.placeDetailsController.view.isHidden = false
+        self.placeDetailsController.setComponentsVisible(visible: true)
         self.shadowWrap.isHidden = true
       }
     } else {

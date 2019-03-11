@@ -62,7 +62,7 @@ class EditViewController : UIViewController, UITableViewDelegate, UITableViewDat
   
   /// Dequeue a table cell and format it properly
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let placeCell = tableView.dequeueReusableCell(withIdentifier: "PlaceCell", for: indexPath)
+    let placeCell = tableView.dequeueReusableCell(withIdentifier: "EditCell", for: indexPath)
     placeCell.textLabel?.text = self.places[indexPath.item].name
     return placeCell
   }
