@@ -71,7 +71,6 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     // needed so edit can access parent data
     self.addChild(editViewController)
     toggleEditVisibility(isHidden: true)
-    setStatistics()
     
     self.view.addSubview(label)
     self.view.addSubview(addressLabel)
@@ -87,8 +86,9 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
   
   /// Reloads the data in the statistics label
   internal func setStatistics() {
-    let numVisits = ModelManager.shared.numberVisits(uuid: self.place.uuid)
-    self.statisticsLabel.text = "\(numVisits)" // TODO
+    let numVisits = ModelManager.shared.numberVisits(place: self.place)
+    let timesString = numVisits! == 1 ? "time" : "times"
+    self.statisticsLabel.text = "Visited \(numVisits!) " + timesString // TODO
   }
   
   /// Update the style for the PlaceDetails card. Applies rounder corners and shadow; then sets up the frames for the collection and table views.
@@ -150,6 +150,7 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     self.view.isHidden = !visible
     self.flowWrap.isHidden = !visible
     self.addressLabel.isHidden = !visible
+    self.statisticsLabel.isHidden = !visible
     self.label.isHidden = !visible
     self.collectionView.isHidden = !visible
   }
@@ -199,13 +200,14 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
   /// - parameter timelineEntry: The timeline entry corresponding to the place that may be edited
   public func setPlaceAndLocation(place: Place, timelineEntry: TimelineEntry) {
     setPlace(place: place)
+    setStatistics()
     self.timelineEntry = timelineEntry
   }
   
   /// Called to set the place to be displayed on the popup view
   /// - parameter place: The place to set for displaying details and edting
   public func setPlace(place: Place) {
-    self.place = place;
+    self.place = place
     self.label.text = self.place.name
     self.addressLabel.text = self.place.address
     // Get rid of the previous image
