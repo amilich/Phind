@@ -42,7 +42,9 @@ class Style {
     alpha: 0.56
   )
   
-  public static let SCREEN_MARGIN : CGFloat = 12
+  public static let SCREEN_MARGIN : CGFloat = 12.0
+  public static let ELEMENT_MARGIN : CGFloat = 12.0
+  public static let ELEMENT_PADDING : CGFloat = 16.0
   public static let CARD_CORNERS : CGFloat = 24.0
   public static let PHOTO_BORDER : CGFloat = 48.0
   public static let DETAILS_LABEL_OFFSET : CGFloat = 120.0
@@ -52,6 +54,11 @@ class Style {
   public static let ROUTE_WIDTH: CGFloat = 4.0
   /// Color for the
   public static let ROUTE_COLOR: UIColor = Style.SECONDARY_COLOR
+  
+  // Icon parameters.
+  public static let FAB_HEIGHT : CGFloat = 56.0
+  public static let FAB_FONT_SIZE : CGFloat = 16.0
+  public static let ICON_FONT = "FontAwesome5Free-Solid"
   
 }
 
@@ -86,6 +93,20 @@ extension Style {
     if (positionWithMargin) {
       view.frame.origin.x = Style.SCREEN_MARGIN
     }
+    
+  }
+  
+  public static func CreateFab(icon: String, backgroundColor: UIColor, iconColor: UIColor) -> UIButton {
+    
+    let fab = UIButton(frame: CGRect(x: 0, y: 0, width: Style.FAB_HEIGHT, height: Style.FAB_HEIGHT))
+    fab.setTitle(icon, for: .normal)
+    fab.titleLabel?.font =  UIFont(name: Style.ICON_FONT, size: Style.FAB_FONT_SIZE)
+    fab.setTitleColor(iconColor, for: .normal)
+    fab.backgroundColor = backgroundColor
+    Style.ApplyDropShadow(view: fab)
+    fab.layer.cornerRadius = Style.FAB_HEIGHT * 0.5
+    
+    return fab
     
   }
   

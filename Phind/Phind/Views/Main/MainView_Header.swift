@@ -31,6 +31,10 @@ internal extension MainViewController {
     self.reloadView()
   }
   
+  @objc func fabAction() {
+    
+  }
+  
   /// Setup the style for the header view coomponent
   internal func setupHeaderView() {
     
@@ -41,6 +45,13 @@ internal extension MainViewController {
     Style.ApplyRoundedCorners(view: headerView)
     Style.SetFullWidth(view: headerView)
     headerView.frame.origin.y = UIApplication.shared.windows[0].safeAreaInsets.top
+    
+    // Add in search fab.
+    let fab = Style.CreateFab(icon: "search", backgroundColor: UIColor.white, iconColor: Style.SECONDARY_COLOR)
+    self.view.addSubview(fab)
+    fab.frame.origin.x = UIScreen.main.bounds.width - Style.SCREEN_MARGIN - Style.FAB_HEIGHT
+    fab.frame.origin.y = headerView.frame.origin.y + headerView.frame.size.height + Style.SCREEN_MARGIN
+    fab.addTarget(self, action: #selector(fabAction), for: .touchUpInside)
     
   }
   
