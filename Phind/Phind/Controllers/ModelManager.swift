@@ -178,24 +178,18 @@ public class ModelManager : NSObject {
     
   }
   
-  public func numberVisits(uuid: String) -> Int? {
+  public func numberVisits(place: Place) -> Int? {
     
-    let placeEntry = realm.objects(Place.self).filter("uuid = %@", uuid)
-    if placeEntry.count == 0 {
-      return 0
-    }
-    let placeId = placeEntry[0].uuid
-    let locationEntries = Array(realm.objects(LocationEntry.self).filter("place_id = %@", placeId))
+    let locationEntries = Array(realm.objects(LocationEntry.self).filter("place_id = %@", place.uuid))
     let numVisits = locationEntries.count
     return numVisits
     
   }
   
-  public func lastVisitDate(placeName: String = "", ascending: Bool = false) -> NSDate? {
+  public func lastVisitDate(place: Place, ascending: Bool = false) -> NSDate? {
     
-    let placeEntry = realm.objects(Place.self).filter("name = %@", placeName).first
-    let placeId = placeEntry?.uuid
-    let locationEntries = Array(realm.objects(LocationEntry.self).filter("place_id = %@", placeId!).sorted(byKeyPath: "start", ascending: ascending))
+    let placeId = place.uuid
+    let locationEntries = Array(realm.objects(LocationEntry.self).filter("place_id = %@", placeId).sorted(byKeyPath: "start", ascending: ascending))
     let lastDate = locationEntries.first!.start
     return lastDate
     

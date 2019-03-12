@@ -48,7 +48,7 @@ public class LocationEntry: Object {
   @objc dynamic var longitude : Double = -1.0
   /// Movement type for location entry (used for timeline; comes from CoreMotion)
   @objc dynamic var movement_type : String = MovementType.STATIONARY.rawValue
-  /// Google place ID for this location entry; set after API call
+  /// Phind place ID for this location entry
   @objc dynamic var place_id : String = "<none>"      // TODO: find default
   /// All coordinate updates attributed to this place
   var raw_coordinates = RealmSwift.List<RawCoordinates>()
