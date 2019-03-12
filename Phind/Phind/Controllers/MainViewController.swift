@@ -15,11 +15,17 @@ import JustLog
 /// The TimelineEntry object references a start and end time, a movement time, and a label for the place in the timeline UI.
 class TimelineEntry: NSObject {
   
+  /// The start time for the timeline entry
   internal var startTime: Date
+  /// The end time for the timeline entry
   internal var endTime: Date?
+  /// The label displayed to the user for the timeline entry
   internal var placeLabel: String
+  /// Path to image for timeline entry side image
   internal var imagePath: String?
+  /// UUID for place described in the timeline entry
   internal var placeUUID: String?
+  /// Type of movement for timeline entry; displayed to user as well
   internal var movementType: String
   
   /// Constructor for the TimelineEntry.
