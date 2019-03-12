@@ -31,7 +31,13 @@ internal extension MainViewController {
     self.reloadView()
   }
   
-  @objc func fabAction() {
+  @objc func showSearch() {
+    
+    // TODO: Do hiding for the place details card too.
+    self.svc.view.isHidden = false
+    self.shadowWrap.isHidden = true
+    self.headerView.isHidden = true
+    self.searchFab.isHidden = true
     
   }
   
@@ -47,11 +53,11 @@ internal extension MainViewController {
     headerView.frame.origin.y = UIApplication.shared.windows[0].safeAreaInsets.top
     
     // Add in search fab.
-    let fab = Style.CreateFab(icon: "search", backgroundColor: UIColor.white, iconColor: Style.SECONDARY_COLOR)
-    self.view.addSubview(fab)
-    fab.frame.origin.x = UIScreen.main.bounds.width - Style.SCREEN_MARGIN - Style.FAB_HEIGHT
-    fab.frame.origin.y = headerView.frame.origin.y + headerView.frame.size.height + Style.SCREEN_MARGIN
-    fab.addTarget(self, action: #selector(fabAction), for: .touchUpInside)
+    searchFab = Style.CreateFab(icon: "search", backgroundColor: UIColor.white, iconColor: Style.SECONDARY_COLOR)
+    self.view.addSubview(searchFab)
+    searchFab.frame.origin.x = UIScreen.main.bounds.width - Style.SCREEN_MARGIN - Style.FAB_HEIGHT
+    searchFab.frame.origin.y = headerView.frame.origin.y + headerView.frame.size.height + Style.SCREEN_MARGIN
+    searchFab.addTarget(self, action: #selector(showSearch), for: .touchUpInside)
     
   }
   

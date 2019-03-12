@@ -51,6 +51,10 @@ class MainViewController: UIViewController, UITableViewDelegate  {
   @IBOutlet weak var refreshButton: UIButton!
   @IBOutlet weak var headerView: UIView!
   
+  // Search UI links.
+  var svc : SearchViewController!
+  var searchFab : UIButton!
+  
   // Map UI links.
   @IBOutlet weak var mapView: MKMapView!
   
@@ -122,8 +126,17 @@ class MainViewController: UIViewController, UITableViewDelegate  {
     self.view.addSubview(placeDetailsController.view)
     placeDetailsController.view.isHidden = true
     
+    // Add popup for search.
+    svc = SearchViewController()
+    self.addChild(svc)
+    self.view.addSubview(svc.view)
+    svc.view.isHidden = true
+    
     // Load the view.
     self.reloadView()
+    
+    self.view.bringSubviewToFront(svc.view)
+    self.view.sendSubviewToBack(mapView)
     
   }
   

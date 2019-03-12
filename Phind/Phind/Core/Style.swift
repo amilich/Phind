@@ -60,6 +60,12 @@ class Style {
   public static let FAB_FONT_SIZE : CGFloat = 16.0
   public static let ICON_FONT = "FontAwesome5Free-Solid"
   
+  // Header parameters.
+  public static let HEADER_HEIGHT : CGFloat = 56.0
+  
+  // Text fields.
+  public static let TEXT_FIELD_FONT = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium)
+  
 }
 
 extension Style {
@@ -67,10 +73,11 @@ extension Style {
   /// Round the corners of the UIView.
   /// - parameter view: The UIView to add rounded corners to
   /// - parameter clip: Whether to clip the corners of the UIView (default false)
-  public static func ApplyRoundedCorners(view: UIView, clip: Bool = false) {
+  public static func ApplyRoundedCorners(view: UIView, clip: Bool = false, radius: CGFloat = Style.CARD_CORNERS) {
     
-    view.layer.cornerRadius = Style.CARD_CORNERS
+    view.layer.cornerRadius = radius
     view.clipsToBounds = clip
+    
   }
   
   /// Apply shadow to the boundary of a UIView.
