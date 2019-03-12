@@ -137,8 +137,8 @@ public class ModelManager : NSObject {
       }
     }
     let mostCommonPlaceType = emptyDict.max { a, b in a.value < b.value }
-    
     return mostCommonPlaceType!.key
+    
   }
   
   public func mostCommonLocation(from: Date = Date(), ascending: Bool = false) -> LocationEntry? {
@@ -168,27 +168,37 @@ public class ModelManager : NSObject {
       }
     }
     return bestLocationEntry
+    
   }
   
   public func searchResult(placeName: String = "") -> [Place]? {
+    
     let placeEntries = Array(realm.objects(Place.self).filter("name contains[c] %@", placeName))
     return placeEntries
+    
   }
   
-  public func numberVisits(placeName: String = "") -> Int? {
-    let placeEntry = realm.objects(Place.self).filter("name = %@", placeName).first
-    let placeId = placeEntry?.uuid
-    let locationEntries = Array(realm.objects(LocationEntry.self).filter("place_id = %@", placeId!))
+  public func numberVisits(uuid: String) -> Int? {
+    
+    let placeEntry = realm.objects(Place.self).filter("uuid = %@", uuid)
+    if placeEntry.count == 0 {
+      return 0
+    }
+    let placeId = placeEntry[0].uuid
+    let locationEntries = Array(realm.objects(LocationEntry.self).filter("place_id = %@", placeId))
     let numVisits = locationEntries.count
     return numVisits
+    
   }
   
   public func lastVisitDate(placeName: String = "", ascending: Bool = false) -> NSDate? {
+    
     let placeEntry = realm.objects(Place.self).filter("name = %@", placeName).first
     let placeId = placeEntry?.uuid
     let locationEntries = Array(realm.objects(LocationEntry.self).filter("place_id = %@", placeId!).sorted(byKeyPath: "start", ascending: ascending))
     let lastDate = locationEntries.first!.start
     return lastDate
+    
   }
   
   public func locationHistory(placeName: String = "", ascending: Bool = true) -> [LocationEntry]? {
