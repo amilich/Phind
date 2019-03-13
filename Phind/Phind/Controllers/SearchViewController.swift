@@ -11,16 +11,22 @@ import JustLog
 
 class SearchViewController: UIViewController {
   
+  /// The tableView stores the timeline entries.
+  var tableView: UITableView!
+  /// The tableWrap UIView is the first UIView encapsulating the tableView.
+  var tableWrap: UIView!
+  
   let TEXT_FIELD_X_MARGIN : CGFloat = 12.0
   let TEXT_FIELD_Y_MARGIN : CGFloat = 16.0
   
   var resultsView : UIView!
+  var noResultsLabel : UILabel!
   
   var searchBarField : UITextField!
   var searchBar : UIView!
   var backFab : UIButton!
   
-  var visits : [Place] = []
+  var results : [Place] = []
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -32,7 +38,7 @@ class SearchViewController: UIViewController {
     self.view.backgroundColor = UIColor.clear
     
     self.setupHeader()
-    self.SetupResults()
+    self.setupResults()
   }
 
 }

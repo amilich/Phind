@@ -31,7 +31,7 @@ extension MainViewController {
     tableView.frame.size.width = timelineView.frame.size.width
     self.tableView.contentInset = UIEdgeInsets(top: 24, left: 0,bottom: 0, right: 0)
     
-    self.tableView.register(TimelineUITableViewCell.self, forCellReuseIdentifier: "TimelineCell")
+    self.tableView.register(TimelineCell.self, forCellReuseIdentifier: "TimelineCell")
     self.tableView.separatorStyle = .none
     self.tableView.dataSource = self
     self.tableView.delegate = self
@@ -75,7 +75,7 @@ extension MainViewController :  UITableViewDataSource {
   // Computes cell content based on the shared array of tableItems
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-    let tableCell = tableView.dequeueReusableCell(withIdentifier: "TimelineCell", for: indexPath) as! TimelineUITableViewCell
+    let tableCell = tableView.dequeueReusableCell(withIdentifier: "TimelineCell", for: indexPath) as! TimelineCell
     
     // Get the location description string set by the TimelineController
     let timelineEntry = self.tableItems[indexPath.item]
@@ -95,7 +95,7 @@ extension MainViewController :  UITableViewDataSource {
   /// Set the text for a timeline table cell.
   /// - parameter tableCell: The tableCell used to set text.
   /// - parameter timelineEntry: The TimelineEntry containing necessary information for the tableCell.
-  func setupCellLabel(_ tableCell: TimelineUITableViewCell, _ timelineEntry: TimelineEntry) {
+  func setupCellLabel(_ tableCell: TimelineCell, _ timelineEntry: TimelineEntry) {
     
     // Update table cell fields.
     let cellLabel = tableCell.cellLabel
@@ -112,7 +112,7 @@ extension MainViewController :  UITableViewDataSource {
   /// - parameter timelineEntry: The TimelineEntry containing necessary information for the tableCell.
   /// - parameter startTime: Start time for timeline entry.
   /// - parameter endTime: End time for timeline entry.
-  func setupTimeLabel(_ tableCell: TimelineUITableViewCell,
+  func setupTimeLabel(_ tableCell: TimelineCell,
                       _ timelineEntry: TimelineEntry,
                       _ startTime: Date, _ endTime: Date?) {
     
@@ -133,7 +133,7 @@ extension MainViewController :  UITableViewDataSource {
   /// - parameter tableCell: The tableCell used to set the time label.
   /// - parameter startTime: Start time for timeline entry.
   /// - parameter endTime: End time for timeline entry.
-  func setupDurationLabel(_ tableCell: TimelineUITableViewCell,
+  func setupDurationLabel(_ tableCell: TimelineCell,
                           _ startTime: Date, _ endTime: Date?) {
   
     // Calculate and assign duration of stay at location.
@@ -149,7 +149,7 @@ extension MainViewController :  UITableViewDataSource {
   /// - parameter tableCell: The tableCell used to set the time label.
   /// - parameter timelineEntry: The timelineEntry is used to determine the movement type, which determines the proper image to use.
   /// - parameter indexPath: The indexPath determines which cell and information should be used.
-  func setupTimelineImage(_ tableCell: TimelineUITableViewCell,
+  func setupTimelineImage(_ tableCell: TimelineCell,
                           _ timelineEntry: TimelineEntry,
                           _ indexPath: IndexPath) {
     

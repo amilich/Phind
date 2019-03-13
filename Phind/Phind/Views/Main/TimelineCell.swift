@@ -9,7 +9,7 @@
 import UIKit
 
 /// The TimelineUITableViewCell stores the requisite UI components for displaying the timeline value to the user, including a label, image, duration, and time.
-class TimelineUITableViewCell: UITableViewCell {
+class TimelineCell: UITableViewCell {
   
   /// The image for the timelineEntry
   @IBOutlet var cellImage: UIImageView!

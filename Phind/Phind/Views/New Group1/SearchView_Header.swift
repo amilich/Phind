@@ -21,6 +21,10 @@ internal extension SearchViewController {
     if let mainVC = self.parent {
       if let mainVC = mainVC as? MainViewController {
         
+        self.results = []
+        self.reloadView()
+        self.searchBarField.text = ""
+        self.view.endEditing(true)
         mainVC.svc.view.isHidden = true
         mainVC.toggleVisibility(hidden: false)
         
@@ -31,8 +35,8 @@ internal extension SearchViewController {
   
   @objc func textFieldDidChange(_ textField: UITextField) {
     
-    self.visits = ModelManager.shared.getSearchResults(placeName: self.searchBarField.text!)!
-    print(visits)
+    self.results = ModelManager.shared.getSearchResults(placeName: self.searchBarField.text!)!
+    self.reloadView()
     
   }
   
