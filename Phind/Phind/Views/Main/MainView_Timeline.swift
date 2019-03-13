@@ -19,16 +19,16 @@ extension MainViewController {
   func setupTimelineView() {
     
     // Setup shadow.
-    Style.ApplyDropShadow(view: shadowWrap)
-    Style.ApplyRoundedCorners(view: shadowWrap)
-    Style.SetFullWidth(view: shadowWrap)
+    Style.ApplyDropShadow(view: timelineView)
+    Style.ApplyRoundedCorners(view: timelineView)
+    Style.SetFullWidth(view: timelineView)
     
     // Timeline card setup.
     Style.ApplyRoundedCorners(view: tableWrap, clip: true)
-    tableWrap.frame.size.width = shadowWrap.frame.size.width
+    tableWrap.frame.size.width = timelineView.frame.size.width
 
     // Timeline table setup.
-    tableView.frame.size.width = shadowWrap.frame.size.width
+    tableView.frame.size.width = timelineView.frame.size.width
     self.tableView.contentInset = UIEdgeInsets(top: 24, left: 0,bottom: 0, right: 0)
     
     self.tableView.register(TimelineUITableViewCell.self, forCellReuseIdentifier: "TimelineCell")

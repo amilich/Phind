@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+enum Alignment {
+  case LEFT, CENTER, RIGHT
+}
+
 /// Class containing all style constants for Phind, including colors, offsets, and shadow parameters.
 class Style {
   
@@ -64,7 +68,7 @@ class Style {
   public static let HEADER_HEIGHT : CGFloat = 56.0
   
   // Text fields.
-  public static let TEXT_FIELD_FONT = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium)
+  public static let TEXT_FIELD_FONT = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.regular)
   
 }
 
@@ -94,12 +98,30 @@ extension Style {
   /// Set a UIView to the full width of the screen
   /// - parameter view: The UIView to set the width of
   /// - parameter positionWithMargin: Whether to set the frame to the screen margin position (default true).
-  public static func SetFullWidth(view: UIView, positionWithMargin: Bool = true) {
+  public static func SetFullWidth(view: UIView) {
     
     view.frame.size.width = UIScreen.main.bounds.width - Style.SCREEN_MARGIN * 2
-    if (positionWithMargin) {
+    view.frame.origin.x = Style.SCREEN_MARGIN
+    
+  }
+  
+  public static func SetPartialWidth(view: UIView, offset: CGFloat) {
+    
+    view.frame.size.width = UIScreen.main.bounds.width - Style.SCREEN_MARGIN * 2 - Style.ELEMENT_MARGIN - offset
+    
+  }
+  
+  
+  public static func SetAlignment(view: UIView, offsetX: CGFloat = 0, offsetY: CGFloat = 0, align: Alignment) {
+    
+    switch align {
+    case Alignment.LEFT:
       view.frame.origin.x = Style.SCREEN_MARGIN
+    default:
+      view.frame.origin.x = UIScreen.main.bounds.width - view.frame.size.width - Style.SCREEN_MARGIN
     }
+    
+    view.frame.origin.y = UIApplication.shared.windows[0].safeAreaInsets.top + offsetY
     
   }
   
@@ -114,6 +136,38 @@ extension Style {
     fab.layer.cornerRadius = Style.FAB_HEIGHT * 0.5
     
     return fab
+    
+  }
+  
+  public static func SetupTextField(textField: UITextField) {
+    
+    textField.font = Style.TEXT_FIELD_FONT
+    textField.borderStyle = UITextField.BorderStyle.none
+    textField.autocorrectionType = UITextAutocorrectionType.no
+    textField.keyboardType = UIKeyboardType.default
+    textField.returnKeyType = UIReturnKeyType.done
+    textField.clearButtonMode = UITextField.ViewMode.whileEditing
+    textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+    
+  }
+  
+  public static func SetupFullScreenView(_ view: UIView) {
+    
+    view.frame.origin.x = 0
+    view.frame.origin.y = 0
+    view.frame.size.width = UIScreen.main.bounds.width
+    view.frame.size.height = UIScreen.main.bounds.height
+    
+  }
+  
+  public static func SetSize(view: UIView,
+                             offsetTop: CGFloat = 0, offsetBottom: CGFloat = 0,
+                             offsetLeft: CGFloat = 0, offsetRight: CGFloat = 0) {
+    
+    view.frame.size.width = UIScreen.main.bounds.width - offsetLeft - offsetRight - Style.SCREEN_MARGIN * 2
+    let safeAreaBuffer = UIApplication.shared.windows[0].safeAreaInsets.top + UIApplication.shared.windows[0].safeAreaInsets.bottom
+    let safeAreaHeight = UIScreen.main.bounds.height - safeAreaBuffer
+    view.frame.size.height = safeAreaHeight - offsetTop - offsetBottom
     
   }
   

@@ -35,9 +35,7 @@ internal extension MainViewController {
     
     // TODO: Do hiding for the place details card too.
     self.svc.view.isHidden = false
-    self.shadowWrap.isHidden = true
-    self.headerView.isHidden = true
-    self.searchFab.isHidden = true
+    self.toggleVisibility(hidden: true)
     
   }
   

@@ -94,9 +94,9 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
 
      if let mainVC = self.parent {
        if let mainVC = mainVC as? MainViewController {
-        self.view.frame = mainVC.shadowWrap.frame
-        self.shadowWrap.frame = mainVC.shadowWrap.frame
-        self.flowWrap.frame = mainVC.shadowWrap.frame // mainVC.tableWrap.frame
+        self.view.frame = mainVC.timelineView.frame
+        self.shadowWrap.frame = mainVC.timelineView.frame
+        self.flowWrap.frame = mainVC.timelineView.frame // mainVC.tableWrap.frame
         
         // TODO resolve the 4 and 8 constants
         self.collectionView.frame = CGRect(x:mainVC.tableWrap.frame.minX - 2, y: mainVC.tableWrap.frame.minY + Style.DETAILS_LABEL_OFFSET, width:mainVC.tableWrap.frame.width + 2, height:Style.DETAILS_PHOTO_VIEW_HEIGHT)
@@ -116,7 +116,7 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
       self.view.isHidden = true
       if let mainVC = self.parent {
         if let mainVC = mainVC as? MainViewController {
-          mainVC.shadowWrap.isHidden = false
+          mainVC.timelineView.isHidden = false
           mainVC.reloadView()
         }
       }

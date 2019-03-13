@@ -13,38 +13,67 @@ internal extension SearchViewController {
   
   func setupHeader() {
     setupSearchBar()
+    setupBackFab()
+  }
+  
+  @objc func closeSearch() {
+    
+    if let mainVC = self.parent {
+      if let mainVC = mainVC as? MainViewController {
+        
+        mainVC.svc.view.isHidden = true
+        mainVC.toggleVisibility(hidden: false)
+        
+      }
+    }
+    
+  }
+  
+  func setupBackFab() {
+    
+    backFab = Style.CreateFab(icon: "arrow-left", backgroundColor: Style.PRIMARY_COLOR, iconColor: UIColor.white)
+    Style.SetAlignment(view: backFab, align: Alignment.LEFT)
+    self.view.addSubview(backFab)
+    backFab.addTarget(self, action: #selector(closeSearch), for: .touchUpInside)
+    
   }
   
   func setupSearchBar() {
-    
-    print("setup search bar")
-    
+
     // Setup search bar.
     self.searchBar = UIView()
-    Style.SetFullWidth(view: self.searchBar)
+    Style.SetPartialWidth(view: self.searchBar, offset: Style.FAB_HEIGHT)
+    Style.SetAlignment(
+      view: self.searchBar,
+      offsetX: Style.FAB_HEIGHT + Style.ELEMENT_MARGIN,
+      align: Alignment.RIGHT
+    )
+    
     Style.ApplyDropShadow(view: self.searchBar)
     Style.ApplyRoundedCorners(view: self.searchBar, radius: Style.HEADER_HEIGHT * 0.5)
     self.view.addSubview(self.searchBar)
-    self.searchBar.frame.origin.y = UIApplication.shared.windows[0].safeAreaInsets.top
+    
     self.searchBar.frame.size.height = Style.HEADER_HEIGHT
     self.searchBar.backgroundColor = UIColor.white
     
     // Setup search bar text field.
-    self.searchBarField = UITextField()
-    self.searchBarField.frame.size.width = self.searchBar.frame.size.width
-    self.searchBarField.frame.size.height = self.searchBar.frame.size.height
-    self.searchBarField.frame.origin.x = 0
-    self.searchBarField.frame.origin.y = 0
-      
-    self.searchBarField.font = Style.TEXT_FIELD_FONT
-    self.searchBarField.borderStyle = UITextField.BorderStyle.none
-    self.searchBarField.autocorrectionType = UITextAutocorrectionType.no
-    self.searchBarField.keyboardType = UIKeyboardType.default
-    self.searchBarField.returnKeyType = UIReturnKeyType.done
-    self.searchBarField.clearButtonMode = UITextField.ViewMode.whileEditing
-    self.searchBarField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
-    self.searchBarField.delegate = self
+    self.searchBarField = UITextField(frame: CGRect(
+      x: TEXT_FIELD_X_MARGIN,
+      y: TEXT_FIELD_Y_MARGIN,
+      width: self.searchBar.frame.size.width - TEXT_FIELD_X_MARGIN * 2.0,
+      height: self.searchBar.frame.size.height - TEXT_FIELD_Y_MARGIN * 2.0
+    ))
+    Style.SetupTextField(textField: self.searchBarField)
     self.searchBar.addSubview(self.searchBarField)
+    self.searchBar.bringSubviewToFront(self.searchBarField)
+    self.searchBarField.placeholder = "Search past locations..."
+    
+    // Add indentation to the text field.
+    let spacerView = UIView(frame:CGRect(x:0, y:0, width: Style.ELEMENT_PADDING, height: Style.ELEMENT_PADDING))
+    self.searchBarField.leftViewMode = UITextField.ViewMode.always
+    self.searchBarField.leftView = spacerView
+    
+    self.searchBarField.delegate = self
     
   }
   
@@ -95,6 +124,7 @@ internal extension SearchViewController {
     // called when 'return' key pressed. return NO to ignore.
     print("TextField should return method called")
     // may be useful: textField.resignFirstResponder()
+    self.view.endEditing(true)
     return true
   }
 

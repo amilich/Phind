@@ -64,7 +64,7 @@ class MainViewController: UIViewController, UITableViewDelegate  {
   /// The tableWrap UIView is the first UIView encapsulating the tableView.
   @IBOutlet weak var tableWrap: UIView!
   /// The shadowWrap encapsulates the tableWrap but contains different stylistic preferences.
-  @IBOutlet weak var shadowWrap: UIView!
+  @IBOutlet weak var timelineView: UIView!
   /// Icon for the tabBar (to view additional place or stats information).
   @IBOutlet weak var barIcon: UITabBarItem!
   
@@ -140,6 +140,15 @@ class MainViewController: UIViewController, UITableViewDelegate  {
     
   }
   
+  public func toggleVisibility(hidden: Bool = false) {
+  
+    self.headerView.isHidden = hidden
+    self.searchFab.isHidden = hidden
+    self.placeDetailsController.view.isHidden = true
+    self.timelineView.isHidden = hidden
+    
+  }
+  
   /// Reload all internal data and propagate to the timeline view. First updates the location entries for this day, then reloads the map view to show correct pins, and ends by clearing and repopulating the timeline.
   internal func reloadView() {
     
@@ -184,7 +193,7 @@ class MainViewController: UIViewController, UITableViewDelegate  {
         
         self.placeDetailsController.setPlaceAndLocation(place: place!, timelineEntry: timelineEntry)
         self.placeDetailsController.view.isHidden = false
-        self.shadowWrap.isHidden = true
+        self.timelineView.isHidden = true
       }
     } else {
       // Do not need an else case; unselecting happens by
