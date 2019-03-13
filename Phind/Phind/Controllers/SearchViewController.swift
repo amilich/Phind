@@ -19,6 +19,8 @@ class SearchViewController: UIViewController {
   var searchBarField : UITextField!
   var searchBar : UIView!
   var backFab : UIButton!
+  
+  var visits : [Place] = []
 
   override func viewDidLoad() {
     super.viewDidLoad()

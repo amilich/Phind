@@ -29,6 +29,13 @@ internal extension SearchViewController {
     
   }
   
+  @objc func textFieldDidChange(_ textField: UITextField) {
+    
+    self.visits = ModelManager.shared.getSearchResults(placeName: self.searchBarField.text!)!
+    print(visits)
+    
+  }
+  
   func setupBackFab() {
     
     backFab = Style.CreateFab(icon: "arrow-left", backgroundColor: Style.PRIMARY_COLOR, iconColor: UIColor.white)
@@ -74,6 +81,7 @@ internal extension SearchViewController {
     self.searchBarField.leftView = spacerView
     
     self.searchBarField.delegate = self
+    self.searchBarField.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
     
   }
   
