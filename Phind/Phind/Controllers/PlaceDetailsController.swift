@@ -168,9 +168,6 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     self.statisticsLabel.isHidden = !visible
     self.label.isHidden = !visible
     self.collectionView.isHidden = !visible
-    if visible {
-        loadNearestPlaces()
-    }
   }
   
   /// Back press target function for back UIButton
