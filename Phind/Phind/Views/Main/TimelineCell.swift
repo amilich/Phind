@@ -9,7 +9,7 @@
 import UIKit
 
 /// The TimelineUITableViewCell stores the requisite UI components for displaying the timeline value to the user, including a label, image, duration, and time.
-class TimelineUITableViewCell: UITableViewCell {
+class TimelineCell: UITableViewCell {
   
   /// The image for the timelineEntry
   @IBOutlet var cellImage: UIImageView!
@@ -28,7 +28,7 @@ class TimelineUITableViewCell: UITableViewCell {
     
     // Create UILabel for place name
     cellLabel = UILabel()
-    cellLabel.frame = CGRect(x: 136, y: 8, width: 280, height: 24)
+    cellLabel.frame = CGRect(x: 136, y: 8, width: 192, height: 24)
     cellLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium)
     
     // Create UILabel for place duration.
@@ -40,7 +40,7 @@ class TimelineUITableViewCell: UITableViewCell {
     
     // Create UILabel for time
     timeLabel = UILabel()
-    timeLabel.frame = CGRect(x: 136, y: 32, width: 280, height: 16)
+    timeLabel.frame = CGRect(x: 136, y: 32, width: 192, height: 16)
     timeLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.light)
     timeLabel.textColor = Style.BODY_COLOR
 

@@ -26,6 +26,11 @@
 		0A4EAF90222CF4EE00D419BD /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4EAF8F222CF4EE00D419BD /* Credentials.swift */; };
 		0A5A2254221047CE00879A38 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A2253221047CE00879A38 /* ModelManager.swift */; };
 		0A607A13222C9382006EDA7A /* timeline_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A607A12222C9382006EDA7A /* timeline_line.png */; };
+		0A6F0D212237D0BD00AF9B3D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F0D202237D0BD00AF9B3D /* SearchViewController.swift */; };
+		0A6F0D242237D18A00AF9B3D /* SearchView_Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F0D232237D18A00AF9B3D /* SearchView_Header.swift */; };
+		0A6F0D262238DE9D00AF9B3D /* SearchView_Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F0D252238DE9D00AF9B3D /* SearchView_Results.swift */; };
+		0A6F0D282238F16800AF9B3D /* ModelManager_Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F0D272238F16800AF9B3D /* ModelManager_Search.swift */; };
+		0A6F0D2C2238F98000AF9B3D /* SearchResultsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F0D2B2238F98000AF9B3D /* SearchResultsCell.swift */; };
 		0AA7BF112210374D0038A274 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA7BF102210374D0038A274 /* Util.swift */; };
 		0AA824A5222CE4BA008BE873 /* MainView_Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA824A4222CE4BA008BE873 /* MainView_Header.swift */; };
 		0AA9103F220F6BF9001B1270 /* Pods in Resources */ = {isa = PBXBuildFile; fileRef = 0AA9103E220F6BF9001B1270 /* Pods */; };
@@ -39,7 +44,7 @@
 		492F5C6E21FD814F009B6411 /* PhindTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5C6D21FD814F009B6411 /* PhindTests.swift */; };
 		492F5C7921FD814F009B6411 /* PhindUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F5C7821FD814F009B6411 /* PhindUITests.swift */; };
 		4934F6BF220296D90025C749 /* RealmTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4934F6BE220296D90025C749 /* RealmTypes.swift */; };
-		494E7EE52210F76E00979950 /* TimelineUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494E7EE42210F76E00979950 /* TimelineUITableViewCell.swift */; };
+		494E7EE52210F76E00979950 /* TimelineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494E7EE42210F76E00979950 /* TimelineCell.swift */; };
 		49AD3CD32213E32F000494D9 /* MapViewFitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AD3CD22213E32F000494D9 /* MapViewFitExtension.swift */; };
 		49B70CC2222DDAA9001E7167 /* PlaceDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B70CC1222DDAA9001E7167 /* PlaceDetailsController.swift */; };
 		49B70CC5222DDBA4001E7167 /* PlaceDetails_Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B70CC4222DDBA4001E7167 /* PlaceDetails_Util.swift */; };
@@ -84,6 +89,11 @@
 		0A4EAF8F222CF4EE00D419BD /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		0A5A2253221047CE00879A38 /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		0A607A12222C9382006EDA7A /* timeline_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timeline_line.png; sourceTree = "<group>"; };
+		0A6F0D202237D0BD00AF9B3D /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		0A6F0D232237D18A00AF9B3D /* SearchView_Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView_Header.swift; sourceTree = "<group>"; };
+		0A6F0D252238DE9D00AF9B3D /* SearchView_Results.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView_Results.swift; sourceTree = "<group>"; };
+		0A6F0D272238F16800AF9B3D /* ModelManager_Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager_Search.swift; sourceTree = "<group>"; };
+		0A6F0D2B2238F98000AF9B3D /* SearchResultsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsCell.swift; sourceTree = "<group>"; };
 		0AA7BF102210374D0038A274 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		0AA824A4222CE4BA008BE873 /* MainView_Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView_Header.swift; sourceTree = "<group>"; };
 		0AA9103E220F6BF9001B1270 /* Pods */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pods; sourceTree = "<group>"; };
@@ -106,7 +116,7 @@
 		492F5C7821FD814F009B6411 /* PhindUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhindUITests.swift; sourceTree = "<group>"; };
 		492F5C7A21FD814F009B6411 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4934F6BE220296D90025C749 /* RealmTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTypes.swift; sourceTree = "<group>"; };
-		494E7EE42210F76E00979950 /* TimelineUITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineUITableViewCell.swift; sourceTree = "<group>"; };
+		494E7EE42210F76E00979950 /* TimelineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineCell.swift; sourceTree = "<group>"; };
 		49AD3CD22213E32F000494D9 /* MapViewFitExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MapViewFitExtension.swift; path = Phind/Views/MapViewFitExtension.swift; sourceTree = SOURCE_ROOT; };
 		49B70CC1222DDAA9001E7167 /* PlaceDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsController.swift; sourceTree = "<group>"; };
 		49B70CC4222DDBA4001E7167 /* PlaceDetails_Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetails_Util.swift; sourceTree = "<group>"; };
@@ -154,6 +164,7 @@
 		0A04B95E220F7DB600D94EB9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0A6F0D222237D16D00AF9B3D /* Search */,
 				49B70CCC222E237B001E7167 /* Edit */,
 				49B70CC3222DDB99001E7167 /* Place */,
 				0AA824A3222CE491008BE873 /* Main */,
@@ -181,6 +192,7 @@
 				0A04B961220FAD1100D94EB9 /* PhindLocationManager.swift */,
 				0A5A2253221047CE00879A38 /* ModelManager.swift */,
 				49B70CCD222E238D001E7167 /* EditViewController.swift */,
+				0A6F0D202237D0BD00AF9B3D /* SearchViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -216,13 +228,25 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		0A6F0D222237D16D00AF9B3D /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				0A6F0D232237D18A00AF9B3D /* SearchView_Header.swift */,
+				0A6F0D252238DE9D00AF9B3D /* SearchView_Results.swift */,
+				0A6F0D272238F16800AF9B3D /* ModelManager_Search.swift */,
+				0A6F0D2B2238F98000AF9B3D /* SearchResultsCell.swift */,
+			);
+			name = Search;
+			path = "New Group1";
+			sourceTree = "<group>";
+		};
 		0AA824A3222CE491008BE873 /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				492F5C5C21FD814E009B6411 /* Main.storyboard */,
 				0AA824A4222CE4BA008BE873 /* MainView_Header.swift */,
 				0A4EAF87222CE76500D419BD /* MainView_Map.swift */,
-				494E7EE42210F76E00979950 /* TimelineUITableViewCell.swift */,
+				494E7EE42210F76E00979950 /* TimelineCell.swift */,
 				0A4EAF89222CE9CD00D419BD /* MainView_Timeline.swift */,
 			);
 			path = Main;
@@ -619,12 +643,14 @@
 			files = (
 				49B70CCE222E238D001E7167 /* EditViewController.swift in Sources */,
 				0A04B962220FAD1100D94EB9 /* PhindLocationManager.swift in Sources */,
+				0A6F0D262238DE9D00AF9B3D /* SearchView_Results.swift in Sources */,
 				49B70CC2222DDAA9001E7167 /* PlaceDetailsController.swift in Sources */,
 				4934F6BF220296D90025C749 /* RealmTypes.swift in Sources */,
+				0A6F0D282238F16800AF9B3D /* ModelManager_Search.swift in Sources */,
 				49AD3CD32213E32F000494D9 /* MapViewFitExtension.swift in Sources */,
 				49B70CC7222DDC8E001E7167 /* PlaceDetails_PhotoTable.swift in Sources */,
 				492F5C5B21FD814E009B6411 /* SecondViewController.swift in Sources */,
-				494E7EE52210F76E00979950 /* TimelineUITableViewCell.swift in Sources */,
+				494E7EE52210F76E00979950 /* TimelineCell.swift in Sources */,
 				492F5C5721FD814E009B6411 /* AppDelegate.swift in Sources */,
 				F97F19BC22133490008CF75E /* StatisticsUICollectionViewCell.swift in Sources */,
 				0AA7BF112210374D0038A274 /* Util.swift in Sources */,
@@ -632,7 +658,10 @@
 				0A4EAF90222CF4EE00D419BD /* Credentials.swift in Sources */,
 				0A5A2254221047CE00879A38 /* ModelManager.swift in Sources */,
 				0AA824A5222CE4BA008BE873 /* MainView_Header.swift in Sources */,
+				0A6F0D242237D18A00AF9B3D /* SearchView_Header.swift in Sources */,
+				0A6F0D212237D0BD00AF9B3D /* SearchViewController.swift in Sources */,
 				49077B30222E436C0024539E /* Edit_Util.swift in Sources */,
+				0A6F0D2C2238F98000AF9B3D /* SearchResultsCell.swift in Sources */,
 				49B70CC5222DDBA4001E7167 /* PlaceDetails_Util.swift in Sources */,
 				0A4EAF8D222CEC4600D419BD /* Style.swift in Sources */,
 				492F5C5921FD814E009B6411 /* MainViewController.swift in Sources */,
@@ -813,7 +842,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XY8GGY7CCK;
+				DEVELOPMENT_TEAM = 6R82YX5UBD;
 				INFOPLIST_FILE = Phind/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "team-7.Phind";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -828,7 +857,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XY8GGY7CCK;
+				DEVELOPMENT_TEAM = 6R82YX5UBD;
 				INFOPLIST_FILE = Phind/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "team-7.Phind";
 				PRODUCT_NAME = "$(TARGET_NAME)";

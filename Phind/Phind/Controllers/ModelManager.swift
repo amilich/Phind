@@ -322,7 +322,6 @@ public class ModelManager : NSObject {
     return nearbySearchApiResponse
   }
   
-  
   public func assignPlaceIdToLocation(_ locationEntry: LocationEntry) {
     
     let locationUuid = locationEntry.uuid

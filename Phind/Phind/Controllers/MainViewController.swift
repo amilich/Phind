@@ -57,6 +57,10 @@ class MainViewController: UIViewController, UITableViewDelegate  {
   @IBOutlet weak var refreshButton: UIButton!
   @IBOutlet weak var headerView: UIView!
   
+  // Search UI links.
+  var svc : SearchViewController!
+  var searchFab : UIButton!
+  
   // Map UI links.
   @IBOutlet weak var mapView: MKMapView!
   
@@ -66,7 +70,7 @@ class MainViewController: UIViewController, UITableViewDelegate  {
   /// The tableWrap UIView is the first UIView encapsulating the tableView.
   @IBOutlet weak var tableWrap: UIView!
   /// The shadowWrap encapsulates the tableWrap but contains different stylistic preferences.
-  @IBOutlet weak var shadowWrap: UIView!
+  @IBOutlet weak var timelineView: UIView!
   /// Icon for the tabBar (to view additional place or stats information).
   @IBOutlet weak var barIcon: UITabBarItem!
   
@@ -123,8 +127,26 @@ class MainViewController: UIViewController, UITableViewDelegate  {
     self.view.addSubview(placeDetailsController.view)
     placeDetailsController.view.isHidden = true
     
+    // Add popup for search.
+    svc = SearchViewController()
+    self.addChild(svc)
+    self.view.addSubview(svc.view)
+    svc.view.isHidden = true
+    
     // Load the view.
     self.reloadView()
+    
+    self.view.bringSubviewToFront(svc.view)
+    self.view.sendSubviewToBack(mapView)
+    
+  }
+  
+  public func toggleVisibility(hidden: Bool = false) {
+  
+    self.headerView.isHidden = hidden
+    self.searchFab.isHidden = hidden
+    self.placeDetailsController.view.isHidden = true
+    self.timelineView.isHidden = hidden
     
   }
   
@@ -170,9 +192,9 @@ class MainViewController: UIViewController, UITableViewDelegate  {
         )
         mapView.setRegion(viewRegion, animated: true)
         
-        placeDetailsController.setPlaceAndLocation(place: place!, timelineEntry: timelineEntry)
-        placeDetailsController.setComponentsVisible(visible: true)
-        self.shadowWrap.isHidden = true
+        self.placeDetailsController.setPlaceAndLocation(place: place!, timelineEntry: timelineEntry)
+        self.timelineView.isHidden = true
+        self.placeDetailsController.setComponentsVisible(visible: true)
       }
     } else {
       // Do not need an else case; unselecting happens by

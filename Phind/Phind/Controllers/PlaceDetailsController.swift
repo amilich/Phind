@@ -88,7 +88,17 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
   internal func setStatistics() {
     let numVisits = ModelManager.shared.numberVisits(place: self.place)
     let timesString = numVisits! == 1 ? "time" : "times"
-    self.statisticsLabel.text = "Visited \(numVisits!) " + timesString // TODO
+    
+    let formatter = DateFormatter()
+    formatter.dateFormat = "MMM d"
+    let lastVisitDate = ModelManager.shared.getLastVisitDate(placeUUID: self.place.uuid) as Date?
+    
+    var subtitleText = "Visited \( ModelManager.shared.getNumberVisits(placeUUID: self.place.uuid) ?? 0 ) " + timesString
+    if lastVisitDate != nil {
+      subtitleText += "  \u{00B7}  Last visited \( formatter.string(from: lastVisitDate!) )"
+    }
+    
+    self.statisticsLabel.text = subtitleText
   }
   
   /// Update the style for the PlaceDetails card. Applies rounder corners and shadow; then sets up the frames for the collection and table views.
@@ -109,7 +119,7 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
 
      if let mainVC = self.parent {
        if let mainVC = mainVC as? MainViewController {
-         self.view.frame = CGRect(x:mainVC.shadowWrap.frame.minX, y: mainVC.shadowWrap.frame.minY - 100.0, width:mainVC.shadowWrap.frame.width, height:mainVC.shadowWrap.frame.height + 100.0)
+        self.view.frame = CGRect(x:mainVC.timelineView.frame.minX, y: mainVC.timelineView.frame.minY - 100.0, width:mainVC.timelineView.frame.width, height:mainVC.timelineView.frame.height + 100.0)
         self.shadowWrap.frame = self.view.frame
         self.flowWrap.frame = self.view.frame
         
@@ -131,7 +141,7 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
       self.view.isHidden = true
       if let mainVC = self.parent {
         if let mainVC = mainVC as? MainViewController {
-          mainVC.shadowWrap.isHidden = false
+          mainVC.timelineView.isHidden = false
           mainVC.reloadView()
         }
       }
