@@ -88,7 +88,17 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
   internal func setStatistics() {
     let numVisits = ModelManager.shared.numberVisits(place: self.place)
     let timesString = numVisits! == 1 ? "time" : "times"
-    self.statisticsLabel.text = "Visited \(numVisits!) " + timesString // TODO
+    
+    let formatter = DateFormatter()
+    formatter.dateFormat = "MMM d"
+    let lastVisitDate = ModelManager.shared.getLastVisitDate(placeUUID: self.place.uuid) as Date?
+    
+    var subtitleText = "Visited \( ModelManager.shared.getNumberVisits(placeUUID: self.place.uuid) ?? 0 ) " + timesString
+    if lastVisitDate != nil {
+      subtitleText += "  \u{00B7}  Last visited \( formatter.string(from: lastVisitDate!) )"
+    }
+    
+    self.statisticsLabel.text = subtitleText
   }
   
   /// Update the style for the PlaceDetails card. Applies rounder corners and shadow; then sets up the frames for the collection and table views.
