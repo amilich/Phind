@@ -58,7 +58,7 @@ internal extension SearchViewController {
   
   /// Delete all elements from timeline and add new entries. Then reload the tableView UIView to push the data to the screen.
   internal func reloadView() {
-    
+    print("length of results: \(self.results.count)")
     // Iterate through location entries and draw them on the map.
     self.tableView.reloadData()
     self.tableView.isHidden = (self.results.count == 0)

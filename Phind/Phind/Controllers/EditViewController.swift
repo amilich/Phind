@@ -30,6 +30,34 @@ class EditViewController : SearchViewController {
     }
         
         
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        
+//        let place = self.results[indexPath.item]
+//        self.closeSearch()
+//        if let mainVC = self.parent {
+//            if let mainVC = mainVC as? MainViewController {
+//                
+//                let visitHistory = ModelManager.shared.getVisitHistory(placeUUID: place.uuid)!
+//                if visitHistory.count == 0 {
+//                    return
+//                }
+//                let latestVisit = visitHistory[0]
+//                let timelineEntry = TimelineEntry(
+//                    placeUUID: place.uuid,
+//                    placeLabel: place.name,
+//                    startTime: latestVisit.start as Date,
+//                    endTime: latestVisit.end as Date?,
+//                    movementType: latestVisit.movement_type
+//                )
+//                
+//                mainVC.placeDetailsController.setPlaceAndLocation(place: place, timelineEntry: timelineEntry)
+//                mainVC.timelineView.isHidden = true
+//                mainVC.placeDetailsController.setComponentsVisible(visible: true)
+//                
+//            }
+//        }
+//        
+//    }
 }
 
 }
