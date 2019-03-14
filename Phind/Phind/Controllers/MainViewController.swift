@@ -28,6 +28,10 @@ class TimelineEntry: NSObject {
   /// Type of movement for timeline entry; displayed to user as well
   internal var movementType: String
   
+    
+  // Search UI links.
+  var editViewController : EditViewController!
+    
   /// Constructor for the TimelineEntry.
   /// - parameter placeUUID: UUID corresponding to Realm object for the place for this TimelineEntry.
   /// - parameter placeLabel: The label for the given place.
@@ -60,6 +64,8 @@ class MainViewController: UIViewController, UITableViewDelegate  {
   // Search UI links.
   var svc : SearchViewController!
   var searchFab : UIButton!
+    
+  var editViewController: EditViewController!
   
   // Map UI links.
   @IBOutlet weak var mapView: MKMapView!
@@ -111,7 +117,7 @@ class MainViewController: UIViewController, UITableViewDelegate  {
   override func viewDidLoad() {
     
     super.viewDidLoad()
-    
+
     let formatter = DateFormatter()
     formatter.dateFormat = "HH:mm:ss"
     self.updateDate(Date())
@@ -122,6 +128,13 @@ class MainViewController: UIViewController, UITableViewDelegate  {
     self.tabBarController?.tabBar.isHidden = true
     self.mapView.delegate = self
 
+    // Add edit controller for disambiguation
+    editViewController = EditViewController()
+    self.addChild(editViewController)
+    self.view.addSubview(editViewController.view)
+    editViewController.view.isHidden = true
+    editViewController.view.sizeToFit()
+    
     // Add popup views.
     self.addChild(placeDetailsController)
     self.view.addSubview(placeDetailsController.view)

@@ -21,7 +21,6 @@ class EditViewController : SearchViewController {
             placeDetailsVC.toggleEditVisibility(isHidden: true)
     }
     
-        
     func textFieldDidChange(_ textField: UITextField) {
         self.getAutocompletePlaces(query: self.searchBarField.text!)
         self.reloadView()

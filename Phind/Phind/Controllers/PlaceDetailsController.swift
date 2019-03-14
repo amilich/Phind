@@ -44,7 +44,6 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
   @IBOutlet var flowLayout: UICollectionViewFlowLayout!
     
   // Search UI links.
-  var editViewController : EditViewController!
   var searchFab : UIButton!
   
   // Edit view controller
@@ -73,18 +72,11 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     // needed so edit can access parent data
 //    self.addChild(editViewController)
     
-    editViewController = EditViewController()
-    self.addChild(editViewController)
-    self.view.addSubview(editViewController.view)
-    editViewController.view.isHidden = true
-    
     setupStyle()
     
     toggleEditVisibility(isHidden: true)
     
     // Add popup for search.
-
-    
     self.view.addSubview(label)
     self.view.addSubview(addressLabel)
     self.view.addSubview(backButton)
@@ -116,14 +108,19 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     
     // Setup shadow.
     Style.ApplyDropShadow(view: view)
-    Style.ApplyDropShadow(view: editViewController.view)
+    if let mainVC = self.parent as? MainViewController {
+        Style.ApplyDropShadow(view: mainVC.editViewController.view)
+    }
     
     Style.SetFullWidth(view: shadowWrap)
 
     // Setup flow layout style.
     Style.ApplyRoundedCorners(view: shadowWrap, clip: true)
     Style.ApplyRoundedCorners(view: flowWrap, clip: true)
-    Style.ApplyRoundedCorners(view: editViewController.view, clip: true)
+    if let mainVC = self.parent as? MainViewController {
+        Style.ApplyRoundedCorners(view: mainVC.editViewController.view, clip: true)
+
+    }
     
     self.collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
 
@@ -134,9 +131,8 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
         self.flowWrap.frame = self.view.frame
         
         // TODO resolve the 4 and 8 constants
-        // self.collectionView.frame = CGRect(x:mainVC.tableWrap.frame.minX - 2, y: mainVC.tableWrap.frame.minY + Style.DETAILS_LABEL_OFFSET, width:mainVC.tableWrap.frame.width + 2, height:Style.DETAILS_PHOTO_VIEW_HEIGHT)
-        
-        self.editViewController.view.frame = self.collectionView.frame
+//        self.collectionView.frame = CGRect(x:mainVC.tableWrap.frame.minX - 2, y: mainVC.tableWrap.frame.minY + Style.DETAILS_LABEL_OFFSET, width:mainVC.tableWrap.frame.width + 2, height:Style.DETAILS_PHOTO_VIEW_HEIGHT)
+        //        self.editViewController.view.frame = CGRect(x:mainVC.tableWrap.frame.minX - 2, y: mainVC.tableWrap.frame.minY, width:mainVC.tableWrap.frame.width-2, height:Style.DETAILS_PHOTO_VIEW_HEIGHT)
        }
      }
     
@@ -176,18 +172,16 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
   
   /// Back press target function for back UIButton
   @objc func backPressed(_ sender: UIButton!) {
-    doBackPress(searchVisible: self.editViewController.view.isHidden)
+    if let mainVC = self.parent as? MainViewController {
+        doBackPress(searchVisible: mainVC.editViewController.view.isHidden)
+    }
   }
   
   /// Show the edit view controller
   @objc func editPressed(_ sender: UIButton!) {
-    self.flowWrap.isHidden = true
-    self.addressLabel.isHidden = true
-    self.label.isHidden = true
-    self.collectionView.isHidden = true
-    self.statisticsLabel.isHidden = true
-    
+    self.setComponentsVisible(visible: false)
     toggleEditVisibility(isHidden: false)
+    
     
     Logger.shared.debug("Edit button clicked")
   }
@@ -195,7 +189,9 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
   /// Show or hide all edit components
   /// - parameter isHidden: Whether the edit view is visible or not
   internal func toggleEditVisibility(isHidden : Bool) {
-    editViewController.view.isHidden = isHidden
+    if let mainVC = self.parent as? MainViewController {
+        mainVC.editViewController.view.isHidden = isHidden
+    }
   }
   
   /// Update the place for the current location entry
@@ -235,7 +231,10 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     self.collectionView.reloadData()
     
     // Preemptively load the nearest places for an edit operation
-    self.editViewController.getNearestPlaces()
+    if let mainVC = self.parent as? MainViewController {
+        mainVC.editViewController.getNearestPlaces()
+    }
+    
   }
 }
 

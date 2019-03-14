@@ -16,6 +16,7 @@ extension EditViewController {
         if let detailsVC = self.parent {
             if let detailsVC = detailsVC as? PlaceDetailsController {
                 repopulateNearbyPlaces(place: detailsVC.place)
+                print("Got nearby places")
             } else {
                 print("Failed to get parent place")
                 return
@@ -66,6 +67,7 @@ extension EditViewController {
                         }
                     }
                     self.results.append(newPlace)
+                    print("collected a bunch of nearby places")
                     DispatchQueue.main.async {
                         // From the main thread, reload the data in the tableView
                         self.tableView.reloadData()
