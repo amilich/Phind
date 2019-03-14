@@ -239,6 +239,10 @@ public class ModelManager : NSObject {
     }
     
   }
+    
+    public func getAutocompleteResults(Place: String) -> [Place] {
+        return []
+    }
   
   private func getLikelyPlaceList(placeLikelihoodList: Array<GMSPlaceLikelihood>) -> [Place]{
     var likelyPlaces = [Place]()

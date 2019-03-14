@@ -42,10 +42,14 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
   @IBOutlet var collectionView: UICollectionView!
   /// Flow layout for photos
   @IBOutlet var flowLayout: UICollectionViewFlowLayout!
+    
+  // Search UI links.
+  var editViewController : EditViewController!
+  var searchFab : UIButton!
   
   // Edit view controller
   // let editViewController = EditPlaceViewController()
-  let editViewController:EditViewController = UIStoryboard(name: "Edit", bundle: nil).instantiateViewController(withIdentifier: "Edit") as! EditViewController
+//  let editViewController:EditViewController = UIStoryboard(name: "Edit", bundle: nil).instantiateViewController(withIdentifier: "Edit") as! EditViewController
   
   /// Coder/decoder init for use in storyboard
   required init?(coder aDecoder: NSCoder) {
@@ -59,18 +63,27 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     collectionView.dataSource = self
     collectionView.delegate = self
     
-    setupStyle()
-    
     backButton.addTarget(self, action: #selector(self.backPressed(_:)), for: .touchUpInside)
     editButton.addTarget(self, action: #selector(self.editPressed(_:)), for: .touchUpInside)
     
     // Register cell here so we can preemptively query for nearby places
-    self.editViewController.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "EditCell")
+//    self.editViewController.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "EditCell")
     
     // Add the editViewController as a child view controller;
     // needed so edit can access parent data
+//    self.addChild(editViewController)
+    
+    editViewController = EditViewController()
     self.addChild(editViewController)
+    self.view.addSubview(editViewController.view)
+    editViewController.view.isHidden = true
+    
+    setupStyle()
+    
     toggleEditVisibility(isHidden: true)
+    
+    // Add popup for search.
+
     
     self.view.addSubview(label)
     self.view.addSubview(addressLabel)
@@ -78,9 +91,6 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     self.view.addSubview(editButton)
     self.view.addSubview(statisticsLabel)
     self.view.addSubview(collectionView)
-    self.view.addSubview(editViewController.searchWrap)
-    self.view.addSubview(editViewController.tableView)
-    self.view.addSubview(editViewController.searchBar)
     
   }
   
@@ -127,7 +137,6 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
         // self.collectionView.frame = CGRect(x:mainVC.tableWrap.frame.minX - 2, y: mainVC.tableWrap.frame.minY + Style.DETAILS_LABEL_OFFSET, width:mainVC.tableWrap.frame.width + 2, height:Style.DETAILS_PHOTO_VIEW_HEIGHT)
         
         self.editViewController.view.frame = self.collectionView.frame
-        self.editViewController.searchWrap.frame = self.editViewController.view.frame
        }
      }
     
@@ -167,7 +176,7 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
   
   /// Back press target function for back UIButton
   @objc func backPressed(_ sender: UIButton!) {
-    doBackPress(searchVisible: self.editViewController.searchWrap.isHidden)
+    doBackPress(searchVisible: self.editViewController.view.isHidden)
   }
   
   /// Show the edit view controller
@@ -176,6 +185,7 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     self.addressLabel.isHidden = true
     self.label.isHidden = true
     self.collectionView.isHidden = true
+    self.statisticsLabel.isHidden = true
     
     toggleEditVisibility(isHidden: false)
     
@@ -185,10 +195,7 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
   /// Show or hide all edit components
   /// - parameter isHidden: Whether the edit view is visible or not
   internal func toggleEditVisibility(isHidden : Bool) {
-    self.editViewController.view.isHidden = isHidden
-    self.editViewController.searchWrap.isHidden = isHidden
-    self.editViewController.searchBar.isHidden = isHidden
-    self.editViewController.tableView.isHidden = isHidden
+    editViewController.view.isHidden = isHidden
   }
   
   /// Update the place for the current location entry
