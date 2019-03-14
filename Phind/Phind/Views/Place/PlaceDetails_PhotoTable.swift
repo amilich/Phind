@@ -49,16 +49,17 @@ extension PlaceDetailsController {
     }
   }
   
+  /// Return number of items in collection view.
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return self.placeImages.count
   }
   
+  /// Dequeue a reusable place details cell and input the proper photograph.
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let photoCell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCell
     
     let imageView = photoCell.placePhoto!
     if indexPath.row < self.placeImages.count {
-      // imageView.frame = photoCell.frame
       imageView.image = self.placeImages[indexPath.row].squared
       imageView.frame = photoCell.contentView.frame
       photoCell.addSubview(imageView)
@@ -68,11 +69,12 @@ extension PlaceDetailsController {
     return photoCell
   }
   
+  /// Called when user taps photo.
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    // TODO scale photo when tapped
-    print("TODO scale photo to screen width")
+    // TODO scale photo when tapped. Or ignore tap.
   }
   
+  /// Necessary memory warning function for custom collection view.
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.

@@ -20,7 +20,7 @@ class TimelineCell: UITableViewCell {
   /// The time length for the timeline component (placed below main label)
   @IBOutlet var timeLabel: UILabel!
   
-  // Constructor for timeline cell.
+  /// Constructor for timeline cell. Sets up style for the internal place label, duration label, time label, and image.
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
@@ -59,12 +59,12 @@ class TimelineCell: UITableViewCell {
     self.contentView.addSubview(cellImage)
   }
   
-  // Coder/decoder init (needed for use as a storyboard component)
+  /// Coder/decoder init (needed for use as a storyboard component)
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
-  // Called when user selects a timeline component
+  /// Called when user selects a timeline component
   override func setSelected(_ selected: Bool, animated: Bool) {
     // TODO(Andrew) write code to make it selected if we want
     // super.setSelected(selected, animated: animated)    

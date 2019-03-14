@@ -11,21 +11,22 @@
 import Foundation
 import UIKit
 
+/// Extend the MainViewController with all functions necessary to control the date picker header.
 internal extension MainViewController {
   
-  // Action selector when user clicks refresh button
+  /// Action selector when user clicks refresh button
   @IBAction func refreshButton(_ sender: Any) {
     // Triggers MainViewController reloadView()
     self.reloadView()
   }
   
-  // Action button selector to scroll to the previous day
+  /// Action button selector to scroll to the previous day
   @IBAction func previousDayButton(_ sender: Any) {
     updateDate(Calendar.current.date(byAdding: .day, value: -1, to: currentDate)!)
     self.reloadView()
   }
   
-  // Action button selector to advance the date viewer to the next day
+  /// Action button selector to advance the date viewer to the next day
   @IBAction func nextDayButton(_ sender: Any) {
     updateDate(Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!)
     self.reloadView()

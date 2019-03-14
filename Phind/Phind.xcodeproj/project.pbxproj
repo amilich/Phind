@@ -30,7 +30,7 @@
 		0A6F0D242237D18A00AF9B3D /* SearchView_Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F0D232237D18A00AF9B3D /* SearchView_Header.swift */; };
 		0A6F0D262238DE9D00AF9B3D /* SearchView_Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F0D252238DE9D00AF9B3D /* SearchView_Results.swift */; };
 		0A6F0D282238F16800AF9B3D /* ModelManager_Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F0D272238F16800AF9B3D /* ModelManager_Search.swift */; };
-		0A6F0D2C2238F98000AF9B3D /* SearchResultsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F0D2B2238F98000AF9B3D /* SearchResultsViewCell.swift */; };
+		0A6F0D2C2238F98000AF9B3D /* SearchResultsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F0D2B2238F98000AF9B3D /* SearchResultsCell.swift */; };
 		0AA7BF112210374D0038A274 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA7BF102210374D0038A274 /* Util.swift */; };
 		0AA824A5222CE4BA008BE873 /* MainView_Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA824A4222CE4BA008BE873 /* MainView_Header.swift */; };
 		0AA9103F220F6BF9001B1270 /* Pods in Resources */ = {isa = PBXBuildFile; fileRef = 0AA9103E220F6BF9001B1270 /* Pods */; };
@@ -93,7 +93,7 @@
 		0A6F0D232237D18A00AF9B3D /* SearchView_Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView_Header.swift; sourceTree = "<group>"; };
 		0A6F0D252238DE9D00AF9B3D /* SearchView_Results.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView_Results.swift; sourceTree = "<group>"; };
 		0A6F0D272238F16800AF9B3D /* ModelManager_Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager_Search.swift; sourceTree = "<group>"; };
-		0A6F0D2B2238F98000AF9B3D /* SearchResultsViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewCell.swift; sourceTree = "<group>"; };
+		0A6F0D2B2238F98000AF9B3D /* SearchResultsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsCell.swift; sourceTree = "<group>"; };
 		0AA7BF102210374D0038A274 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		0AA824A4222CE4BA008BE873 /* MainView_Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView_Header.swift; sourceTree = "<group>"; };
 		0AA9103E220F6BF9001B1270 /* Pods */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pods; sourceTree = "<group>"; };
@@ -234,7 +234,7 @@
 				0A6F0D232237D18A00AF9B3D /* SearchView_Header.swift */,
 				0A6F0D252238DE9D00AF9B3D /* SearchView_Results.swift */,
 				0A6F0D272238F16800AF9B3D /* ModelManager_Search.swift */,
-				0A6F0D2B2238F98000AF9B3D /* SearchResultsViewCell.swift */,
+				0A6F0D2B2238F98000AF9B3D /* SearchResultsCell.swift */,
 			);
 			name = Search;
 			path = "New Group1";
@@ -661,7 +661,7 @@
 				0A6F0D242237D18A00AF9B3D /* SearchView_Header.swift in Sources */,
 				0A6F0D212237D0BD00AF9B3D /* SearchViewController.swift in Sources */,
 				49077B30222E436C0024539E /* Edit_Util.swift in Sources */,
-				0A6F0D2C2238F98000AF9B3D /* SearchResultsViewCell.swift in Sources */,
+				0A6F0D2C2238F98000AF9B3D /* SearchResultsCell.swift in Sources */,
 				49B70CC5222DDBA4001E7167 /* PlaceDetails_Util.swift in Sources */,
 				0A4EAF8D222CEC4600D419BD /* Style.swift in Sources */,
 				492F5C5921FD814E009B6411 /* MainViewController.swift in Sources */,

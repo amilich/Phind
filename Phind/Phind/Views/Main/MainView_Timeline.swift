@@ -167,7 +167,7 @@ extension MainViewController :  UITableViewDataSource {
     
   }
   
-  // The height of each cell in the table.
+  /// The height of each cell in the table.
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     
     // TODO: Make this a constant.
@@ -175,14 +175,14 @@ extension MainViewController :  UITableViewDataSource {
     
   }
   
-  // The number of items in the table
+  /// The number of items in the table
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
     return self.tableItems.count
     
   }
   
-  // Called when you tap a row in the table; displays the place popup
+  /// Called when you tap a row in the table; displays the place popup
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
     let timelineIdx = indexPath[1]

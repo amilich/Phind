@@ -63,7 +63,7 @@ extension MainViewController :  MKMapViewDelegate {
     
   }
   
-  // Create the polyline renderer for the mapView.
+  /// Create the polyline renderer for the mapView.
   func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
     
     // Return an `MKPolylineRenderer` for the `MKPolyline` in the `MKMapViewDelegate`s method
@@ -77,7 +77,7 @@ extension MainViewController :  MKMapViewDelegate {
     
   }
   
-  // Draw a pin on the mapView.
+  /// Draw a pin on the mapView.
   func drawPin(_ lastCoord: inout CLLocationCoordinate2D?, _ locationEntry: LocationEntry) {
     
     // Add a pin for each stationary location on the map.
@@ -113,7 +113,7 @@ extension MainViewController :  MKMapViewDelegate {
     
   }
   
-  // Draw the user's route onto the MapView.
+  /// Draw the user's route onto the MapView.
   func drawRoute(_ lastCoord: inout CLLocationCoordinate2D?, _ locationEntry: LocationEntry) {
     
     // Ensure that coordinatse are in proper order, by timestamp.

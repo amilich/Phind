@@ -15,28 +15,31 @@ import UIKit
 import RealmSwift
 import JustLog
 
-// Motion activites based on Apple definitions here: https://apple.co/2SlBGg2
+/// Motion activites based on Apple definitions here: https://apple.co/2SlBGg2
 public enum MovementType : String {
   case AUTOMOTIVE, CYCLING, WALKING, STATIONARY
   static let allTypes = [AUTOMOTIVE, CYCLING, WALKING, STATIONARY]
 }
 
+/// The PhindLocationManager is responsible for managing all recorded location updates from CoreMotion, including activity types and latitude/longitude updates.
 public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
   
   // Public static fields.
   
-  // Singleton declaration.
+  /// Singleton declaration.
   public static let shared = PhindLocationManager()
   // TODO: Change this back to 15.0m when done debugging.
+  /// Distance filter for ignoring location updates.
   public static let DEFAULT_DISTANCE_FILTER : CLLocationDistance = 15.0
-  // Minimum threshold for a new location to register as a new LocationEntry (in meters).
+  /// Minimum threshold for a new location to register as a new LocationEntry (in meters).
   public static let NOTABLE_DISTANCE_THRESHOLD = 50.0
   
   // Private constants.
-  // The window for how far back we go to check CoreMotion activities.
+  /// The window for how far back we go to check CoreMotion activities.
   private let ACTIVITY_TRACKING_WINDOW = 180
   
   // Public fields.
+  /// The current - i.e. last received - movement type.
   public private(set) var currMovementType = MovementType.STATIONARY
   
   // Private fields.
@@ -45,13 +48,14 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
   private var realm = AppDelegate().realm
   
   
-  // Default Swift constructor for classes.
+  /// Add logging message to default constructor.
   override init() {
     super.init()
     Logger.shared.debug("PhindLocationManager has been initialized.")
   }
   
-  // Update movement type based on CMMotionActivity passed in from AppDelegate.
+  /// Update movement type based on CMMotionActivity passed in from AppDelegate.
+  /// - parameter motion: Object storing the current movement type.
   public func updateMovementType(motion: CMMotionActivity) {
     
     // Update currMovementType based CoreMotion-reported motion type.
@@ -74,7 +78,9 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
     
   }
   
-  // Get most likely movement type from a certain time period.
+  /// Get most likely movement type from a certain time period.
+  /// - parameter from: Start time to search for motion.
+  /// - parameter to: End time to search for motion.
   public func updateMovementType(from: Date, to: Date) {
     
     Logger.shared.debug("Begin updating movement type...")
@@ -129,9 +135,8 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
     
   }
   
-  // Update location entries based on CLLocation. If location data indicates new location,
-  // then close the latest LocationEntry by adding a departure time and create a new LocationEntry.
-  // In all cases, add in a new rawCoord entry.
+  /// Update location entries based on CLLocation. If location data indicates new location, then close the latest LocationEntry by adding a departure time and create a new LocationEntry. In all cases, add in a new rawCoord entry. See extensive inline documentation.
+  /// - parameter location: Location used to update the PhindLocationManager internal data.
   private func updateLocation(location: CLLocation) {
     
     let rawCoord = ModelManager.shared.addRawCoord(location)
@@ -241,8 +246,7 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
     
   }
   
-  // Callback functions for location manager.
-  
+  /// Callback function for location manager.
   public func updateLocation(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     
     Logger.shared.verbose("Locations \(locations)")
