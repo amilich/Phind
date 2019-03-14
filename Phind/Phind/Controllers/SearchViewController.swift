@@ -26,6 +26,8 @@ class SearchViewController: UIViewController {
   var searchBar : UIView!
   var backFab : UIButton!
   
+  var accessedFromEdit: Bool!
+    
   var results : [Place] = []
 
   override func viewDidLoad() {

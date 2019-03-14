@@ -168,6 +168,9 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     self.statisticsLabel.isHidden = !visible
     self.label.isHidden = !visible
     self.collectionView.isHidden = !visible
+    if visible {
+        loadNearestPlaces()
+    }
   }
   
   /// Back press target function for back UIButton
@@ -216,6 +219,12 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     setStatistics()
     self.timelineEntry = timelineEntry
   }
+    
+public func loadNearestPlaces() {
+    if let mainVC = self.parent as? MainViewController {
+        mainVC.editViewController.getNearestPlaces()
+    }
+}
   
   /// Called to set the place to be displayed on the popup view
   /// - parameter place: The place to set for displaying details and edting
@@ -231,9 +240,7 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     self.collectionView.reloadData()
     
     // Preemptively load the nearest places for an edit operation
-    if let mainVC = self.parent as? MainViewController {
-        mainVC.editViewController.getNearestPlaces()
-    }
+    loadNearestPlaces()
     
   }
 }

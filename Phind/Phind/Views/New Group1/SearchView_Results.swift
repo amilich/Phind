@@ -93,21 +93,23 @@ extension SearchViewController : UITableViewDataSource, UITableViewDelegate {
     tableCell.placeTitleLabel!.text = result.name
     
     // Format last visit date.
-    let formatter = DateFormatter()
-    formatter.dateFormat = "MMM d"
-    let lastVisitDate = ModelManager.shared.getLastVisitDate(placeUUID: result.uuid) as Date?
-    
-    var subtitleText = "Visited \( ModelManager.shared.getNumberVisits(placeUUID: result.uuid) ?? 0 ) times"
-    if lastVisitDate != nil {
-      subtitleText += "  \u{00B7}  Last visited \( formatter.string(from: lastVisitDate!) )"
+    if !accessedFromEdit {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d"
+        let lastVisitDate = ModelManager.shared.getLastVisitDate(placeUUID: result.uuid) as Date?
+        
+        var subtitleText = "Visited \( ModelManager.shared.getNumberVisits(placeUUID: result.uuid) ?? 0 ) times"
+        if lastVisitDate != nil {
+          subtitleText += "  \u{00B7}  Last visited \( formatter.string(from: lastVisitDate!) )"
+        }
+        tableCell.subtitle!.text = subtitleText
+        tableCell.layoutMargins = UIEdgeInsets.zero
     }
-    tableCell.subtitle!.text = subtitleText
-    tableCell.layoutMargins = UIEdgeInsets.zero
     
     return tableCell
     
   }
-  
+    
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return Style.ELEMENT_PADDING
   }
@@ -116,33 +118,51 @@ extension SearchViewController : UITableViewDataSource, UITableViewDelegate {
     return CGFloat.leastNormalMagnitude
   }
   
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
+
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let place = self.results[indexPath.item]
     self.closeSearch()
     if let mainVC = self.parent {
-      if let mainVC = mainVC as? MainViewController {
-        
-        let visitHistory = ModelManager.shared.getVisitHistory(placeUUID: place.uuid)!
-        if visitHistory.count == 0 {
-          return
+        if let mainVC = mainVC as? MainViewController {
+            mainVC.placeDetailsController.updatePlaceForTimelineEntry(place: place)
+            
+            var truePlace : Place!
+            
+            // determines whether to use the old place or the new place for visit details
+            // we use the new place in normal search, where you simply want to view details about the place
+            // we use the old place in disambiguation, where you want to assign the new place using
+            // details from the old one
+            if accessedFromEdit {
+                truePlace = mainVC.placeDetailsController.place
+            }
+            else {
+                truePlace = place
+            }
+            
+            let visitHistory = ModelManager.shared.getVisitHistory(placeUUID: truePlace.uuid)!
+            if visitHistory.count == 0 {
+                return
+            }
+            
+            let latestVisit = visitHistory[0]
+            let timelineEntry = TimelineEntry(
+                placeUUID: place.uuid,
+                placeLabel: place.name,
+                startTime: latestVisit.start as Date,
+                endTime: latestVisit.end as Date?,
+                movementType: latestVisit.movement_type
+            )
+            
+            mainVC.placeDetailsController.setPlaceAndLocation(place: place, timelineEntry: timelineEntry)
+            mainVC.timelineView.isHidden = true
+            mainVC.placeDetailsController.collectionView.reloadData()
+            mainVC.placeDetailsController.setComponentsVisible(visible: true)
+            
         }
-        let latestVisit = visitHistory[0]
-        let timelineEntry = TimelineEntry(
-          placeUUID: place.uuid,
-          placeLabel: place.name,
-          startTime: latestVisit.start as Date,
-          endTime: latestVisit.end as Date?,
-          movementType: latestVisit.movement_type
-        )
-
-        mainVC.placeDetailsController.setPlaceAndLocation(place: place, timelineEntry: timelineEntry)
-        mainVC.timelineView.isHidden = true
-        mainVC.placeDetailsController.setComponentsVisible(visible: true)
-        
-      }
     }
     
+
   }
   
 }

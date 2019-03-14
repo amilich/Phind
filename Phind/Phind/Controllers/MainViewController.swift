@@ -134,6 +134,7 @@ class MainViewController: UIViewController, UITableViewDelegate  {
     self.view.addSubview(editViewController.view)
     editViewController.view.isHidden = true
     editViewController.view.sizeToFit()
+    editViewController.accessedFromEdit = true
     
     // Add popup views.
     self.addChild(placeDetailsController)
@@ -145,6 +146,7 @@ class MainViewController: UIViewController, UITableViewDelegate  {
     self.addChild(svc)
     self.view.addSubview(svc.view)
     svc.view.isHidden = true
+    svc.accessedFromEdit = false 
     
     // Load the view.
     self.reloadView()
