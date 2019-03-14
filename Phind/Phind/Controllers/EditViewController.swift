@@ -12,13 +12,16 @@ import UIKit
 class EditViewController : SearchViewController {
     
     override func closeSearch() {
-        if let placeDetailsVC = self.parent as? PlaceDetailsController {
+        if let mainVC = self.parent as? MainViewController {
+            if let placeDetailsVC = mainVC.placeDetailsController as? PlaceDetailsController {
             self.results = []
-            self.reloadView()
             self.searchBarField.text = ""
             self.view.endEditing(true)
             self.view.isHidden = true
             placeDetailsVC.toggleEditVisibility(isHidden: true)
+            placeDetailsVC.setComponentsVisible(visible: true)
+            self.reloadView()
+        }
     }
     
     func textFieldDidChange(_ textField: UITextField) {
