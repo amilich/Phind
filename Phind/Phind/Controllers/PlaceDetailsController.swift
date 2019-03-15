@@ -137,11 +137,13 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
       if let mainVC = self.parent {
         if let mainVC = mainVC as? MainViewController {
           mainVC.timelineView.isHidden = false
+          mainVC.headerView.isHidden = false
           mainVC.reloadView()
         }
       }
       setComponentsVisible(visible: false)
     } else {
+    
       // Edit view is on screen; go back to place details
       toggleEditVisibility(isHidden: true)
       setComponentsVisible(visible: true)
@@ -169,10 +171,11 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
   
   /// Show the edit view controller
   @objc func editPressed(_ sender: UIButton!) {
+    if let mainVC = self.parent as? MainViewController {
+        mainVC.headerView.isHidden = true
+    }
     self.setComponentsVisible(visible: false)
     toggleEditVisibility(isHidden: false)
-    
-    
     Logger.shared.debug("Edit button clicked")
   }
   

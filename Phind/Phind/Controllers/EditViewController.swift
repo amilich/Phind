@@ -27,6 +27,7 @@ class EditViewController : SearchViewController {
         
     override func textFieldDidChange(_ textField: UITextField) {
         print("calling text field did change function")
+        self.results.removeAll()
         self.getAutocompletePlaces(query: self.searchBarField.text!)
         self.reloadView()
     }

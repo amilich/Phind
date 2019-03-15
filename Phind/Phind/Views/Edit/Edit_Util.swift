@@ -96,36 +96,61 @@ extension EditViewController {
         let token = GMSAutocompleteSessionToken.init()
         print("token: \(token)")
         // Create a type filter.
-        let query = "museum"
         let filter = GMSAutocompleteFilter()
         filter.type = .establishment
+        
+        var placesClient = GMSPlacesClient.shared()
+        
+        placesClient.findAutocompletePredictions(
+            fromQuery: query, bounds: nil, boundsMode: GMSAutocompleteBoundsMode.bias,
+            filter: filter, sessionToken: token, callback: { (results, error) in
+                print("inside predictions")
+                if let error = error {
+                    print("Autocomplete error: \(error)")
+                    return
+                }
+                if let results = results {
+                    print("number of results: \(results.count)")
+                    for result in results {
+                        let placeId = result.placeID
+                        print("place id: \(placeId)")
+                        let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
+                            UInt(GMSPlaceField.placeID.rawValue) | UInt(GMSPlaceField.formattedAddress.rawValue)
+                            | UInt(GMSPlaceField.coordinate.rawValue))!
 
-        var placesClient: GMSPlacesClient!
-        
-        
-        print("about to make autocomplete call")
-        placesClient?.findAutocompletePredictions(fromQuery: "Museum",
-                                                  bounds: nil,
-                                                  boundsMode: GMSAutocompleteBoundsMode.bias,
-                                                  filter: filter,
-                                                  sessionToken: token,
-                                                  callback: { (results, error) in
-                                                    print("in autocomplete call")
-                                                    if let error = error {
-                                                        print("Autocomplete error: \(error)")
-                                                        return
-                                                    }
-                                                    if let results = results {
-                                                        for result in results {
-                                                            print("\(result.attributedPrimaryText.string))")
-                                                    
-                                                        }
-                                                        
-                                                    }
-                                                    else {
-                                                        print("nothing happened")
-                                                    }
+                        placesClient.fetchPlace(fromPlaceID: placeId, placeFields: fields, sessionToken: nil, callback: {
+                            (place: GMSPlace?, error: Error?) in
+                            if let error = error {
+                                print("An error occurred: \(error.localizedDescription)")
+                                return
+                            }
+                            if let place = place {
+                                print("The selected place is: \(place.name)")
+                                let newPlace = Place()
+                                newPlace.name = place.name!
+                                newPlace.gms_id = place.placeID!
+                                newPlace.address = place.formattedAddress!
+                                newPlace.latitude = place.coordinate.latitude
+                                newPlace.longitude = place.coordinate.longitude
+                                self.results.append(newPlace)
+                                self.reloadView()
+                                print(self.results.count)
+                            }
+                        })
+
+                    }
+//                    DispatchQueue.main.async {
+//                        // From the main thread, reload the data in the tableView
+//                        self.reloadView()
+//                    }
+                    print("collected results")
+                    
+                }
+                else {
+                    print("no results")
+                }
         })
+    }
     }
     
 //    func repopulateAutocompletePlaces(query: String, place: Place) {
@@ -195,5 +220,4 @@ extension EditViewController {
 func loadPhotoForPlaceID(gms_id: String) {
     let token = GMSAutocompleteSessionToken.init()
 
-}
 }
