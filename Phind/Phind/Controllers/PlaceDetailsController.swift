@@ -174,7 +174,6 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     
     if let mainVC = self.parent as? MainViewController {
       mainVC.headerView.isHidden = true
-      mainVC.headerView.isHidden = !isHidden
     }
     self.setComponentsVisible(visible: false)
     toggleEditVisibility(isHidden: false)
@@ -188,6 +187,7 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     
     if let mainVC = self.parent as? MainViewController {
       mainVC.editViewController.view.isHidden = isHidden
+      mainVC.headerView.isHidden = !isHidden
     }
     
   }
