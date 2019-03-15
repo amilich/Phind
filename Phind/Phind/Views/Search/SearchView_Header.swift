@@ -9,13 +9,16 @@
 import Foundation
 import UIKit
 
+/// All header components and functions for the SearchViewController
 internal extension SearchViewController {
   
+  /// Wrapper function for setting up the input field and back button
   func setupHeader() {
     setupSearchBar()
     setupBackFab()
   }
   
+  /// Close the search view and return to main view
   @objc func closeSearch() {
     
     if let mainVC = self.parent {
@@ -33,6 +36,7 @@ internal extension SearchViewController {
     
   }
   
+  /// Triggered when user types into the text field
   @objc func textFieldDidChange(_ textField: UITextField) {
     
     self.results = ModelManager.shared.getSearchResults(placeName: self.searchBarField.text!)!
@@ -40,6 +44,7 @@ internal extension SearchViewController {
     
   }
   
+  /// Setup and format the back button
   func setupBackFab() {
     
     backFab = Style.CreateFab(icon: "arrow-left", backgroundColor: Style.PRIMARY_COLOR, iconColor: UIColor.white)
@@ -49,6 +54,7 @@ internal extension SearchViewController {
     
   }
   
+  /// Setup and format the search bar
   func setupSearchBar() {
 
     // Setup search bar.
@@ -91,47 +97,56 @@ internal extension SearchViewController {
   
 }
 
- extension SearchViewController : UITextFieldDelegate {
+/// Extension for the SearchViewController to act as a delegate for the text field
+extension SearchViewController : UITextFieldDelegate {
   
+  /// Called when user can edit text field
   func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
     // return NO to disallow editing.
     print("TextField should begin editing method called")
     return true
   }
   
+  /// Called when user edits value in text field
   func textFieldDidBeginEditing(_ textField: UITextField) {
     // became first responder
     print("TextField did begin editing method called")
   }
   
+  /// Called right when editing is not allowed anymore
   func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
     // return YES to allow editing to stop and to resign first responder status. NO to disallow the editing session to end
     print("TextField should snd editing method called")
     return true
   }
   
+  /// Called when user finishes editing
   func textFieldDidEndEditing(_ textField: UITextField) {
     // may be called if forced even if shouldEndEditing returns NO (e.g. view removed from window) or endEditing:YES called
     print("TextField did end editing method called")
   }
   
+  /// Called when user ends editing, butw ith specific reason
   func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
     // if implemented, called in place of textFieldDidEndEditing:
     print("TextField did end editing with reason method called")
   }
   
+  /// Called right after the user enters a character
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     // return NO to not change text
     print("While entering the characters this method gets called")
     return true
   }
   
+  // When user clears text field
   func textFieldShouldClear(_ textField: UITextField) -> Bool {
     // called when clear button pressed. return NO to ignore (no notifications)
     print("TextField should clear method called")
     return true
   }
   
+  /// Called after return button on keyboard is pressed
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     // called when 'return' key pressed. return NO to ignore.
     print("TextField should return method called")
