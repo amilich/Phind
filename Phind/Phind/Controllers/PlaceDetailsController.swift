@@ -52,15 +52,15 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
   override func viewDidLoad() {
     
     super.viewDidLoad()
-  
+
     collectionView.dataSource = self
     collectionView.delegate = self
-  
+
     backButton.addTarget(self, action: #selector(self.backPressed(_:)), for: .touchUpInside)
     editButton.addTarget(self, action: #selector(self.editPressed(_:)), for: .touchUpInside)
   
     setupStyle()
-  
+    
     toggleEditVisibility(isHidden: true)
   
     // Add popup for search.
@@ -85,7 +85,7 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
   
     var subtitleText = "Visited \( ModelManager.shared.getNumberVisits(placeUUID: self.place.uuid) ?? 0 ) " + timesString
     if lastVisitDate != nil {
-        subtitleText += "  \u{00B7}  Last visited \( formatter.string(from: lastVisitDate!) )"
+      subtitleText += "  \u{00B7}  Last visited \( formatter.string(from: lastVisitDate!) )"
     }
   
     self.statisticsLabel.text = subtitleText
@@ -101,7 +101,11 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
   
     // Setup flow layout style.
     Style.ApplyRoundedCorners(view: flowWrap, clip: true)
+    Style.SetFullWidth(view: self.view)
   
+    // Setup flow layout style.
+    Style.ApplyRoundedCorners(view: flowWrap, clip: true)
+
     self.collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
   
     if let mainVC = self.parent {
@@ -180,6 +184,7 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     
     if let mainVC = self.parent as? MainViewController {
       mainVC.editViewController.view.isHidden = isHidden
+      mainVC.headerView.isHidden = !isHidden
     }
     
   }

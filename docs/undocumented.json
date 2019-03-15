@@ -9,71 +9,71 @@
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/MainViewController.swift",
-      "line": 56,
-      "symbol": "MainViewController.currentDateLabel",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/MainViewController.swift",
-      "line": 57,
-      "symbol": "MainViewController.refreshButton",
+      "line": 32,
+      "symbol": "TimelineEntry.editViewController",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/MainViewController.swift",
       "line": 58,
+      "symbol": "MainViewController.currentDateLabel",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/MainViewController.swift",
+      "line": 59,
+      "symbol": "MainViewController.refreshButton",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/MainViewController.swift",
+      "line": 60,
       "symbol": "MainViewController.headerView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/MainViewController.swift",
-      "line": 61,
+      "line": 63,
       "symbol": "MainViewController.svc",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/MainViewController.swift",
-      "line": 62,
+      "line": 64,
       "symbol": "MainViewController.searchFab",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/MainViewController.swift",
-      "line": 65,
+      "line": 66,
+      "symbol": "MainViewController.editViewController",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/MainViewController.swift",
+      "line": 69,
       "symbol": "MainViewController.mapView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/MainViewController.swift",
-      "line": 89,
+      "line": 93,
       "symbol": "MainViewController.init()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/MainViewController.swift",
-      "line": 95,
+      "line": 99,
       "symbol": "MainViewController.viewWillAppear(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/MainViewController.swift",
-      "line": 111,
-      "symbol": "MainViewController.viewDidLoad()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/MainViewController.swift",
-      "line": 144,
-      "symbol": "MainViewController.toggleVisibility(hidden:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
@@ -121,197 +121,162 @@
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
-      "line": 301,
+      "line": 243,
+      "symbol": "ModelManager.getAutocompleteResults(Place:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
+      "line": 305,
       "symbol": "ModelManager.getNearbySearchResponse(data:response:error:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
-      "line": 325,
+      "line": 329,
       "symbol": "ModelManager.assignPlaceIdToLocation(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/PhindLocationManager.swift",
-      "line": 20,
+      "line": 19,
       "symbol": "MovementType.AUTOMOTIVE",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/PhindLocationManager.swift",
-      "line": 20,
+      "line": 19,
       "symbol": "MovementType.CYCLING",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/PhindLocationManager.swift",
-      "line": 20,
+      "line": 19,
       "symbol": "MovementType.STATIONARY",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/PhindLocationManager.swift",
-      "line": 20,
+      "line": 19,
       "symbol": "MovementType.WALKING",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/PhindLocationManager.swift",
-      "line": 21,
+      "line": 20,
       "symbol": "MovementType.allTypes",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/PlaceDetailsController.swift",
-      "line": 48,
-      "symbol": "PlaceDetailsController.editViewController",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SecondViewController.swift",
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SearchViewController.swift",
       "line": null,
-      "symbol": "SecondViewController",
+      "symbol": "SearchViewController",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SecondViewController.swift",
-      "line": 15,
-      "symbol": "StatisticLabel1",
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SearchViewController.swift",
+      "line": null,
+      "symbol": "SearchViewController",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SearchViewController.swift",
+      "line": null,
+      "symbol": "SearchViewController",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SearchViewController.swift",
+      "line": null,
+      "symbol": "SearchViewController",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SearchViewController.swift",
+      "line": 11,
+      "symbol": "SearchViewController",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SecondViewController.swift",
-      "line": 16,
-      "symbol": "StatisticLabel1.stat1",
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SearchViewController.swift",
+      "line": 18,
+      "symbol": "SearchViewController.TEXT_FIELD_X_MARGIN",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SecondViewController.swift",
-      "line": 17,
-      "symbol": "StatisticLabel1.statType",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SecondViewController.swift",
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SearchViewController.swift",
       "line": 19,
-      "symbol": "StatisticLabel1.init(stat1:statType:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "symbol": "SearchViewController.TEXT_FIELD_Y_MARGIN",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SecondViewController.swift",
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SearchViewController.swift",
+      "line": 21,
+      "symbol": "SearchViewController.resultsView",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SearchViewController.swift",
+      "line": 22,
+      "symbol": "SearchViewController.noResultsLabel",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SearchViewController.swift",
+      "line": 24,
+      "symbol": "SearchViewController.searchBarField",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SearchViewController.swift",
+      "line": 25,
+      "symbol": "SearchViewController.searchBar",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SearchViewController.swift",
       "line": 26,
-      "symbol": "SecondViewController",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SecondViewController.swift",
-      "line": 27,
-      "symbol": "SecondViewController.collectionView",
+      "symbol": "SearchViewController.backFab",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SecondViewController.swift",
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SearchViewController.swift",
       "line": 28,
-      "symbol": "SecondViewController.DateLabel",
+      "symbol": "SearchViewController.accessedFromEdit",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SecondViewController.swift",
-      "line": 29,
-      "symbol": "SecondViewController.refreshButton",
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SearchViewController.swift",
+      "line": 30,
+      "symbol": "SearchViewController.results",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SecondViewController.swift",
-      "line": 31,
-      "symbol": "SecondViewController.realm",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SecondViewController.swift",
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SearchViewController.swift",
       "line": 32,
-      "symbol": "SecondViewController.formatter",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SecondViewController.swift",
-      "line": 37,
-      "symbol": "SecondViewController.viewWillAppear(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SecondViewController.swift",
-      "line": 45,
-      "symbol": "SecondViewController.refreshButton(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SecondViewController.swift",
-      "line": 50,
-      "symbol": "SecondViewController.previousDayButton(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SecondViewController.swift",
-      "line": 54,
-      "symbol": "SecondViewController.nextDayButton(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SecondViewController.swift",
-      "line": 73,
-      "symbol": "SecondViewController.viewDidLoad()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SecondViewController.swift",
-      "line": 80,
-      "symbol": "SecondViewController.populateCollectionView()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SecondViewController.swift",
-      "line": 130,
-      "symbol": "SecondViewController.setupCollectionView()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SecondViewController.swift",
-      "line": 140,
-      "symbol": "SecondViewController.collectionView(_:numberOfItemsInSection:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/SecondViewController.swift",
-      "line": 144,
-      "symbol": "SecondViewController.collectionView(_:cellForItemAt:)",
+      "symbol": "SearchViewController.viewDidLoad()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
@@ -471,63 +436,63 @@
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Main/MainView_Header.swift",
-      "line": 35,
+      "line": 34,
       "symbol": "MainViewController.showSearch()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Main/MainView_Map.swift",
-      "line": 21,
+      "line": 20,
       "symbol": "MapPin.coordinate",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Main/MainView_Map.swift",
-      "line": 22,
+      "line": 21,
       "symbol": "MapPin.title",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Main/MainView_Map.swift",
-      "line": 23,
+      "line": 22,
       "symbol": "MapPin.subtitle",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Main/MainView_Timeline.swift",
-      "line": 76,
+      "line": 75,
       "symbol": "MainViewController.tableView(_:cellForRowAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Search/ModelManager_Search.swift",
-      "line": 14,
+      "line": 13,
       "symbol": "ModelManager.getSearchResults(placeName:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Search/ModelManager_Search.swift",
-      "line": 19,
+      "line": 18,
       "symbol": "ModelManager.getNumberVisits(placeUUID:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Search/ModelManager_Search.swift",
-      "line": 25,
+      "line": 24,
       "symbol": "ModelManager.getLastVisitDate(placeUUID:ascending:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Search/ModelManager_Search.swift",
-      "line": 37,
+      "line": 36,
       "symbol": "ModelManager.getVisitHistory(placeUUID:ascending:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -569,57 +534,141 @@
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Search/SearchView_Header.swift",
-      "line": 143,
+      "line": 13,
+      "symbol": "SearchViewController.setupHeader()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Search/SearchView_Header.swift",
+      "line": 18,
+      "symbol": "SearchViewController.closeSearch()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Search/SearchView_Header.swift",
+      "line": 35,
+      "symbol": "SearchViewController.textFieldDidChange(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Search/SearchView_Header.swift",
+      "line": 41,
+      "symbol": "SearchViewController.setupBackFab()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Search/SearchView_Header.swift",
+      "line": 50,
+      "symbol": "SearchViewController.setupSearchBar()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Search/SearchView_Header.swift",
+      "line": 94,
+      "symbol": "SearchViewController.textFieldShouldBeginEditing(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Search/SearchView_Header.swift",
+      "line": 100,
+      "symbol": "SearchViewController.textFieldDidBeginEditing(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Search/SearchView_Header.swift",
+      "line": 105,
+      "symbol": "SearchViewController.textFieldShouldEndEditing(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Search/SearchView_Header.swift",
+      "line": 111,
+      "symbol": "SearchViewController.textFieldDidEndEditing(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Search/SearchView_Header.swift",
+      "line": 116,
+      "symbol": "SearchViewController.textFieldDidEndEditing(_:reason:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Search/SearchView_Header.swift",
+      "line": 121,
+      "symbol": "SearchViewController.textField(_:shouldChangeCharactersIn:replacementString:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Search/SearchView_Header.swift",
+      "line": 127,
       "symbol": "SearchViewController.textFieldShouldClear(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Search/SearchView_Header.swift",
+      "line": 133,
+      "symbol": "SearchViewController.textFieldShouldReturn(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Search/SearchView_Results.swift",
-      "line": 14,
+      "line": 13,
       "symbol": "SearchViewController.setupResults()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/StatisticsUICollectionViewCell.swift",
-      "line": 11,
-      "symbol": "StatisticsUICollectionViewCell",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/StatisticsUICollectionViewCell.swift",
-      "line": 13,
-      "symbol": "StatisticsUICollectionViewCell.StatValue",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/StatisticsUICollectionViewCell.swift",
-      "line": 14,
-      "symbol": "StatisticsUICollectionViewCell.StatType",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/StatisticsUICollectionViewCell.swift",
-      "line": 16,
-      "symbol": "StatisticsUICollectionViewCell.init(frame:)",
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Search/SearchView_Results.swift",
+      "line": 73,
+      "symbol": "SearchViewController.tableView(_:heightForRowAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/StatisticsUICollectionViewCell.swift",
-      "line": 28,
-      "symbol": "StatisticsUICollectionViewCell.init(coder:)",
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Search/SearchView_Results.swift",
+      "line": 81,
+      "symbol": "SearchViewController.tableView(_:numberOfRowsInSection:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/StatisticsUICollectionViewCell.swift",
-      "line": 33,
-      "symbol": "StatisticsUICollectionViewCell.awakeFromNib()",
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Search/SearchView_Results.swift",
+      "line": 88,
+      "symbol": "SearchViewController.tableView(_:cellForRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Search/SearchView_Results.swift",
+      "line": 112,
+      "symbol": "SearchViewController.tableView(_:heightForHeaderInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Search/SearchView_Results.swift",
+      "line": 116,
+      "symbol": "SearchViewController.tableView(_:heightForFooterInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Views/Search/SearchView_Results.swift",
+      "line": 122,
+      "symbol": "SearchViewController.tableView(_:didSelectRowAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     }
