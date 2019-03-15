@@ -46,16 +46,15 @@ class Style {
     alpha: 0.56
   )
   
+  /// Height of the search view cells
+  public static let SEARCH_VIEW_CELL_HEIGHT : CGFloat = 80.0
   /// Margin between distinct elements
   public static let ELEMENT_MARGIN : CGFloat = 12.0
-  
   /// Padding within an element
   public static let ELEMENT_PADDING : CGFloat = 16.0
-
   /// Screen margin around UI card components
   public static let SCREEN_MARGIN : CGFloat = 12
   /// Corner radius for cards
-
   public static let CARD_CORNERS : CGFloat = 24.0
   /// Border size for photo collection view
   public static let PHOTO_BORDER : CGFloat = 48.0

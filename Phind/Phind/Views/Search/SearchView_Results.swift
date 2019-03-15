@@ -70,22 +70,22 @@ internal extension SearchViewController {
 
 extension SearchViewController : UITableViewDataSource, UITableViewDelegate {
   
-  // The height of each cell in the table.
+  /// The height of each cell in the table.
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     
     // TODO: Make this a constant.
-    return 80.0
+    return Style.SEARCH_VIEW_CELL_HEIGHT
     
   }
   
-  // The number of items in the table
+  /// The number of items in the table
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
     return self.results.count
     
   }
   
-  // Computes cell content based on the shared array of tableItems
+  /// Computes cell content based on the shared array of tableItems
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     let result = self.results[indexPath.item]
@@ -108,14 +108,17 @@ extension SearchViewController : UITableViewDataSource, UITableViewDelegate {
     
   }
   
+  /// Height of the table view cell
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return Style.ELEMENT_PADDING
   }
   
+  /// Height for the footer of the table view
   func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
     return CGFloat.leastNormalMagnitude
   }
   
+  /// Selector function triggered when user taps a table cell. Closes search and opens place details view.
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
     let place = self.results[indexPath.item]
