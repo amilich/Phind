@@ -23,8 +23,6 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
   var placeImages: [UIImage] = []
   
   // UI components
-  /// Wrap for details page to add shadow
-  @IBOutlet var shadowWrap: UIView!
   /// Surrounding UIView wrap for the UICollectionViewFlowLayout
   @IBOutlet var flowWrap: UIView!
   /// Place label
@@ -52,25 +50,26 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
   
   /// Initialize the button and text elements inside the place popup view.
   override func viewDidLoad() {
-      super.viewDidLoad()
     
-      collectionView.dataSource = self
-      collectionView.delegate = self
-    
-      backButton.addTarget(self, action: #selector(self.backPressed(_:)), for: .touchUpInside)
-      editButton.addTarget(self, action: #selector(self.editPressed(_:)), for: .touchUpInside)
-    
-      setupStyle()
-    
-      toggleEditVisibility(isHidden: true)
-    
-      // Add popup for search.
-      self.view.addSubview(label)
-      self.view.addSubview(addressLabel)
-      self.view.addSubview(backButton)
-      self.view.addSubview(editButton)
-      self.view.addSubview(statisticsLabel)
-      self.view.addSubview(collectionView)
+    super.viewDidLoad()
+  
+    collectionView.dataSource = self
+    collectionView.delegate = self
+  
+    backButton.addTarget(self, action: #selector(self.backPressed(_:)), for: .touchUpInside)
+    editButton.addTarget(self, action: #selector(self.editPressed(_:)), for: .touchUpInside)
+  
+    setupStyle()
+  
+    toggleEditVisibility(isHidden: true)
+  
+    // Add popup for search.
+    self.view.addSubview(label)
+    self.view.addSubview(addressLabel)
+    self.view.addSubview(backButton)
+    self.view.addSubview(editButton)
+    self.view.addSubview(statisticsLabel)
+    self.view.addSubview(collectionView)
     
   }
   
@@ -96,30 +95,24 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
   /// Update the style for the PlaceDetails card. Applies rounder corners and shadow; then sets up the frames for the collection and table views.
   internal func setupStyle() {
     
-      // Setup shadow.
-      Style.ApplyDropShadow(view: view)
-      if let mainVC = self.parent as? MainViewController {
-        Style.ApplyDropShadow(view: mainVC.editViewController.view)
+    // Setup shadow.
+    Style.ApplyRoundedCorners(view: self.view)
+    Style.ApplyDropShadow(view: self.view)
+  
+    // Setup flow layout style.
+    Style.ApplyRoundedCorners(view: flowWrap, clip: true)
+  
+    self.collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+  
+    if let mainVC = self.parent {
+      if let mainVC = mainVC as? MainViewController {
+        self.view.frame = CGRect(x:mainVC.timelineView.frame.minX, y: mainVC.timelineView.frame.minY - 100.0, width:mainVC.timelineView.frame.width, height:mainVC.timelineView.frame.height + 100.0)
+        self.flowWrap.frame = self.view.frame
       }
+    }
     
-      Style.SetFullWidth(view: shadowWrap)
-    
-      // Setup flow layout style.
-      Style.ApplyRoundedCorners(view: shadowWrap, clip: true)
-      Style.ApplyRoundedCorners(view: flowWrap, clip: true)
-      if let mainVC = self.parent as? MainViewController {
-        Style.ApplyRoundedCorners(view: mainVC.editViewController.view, clip: true)
-      }
-    
-      self.collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-    
-      if let mainVC = self.parent {
-        if let mainVC = mainVC as? MainViewController {
-          self.view.frame = CGRect(x:mainVC.timelineView.frame.minX, y: mainVC.timelineView.frame.minY - 100.0, width:mainVC.timelineView.frame.width, height:mainVC.timelineView.frame.height + 100.0)
-          self.shadowWrap.frame = self.view.frame
-          self.flowWrap.frame = self.view.frame
-        }
-      }
+    self.flowWrap.frame.size.width = self.view.frame.size.width
+    self.collectionView.frame.size.width = self.flowWrap.frame.size.width
     
   }
   
