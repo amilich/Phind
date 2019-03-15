@@ -188,32 +188,35 @@ class MainViewController: UIViewController, UITableViewDelegate  {
     /// - parameter selected: Whether the user has selected a given table entry.
     /// - parameter timelineEntry: The timelineEntry object related to the table entry selected by the user.
     func displayPlacePopup(selected: Bool, timelineEntry: TimelineEntry) {
-        let placeUUID = timelineEntry.placeUUID
-        if (selected) {
-            let uuid = placeUUID!
-            let place = ModelManager.shared.getPlaceWithUUID(uuid: uuid)
-            if place != nil {
-                // Set the place for the place details view and load that view
-                self.reloadMapView()
-                let centCoord = CLLocationCoordinate2D(
-                    latitude: place!.latitude,
-                    longitude: place!.longitude
-                )
-                let viewRegion = MKCoordinateRegion(
-                    center: centCoord,
-                    latitudinalMeters: Style.MAP_SPAN_LAT,
-                    longitudinalMeters: Style.MAP_SPAN_LONG
-                )
-                mapView.setRegion(viewRegion, animated: true)
-                
-                self.placeDetailsController.setPlaceAndLocation(place: place!, timelineEntry: timelineEntry)
-                self.timelineView.isHidden = true
-                self.placeDetailsController.setComponentsVisible(visible: true)
-            }
-        } else {
-            // Do not need an else case; unselecting happens by
-            // the user pressing the back button.
-        }
+      if timelineEntry.movementType != "STATIONARY" {
+        return
+      }
+      let placeUUID = timelineEntry.placeUUID
+      if (selected) {
+          let uuid = placeUUID!
+          let place = ModelManager.shared.getPlaceWithUUID(uuid: uuid)
+          if place != nil {
+              // Set the place for the place details view and load that view
+              self.reloadMapView()
+              let centCoord = CLLocationCoordinate2D(
+                  latitude: place!.latitude,
+                  longitude: place!.longitude
+              )
+              let viewRegion = MKCoordinateRegion(
+                  center: centCoord,
+                  latitudinalMeters: Style.MAP_SPAN_LAT,
+                  longitudinalMeters: Style.MAP_SPAN_LONG
+              )
+              mapView.setRegion(viewRegion, animated: true)
+            
+              self.placeDetailsController.setPlaceAndLocation(place: place!, timelineEntry: timelineEntry)
+              self.timelineView.isHidden = true
+              self.placeDetailsController.setComponentsVisible(visible: true)
+          }
+      } else {
+          // Do not need an else case; unselecting happens by
+          // the user pressing the back button.
+      }
     }
     
 }
