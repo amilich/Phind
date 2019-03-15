@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import GoogleMaps
+import GooglePlaces
 
 /// Extend the EditViewController with functions to perform API calls.
 extension EditViewController {
+
     /// Get a set of nearest places using the Google places API.
     public func getNearestPlaces() {
+        self.results.removeAll()
         // TODO: fill in with call to nearest places API
         if let mainVC = self.parent as? MainViewController {
             if let placeDetailsVC = mainVC.placeDetailsController as? PlaceDetailsController {
@@ -28,6 +32,7 @@ extension EditViewController {
     }
     
     public func getAutocompletePlaces(query: String) {
+        print("calling get autocomplete places")
         if let mainVC = self.parent as? MainViewController {
             if let placeDetailsVC = mainVC.placeDetailsController as? PlaceDetailsController {
                 repopulateAutocompletePlaces(query: query, place: placeDetailsVC.place)
@@ -88,7 +93,15 @@ extension EditViewController {
     }
     
     func repopulateAutocompletePlaces(query: String, place: Place) {
-        return 
+ 
     }
+
+}
+
+
+/// Given a place ID, lookup the photos for the place and add one to the UIImageview in the popup view detail.
+/// - parameter gms_id: The Google place ID used to load a photo.
+func loadPhotoForPlaceID(gms_id: String) {
+    let token = GMSAutocompleteSessionToken.init()
 
 }

@@ -126,39 +126,9 @@ extension SearchViewController : UITableViewDataSource, UITableViewDelegate {
     if let mainVC = self.parent {
         if let mainVC = mainVC as? MainViewController {
             mainVC.placeDetailsController.updatePlaceForTimelineEntry(place: place)
-            
-            var truePlace : Place!
-            
-            // determines whether to use the old place or the new place for visit details
-            // we use the new place in normal search, where you simply want to view details about the place
-            // we use the old place in disambiguation, where you want to assign the new place using
-            // details from the old one
-            if accessedFromEdit {
-                truePlace = mainVC.placeDetailsController.place
-            }
-            else {
-                truePlace = place
-            }
-            
-            let visitHistory = ModelManager.shared.getVisitHistory(placeUUID: truePlace.uuid)!
-            if visitHistory.count == 0 {
-                return
-            }
-            
-            let latestVisit = visitHistory[0]
-            let timelineEntry = TimelineEntry(
-                placeUUID: place.uuid,
-                placeLabel: place.name,
-                startTime: latestVisit.start as Date,
-                endTime: latestVisit.end as Date?,
-                movementType: latestVisit.movement_type
-            )
-            
-            mainVC.placeDetailsController.setPlaceAndLocation(place: place, timelineEntry: timelineEntry)
+            mainVC.placeDetailsController.setPlace(place: place)
             mainVC.timelineView.isHidden = true
-            mainVC.placeDetailsController.collectionView.reloadData()
             mainVC.placeDetailsController.setComponentsVisible(visible: true)
-            
         }
     }
     

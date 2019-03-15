@@ -22,14 +22,14 @@ class EditViewController : SearchViewController {
             placeDetailsVC.setComponentsVisible(visible: true)
             self.reloadView()
         }
+      }
     }
-    
-    func textFieldDidChange(_ textField: UITextField) {
+        
+    override func textFieldDidChange(_ textField: UITextField) {
+        print("calling text field did change function")
         self.getAutocompletePlaces(query: self.searchBarField.text!)
         self.reloadView()
     }
-        
 
-}
 
 }

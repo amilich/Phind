@@ -34,7 +34,6 @@ internal extension SearchViewController {
   }
   
   @objc func textFieldDidChange(_ textField: UITextField) {
-    
     self.results = ModelManager.shared.getSearchResults(placeName: self.searchBarField.text!)!
     self.reloadView()
     
@@ -77,7 +76,7 @@ internal extension SearchViewController {
     Style.SetupTextField(textField: self.searchBarField)
     self.searchBar.addSubview(self.searchBarField)
     self.searchBar.bringSubviewToFront(self.searchBarField)
-    self.searchBarField.placeholder = "Search past locations..."
+    self.searchBarField.placeholder = "Search locations..."
     
     // Add indentation to the text field.
     let spacerView = UIView(frame:CGRect(x:0, y:0, width: Style.ELEMENT_PADDING, height: Style.ELEMENT_PADDING))

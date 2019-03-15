@@ -64,14 +64,7 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
     
     backButton.addTarget(self, action: #selector(self.backPressed(_:)), for: .touchUpInside)
     editButton.addTarget(self, action: #selector(self.editPressed(_:)), for: .touchUpInside)
-    
-    // Register cell here so we can preemptively query for nearby places
-//    self.editViewController.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "EditCell")
-    
-    // Add the editViewController as a child view controller;
-    // needed so edit can access parent data
-//    self.addChild(editViewController)
-    
+
     setupStyle()
     
     toggleEditVisibility(isHidden: true)
@@ -129,10 +122,7 @@ class PlaceDetailsController: UIViewController, UICollectionViewDataSource, UICo
         self.view.frame = CGRect(x:mainVC.timelineView.frame.minX, y: mainVC.timelineView.frame.minY - 100.0, width:mainVC.timelineView.frame.width, height:mainVC.timelineView.frame.height + 100.0)
         self.shadowWrap.frame = self.view.frame
         self.flowWrap.frame = self.view.frame
-        
-        // TODO resolve the 4 and 8 constants
-//        self.collectionView.frame = CGRect(x:mainVC.tableWrap.frame.minX - 2, y: mainVC.tableWrap.frame.minY + Style.DETAILS_LABEL_OFFSET, width:mainVC.tableWrap.frame.width + 2, height:Style.DETAILS_PHOTO_VIEW_HEIGHT)
-        //        self.editViewController.view.frame = CGRect(x:mainVC.tableWrap.frame.minX - 2, y: mainVC.tableWrap.frame.minY, width:mainVC.tableWrap.frame.width-2, height:Style.DETAILS_PHOTO_VIEW_HEIGHT)
+
        }
      }
     
@@ -227,6 +217,7 @@ public func loadNearestPlaces() {
   /// - parameter place: The place to set for displaying details and edting
   public func setPlace(place: Place) {
     self.place = place
+    print("new place name: \(self.place.name)")
     self.label.text = self.place.name
     self.addressLabel.text = self.place.address
     // Get rid of the previous image
