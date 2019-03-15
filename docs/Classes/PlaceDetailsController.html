@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
            Docs
         </a>
-         (75% documented)
+         (72% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -84,6 +84,12 @@
                 <a class="nav-group-task-link" href="../Classes/RawCoordinates.html">RawCoordinates</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/SearchResultsCell.html">SearchResultsCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/SearchViewController.html">SearchViewController</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/SecondViewController.html">SecondViewController</a>
               </li>
               <li class="nav-group-task">
@@ -96,10 +102,10 @@
                 <a class="nav-group-task-link" href="../Classes/Style.html">Style</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/TimelineEntry.html">TimelineEntry</a>
+                <a class="nav-group-task-link" href="../Classes/TimelineCell.html">TimelineCell</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/TimelineUITableViewCell.html">TimelineUITableViewCell</a>
+                <a class="nav-group-task-link" href="../Classes/TimelineEntry.html">TimelineEntry</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/Util.html">Util</a>
@@ -109,6 +115,9 @@
           <li class="nav-group-name">
             <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/Alignment.html">Alignment</a>
+              </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/MovementType.html">MovementType</a>
               </li>
@@ -374,6 +383,34 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/c:@M@Phind@objc(cs)PlaceDetailsController(py)statisticsLabel"></a>
+                    <a name="//apple_ref/swift/Property/statisticsLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)PlaceDetailsController(py)statisticsLabel">statisticsLabel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Outputs place statistics</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">var</span> <span class="nv">statisticsLabel</span><span class="p">:</span> <span class="kt">UILabel</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/c:@M@Phind@objc(cs)PlaceDetailsController(py)editButton"></a>
                     <a name="//apple_ref/swift/Property/editButton" class="dashAnchor"></a>
                     <a class="token" href="#/c:@M@Phind@objc(cs)PlaceDetailsController(py)editButton">editButton</a>
@@ -539,6 +576,33 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:5Phind22PlaceDetailsControllerC13setStatisticsyyF"></a>
+                    <a name="//apple_ref/swift/Method/setStatistics()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Phind22PlaceDetailsControllerC13setStatisticsyyF">setStatistics()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Reloads the data in the statistics label</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">internal</span> <span class="kd">func</span> <span class="nf">setStatistics</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:5Phind22PlaceDetailsControllerC10setupStyleyyF"></a>
                     <a name="//apple_ref/swift/Method/setupStyle()" class="dashAnchor"></a>
                     <a class="token" href="#/s:5Phind22PlaceDetailsControllerC10setupStyleyyF">setupStyle()</a>
@@ -600,6 +664,52 @@
                               <td>
                                 <div>
                                   <p>Whether the user is currently in the edit page or the details page. This determines which components to set visible.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Phind22PlaceDetailsControllerC20setComponentsVisible7visibleySb_tF"></a>
+                    <a name="//apple_ref/swift/Method/setComponentsVisible(visible:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Phind22PlaceDetailsControllerC20setComponentsVisible7visibleySb_tF">setComponentsVisible(visible:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set place details UI components to be visible or hidden</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setComponentsVisible</span><span class="p">(</span><span class="nv">visible</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>visible</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether to show or hide the UI components</p>
                                 </div>
                               </td>
                             </tr>
@@ -701,7 +811,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Whether the edit view is visible or not.</p>
+                                  <p>Whether the edit view is visible or not</p>
                                 </div>
                               </td>
                             </tr>
@@ -747,7 +857,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>The place that the user has edited. Update the timeline to correspond to this place.</p>
+                                  <p>The place that the user has edited. Update the timeline to correspond to this place</p>
                                 </div>
                               </td>
                             </tr>
@@ -793,7 +903,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>The place to use for placeDetails.</p>
+                                  <p>The place to use for placeDetails</p>
                                 </div>
                               </td>
                             </tr>
@@ -805,7 +915,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>The timeline entry corresponding to the place that may be edited.</p>
+                                  <p>The timeline entry corresponding to the place that may be edited</p>
                                 </div>
                               </td>
                             </tr>
@@ -828,7 +938,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Called to set the place to be displayed on the popup view.</p>
+                        <p>Called to set the place to be displayed on the popup view</p>
 
                       </div>
                       <div class="declaration">
@@ -851,7 +961,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>The place to set for displaying details and edting.</p>
+                                  <p>The place to set for displaying details and edting</p>
                                 </div>
                               </td>
                             </tr>
@@ -1008,7 +1118,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external">Andrew, Anna, Dhruv, and Kevin</a>. All rights reserved. (Last updated: 2019-03-11)</p>
+      <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external">Andrew, Anna, Dhruv, and Kevin</a>. All rights reserved. (Last updated: 2019-03-14)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

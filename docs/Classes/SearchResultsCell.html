@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Realm Extension Reference</title>
+    <title>SearchResultsCell Class Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Extension/Realm" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Class/SearchResultsCell" class="dashAnchor"></a>
 
-    <a title="Realm Extension Reference"></a>
+    <a title="SearchResultsCell Class Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -38,7 +38,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html"> Reference</a>
       <img class="carat" src="../img/carat.png" />
-      Realm Extension Reference
+      SearchResultsCell Class Reference
     </p>
 
     <div class="content-wrapper">
@@ -143,15 +143,14 @@
 
         <section class="section">
           <div class="section-content">
-            <h1>Realm</h1>
+            <h1>SearchResultsCell</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">final</span> <span class="kd">class</span> <span class="kt">Realm</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">SearchResultsCell</span> <span class="p">:</span> <span class="kt">UITableViewCell</span></code></pre>
 
                 </div>
               </div>
-            <p>We extend Realm with asynchronous writing functionality so we are able to write to the database in API calls, which may be off the main thread.
-See <a href="https://realm.io/docs/cookbook/swift/object-to-background/">https://realm.io/docs/cookbook/swift/object-to-background/</a> for original source and more information.</p>
+            <p>Undocumented</p>
 
           </div>
         </section>
@@ -163,9 +162,9 @@ See <a href="https://realm.io/docs/cookbook/swift/object-to-background/">https:/
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10RealmSwift0A0C5PhindE10writeAsync3obj12errorHandler5blockyx_ys5Error_pcyAC_xSgtctAA14ThreadConfinedRzlF"></a>
-                    <a name="//apple_ref/swift/Method/writeAsync(obj:errorHandler:block:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10RealmSwift0A0C5PhindE10writeAsync3obj12errorHandler5blockyx_ys5Error_pcyAC_xSgtctAA14ThreadConfinedRzlF">writeAsync(obj:errorHandler:block:)</a>
+                    <a name="/c:@M@Phind@objc(cs)SearchResultsCell(py)placeTitleLabel"></a>
+                    <a name="//apple_ref/swift/Property/placeTitleLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)SearchResultsCell(py)placeTitleLabel">placeTitleLabel</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -173,14 +172,97 @@ See <a href="https://realm.io/docs/cookbook/swift/object-to-background/">https:/
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Asynchronously write to Realm from a background thread.</p>
+                        <p>Undocumented</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">writeAsync</span><span class="o">&lt;</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">ThreadConfined</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">obj</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span> <span class="nv">errorHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">((</span><span class="n">_</span> <span class="nv">error</span> <span class="p">:</span> <span class="kt">Swift</span><span class="o">.</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span> <span class="k">return</span> <span class="p">},</span> <span class="nv">block</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">((</span><span class="kt">Realm</span><span class="p">,</span> <span class="kt">T</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">))</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">var</span> <span class="nv">placeTitleLabel</span><span class="p">:</span> <span class="kt">UILabel</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Phind@objc(cs)SearchResultsCell(py)subtitle"></a>
+                    <a name="//apple_ref/swift/Property/subtitle" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)SearchResultsCell(py)subtitle">subtitle</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">var</span> <span class="nv">subtitle</span><span class="p">:</span> <span class="kt">UILabel</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Phind@objc(cs)SearchResultsCell(im)initWithStyle:reuseIdentifier:"></a>
+                    <a name="//apple_ref/swift/Method/init(style:reuseIdentifier:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)SearchResultsCell(im)initWithStyle:reuseIdentifier:">init(style:reuseIdentifier:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="nf">init</span><span class="p">(</span><span class="nv">style</span><span class="p">:</span> <span class="kt">UITableViewCell</span><span class="o">.</span><span class="kt">CellStyle</span><span class="p">,</span> <span class="nv">reuseIdentifier</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Phind@objc(cs)SearchResultsCell(im)initWithCoder:"></a>
+                    <a name="//apple_ref/swift/Method/init(coder:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)SearchResultsCell(im)initWithCoder:">init(coder:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">required</span> <span class="nf">init</span><span class="p">?(</span><span class="n">coder</span> <span class="nv">aDecoder</span><span class="p">:</span> <span class="kt">NSCoder</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>

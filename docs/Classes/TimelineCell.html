@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>TimelineEntry Class Reference</title>
+    <title>TimelineCell Class Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Class/TimelineEntry" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Class/TimelineCell" class="dashAnchor"></a>
 
-    <a title="TimelineEntry Class Reference"></a>
+    <a title="TimelineCell Class Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -38,7 +38,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html"> Reference</a>
       <img class="carat" src="../img/carat.png" />
-      TimelineEntry Class Reference
+      TimelineCell Class Reference
     </p>
 
     <div class="content-wrapper">
@@ -143,14 +143,14 @@
 
         <section class="section">
           <div class="section-content">
-            <h1>TimelineEntry</h1>
+            <h1>TimelineCell</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">TimelineEntry</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">TimelineCell</span> <span class="p">:</span> <span class="kt">UITableViewCell</span></code></pre>
 
                 </div>
               </div>
-            <p>The TimelineEntry object references a start and end time, a movement time, and a label for the place in the timeline UI.</p>
+            <p>The TimelineUITableViewCell stores the requisite UI components for displaying the timeline value to the user, including a label, image, duration, and time.</p>
 
           </div>
         </section>
@@ -162,9 +162,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:5Phind13TimelineEntryC9startTime10Foundation4DateVvp"></a>
-                    <a name="//apple_ref/swift/Property/startTime" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Phind13TimelineEntryC9startTime10Foundation4DateVvp">startTime</a>
+                    <a name="/c:@M@Phind@objc(cs)TimelineCell(py)cellImage"></a>
+                    <a name="//apple_ref/swift/Property/cellImage" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)TimelineCell(py)cellImage">cellImage</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -172,14 +172,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The start time for the timeline entry</p>
+                        <p>The image for the timelineEntry</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">internal</span> <span class="k">var</span> <span class="nv">startTime</span><span class="p">:</span> <span class="kt">Date</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">var</span> <span class="nv">cellImage</span><span class="p">:</span> <span class="kt">UIImageView</span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
@@ -189,9 +190,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:5Phind13TimelineEntryC7endTime10Foundation4DateVSgvp"></a>
-                    <a name="//apple_ref/swift/Property/endTime" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Phind13TimelineEntryC7endTime10Foundation4DateVSgvp">endTime</a>
+                    <a name="/c:@M@Phind@objc(cs)TimelineCell(py)cellLabel"></a>
+                    <a name="//apple_ref/swift/Property/cellLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)TimelineCell(py)cellLabel">cellLabel</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -199,14 +200,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The end time for the timeline entry</p>
+                        <p>Main label for timelineLabel (typically place or movement type)</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">internal</span> <span class="k">var</span> <span class="nv">endTime</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">var</span> <span class="nv">cellLabel</span><span class="p">:</span> <span class="kt">UILabel</span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
@@ -216,9 +218,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:5Phind13TimelineEntryC10placeLabelSSvp"></a>
-                    <a name="//apple_ref/swift/Property/placeLabel" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Phind13TimelineEntryC10placeLabelSSvp">placeLabel</a>
+                    <a name="/c:@M@Phind@objc(cs)TimelineCell(py)durationLabel"></a>
+                    <a name="//apple_ref/swift/Property/durationLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)TimelineCell(py)durationLabel">durationLabel</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -226,14 +228,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The label displayed to the user for the timeline entry</p>
+                        <p>The duration for the timeline</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">internal</span> <span class="k">var</span> <span class="nv">placeLabel</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">var</span> <span class="nv">durationLabel</span><span class="p">:</span> <span class="kt">UILabel</span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
@@ -243,9 +246,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:5Phind13TimelineEntryC9imagePathSSSgvp"></a>
-                    <a name="//apple_ref/swift/Property/imagePath" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Phind13TimelineEntryC9imagePathSSSgvp">imagePath</a>
+                    <a name="/c:@M@Phind@objc(cs)TimelineCell(py)timeLabel"></a>
+                    <a name="//apple_ref/swift/Property/timeLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)TimelineCell(py)timeLabel">timeLabel</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -253,14 +256,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Path to image for timeline entry side image</p>
+                        <p>The time length for the timeline component (placed below main label)</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">internal</span> <span class="k">var</span> <span class="nv">imagePath</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">var</span> <span class="nv">timeLabel</span><span class="p">:</span> <span class="kt">UILabel</span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
@@ -270,9 +274,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:5Phind13TimelineEntryC9placeUUIDSSSgvp"></a>
-                    <a name="//apple_ref/swift/Property/placeUUID" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Phind13TimelineEntryC9placeUUIDSSSgvp">placeUUID</a>
+                    <a name="/c:@M@Phind@objc(cs)TimelineCell(im)initWithStyle:reuseIdentifier:"></a>
+                    <a name="//apple_ref/swift/Method/init(style:reuseIdentifier:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)TimelineCell(im)initWithStyle:reuseIdentifier:">init(style:reuseIdentifier:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -280,14 +284,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>UUID for place described in the timeline entry</p>
+                        <p>Constructor for timeline cell. Sets up style for the internal place label, duration label, time label, and image.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">internal</span> <span class="k">var</span> <span class="nv">placeUUID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="nf">init</span><span class="p">(</span><span class="nv">style</span><span class="p">:</span> <span class="kt">UITableViewCell</span><span class="o">.</span><span class="kt">CellStyle</span><span class="p">,</span> <span class="nv">reuseIdentifier</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span></code></pre>
 
                         </div>
                       </div>
@@ -297,9 +301,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:5Phind13TimelineEntryC12movementTypeSSvp"></a>
-                    <a name="//apple_ref/swift/Property/movementType" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Phind13TimelineEntryC12movementTypeSSvp">movementType</a>
+                    <a name="/c:@M@Phind@objc(cs)TimelineCell(im)initWithCoder:"></a>
+                    <a name="//apple_ref/swift/Method/init(coder:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)TimelineCell(im)initWithCoder:">init(coder:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -307,14 +311,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Type of movement for timeline entry; displayed to user as well</p>
+                        <p>Coder/decoder init (needed for use as a storyboard component)</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">internal</span> <span class="k">var</span> <span class="nv">movementType</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">required</span> <span class="nf">init</span><span class="p">?(</span><span class="n">coder</span> <span class="nv">aDecoder</span><span class="p">:</span> <span class="kt">NSCoder</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -324,9 +328,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:5Phind13TimelineEntryC9placeUUID0D5Label9startTime03endH012movementTypeACSS_SS10Foundation4DateVAKSgSStcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(placeUUID:placeLabel:startTime:endTime:movementType:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Phind13TimelineEntryC9placeUUID0D5Label9startTime03endH012movementTypeACSS_SS10Foundation4DateVAKSgSStcfc">init(placeUUID:placeLabel:startTime:endTime:movementType:)</a>
+                    <a name="/c:@M@Phind@objc(cs)TimelineCell(im)setSelected:animated:"></a>
+                    <a name="//apple_ref/swift/Method/setSelected(_:animated:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)TimelineCell(im)setSelected:animated:">setSelected(_:animated:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -334,84 +338,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Constructor for the TimelineEntry.</p>
+                        <p>Called when user selects a timeline component</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">placeUUID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">placeLabel</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">startTime</span><span class="p">:</span> <span class="kt">Date</span><span class="p">,</span>
-     <span class="nv">endTime</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?,</span> <span class="nv">movementType</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">setSelected</span><span class="p">(</span><span class="n">_</span> <span class="nv">selected</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>placeUUID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>UUID corresponding to Realm object for the place for this TimelineEntry.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>placeLabel</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The label for the given place.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>startTime</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The date object corresponding to the start of the given entry.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>endTime</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The end date for the given timeline entry (optional).</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>movementType</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The type of movement (from CoreMotion).</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
                       </div>
                     </section>
                   </div>

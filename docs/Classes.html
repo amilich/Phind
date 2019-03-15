@@ -23,7 +23,7 @@
         <a class="header-link" href="index.html">
            Docs
         </a>
-         (75% documented)
+         (72% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -84,6 +84,12 @@
                 <a class="nav-group-task-link" href="Classes/RawCoordinates.html">RawCoordinates</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/SearchResultsCell.html">SearchResultsCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/SearchViewController.html">SearchViewController</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/SecondViewController.html">SecondViewController</a>
               </li>
               <li class="nav-group-task">
@@ -96,10 +102,10 @@
                 <a class="nav-group-task-link" href="Classes/Style.html">Style</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/TimelineEntry.html">TimelineEntry</a>
+                <a class="nav-group-task-link" href="Classes/TimelineCell.html">TimelineCell</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/TimelineUITableViewCell.html">TimelineUITableViewCell</a>
+                <a class="nav-group-task-link" href="Classes/TimelineEntry.html">TimelineEntry</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/Util.html">Util</a>
@@ -109,6 +115,9 @@
           <li class="nav-group-name">
             <a class="nav-group-name-link" href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/Alignment.html">Alignment</a>
+              </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/MovementType.html">MovementType</a>
               </li>
@@ -355,6 +364,38 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">PlaceDetailsController</span> <span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="kt">UICollectionViewDataSource</span><span class="p">,</span> <span class="kt">UICollectionViewDelegate</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Phind@objc(cs)SearchViewController"></a>
+                    <a name="//apple_ref/swift/Class/SearchViewController" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)SearchViewController">SearchViewController</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The UIViewController for searching for past places.</p>
+
+                        <a href="Classes/SearchViewController.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">SearchViewController</span> <span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
 
                         </div>
                       </div>
@@ -645,9 +686,9 @@ Notably, LocationEntry can represent both STATIONARY locations (places like rest
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@Phind@objc(cs)TimelineUITableViewCell"></a>
-                    <a name="//apple_ref/swift/Class/TimelineUITableViewCell" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@Phind@objc(cs)TimelineUITableViewCell">TimelineUITableViewCell</a>
+                    <a name="/c:@M@Phind@objc(cs)TimelineCell"></a>
+                    <a name="//apple_ref/swift/Class/TimelineCell" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)TimelineCell">TimelineCell</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -657,13 +698,13 @@ Notably, LocationEntry can represent both STATIONARY locations (places like rest
                       <div class="abstract">
                         <p>The TimelineUITableViewCell stores the requisite UI components for displaying the timeline value to the user, including a label, image, duration, and time.</p>
 
-                        <a href="Classes/TimelineUITableViewCell.html" class="slightly-smaller">See more</a>
+                        <a href="Classes/TimelineCell.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">TimelineUITableViewCell</span> <span class="p">:</span> <span class="kt">UITableViewCell</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">TimelineCell</span> <span class="p">:</span> <span class="kt">UITableViewCell</span></code></pre>
 
                         </div>
                       </div>
@@ -696,6 +737,38 @@ Notably, LocationEntry can represent both STATIONARY locations (places like rest
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">PhotoCell</span> <span class="p">:</span> <span class="kt">UICollectionViewCell</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Phind@objc(cs)SearchResultsCell"></a>
+                    <a name="//apple_ref/swift/Class/SearchResultsCell" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Phind@objc(cs)SearchResultsCell">SearchResultsCell</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Classes/SearchResultsCell.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">SearchResultsCell</span> <span class="p">:</span> <span class="kt">UITableViewCell</span></code></pre>
 
                         </div>
                       </div>
@@ -742,7 +815,7 @@ Notably, LocationEntry can represent both STATIONARY locations (places like rest
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external">Andrew, Anna, Dhruv, and Kevin</a>. All rights reserved. (Last updated: 2019-03-11)</p>
+      <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external">Andrew, Anna, Dhruv, and Kevin</a>. All rights reserved. (Last updated: 2019-03-14)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
