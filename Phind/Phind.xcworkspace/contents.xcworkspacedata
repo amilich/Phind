@@ -221,7 +221,7 @@
             name = "Views">
             <Group
                location = "group:New Group1"
-               name = "New Group1">
+               name = "Search">
                <FileRef
                   location = "group:SearchView_Results.swift">
                </FileRef>
