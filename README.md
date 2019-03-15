@@ -29,3 +29,4 @@ Kevin | UX Design, Web Dev, Backend Dev, VR & AR, Prototyping. | Likes fun color
 - Github: [Team Repo](https://github.com/orgs/StanfordCS194/teams/team-7), Source Code Repo
 - [Google Drive](https://drive.google.com/drive/u/1/folders/1v_vvg39q1aLEF4Y-PDn61yVAZ-L_a0cM)
 - [SGM Worksheet](https://docs.google.com/forms/d/e/1FAIpQLScl6OlzF-vqWJp31zyIOK2Kfy3jFG4kIkAA-P5FfcsYii5H5w/viewform?usp=sf_link)
+- [Code reference documentation](https://stanfordcs194.github.io/Team-7/index.html)
