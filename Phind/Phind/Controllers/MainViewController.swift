@@ -55,17 +55,23 @@ class TimelineEntry: NSObject {
 class MainViewController: UIViewController, UITableViewDelegate  {
     
   // Header UI links.
+  /// UILabel for displaying the date
   @IBOutlet weak var currentDateLabel: UILabel!
+  /// UIButton for refreshing
   @IBOutlet weak var refreshButton: UIButton!
+  /// UIView for the date header
   @IBOutlet weak var headerView: UIView!
   
   // Search UI links.
+  /// SearchViewController object
   var svc : SearchViewController!
+  /// UIButton link for search
   var searchFab : UIButton!
-  
+  /// Child edit view controller for editing place
   var editViewController: EditViewController!
   
   // Map UI links.
+  /// The Apple MapView component
   @IBOutlet weak var mapView: MKMapView!
   
   // Timeline UI links.
@@ -90,8 +96,11 @@ class MainViewController: UIViewController, UITableViewDelegate  {
   /// Location entries used to populate timeline.
   internal var locationEntries: [LocationEntry] = []
   
+  /// Custom init; could be extended to do additional setup
   convenience init() {
-      self.init()
+    
+    self.init()
+    
   }
   
   // viewWillAppear and viewDidLoad all follow the cycle delineated

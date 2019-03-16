@@ -230,7 +230,7 @@ public class PhindLocationManager : NSObject, CLLocationManagerDelegate {
           }
         }
       } else {
-          currLocationEntry = lastLocationEntry!
+        currLocationEntry = lastLocationEntry!
       }
     } else {
       // If location entry is not found, then create a new one.
