@@ -16,127 +16,8 @@
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/MainViewController.swift",
-      "line": 58,
-      "symbol": "MainViewController.currentDateLabel",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/MainViewController.swift",
-      "line": 59,
-      "symbol": "MainViewController.refreshButton",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/MainViewController.swift",
-      "line": 60,
-      "symbol": "MainViewController.headerView",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/MainViewController.swift",
-      "line": 63,
-      "symbol": "MainViewController.svc",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/MainViewController.swift",
-      "line": 64,
-      "symbol": "MainViewController.searchFab",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/MainViewController.swift",
-      "line": 66,
-      "symbol": "MainViewController.editViewController",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/MainViewController.swift",
-      "line": 69,
-      "symbol": "MainViewController.mapView",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/MainViewController.swift",
-      "line": 93,
-      "symbol": "MainViewController.init()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/MainViewController.swift",
-      "line": 99,
+      "line": 108,
       "symbol": "MainViewController.viewWillAppear(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
-      "line": 113,
-      "symbol": "ModelManager.mostCommonPlaceType(from:ascending:period:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
-      "line": 144,
-      "symbol": "ModelManager.mostCommonLocation(from:ascending:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
-      "line": 174,
-      "symbol": "ModelManager.searchResult(placeName:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
-      "line": 181,
-      "symbol": "ModelManager.numberVisits(place:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
-      "line": 189,
-      "symbol": "ModelManager.lastVisitDate(place:ascending:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
-      "line": 198,
-      "symbol": "ModelManager.locationHistory(placeName:ascending:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
-      "line": 243,
-      "symbol": "ModelManager.getAutocompleteResults(Place:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
-      "line": 305,
-      "symbol": "ModelManager.getNearbySearchResponse(data:response:error:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Controllers/ModelManager.swift",
-      "line": 329,
-      "symbol": "ModelManager.assignPlaceIdToLocation(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
@@ -282,156 +163,58 @@
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Core/Style.swift",
-      "line": 12,
-      "symbol": "Alignment",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Core/Style.swift",
-      "line": 13,
+      "line": 14,
       "symbol": "Alignment.CENTER",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Core/Style.swift",
-      "line": 13,
+      "line": 14,
       "symbol": "Alignment.LEFT",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Core/Style.swift",
-      "line": 13,
+      "line": 14,
       "symbol": "Alignment.RIGHT",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Core/Style.swift",
-      "line": 20,
-      "symbol": "Style.PURPLE",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Core/Style.swift",
-      "line": 26,
-      "symbol": "Style.RED",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Core/Style.swift",
-      "line": 32,
-      "symbol": "Style.GREEN",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Core/Style.swift",
-      "line": 39,
-      "symbol": "Style.PRIMARY_COLOR",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Core/Style.swift",
-      "line": 40,
-      "symbol": "Style.SECONDARY_COLOR",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Core/Style.swift",
-      "line": 41,
-      "symbol": "Style.TERTIARY_COLOR",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Core/Style.swift",
-      "line": 42,
-      "symbol": "Style.BODY_COLOR",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Core/Style.swift",
-      "line": 77,
+      "line": 85,
       "symbol": "Style.FAB_HEIGHT",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Core/Style.swift",
-      "line": 78,
+      "line": 86,
       "symbol": "Style.FAB_FONT_SIZE",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Core/Style.swift",
-      "line": 79,
+      "line": 87,
       "symbol": "Style.ICON_FONT",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Core/Style.swift",
-      "line": 82,
+      "line": 90,
       "symbol": "Style.HEADER_HEIGHT",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Core/Style.swift",
-      "line": 85,
+      "line": 93,
       "symbol": "Style.TEXT_FIELD_FONT",
       "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Core/Style.swift",
-      "line": 122,
-      "symbol": "Style.SetPartialWidth(view:offset:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Core/Style.swift",
-      "line": 129,
-      "symbol": "Style.SetAlignment(view:offsetX:offsetY:align:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Core/Style.swift",
-      "line": 142,
-      "symbol": "Style.CreateFab(icon:backgroundColor:iconColor:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Core/Style.swift",
-      "line": 156,
-      "symbol": "Style.SetupTextField(textField:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Core/Style.swift",
-      "line": 168,
-      "symbol": "Style.SetupFullScreenView(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Andrew/Desktop/Stanford/Quarter 11/CS 194W/Team-7/Phind/Phind/Core/Style.swift",
-      "line": 177,
-      "symbol": "Style.SetSize(view:offsetTop:offsetBottom:offsetLeft:offsetRight:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
