@@ -78,18 +78,26 @@ class Style {
   
   /// Width of the route drawn on the MapView
   public static let ROUTE_WIDTH: CGFloat = 4.0
-  /// Color for the
+  /// Color for the route line
   public static let ROUTE_COLOR: UIColor = Style.SECONDARY_COLOR
   
   // Icon parameters.
+  /// Button height
   public static let FAB_HEIGHT : CGFloat = 56.0
+  /// Round button font size
   public static let FAB_FONT_SIZE : CGFloat = 16.0
+  /// Round button font
   public static let ICON_FONT = "FontAwesome5Free-Solid"
   
+  /// Number of seconds in a minute
+  public static let ONE_MINUTE : CGFloat = 60.0
+  
   // Header parameters.
+  /// Header height
   public static let HEADER_HEIGHT : CGFloat = 56.0
   
-  // Text fields.
+  /// Text field parameters.
+  /// Text field font
   public static let TEXT_FIELD_FONT = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.regular)
   
 }
