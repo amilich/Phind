@@ -16,9 +16,12 @@ import JustLog
 
 /// The MapPin object can be added as an annotation to a MapView; it stores an individual coordinate, title, and subtitle.
 class MapPin: NSObject, MKAnnotation {
-    
+  
+  /// 2D coordinate for pin
   dynamic var coordinate: CLLocationCoordinate2D
+  /// Pin title string
   dynamic var title: String?
+  /// Pin subtitle string
   dynamic var subtitle: String?
   
   /// Constructor for MapPin annotation object.
@@ -26,11 +29,13 @@ class MapPin: NSObject, MKAnnotation {
   /// - parameter title: Title string for pin
   /// - parameter subTitle: Subtitle text for map pin
   init(coordinate: CLLocationCoordinate2D, title: String? = nil, subtitle: String? = nil) {
+    
     self.coordinate = coordinate
     self.title = title
     self.subtitle = subtitle
   
     super.init()
+    
   }
     
 }

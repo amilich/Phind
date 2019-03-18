@@ -145,13 +145,13 @@ extension MainViewController :  UITableViewDataSource {
   /// - parameter endTime: End time for timeline entry.
   func setupDurationLabel(_ tableCell: TimelineCell,
                           _ startTime: Date, _ endTime: Date?) {
-    
-      // Calculate and assign duration of stay at location.
-      let durationLabel = tableCell.durationLabel
-      let duration : Int = abs (Int( startTime.timeIntervalSince(endTime ?? Date()) ))
-      let hours : Int = Int (duration / 3600)
-      let min : Int = Int( (duration % 3600) / 60 )
-      durationLabel!.text = String(hours) + "h " + String(min) + "m"
+  
+    // Calculate and assign duration of stay at location.
+    let durationLabel = tableCell.durationLabel
+    let duration : Int = abs (Int( startTime.timeIntervalSince(endTime ?? Date()) ))
+    let hours : Int = Int (duration / 3600)
+    let min : Int = Int( (duration % 3600) / 60 )
+    durationLabel!.text = String(hours) + "h " + String(min) + "m"
     
   }
   
@@ -198,6 +198,6 @@ extension MainViewController :  UITableViewDataSource {
     let timelineIdx = indexPath[1]
     displayPlacePopup(selected: true, timelineEntry: self.tableItems[timelineIdx])
     
-}
+  }
 
 }
