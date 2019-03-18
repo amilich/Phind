@@ -50,10 +50,10 @@ extension MainViewController :  MKMapViewDelegate {
     var lastCoord: CLLocationCoordinate2D?
     for locationEntry in self.locationEntries {
       if locationEntry.movement_type == MovementType.STATIONARY.rawValue {
-          drawPin(&lastCoord, locationEntry)
+        drawPin(&lastCoord, locationEntry)
       } else {
-          // TODO: Add location entries to timeline even if they are not stationary.
-          drawRoute(&lastCoord, locationEntry)
+        // TODO: Add location entries to timeline even if they are not stationary.
+        drawRoute(&lastCoord, locationEntry)
       }
     }
   
